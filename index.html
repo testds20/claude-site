@@ -147,6 +147,10 @@ nav.scrolled{
   display:flex;flex-direction:column;align-items:center;
   text-align:center;gap:clamp(44px,6vw,72px);width:100%;
 }
+@media(min-width:901px){
+  .hero{padding-bottom:clamp(120px,15vh,210px)}
+  .hero-grid{gap:clamp(56px,9vw,108px)}
+}
 .hero-copy{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center}
 .hero-copy .h-display{margin-bottom:26px;max-width:16ch}
 .hero-copy .lede{margin-bottom:38px;margin-left:auto;margin-right:auto;max-width:44ch}
@@ -277,10 +281,13 @@ nav.scrolled{
 .caps .scrub{background:#f5f5f5}
 .scrub-dot{
   position:relative;flex:none;
-  width:7px;height:7px;border-radius:99px;overflow:hidden;
+  width:7px;height:7px;border-radius:99px;
   background:rgba(16,16,16,.18);
-  transition:width .5s var(--ease),background .25s var(--ease);
+  transition:width .5s var(--ease),background .35s var(--ease);
   cursor:pointer;
+}
+.scrub-dot::after{
+  content:"";position:absolute;inset:-9px;
 }
 .scrub-dot:hover{background:rgba(16,16,16,.38)}
 .scrub-dot.on{width:104px}
@@ -288,6 +295,7 @@ nav.scrolled{
 .scrub-fill{
   position:absolute;inset:0;width:0%;
   background:var(--ink);border-radius:99px;
+  pointer-events:none;
 }
 .play-toggle{
   width:36px;height:36px;border-radius:50%;flex:none;
@@ -685,7 +693,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
       <a href="#why">Why Us</a>
       <a href="#pricing">Pricing</a>
     </div>
-    <a href="https://cal.com/ian-barin/discovery" class="btn btn-primary nav-cta">Book a Discovery Call</a>
+    <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary nav-cta">Book a Discovery Call</a>
   </div>
 </nav>
 
@@ -697,7 +705,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
       <h1 class="h-display">Tech Marketing —<br /><span class="serif">Designed Better.</span></h1>
       <p class="lede">Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams, of all sizes.</p>
       <div class="hero-ctas">
-        <a href="https://cal.com/ian-barin/discovery" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
+        <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
         <a href="#work" class="btn btn-ghost">Explore Designs</a>
       </div>
       <div class="hero-meta">
@@ -967,7 +975,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
     <div class="int-panel reveal">
       <div class="int-label">
         <h3>Plays nicely with the tools your team already uses</h3>
-        <a class="int-pill-btn" href="https://cal.com/ian-barin/discovery">See how we work</a>
+        <a class="int-pill-btn" href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener">See how we work</a>
       </div>
       <div class="int-grid">
         <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/figma" alt="" loading="lazy" /></span>Figma</div>
@@ -1155,7 +1163,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
           <li>Typically 4–8 projects / month</li>
           <li>Up to 10 rollover hours / month</li>
         </ul>
-        <a href="https://cal.com/ian-barin/discovery" class="btn btn-ghost">Book a Discovery Call</a>
+        <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-ghost">Book a Discovery Call</a>
       </div>
       <div class="price-card popular reveal">
         <span class="pop-badge">Popular</span>
@@ -1168,7 +1176,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
           <li>Typically 6–12 projects / month</li>
           <li>Up to 15 rollover hours / month</li>
         </ul>
-        <a href="https://cal.com/ian-barin/discovery" class="btn btn-primary">Book a Discovery Call</a>
+        <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call</a>
       </div>
       <div class="price-card reveal">
         <div class="price-name">Mega</div>
@@ -1180,7 +1188,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
           <li>Typically 8–16 projects / month</li>
           <li>Up to 20 rollover hours / month</li>
         </ul>
-        <a href="https://cal.com/ian-barin/discovery" class="btn btn-ghost">Book a Discovery Call</a>
+        <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-ghost">Book a Discovery Call</a>
       </div>
     </div>
     <div class="includes reveal">
@@ -1270,7 +1278,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
       <div class="reveal">
         <h2 class="h-xl">Ready to go?<br /><span class="serif">Let's talk it through.</span></h2>
         <p class="lede" style="max-width:42ch">A 30-minute discovery call — your priorities, our process, and whether we're the right fit.</p>
-        <a href="https://cal.com/ian-barin/discovery" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
+        <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
       </div>
     </div>
   </div>
@@ -1430,6 +1438,12 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
         var c = el.cloneNode(true);
         c.classList.remove('reveal');
         c.setAttribute('aria-hidden', 'true');
+        // Clones may sit far outside the viewport; force their images to
+        // load immediately so they're ready before the loop scrolls to them
+        // (lazy-loaded clones otherwise leave a blank gap in the row).
+        c.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+          img.loading = 'eager';
+        });
         frag.appendChild(c);
       });
       if (prepend) track.insertBefore(frag, track.firstChild);
@@ -1589,46 +1603,27 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
   ScrollTrigger.matchMedia({
     "(min-width: 901px)": function () {
       var app = document.querySelector('.hero-app');
-      var nav = document.querySelector('nav');
       if (!app) return;
 
       gsap.set(app, { transformOrigin: '50% 50%' });
 
-      // Center target = middle of the viewport area BELOW the fixed nav,
-      // so the widget doesn't look cut off behind the header while grown.
-      var deltaY = 0;
-      function recalc() {
-        var r = app.getBoundingClientRect();
-        var navH = nav ? nav.getBoundingClientRect().height : 0;
-        var centerY = r.top + r.height / 2 - (gsap.getProperty(app, 'y') || 0);
-        var targetY = navH + (window.innerHeight - navH) / 2;
-        deltaY = targetY - centerY;
-      }
-      recalc();
-
+      // No pin/spacer involved: as the widget scrolls up from the bottom
+      // of the viewport toward center it grows in place, then continues
+      // scrolling up with the section at its grown size. Sections below
+      // simply stack in underneath as normal, with no overlap or blank gap.
       var st = ScrollTrigger.create({
         trigger: app,
-        start: 'top top',
-        end: '+=' + Math.round(window.innerHeight * 0.6),
-        pin: true,
-        pinSpacing: true, // reserve the scroll distance so sections below
-                           // stack in underneath instead of being overlapped
+        start: 'top bottom',
+        end: 'top 45%',
         scrub: true,
-        onRefresh: recalc,
         onUpdate: function (self) {
-          var p = self.progress;
-          var grow = Math.min(p / 0.6, 1);            // scale + center over first 60%
-          var settle = Math.max((p - 0.6) / 0.4, 0);  // ease back into flow for the rest
-          gsap.set(app, {
-            scale: 1 + grow * 0.32,
-            y: grow * deltaY * (1 - settle)
-          });
+          gsap.set(app, { scale: 1 + self.progress * 0.1 });
         }
       });
 
       return function () {
         st.kill();
-        gsap.set(app, { clearProps: 'scale,y,transformOrigin' });
+        gsap.set(app, { clearProps: 'scale,transformOrigin' });
       };
     }
   });
