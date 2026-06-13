@@ -1430,6 +1430,17 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
     if (!N) return;
     var center = root.hasAttribute('data-center');
 
+    // Carousel cards loop endlessly, so don't leave them dependent on a
+    // scroll-triggered "reveal" animation that may never fire for cards
+    // sitting outside the initial viewport — that's what produced the
+    // blank/empty card after the row wraps.
+    originals.forEach(function (el) {
+      if (el.classList.contains('reveal')) {
+        el.classList.remove('reveal');
+        if (window.gsap) gsap.set(el, { clearProps: 'opacity,transform' });
+      }
+    });
+
     // Build [prepend set][originals][append set] so the rail can scroll
     // seamlessly in BOTH directions without ever revealing empty space.
     function cloneSet(prepend) {
