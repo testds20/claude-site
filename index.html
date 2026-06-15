@@ -7,13 +7,13 @@
 <meta name="description" content="Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams. One subscription, all design assets covered." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="icon" type="image/png" href="https://framerusercontent.com/images/jPhwNH3UTuBDYSHmKOBd1KZxkUk.png?width=64&height=64" />
 <style>
 /* ============ DESIGN TOKENS ============ */
 :root{
-  --bg:#FAFAF7;
-  --bg-soft:#F2F1EC;
+  --bg:#f8f8f8;
+  --bg-soft:#f5f5f5;
   --bg-card:#FFFFFF;
   --ink:#101010;
   --ink-soft:#55554F;
@@ -24,7 +24,6 @@
   --radius-md:18px;
   --radius-sm:12px;
   --font-sans:'Geist','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-  --font-serif:'Instrument Serif',Georgia,serif;
   --max:1280px;
   --pad:clamp(20px,4vw,56px);
   --ease:cubic-bezier(.22,1,.36,1);
@@ -65,10 +64,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   line-height:1.2;
 }
 .serif{
-  font-family:var(--font-serif);
-  font-style:italic;
-  font-weight:400;
-  letter-spacing:-.01em;
+  font-weight:500;
   color:var(--ink-soft);
 }
 .lede{
@@ -111,13 +107,15 @@ section{padding:clamp(72px,9vw,140px) 0}
 /* ============ NAV ============ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  transition:background .4s,backdrop-filter .4s,border-color .4s;
+  transition:background .4s,backdrop-filter .4s,border-color .4s,opacity .4s,transform .4s;
   border-bottom:1px solid transparent;
+  opacity:0;transform:translateY(-14px);pointer-events:none;
 }
 nav.scrolled{
-  background:rgba(250,250,247,.82);
+  background:rgba(248,248,248,.82);
   backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
   border-bottom-color:var(--line);
+  opacity:1;transform:none;pointer-events:auto;
 }
 .nav-inner{
   max-width:var(--max);margin:0 auto;
@@ -137,36 +135,137 @@ nav.scrolled{
 .nav-cta{padding:11px 22px;font-size:14px}
 @media(max-width:880px){.nav-links{display:none}}
 
-/* ============ HERO ============ */
+/* ============ HERO — CARD + SPLIT BUBBLE MENU ============ */
 .hero{
   position:relative;
-  padding:clamp(140px,16vh,190px) 0 70px;
+  padding:18px var(--pad) clamp(36px,4vw,56px);
+}
+.hero-card{
+  position:relative;
+  background:var(--bg-soft);
+  border:1px solid var(--line);
+  border-radius:clamp(26px,3vw,40px);
+  padding:clamp(18px,1.8vw,26px);
   overflow:hidden;
+  min-height:min(88vh,880px);
+  display:flex;flex-direction:column;
+  gap:clamp(28px,4vw,56px);
 }
-.hero-grid{
-  display:flex;flex-direction:column;align-items:center;
-  text-align:center;gap:clamp(44px,6vw,72px);width:100%;
+/* soft ambient wash behind the visual */
+.hero-card::before{
+  content:"";position:absolute;top:-30%;right:-10%;width:70%;height:90%;
+  background:radial-gradient(circle at 60% 40%,rgba(22,192,121,.10),transparent 62%);
+  pointer-events:none;z-index:0;
 }
-@media(min-width:901px){
-  .hero{padding-bottom:clamp(120px,15vh,210px)}
-  .hero-grid{gap:clamp(56px,9vw,108px)}
+
+/* --- split bubble menu --- */
+.bubble-nav{
+  position:relative;z-index:6;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
 }
-.hero-copy{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center}
-.hero-copy .h-display{margin-bottom:26px;max-width:16ch}
-.hero-copy .lede{margin-bottom:38px;margin-left:auto;margin-right:auto;max-width:44ch}
-.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-.hero-meta{
-  margin-top:44px;display:flex;gap:30px;flex-wrap:wrap;justify-content:center;
-  font-size:13px;color:var(--ink-faint);font-weight:500;
+.bubble{
+  display:flex;align-items:center;gap:4px;
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:100px;
+  padding:7px;
+  box-shadow:0 10px 30px -18px rgba(0,0,0,.22);
 }
-.hero-meta span{display:flex;align-items:center;gap:8px}
-.hero-meta span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--ink-faint)}
+.bubble .logo{padding:5px 12px 5px 10px}
+.bubble .logo img{height:19px}
+.bnav-link{
+  padding:10px 16px;border-radius:100px;
+  font-size:14px;font-weight:500;color:var(--ink-soft);
+  transition:background .25s,color .25s;white-space:nowrap;
+}
+.bnav-link:hover{background:var(--bg-soft);color:var(--ink)}
+.bnav-cta{
+  padding:11px 20px;border-radius:100px;
+  background:var(--ink);color:var(--bg);
+  font-size:14px;font-weight:600;white-space:nowrap;
+  transition:transform .3s var(--ease),box-shadow .3s;
+}
+.bnav-cta:hover{transform:translateY(-1px);box-shadow:0 12px 26px -12px rgba(0,0,0,.5)}
+@media(max-width:880px){
+  .bubble .bnav-link{display:none}
+  .bubble{padding:6px}
+}
+
+/* --- hero stage: big copy + tilted visual --- */
+.hero-stage{
+  position:relative;z-index:2;flex:1;
+  display:grid;grid-template-columns:1.05fr .95fr;
+  align-items:end;gap:clamp(20px,3vw,48px);
+}
+.hero-text{align-self:end;max-width:18ch}
+.hero-kicker{
+  font-size:clamp(14px,1.1vw,16px);color:var(--ink-soft);
+  font-weight:500;line-height:1.45;margin-bottom:clamp(18px,2vw,26px);
+}
+.hero-h1{
+  font-size:clamp(54px,8.6vw,132px);
+  line-height:.9;letter-spacing:-.05em;font-weight:600;
+  margin-bottom:clamp(24px,3vw,36px);
+}
+.hero-h1 .serif{display:block;color:var(--ink-soft)}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+
+/* tilted app/device preview */
+.hero-visual{
+  position:relative;align-self:center;
+  display:flex;justify-content:flex-end;
+  min-height:clamp(320px,38vw,520px);
+}
+.hero-device{
+  position:relative;width:min(100%,440px);
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:26px;overflow:hidden;
+  box-shadow:0 60px 110px -55px rgba(0,0,0,.45);
+  transform:rotate(2.6deg);
+  transition:transform .7s var(--ease);
+}
+.hero-card:hover .hero-device{transform:rotate(1.4deg) translateY(-4px)}
+.hero-device img{width:100%;display:block}
+.hero-chip{
+  position:absolute;z-index:3;left:-6%;bottom:14%;
+  background:var(--bg-card);border:1px solid var(--line);
+  border-radius:16px;padding:14px 18px;
+  box-shadow:0 26px 50px -26px rgba(0,0,0,.32);
+  display:flex;align-items:center;gap:12px;
+}
+.hero-chip .chip-dot{
+  width:38px;height:38px;border-radius:11px;flex:none;
+  background:#16C079;display:flex;align-items:center;justify-content:center;
+}
+.hero-chip .chip-dot svg{width:19px;height:19px;stroke:#fff;stroke-width:2;fill:none}
+.hero-chip .chip-num{font-size:18px;font-weight:700;letter-spacing:-.02em;line-height:1}
+.hero-chip .chip-sub{font-size:12px;color:var(--ink-faint);font-weight:500;margin-top:2px}
+.hero-plane{position:absolute;z-index:3;top:2%;right:-2%;width:clamp(74px,9vw,118px);pointer-events:none}
+.hero-plane svg{width:100%;height:auto;overflow:visible}
+.hero-plane .trail{stroke:var(--ink);stroke-width:1.4;stroke-dasharray:3 6;fill:none;opacity:.32}
+.hero-plane .plane{fill:var(--ink)}
+
+@media(max-width:860px){
+  .hero-stage{grid-template-columns:1fr;align-items:start}
+  .hero-text{order:2;max-width:100%}
+  .hero-visual{order:1;justify-content:center;min-height:0;margin-bottom:8px}
+  .hero-device{transform:rotate(1.5deg);width:min(86%,400px)}
+  .hero-chip{left:2%}
+}
+
+/* ============ WORK SHOWCASE (below hero) ============ */
+.work-strip-section{overflow:hidden}
+.work-strip-section .wrap{text-align:center;margin-bottom:clamp(40px,5vw,64px)}
+.work-strip-section h1{max-width:26ch;margin:0 auto;color:var(--ink)}
+.work-strip{width:100%}
+.work-strip .cap-card{width:min(360px,78vw)}
 
 /* --- Animated app widget (replica of staging component) --- */
 .hero-app{
   background:#0D0D0D;border-radius:28px;
   padding:18px 34px 26px;
-  width:100%;max-width:760px;margin:0 auto;
+  width:100%;max-width:840px;margin:0 auto;
   box-shadow:0 50px 100px -50px rgba(0,0,0,.5);
   position:relative;z-index:40;text-align:left;
 }
@@ -252,18 +351,22 @@ nav.scrolled{
 @keyframes marquee{to{transform:translateX(-50%)}}
 .client-logo{
   height:26px;width:auto;flex:none;
-  opacity:.4;filter:brightness(0);
+  opacity:.6;filter:brightness(0);
   transition:opacity .3s;
   align-self:center;
 }
-.client-logo:hover{opacity:.8}
+.client-logo:hover{opacity:1}
 .marquee-track{align-items:center}
 
 /* ============ CAPABILITY CAROUSEL (Sana-style) ============ */
-.caps{background:#f8f8f8;border:1px solid var(--line);border-radius:var(--radius-lg);margin:0 var(--pad);padding:clamp(56px,7vw,104px) 0;overflow:hidden}
+.caps{background:#FFFFFF;border:1px solid var(--line);border-radius:var(--radius-lg);margin:0 var(--pad);padding:clamp(56px,7vw,104px) 0;overflow:hidden}
 
 /* ============ INFINITE CAROUSEL SYSTEM ============ */
 .ds-carousel{position:relative}
+.hero-grid .ds-carousel{width:100%}
+.caps .wrap{text-align:center}
+.caps .section-head{display:flex;flex-direction:column;align-items:center}
+.caps .lede{margin-left:auto;margin-right:auto}
 .ds-rail{overflow:hidden;width:100%;cursor:grab;touch-action:pan-y}
 .ds-carousel.dragging .ds-rail{cursor:grabbing}
 .ds-track{
@@ -278,7 +381,6 @@ nav.scrolled{
   height:38px;padding:0 16px;border-radius:99px;
   background:var(--bg-soft);cursor:pointer;touch-action:none;
 }
-.caps .scrub{background:#f5f5f5}
 .scrub-dot{
   position:relative;flex:none;
   width:7px;height:7px;border-radius:99px;
@@ -302,7 +404,6 @@ nav.scrolled{
   background:var(--bg-soft);display:flex;align-items:center;justify-content:center;
   transition:transform .3s;
 }
-.caps .play-toggle{background:#f5f5f5}
 .play-toggle:hover{transform:scale(1.08)}
 .play-toggle svg{width:11px;height:11px;fill:var(--ink)}
 .cap-card{
@@ -341,24 +442,39 @@ nav.scrolled{
 
 /* ============ WHY GRID ============ */
 .why-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:300px;gap:18px;
 }
 .why-card{
-  background:var(--bg-card);border:1px solid var(--line);
-  border-radius:var(--radius-md);padding:36px 32px;
+  position:relative;border:1px solid var(--line);
+  border-radius:var(--radius-md);padding:32px;
+  overflow:hidden;
   transition:transform .45s var(--ease),box-shadow .45s var(--ease);
 }
 .why-card:hover{transform:translateY(-5px);box-shadow:0 30px 56px -30px rgba(0,0,0,.16)}
-.why-icon{
-  width:46px;height:46px;border-radius:13px;
-  background:var(--bg-soft);
-  display:flex;align-items:center;justify-content:center;margin-bottom:22px;
+.why-card h3{position:relative;z-index:1;font-size:20px;letter-spacing:-.015em;margin-bottom:8px;line-height:1.3;max-width:80%}
+.why-card p{position:relative;z-index:1;color:var(--ink-soft);font-size:14.5px;max-width:75%}
+.why-card-media{
+  position:absolute;right:-8%;bottom:-10%;width:62%;
+  pointer-events:none;
 }
-.why-icon svg{width:22px;height:22px;stroke:var(--ink);stroke-width:1.6;fill:none}
-.why-card h3{font-size:18.5px;letter-spacing:-.015em;margin-bottom:10px;line-height:1.3}
-.why-card p{color:var(--ink-soft);font-size:14.5px}
-@media(max-width:980px){.why-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:640px){.why-grid{grid-template-columns:1fr}}
+.why-card-media img{display:block;width:100%;height:auto;border-radius:10px;box-shadow:0 24px 48px -20px rgba(0,0,0,.25)}
+.why-bg-1{background:linear-gradient(135deg,#f3f3f1,#e7e6e2)}
+.why-bg-2{background:linear-gradient(135deg,#f2edfb,#e3d9f7)}
+.why-bg-3{background:linear-gradient(135deg,#e8f7ee,#d6f0e0)}
+.why-bg-4{background:linear-gradient(135deg,#fdf1ea,#fae1d2)}
+.why-bg-5{background:linear-gradient(135deg,#eef1fb,#dfe5f8)}
+.why-bg-6{background:linear-gradient(135deg,#f8f4ee,#efe6d8)}
+.why-lg{grid-column:span 2}
+.why-sm{grid-column:span 1}
+@media(max-width:980px){
+  .why-grid{grid-template-columns:1fr 1fr;grid-auto-rows:260px}
+  .why-lg,.why-sm{grid-column:span 1}
+}
+@media(max-width:640px){
+  .why-grid{grid-template-columns:1fr;grid-auto-rows:280px}
+  .why-card h3,.why-card p{max-width:65%}
+  .why-card-media{width:58%}
+}
 
 /* ============ STATS ============ */
 .stats{
@@ -405,7 +521,7 @@ nav.scrolled{
   background:var(--bg-soft);
 }
 .testi-person .name{font-size:15px;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
-.testi-person .role{font-size:13.5px;color:var(--ink-soft);font-style:italic;font-family:var(--font-serif)}
+.testi-person .role{font-size:13.5px;color:var(--ink-soft)}
 .testi-visual{
   position:relative;overflow:hidden;
   margin:clamp(14px,1.6vw,22px);margin-left:0;
@@ -473,7 +589,7 @@ nav.scrolled{
 .price-card .btn{justify-content:center}
 @media(max-width:980px){.pricing-grid{grid-template-columns:1fr;max-width:480px;margin-left:auto;margin-right:auto}}
 .includes{
-  background:#f5f5f5;border-radius:var(--radius-md);
+  background:#ececec;border-radius:var(--radius-md);
   padding:clamp(32px,4vw,52px);
 }
 .includes h3{font-size:18px;letter-spacing:-.015em;margin-bottom:26px}
@@ -500,8 +616,9 @@ nav.scrolled{
   padding-top:28px;position:relative;
 }
 .step-num{
-  font-family:var(--font-serif);font-style:italic;
-  font-size:15px;color:var(--ink-faint);margin-bottom:18px;display:block;
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  text-transform:uppercase;letter-spacing:.12em;
+  font-size:12px;color:var(--ink-faint);margin-bottom:18px;display:block;
 }
 .process-step h3{font-size:21px;letter-spacing:-.02em;margin-bottom:12px;line-height:1.25}
 .process-step p{color:var(--ink-soft);font-size:14.5px;max-width:34ch}
@@ -544,8 +661,8 @@ nav.scrolled{
   text-align:center;overflow:hidden;position:relative;
 }
 .cta-final .wrap{position:relative;z-index:2}
-.cta-final .serif{color:rgba(250,250,247,.6)}
-.cta-final .lede{color:rgba(250,250,247,.65);margin:22px auto 40px}
+.cta-final .serif{color:rgba(248,248,248,.6)}
+.cta-final .lede{color:rgba(248,248,248,.65);margin:22px auto 40px}
 .cta-final .btn-primary{background:var(--bg);color:var(--ink)}
 .cta-final .btn-primary:hover{box-shadow:0 14px 34px -10px rgba(0,0,0,.6)}
 .cta-orbit{
@@ -617,23 +734,94 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 @media(max-width:560px){.int-grid{grid-template-columns:1fr}}
 .marquee img{-webkit-user-drag:none;user-select:none}
 
-/* ============ WHY CHOOSE (3 statement cards) ============ */
-.choose-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.choose-card{
-  position:relative;overflow:hidden;
-  aspect-ratio:1/1.14;
-  border:1px solid var(--ink);
-  background:repeating-linear-gradient(135deg,#ECECE9 0px,#ECECE9 11px,#E3E3E0 11px,#E3E3E0 12px);
-  background-size:200% 200%;
-  display:flex;align-items:flex-end;
-  padding:26px 28px;
-  transition:background-position 1.2s var(--ease),transform .45s var(--ease);
+/* ============ WHY CHOOSE (image + feature list + stat) ============ */
+.wc-grid{
+  display:grid;grid-template-columns:1.02fr 1.28fr;
+  gap:18px;align-items:stretch;
+  margin-top:clamp(36px,4vw,56px);
 }
-.choose-card:hover{background-position:46px 46px;transform:translateY(-5px)}
-.choose-card h3{font-size:17.5px;font-weight:600;letter-spacing:-.015em}
+.wc-media{
+  position:relative;grid-row:span 2;
+  border-radius:var(--radius-lg);overflow:hidden;
+  min-height:clamp(440px,46vw,600px);
+  background:#0d0d0d;
+  display:flex;align-items:flex-end;
+}
+.wc-media img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:.92;
+  transition:transform .9s var(--ease);
+}
+.wc-media:hover img{transform:scale(1.04)}
+.wc-media::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(13,13,13,.05) 38%,rgba(13,13,13,.58));
+}
+.wc-media-bar{
+  position:relative;z-index:2;width:100%;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:clamp(18px,2vw,26px);gap:14px;
+}
+.wc-pill{
+  background:#fff;color:var(--ink);
+  padding:14px 24px;border-radius:100px;
+  font-size:15px;font-weight:600;
+  transition:transform .3s var(--ease);
+}
+.wc-pill:hover{transform:translateY(-2px)}
+.wc-arrow{
+  width:52px;height:52px;border-radius:50%;flex:none;
+  background:#fff;display:flex;align-items:center;justify-content:center;
+  transition:transform .3s var(--ease);
+}
+.wc-arrow:hover{transform:translateX(3px)}
+.wc-arrow svg{width:18px;height:18px;stroke:var(--ink);stroke-width:2;fill:none}
+
+.wc-list{
+  display:flex;flex-direction:column;justify-content:center;
+  border-top:1px solid var(--line);
+}
+.wc-row{
+  display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1.15fr);
+  gap:clamp(16px,2vw,32px);align-items:center;
+  padding:clamp(20px,2.6vw,32px) 0;
+  border-bottom:1px solid var(--line);
+}
+.wc-num{
+  width:46px;height:46px;border-radius:50%;flex:none;
+  border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink-faint);
+}
+.wc-row h3{font-size:clamp(19px,1.9vw,25px);font-weight:600;letter-spacing:-.02em;line-height:1.18}
+.wc-row p{color:var(--ink-soft);font-size:14.5px;line-height:1.55}
+
+.wc-bottom{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch;
+}
+.wc-note{
+  display:flex;align-items:flex-end;
+  font-size:clamp(16px,1.45vw,20px);color:var(--ink-soft);
+  line-height:1.45;letter-spacing:-.01em;padding:6px 4px 6px 0;max-width:34ch;
+}
+.wc-stat{
+  background:#16C079;color:#fff;
+  border-radius:var(--radius-lg);
+  padding:clamp(24px,3vw,36px);
+  display:flex;flex-direction:column;justify-content:space-between;gap:24px;
+  min-height:210px;overflow:hidden;position:relative;
+}
+.wc-stat .big{font-size:clamp(50px,6vw,80px);font-weight:600;letter-spacing:-.04em;line-height:1}
+.wc-stat p{font-size:14.5px;color:rgba(255,255,255,.88);max-width:24ch;line-height:1.5}
 @media(max-width:880px){
-  .choose-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}
-  .choose-card{aspect-ratio:1/0.72}
+  .wc-grid{grid-template-columns:1fr}
+  .wc-media{grid-row:auto;min-height:360px}
+  .wc-list{border-top:none}
+  .wc-row{grid-template-columns:auto 1fr}
+  .wc-row p{grid-column:2}
+  .wc-bottom{grid-template-columns:1fr}
+  .wc-note{max-width:100%}
 }
 
 /* ============ ASSETS COLLAGE (word wheel) ============ */
@@ -649,9 +837,9 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 }
 .assets-label{
   position:relative;z-index:3;
-  font-family:var(--font-serif);font-style:italic;
+  font-weight:600;
   font-size:clamp(24px,3vw,40px);color:var(--ink);
-  white-space:nowrap;letter-spacing:-.01em;
+  white-space:nowrap;letter-spacing:-.025em;
 }
 .word-wheel{
   position:relative;z-index:1;
@@ -697,128 +885,55 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
   </div>
 </nav>
 
-<!-- ============ HERO ============ -->
+<!-- ============ HERO — CARD + SPLIT BUBBLE MENU ============ -->
 <header class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <div class="eyebrow">Flexible B2B Design Subscription</div>
-      <h1 class="h-display">Tech Marketing —<br /><span class="serif">Designed Better.</span></h1>
-      <p class="lede">Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams, of all sizes.</p>
-      <div class="hero-ctas">
-        <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
-        <a href="#work" class="btn btn-ghost">Explore Designs</a>
+  <div class="hero-card">
+
+    <!-- split bubble menu -->
+    <div class="bubble-nav">
+      <div class="bubble">
+        <a href="#" class="logo"><img src="logo.svg" alt="DesignSpace" /></a>
+        <a href="#work" class="bnav-link">Projects</a>
+        <a href="#process" class="bnav-link">Process</a>
       </div>
-      <div class="hero-meta">
-        <span>100+ marketing teams</span>
-        <span>Since 2020</span>
-        <span>Pause or cancel anytime</span>
+      <div class="bubble">
+        <a href="#why" class="bnav-link">Why Us</a>
+        <a href="#pricing" class="bnav-link">Pricing</a>
+        <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="bnav-cta">Book a Call</a>
       </div>
     </div>
-    <div class="hero-app" id="hero-app">
-      <div class="app-stage">
 
-        <!-- Panel 0: Your Entire Team -->
-        <div class="app-panel" data-panel="0">
-          <div class="app-row">
-            <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
-            <img class="app-avatar" src="https://framerusercontent.com/images/LvgYJ9klzRyqxco2w5piarzLq8.webp?width=300&height=300" alt="Pablo Picasso" loading="lazy" />
-            <div><div class="row-title">Pablo Picasso</div><div class="row-sub">CMO</div></div>
-            <div class="row-end"><span class="app-date" style="display:block">2 Active Projects</span></div>
-          </div>
-          <div class="app-row">
-            <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
-            <img class="app-avatar" src="https://framerusercontent.com/images/QMJQby2GSM1LxBOUQSRvXkPky04.png?width=300&height=300" alt="Leonardo da Vinci" loading="lazy" />
-            <div><div class="row-title">Leonardo da Vinci</div><div class="row-sub">VP Marketing</div></div>
-            <div class="row-end"><span class="app-date" style="display:block">5 Active Projects</span></div>
-          </div>
-          <div class="app-row">
-            <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
-            <img class="app-avatar" src="https://framerusercontent.com/images/kjtCn1FFkVpSiCoaISG00zLqJJY.jpg?width=300&height=300" alt="Andy Warhol" loading="lazy" />
-            <div><div class="row-title">Andy Warhol</div><div class="row-sub">Content Marketer</div></div>
-            <div class="row-end"><span class="app-date" style="display:block">9 Active Projects</span></div>
-          </div>
-          <div class="app-row">
-            <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
-            <img class="app-avatar" src="frida.jpg" alt="Frida Kahlo" loading="lazy" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Frida_Kahlo,_by_Guillermo_Kahlo.jpg?width=200'}else{var d=document.createElement('div');d.className='app-avatar initials';d.textContent='FK';this.replaceWith(d)}" />
-            <div><div class="row-title">Frida Kahlo</div><div class="row-sub">Demand Gen Lead</div></div>
-            <div class="row-end"><span class="app-date" style="display:block">4 Active Projects</span></div>
-          </div>
+    <!-- big copy + tilted visual -->
+    <div class="hero-stage">
+      <div class="hero-text">
+        <p class="hero-kicker">One subscription.<br />All your marketing design, covered.</p>
+        <h1 class="hero-h1">Designed<span class="serif">Better.</span></h1>
+        <div class="hero-ctas">
+          <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
+          <a href="#work" class="btn btn-ghost">Explore Designs</a>
         </div>
-
-        <!-- Panel 1: Active Design Projects -->
-        <div class="app-panel active" data-panel="1">
-          <div class="app-row">
-            <svg class="row-icon" viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
-            <span class="row-title">Update Sales Deck Template</span>
-            <span class="row-end"><span class="app-pill">Urgent</span><span class="app-date">April 18, 2027</span></span>
-          </div>
-          <div class="app-row">
-            <svg class="row-icon" viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
-            <span class="row-title">LinkedIn Carousel Posts</span>
-            <span class="row-end"><span class="app-pill">Low</span><span class="app-date">April 21, 2027</span></span>
-          </div>
-          <div class="app-row">
-            <svg class="row-icon" viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
-            <span class="row-title">Product Dashboards Mockups</span>
-            <span class="row-end"><span class="app-pill">High</span><span class="app-date">April 23, 2027</span></span>
-          </div>
-          <div class="app-row">
-            <svg class="row-icon" viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
-            <span class="row-title">Event Booth &amp; Swag</span>
-            <span class="row-end"><span class="app-pill">Medium</span><span class="app-date">April 25, 2027</span></span>
-          </div>
-          <div class="app-row">
-            <svg class="row-icon" viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
-            <span class="row-title">Q2 AI Insights Report</span>
-            <span class="row-end"><span class="app-pill">High</span><span class="app-date">April 29, 2027</span></span>
-          </div>
-        </div>
-
-        <!-- Panel 2: Ongoing Fulfillment -->
-        <div class="app-panel" data-panel="2">
-          <div class="app-row">
-            <svg class="row-icon" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-            <div><div class="row-title">January 2027</div><div class="row-sub">Pro Plan</div></div>
-            <span class="row-end"><span class="app-bar"><i data-fill="92.5%"></i></span><span class="app-date">37/40 Hours Used</span></span>
-          </div>
-          <div class="app-row">
-            <svg class="row-icon" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-            <div><div class="row-title">February 2027</div><div class="row-sub">Extra Plan</div></div>
-            <span class="row-end"><span class="app-bar"><i data-fill="98.75%"></i></span><span class="app-date">79/80 Hours Used</span></span>
-          </div>
-          <div class="app-row">
-            <svg class="row-icon" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-            <div><div class="row-title">March 2027</div><div class="row-sub">Pro Plan</div></div>
-            <span class="row-end"><span class="app-bar"><i data-fill="100%"></i></span><span class="app-date">40/40 Hours Used</span></span>
-          </div>
-          <div class="app-row">
-            <svg class="row-icon" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-            <div><div class="row-title">April 2027</div><div class="row-sub">Current: Mega Plan</div></div>
-            <span class="row-end"><span class="app-bar"><i data-fill="51.6%"></i></span><span class="app-date">62/120 Hours Used</span></span>
-          </div>
-        </div>
-
       </div>
-      <div class="app-tabs">
-        <button class="app-tab" data-tab="0" aria-label="Your Entire Team">
-          <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
-          <span>Your Entire Team</span>
-        </button>
-        <button class="app-tab active" data-tab="1" aria-label="Active Design Projects">
-          <svg viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
-          <span>Active Design Projects</span>
-        </button>
-        <button class="app-tab" data-tab="2" aria-label="Ongoing Fulfillment">
-          <svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-          <span>Ongoing Fulfillment</span>
-        </button>
+      <div class="hero-visual">
+        <div class="hero-plane" aria-hidden="true">
+          <svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+            <path class="trail" d="M2 86 C 30 80, 52 64, 66 40 S 92 8, 112 8" />
+            <path class="plane" d="M112 6 L88 22 L96 28 L92 40 L100 32 L116 36 L120 8 Z" />
+          </svg>
+        </div>
+        <div class="hero-device">
+          <img src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=880&height=1120" alt="DesignSpace client work preview" />
+        </div>
+        <div class="hero-chip">
+          <span class="chip-dot"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5M16 7h5"/></svg></span>
+          <span><span class="chip-num">3× output</span><span class="chip-sub">in 90 days, no new hires</span></span>
+        </div>
       </div>
     </div>
   </div>
 </header>
 
 <!-- ============ CLIENT LOGOS ============ -->
-<div class="clients" id="work">
+<div class="clients hero-clients">
   <p class="clients-label">Trusted by leading tech and cybersecurity teams</p>
   <div class="marquee">
     <div class="marquee-track" id="marquee-track">
@@ -834,6 +949,51 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
   </div>
 </div>
 
+<!-- ============ WORK SHOWCASE (below hero) ============ -->
+<section class="work-strip-section" id="work">
+  <div class="wrap">
+    <h1 class="h-xl reveal">Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams, of all sizes.</h1>
+  </div>
+  <div class="ds-carousel work-strip reveal" data-speed="34">
+    <div class="ds-rail"><div class="ds-track">
+      <div class="cap-card reveal">
+        <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=660&height=900" alt="Product mockups client work" loading="lazy" /></div>
+        <span class="cap-pill">Product Mockups</span>
+        <div class="cap-client"><img src="https://framerusercontent.com/images/Gtuq5tWbrXabiSQIig8vrihPbYY.png?width=2377&height=446" alt="Hyperproof" loading="lazy" /></div>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/n0YP32ZIZM8bBOcyoaarS35Ws.png?width=660&height=900" alt="Reports and docs client work" loading="lazy" /></div>
+        <span class="cap-pill">Reports + Docs</span>
+        <div class="cap-client"><img src="https://framerusercontent.com/images/S7eiYkINZ5Q4uBo75a3rRpHObdU.svg?width=175&height=40" alt="Client logo" loading="lazy" /></div>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/w2PBu9y5PW7w0pJMBg20EXzq0VE.png?width=660&height=900" alt="Ad campaigns client work" loading="lazy" /></div>
+        <span class="cap-pill">Ad Campaigns</span>
+        <div class="cap-client"><img src="https://framerusercontent.com/images/vUL4UKtSxzNpY4BTablrxP3TD5Y.png?width=1886&height=407" alt="Client logo" loading="lazy" /></div>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=660&height=900" alt="Diagrams client work" loading="lazy" /></div>
+        <span class="cap-pill">Diagrams</span>
+        <div class="cap-client"><img src="https://framerusercontent.com/images/ybMs8JWdsWa1LjoYzj3wZKTWQ.jpg?width=800&height=129" alt="Client logo" loading="lazy" /></div>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=660&height=900" alt="Social content client work" loading="lazy" /></div>
+        <span class="cap-pill">Social Content</span>
+        <div class="cap-client"><img src="https://framerusercontent.com/images/GImBoI5JvavtbCMVJpSJ7qXfd3A.svg?width=420&height=76" alt="Client logo" loading="lazy" /></div>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=660&height=900" alt="Reports and docs client work" loading="lazy" /></div>
+        <span class="cap-pill">Reports + Docs</span>
+        <div class="cap-client"><img src="https://framerusercontent.com/images/TDLRhJgtdEMI1bJm76cVSEljj1E.png?width=900&height=202" alt="Kasada" loading="lazy" /></div>
+      </div>
+    </div></div>
+    <div class="ds-controls">
+      <div class="scrub" aria-label="Carousel position"></div>
+      <button class="play-toggle" aria-label="Pause"></button>
+    </div>
+  </div>
+</section>
+
 <!-- ============ CAPABILITIES ============ -->
 <section>
   <div class="caps">
@@ -843,59 +1003,151 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
         <h2 class="h-xl">Creative fulfillment<br /><span class="serif">for your entire team.</span></h2>
         <p class="lede" style="margin-top:20px">One subscription that keeps your creative output moving — no bottlenecks, no handoff delays, no waiting on design.</p>
       </div>
-    </div>
-    <div class="ds-carousel" data-speed="42">
-      <div class="ds-rail"><div class="ds-track">
-        <div class="cap-card reveal">
-          <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=660&height=900" alt="Product mockups client work" loading="lazy" /></div>
-          <span class="cap-pill">Product Mockups</span>
-          <div class="cap-client"><img src="https://framerusercontent.com/images/Gtuq5tWbrXabiSQIig8vrihPbYY.png?width=2377&height=446" alt="Hyperproof" loading="lazy" /></div>
+      <div class="hero-app reveal" id="hero-app" style="margin-top:clamp(40px,5vw,72px)">
+        <div class="app-stage">
+  
+          <!-- Panel 0: Your Entire Team -->
+          <div class="app-panel" data-panel="0">
+            <div class="app-row">
+              <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
+              <img class="app-avatar" src="https://framerusercontent.com/images/LvgYJ9klzRyqxco2w5piarzLq8.webp?width=300&height=300" alt="Pablo Picasso" loading="lazy" />
+              <div><div class="row-title">Pablo Picasso</div><div class="row-sub">CMO</div></div>
+              <div class="row-end"><span class="app-date" style="display:block">2 Active Projects</span></div>
+            </div>
+            <div class="app-row">
+              <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
+              <img class="app-avatar" src="https://framerusercontent.com/images/QMJQby2GSM1LxBOUQSRvXkPky04.png?width=300&height=300" alt="Leonardo da Vinci" loading="lazy" />
+              <div><div class="row-title">Leonardo da Vinci</div><div class="row-sub">VP Marketing</div></div>
+              <div class="row-end"><span class="app-date" style="display:block">5 Active Projects</span></div>
+            </div>
+            <div class="app-row">
+              <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
+              <img class="app-avatar" src="https://framerusercontent.com/images/kjtCn1FFkVpSiCoaISG00zLqJJY.jpg?width=300&height=300" alt="Andy Warhol" loading="lazy" />
+              <div><div class="row-title">Andy Warhol</div><div class="row-sub">Content Marketer</div></div>
+              <div class="row-end"><span class="app-date" style="display:block">9 Active Projects</span></div>
+            </div>
+            <div class="app-row">
+              <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
+              <img class="app-avatar" src="frida.jpg" alt="Frida Kahlo" loading="lazy" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Frida_Kahlo,_by_Guillermo_Kahlo.jpg?width=200'}else{var d=document.createElement('div');d.className='app-avatar initials';d.textContent='FK';this.replaceWith(d)}" />
+              <div><div class="row-title">Frida Kahlo</div><div class="row-sub">Demand Gen Lead</div></div>
+              <div class="row-end"><span class="app-date" style="display:block">4 Active Projects</span></div>
+            </div>
+          </div>
+  
+          <!-- Panel 1: Active Design Projects -->
+          <div class="app-panel active" data-panel="1">
+            <div class="app-row">
+              <svg class="row-icon" viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
+              <span class="row-title">Update Sales Deck Template</span>
+              <span class="row-end"><span class="app-pill">Urgent</span><span class="app-date">April 18, 2027</span></span>
+            </div>
+            <div class="app-row">
+              <svg class="row-icon" viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
+              <span class="row-title">LinkedIn Carousel Posts</span>
+              <span class="row-end"><span class="app-pill">Low</span><span class="app-date">April 21, 2027</span></span>
+            </div>
+            <div class="app-row">
+              <svg class="row-icon" viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
+              <span class="row-title">Product Dashboards Mockups</span>
+              <span class="row-end"><span class="app-pill">High</span><span class="app-date">April 23, 2027</span></span>
+            </div>
+            <div class="app-row">
+              <svg class="row-icon" viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
+              <span class="row-title">Event Booth &amp; Swag</span>
+              <span class="row-end"><span class="app-pill">Medium</span><span class="app-date">April 25, 2027</span></span>
+            </div>
+            <div class="app-row">
+              <svg class="row-icon" viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
+              <span class="row-title">Q2 AI Insights Report</span>
+              <span class="row-end"><span class="app-pill">High</span><span class="app-date">April 29, 2027</span></span>
+            </div>
+          </div>
+  
+          <!-- Panel 2: Ongoing Fulfillment -->
+          <div class="app-panel" data-panel="2">
+            <div class="app-row">
+              <svg class="row-icon" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+              <div><div class="row-title">January 2027</div><div class="row-sub">Pro Plan</div></div>
+              <span class="row-end"><span class="app-bar"><i data-fill="92.5%"></i></span><span class="app-date">37/40 Hours Used</span></span>
+            </div>
+            <div class="app-row">
+              <svg class="row-icon" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+              <div><div class="row-title">February 2027</div><div class="row-sub">Extra Plan</div></div>
+              <span class="row-end"><span class="app-bar"><i data-fill="98.75%"></i></span><span class="app-date">79/80 Hours Used</span></span>
+            </div>
+            <div class="app-row">
+              <svg class="row-icon" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+              <div><div class="row-title">March 2027</div><div class="row-sub">Pro Plan</div></div>
+              <span class="row-end"><span class="app-bar"><i data-fill="100%"></i></span><span class="app-date">40/40 Hours Used</span></span>
+            </div>
+            <div class="app-row">
+              <svg class="row-icon" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+              <div><div class="row-title">April 2027</div><div class="row-sub">Current: Mega Plan</div></div>
+              <span class="row-end"><span class="app-bar"><i data-fill="51.6%"></i></span><span class="app-date">62/120 Hours Used</span></span>
+            </div>
+          </div>
+  
         </div>
-        <div class="cap-card reveal">
-          <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/n0YP32ZIZM8bBOcyoaarS35Ws.png?width=660&height=900" alt="Reports and docs client work" loading="lazy" /></div>
-          <span class="cap-pill">Reports + Docs</span>
-          <div class="cap-client"><img src="https://framerusercontent.com/images/S7eiYkINZ5Q4uBo75a3rRpHObdU.svg?width=175&height=40" alt="Client logo" loading="lazy" /></div>
+        <div class="app-tabs">
+          <button class="app-tab" data-tab="0" aria-label="Your Entire Team">
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
+            <span>Your Entire Team</span>
+          </button>
+          <button class="app-tab active" data-tab="1" aria-label="Active Design Projects">
+            <svg viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
+            <span>Active Design Projects</span>
+          </button>
+          <button class="app-tab" data-tab="2" aria-label="Ongoing Fulfillment">
+            <svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+            <span>Ongoing Fulfillment</span>
+          </button>
         </div>
-        <div class="cap-card reveal">
-          <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/w2PBu9y5PW7w0pJMBg20EXzq0VE.png?width=660&height=900" alt="Ad campaigns client work" loading="lazy" /></div>
-          <span class="cap-pill">Ad Campaigns</span>
-          <div class="cap-client"><img src="https://framerusercontent.com/images/vUL4UKtSxzNpY4BTablrxP3TD5Y.png?width=1886&height=407" alt="Client logo" loading="lazy" /></div>
-        </div>
-        <div class="cap-card reveal">
-          <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=660&height=900" alt="Diagrams client work" loading="lazy" /></div>
-          <span class="cap-pill">Diagrams</span>
-          <div class="cap-client"><img src="https://framerusercontent.com/images/ybMs8JWdsWa1LjoYzj3wZKTWQ.jpg?width=800&height=129" alt="Client logo" loading="lazy" /></div>
-        </div>
-        <div class="cap-card reveal">
-          <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=660&height=900" alt="Social content client work" loading="lazy" /></div>
-          <span class="cap-pill">Social Content</span>
-          <div class="cap-client"><img src="https://framerusercontent.com/images/GImBoI5JvavtbCMVJpSJ7qXfd3A.svg?width=420&height=76" alt="Client logo" loading="lazy" /></div>
-        </div>
-        <div class="cap-card reveal">
-          <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=660&height=900" alt="Reports and docs client work" loading="lazy" /></div>
-          <span class="cap-pill">Reports + Docs</span>
-          <div class="cap-client"><img src="https://framerusercontent.com/images/TDLRhJgtdEMI1bJm76cVSEljj1E.png?width=900&height=202" alt="Kasada" loading="lazy" /></div>
-        </div>
-      </div></div>
-      <div class="ds-controls">
-        <div class="scrub" aria-label="Carousel position"></div>
-        <button class="play-toggle" aria-label="Pause"></button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ WHY CHOOSE (3 statement cards) ============ -->
+<!-- ============ WHY CHOOSE (image + feature list + stat) ============ -->
 <section style="padding-top:0">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Why Choose DesignSpace</div>
       <h2 class="h-xl">Your dedicated design team.<br /><span class="serif">Built around your priorities.</span></h2>
     </div>
-    <div class="choose-grid">
-      <div class="choose-card reveal"><h3>Every asset, handled.</h3></div>
-      <div class="choose-card reveal"><h3>Specialists, not generalists.</h3></div>
-      <div class="choose-card reveal"><h3>Your whole team, covered.</h3></div>
+    <div class="wc-grid">
+      <div class="wc-media reveal">
+        <img src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=900&height=1200" alt="DesignSpace client work" loading="lazy" />
+        <div class="wc-media-bar">
+          <a href="#work" class="wc-pill">Explore client work</a>
+          <a href="#work" class="wc-arrow" aria-label="Explore client work"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+
+      <div class="wc-list reveal">
+        <div class="wc-row">
+          <span class="wc-num">01</span>
+          <h3>Every asset, handled.</h3>
+          <p>From product mockups to pitch decks, ad campaigns to diagrams — one team covers every format you need.</p>
+        </div>
+        <div class="wc-row">
+          <span class="wc-num">02</span>
+          <h3>Specialists, not generalists.</h3>
+          <p>Built for B2B tech and cybersecurity marketing — we know the landscape, the language, and what your buyers respond to.</p>
+        </div>
+        <div class="wc-row">
+          <span class="wc-num">03</span>
+          <h3>Your whole team, covered.</h3>
+          <p>Add your whole team — marketing, design, sales, events — with a dedicated PM keeping every request on track.</p>
+        </div>
+      </div>
+
+      <div class="wc-bottom reveal">
+        <p class="wc-note">Explore the benefits — meticulously tailored to the way fast-moving B2B tech and cybersecurity teams work.</p>
+        <div class="wc-stat">
+          <span class="big">3×</span>
+          <p>More creative output within 90 days — without growing your headcount.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -931,35 +1183,35 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
       <p class="lede" style="margin-top:20px">Branded creatives whenever you need them. A team that already knows your industry and keeps your creative output moving.</p>
     </div>
     <div class="why-grid">
-      <div class="why-card reveal">
-        <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.7 1.5 6.8L12 17.3 5.7 20.8l1.5-6.8L2 9.3l7-.8z"/></svg></div>
+      <div class="why-card why-lg why-bg-1 reveal">
         <h3>Built for tech &amp; cyber marketing teams</h3>
         <p>We're deeply rooted in your industry. We understand the landscape, the language, what your buyers respond to, and what the competition is doing.</p>
+        <div class="why-card-media"><img src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=800" alt="" loading="lazy" /></div>
       </div>
-      <div class="why-card reveal">
-        <div class="why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></div>
+      <div class="why-card why-sm why-bg-2 reveal">
         <h3>Founder-led quality control, on every output</h3>
         <p>Every deliverable is reviewed and refined by our creative director before it reaches you — the person who built the standard in the first place.</p>
+        <div class="why-card-media"><img src="https://framerusercontent.com/images/Cx3Rw7mQccGjeuJGUbE3klCs.png?width=800" alt="" loading="lazy" /></div>
       </div>
-      <div class="why-card reveal">
-        <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path d="M9 12l2 2 4-5"/></svg></div>
+      <div class="why-card why-sm why-bg-3 reveal">
         <h3>One point of contact. Always.</h3>
         <p>You're not submitting into a black box. Every account has a dedicated project manager — a real person who knows your priorities and keeps things moving.</p>
+        <div class="why-card-media"><img src="https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=800" alt="" loading="lazy" /></div>
       </div>
-      <div class="why-card reveal">
-        <div class="why-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="18" rx="1.5"/><rect x="14" y="3" width="7" height="10" rx="1.5"/></svg></div>
+      <div class="why-card why-lg why-bg-4 reveal">
         <h3>Full visibility at every stage</h3>
         <p>Your Asana board shows exactly where every task sits — timelines, priorities, in progress, awaiting assets, or ready for review. No more chasing updates.</p>
+        <div class="why-card-media"><img src="https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=800" alt="" loading="lazy" /></div>
       </div>
-      <div class="why-card reveal">
-        <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0114-5M20 12a8 8 0 01-14 5"/><path d="M18 3v4h-4M6 21v-4h4"/></svg></div>
+      <div class="why-card why-lg why-bg-5 reveal">
         <h3>A subscription, not a contract</h3>
         <p>One flat monthly rate, full flexibility. Upgrade or downgrade as your needs change — and if you ever need to step away, just give us 30 days notice.</p>
+        <div class="why-card-media"><img src="https://framerusercontent.com/images/VJPlRfJINbYC3Wjw3ivpq7nAYg.png?width=800" alt="" loading="lazy" /></div>
       </div>
-      <div class="why-card reveal">
-        <div class="why-icon"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a4 4 0 018 0v2M3 13h18"/></svg></div>
+      <div class="why-card why-sm why-bg-6 reveal">
         <h3>All design assets covered</h3>
         <p>Branded creatives whenever you need them. A team that already knows your industry and keeps your creative output moving.</p>
+        <div class="why-card-media"><img src="https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=800" alt="" loading="lazy" /></div>
       </div>
     </div>
   </div>
@@ -1364,6 +1616,18 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 })();
 
 /* ================================================================
+   HERO ENTRANCE — card, bubble menu, copy, visual
+================================================================ */
+(function () {
+  if (!window.gsap) return;
+  gsap.from('.bubble-nav .bubble', { y: -16, opacity: 0, duration: .8, ease: 'power3.out', stagger: .12, delay: .1 });
+  gsap.from('.hero-text > *', { y: 30, opacity: 0, duration: 1, ease: 'power3.out', stagger: .1, delay: .25 });
+  gsap.from('.hero-visual', { y: 40, opacity: 0, duration: 1.1, ease: 'power3.out', delay: .35 });
+})();
+
+/* ---- COSMOS RING hero fully removed; replaced by static card hero ---- */
+
+/* ================================================================
    GSAP — scroll reveals, nav, counters
 ================================================================ */
 (function () {
@@ -1376,14 +1640,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
     nav.classList.toggle('scrolled', window.scrollY > 24);
   }, { passive: true });
 
-  // Hero copy entrance
-  gsap.from('.hero-copy > *', {
-    y: 36, opacity: 0, duration: 1.1, ease: 'power3.out',
-    stagger: 0.09, delay: 0.15
-  });
-  gsap.from('.hero-app', {
-    y: 48, opacity: 0, duration: 1.2, ease: 'power3.out', delay: 0.4
-  });
+  // (Hero entrance handled in the dedicated hero IIFE above.)
 
   // Section reveals
   gsap.utils.toArray('.reveal').forEach(function (el) {
@@ -1542,8 +1799,9 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
     var last = performance.now();
     (function loop(now) {
       var dt = Math.min(now - last, 64); last = now;
-      if (playing && !hovering && !dragging && !tweening) {
-        fill += dt / DWELL;
+      if (playing && !dragging && !tweening) {
+        var rate = hovering ? 0.5 : 1;
+        fill += (dt / DWELL) * rate;
         if (fill >= 1) { fill = 0; goTo(idx + 1); }
         setDots();
       }
@@ -1604,40 +1862,6 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
     render();
   }
   document.querySelectorAll('.ds-carousel').forEach(makeCarousel);
-})();
-
-/* ================================================================
-   Hero widget — grows & centers on scroll (desktop spotlight effect)
-================================================================ */
-(function () {
-  if (!window.gsap || !window.ScrollTrigger) return;
-  ScrollTrigger.matchMedia({
-    "(min-width: 901px)": function () {
-      var app = document.querySelector('.hero-app');
-      if (!app) return;
-
-      gsap.set(app, { transformOrigin: '50% 50%' });
-
-      // No pin/spacer involved: as the widget scrolls up from the bottom
-      // of the viewport toward center it grows in place, then continues
-      // scrolling up with the section at its grown size. Sections below
-      // simply stack in underneath as normal, with no overlap or blank gap.
-      var st = ScrollTrigger.create({
-        trigger: app,
-        start: 'top bottom',
-        end: 'top 45%',
-        scrub: true,
-        onUpdate: function (self) {
-          gsap.set(app, { scale: 1 + self.progress * 0.1 });
-        }
-      });
-
-      return function () {
-        st.kill();
-        gsap.set(app, { clearProps: 'scale,transformOrigin' });
-      };
-    }
-  });
 })();
 
 /* ================================================================
