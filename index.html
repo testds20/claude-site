@@ -250,6 +250,7 @@ nav{
   .hero-ctas{justify-content:center}
   .hero-visual{order:1;justify-content:center;min-height:0;margin-bottom:8px}
   .hero-gradient{transform:rotate(1.5deg);width:min(86%,400px)}
+  .hero-clients .clients-label{text-align:center}
 }
 
 /* ============ WORK SHOWCASE (below hero) ============ */
@@ -451,6 +452,21 @@ nav{
 }
 .hhead .eyebrow{margin-bottom:14px}
 .hhead .lede{margin-top:16px}
+/* prev/next controls */
+.h-controls{
+  display:flex;gap:10px;justify-content:flex-end;
+  padding:0 max(var(--pad), calc((100% - var(--max)) / 2 + var(--pad)));
+  margin-bottom:clamp(18px,2vw,26px);
+}
+.h-arrow{
+  width:48px;height:48px;border-radius:50%;flex:none;
+  border:1px solid var(--line);background:var(--bg-card);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .25s,opacity .25s;
+}
+.h-arrow:hover{background:var(--bg-soft)}
+.h-arrow:disabled{opacity:.35;cursor:default}
+.h-arrow svg{width:18px;height:18px;stroke:var(--ink);stroke-width:2;fill:none}
 .htrack{
   display:flex;align-items:stretch;gap:clamp(20px,2.4vw,34px);
   overflow-x:auto;overflow-y:hidden;
@@ -458,7 +474,9 @@ nav{
   -webkit-overflow-scrolling:touch;
   scrollbar-width:none;
   cursor:grab;
-  padding:4px max(var(--pad), calc((100% - var(--max)) / 2 + var(--pad))) 16px;
+  padding-top:4px;padding-bottom:16px;
+  padding-left:max(var(--pad), calc((100% - var(--max)) / 2 + var(--pad)));
+  padding-right:max(var(--pad), calc((100% - var(--max)) / 2 + var(--pad)));
 }
 .htrack::-webkit-scrollbar{display:none}
 .htrack.dragging{cursor:grabbing;scroll-snap-type:none}
@@ -487,7 +505,8 @@ nav{
 .hcard p{color:var(--ink-soft);font-size:15px;line-height:1.55;margin-top:12px;max-width:42ch}
 @media(max-width:880px){
   .hwrap{padding:clamp(56px,12vw,80px) 0}
-  .hhead{margin-bottom:clamp(28px,7vw,40px)}
+  .hhead{margin-bottom:clamp(24px,6vw,36px)}
+  .h-controls{display:none}
   .htrack{gap:clamp(20px,5vw,28px);padding:4px var(--pad) 16px}
   .hcard{width:min(82vw,360px)}
 }
@@ -495,7 +514,6 @@ nav{
 /* ============ STATS ============ */
 .stats{
   display:grid;grid-template-columns:repeat(3,1fr);
-  border-top:1px solid var(--line);
 }
 .stat{
   padding:clamp(36px,4vw,60px) clamp(20px,3vw,48px);
@@ -724,6 +742,11 @@ nav{
 .proc-bar{display:block;height:2px;background:var(--line);overflow:hidden;border-radius:2px;margin-bottom:clamp(18px,2vw,24px)}
 .proc-bar i{display:block;height:100%;width:0;background:var(--ink);border-radius:2px}
 .proc-step.active .proc-bar i{width:100%;transition:width var(--aloop-dur,5000ms) linear}
+.proc-step-num{
+  display:block;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-faint);margin-bottom:12px;
+}
 .proc-step h3{font-size:clamp(18px,1.7vw,22px);letter-spacing:-.02em;margin-bottom:10px;line-height:1.25;transition:color .3s}
 .proc-step p{color:var(--ink-soft);font-size:14.5px;line-height:1.55;max-width:34ch}
 .proc-step:not(.active) h3{color:var(--ink-faint)}
@@ -731,8 +754,13 @@ nav{
   .proc-head{grid-template-columns:1fr;gap:14px}
   .proc-figure{aspect-ratio:16/10}
   .proc-steps{grid-template-columns:1fr;gap:0}
-  .proc-step{padding:22px 0;border-top:1px solid var(--line)}
+  /* like the stats: Step label left, content right, top-aligned */
+  .proc-step{
+    display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,5vw,28px);align-items:start;
+    padding:22px 0;border-top:1px solid var(--line);
+  }
   .proc-step .proc-bar{display:none}
+  .proc-step-num{margin-bottom:0;padding-top:2px}
 }
 
 /* ============ FAQ ============ */
@@ -769,23 +797,30 @@ nav{
 .cta-head{display:flex;flex-direction:column;align-items:center;text-align:center}
 .cta-head .eyebrow{justify-content:center}
 .cal-card{
+  margin:0 var(--pad);
   background:var(--bg-card);border:1px solid var(--line);
-  border-radius:var(--radius-lg);overflow:hidden;
+  border-radius:var(--radius-lg);
   box-shadow:0 50px 100px -55px rgba(0,0,0,.28);
-  margin-top:clamp(32px,4vw,52px);
-  min-height:560px;
+  padding:clamp(32px,4vw,56px) clamp(16px,2.5vw,32px) clamp(20px,3vw,40px);
 }
-.cal-card iframe{width:100%;min-height:680px;border:0;display:block;background:var(--bg-card)}
-@media(max-width:560px){.cal-card iframe{min-height:760px}}
+.cal-card .cta-head{margin-bottom:clamp(26px,3.2vw,44px)}
+.cal-card iframe{
+  width:100%;min-height:720px;border:0;display:block;
+  border-radius:var(--radius-md);background:var(--bg-card);
+}
+@media(max-width:560px){
+  .cal-card{padding:clamp(24px,6vw,32px) 14px 18px}
+  .cal-card iframe{min-height:1040px}
+}
 
 /* ============ FOOTER ============ */
 footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 .foot-top{
-  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
-  gap:clamp(28px,3.5vw,52px);align-items:start;
+  display:grid;grid-template-columns:2.3fr 1fr 1fr 1fr;
+  gap:clamp(28px,3vw,48px);align-items:start;
   padding-bottom:clamp(36px,4vw,56px);
 }
-.foot-head{font-size:clamp(24px,2.7vw,38px);font-weight:400;letter-spacing:-.025em;line-height:1.12;text-wrap:balance}
+.foot-head{font-size:clamp(22px,2.3vw,34px);font-weight:400;letter-spacing:-.025em;line-height:1.14;max-width:18ch}
 .foot-head .serif{color:var(--ink-soft)}
 .foot-copy{margin-top:clamp(18px,2vw,26px);font-size:13px;color:var(--ink-faint)}
 .foot-col h4{
@@ -797,7 +832,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   margin-bottom:12px;transition:color .25s;
 }
 .foot-col a:hover{color:var(--ink-soft)}
-.foot-word{padding:0 var(--pad);margin-top:clamp(32px,5vw,64px)}
+.foot-word{max-width:var(--max);margin:clamp(32px,5vw,64px) auto 0;padding:0 var(--pad)}
 .foot-word img{width:100%;height:auto;display:block}
 @media(max-width:820px){
   .foot-top{grid-template-columns:1fr 1fr 1fr;gap:36px 24px}
@@ -838,9 +873,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   font-size:12.5px;font-weight:600;
 }
 .int-ico img{width:18px;height:18px;object-fit:contain}
-/* brand favicons (Lovable, Jitter) fill the tile as a rounded app icon */
-.int-ico-fav{overflow:hidden;border-color:transparent}
-.int-ico-fav img{width:100%;height:100%;object-fit:cover}
+/* brand favicons (Lovable, Jitter): same size/placement as the other icons */
+.int-ico-fav img{width:20px;height:20px;object-fit:contain;border-radius:5px}
 .int-ico.ps img,.int-ico.ai img,.int-ico.id img,.int-ico.ae img{width:24px;height:24px;border-radius:5px}
 .int-ico svg{width:18px;height:18px;stroke:var(--ink);stroke-width:1.6;fill:none}
 .int-ico.ps{background:#001E36;color:#31A8FF;border:none}
@@ -1253,6 +1287,11 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       <p class="lede">Branded creatives whenever you need them — from a team that already knows your industry and keeps your output moving.</p>
     </div>
 
+    <div class="h-controls">
+      <button class="h-arrow" type="button" data-h-prev aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="h-arrow" type="button" data-h-next aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+
     <div class="htrack">
       <article class="hcard">
         <div class="hcard-media"><img src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=800" alt="Tech & cyber marketing work" loading="lazy" /></div>
@@ -1549,18 +1588,27 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       <div class="proc-steps">
         <button class="proc-step active" data-step="0">
           <span class="proc-bar"><i></i></span>
-          <h3>Kickoff with DesignSpace.</h3>
-          <p>We align on your team, priorities, and workflows — then set up your Asana board, shared Figma file, and brand assets folder.</p>
+          <span class="proc-step-num">Step 1</span>
+          <div class="proc-step-body">
+            <h3>Kickoff with DesignSpace.</h3>
+            <p>We align on your team, priorities, and workflows — then set up your Asana board, shared Figma file, and brand assets folder.</p>
+          </div>
         </button>
         <button class="proc-step" data-step="1">
           <span class="proc-bar"><i></i></span>
-          <h3>Submit tasks. We deliver.</h3>
-          <p>Drop tasks straight into Asana — no forms, no brief templates. Your team designs, your creative director reviews, you receive polished work.</p>
+          <span class="proc-step-num">Step 2</span>
+          <div class="proc-step-body">
+            <h3>Submit tasks. We deliver.</h3>
+            <p>Drop tasks straight into Asana — no forms, no brief templates. Your team designs, your creative director reviews, you receive polished work.</p>
+          </div>
         </button>
         <button class="proc-step" data-step="2">
           <span class="proc-bar"><i></i></span>
-          <h3>Scale on your terms.</h3>
-          <p>Upgrade for launches, downgrade in quiet months, pause when you need to. Your subscription flexes with your roadmap.</p>
+          <span class="proc-step-num">Step 3</span>
+          <div class="proc-step-body">
+            <h3>Scale on your terms.</h3>
+            <p>Upgrade for launches, downgrade in quiet months, pause when you need to. Your subscription flexes with your roadmap.</p>
+          </div>
         </button>
       </div>
     </div>
@@ -1605,15 +1653,13 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 
 <!-- ============ CTA — booking ============ -->
 <section id="contact" style="padding-top:0">
-  <div class="wrap">
-    <div class="section-head cta-head reveal">
+  <div class="cal-card reveal">
+    <div class="section-head cta-head">
       <div class="eyebrow">Let's chat</div>
       <h2 class="h-xl">Ready to go?<br /><span class="serif">Book a Discovery Call</span></h2>
     </div>
-    <div class="cal-card reveal">
-      <iframe src="https://cal.com/ian-barin/discovery?embed=true&layout=month_view&theme=light"
-        title="Book a Discovery Call" loading="lazy"></iframe>
-    </div>
+    <iframe src="https://cal.com/ian-barin/discovery?embed=true&layout=month_view&theme=light"
+      title="Book a Discovery Call" loading="lazy"></iframe>
   </div>
 </section>
 
@@ -1769,6 +1815,26 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   track.addEventListener('pointercancel', end);
   // Swallow the click that follows a drag so cards/links don't fire.
   track.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+
+  // prev/next arrows
+  function stepBy() {
+    var card = track.querySelector('.hcard');
+    var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 24;
+    return card ? card.offsetWidth + gap : 420;
+  }
+  var prevBtn = document.querySelector('[data-h-prev]');
+  var nextBtn = document.querySelector('[data-h-next]');
+  if (nextBtn) nextBtn.addEventListener('click', function () { track.scrollBy({ left: stepBy(), behavior: 'smooth' }); });
+  if (prevBtn) prevBtn.addEventListener('click', function () { track.scrollBy({ left: -stepBy(), behavior: 'smooth' }); });
+  function syncArrows() {
+    if (!prevBtn || !nextBtn) return;
+    var max = track.scrollWidth - track.clientWidth - 2;
+    prevBtn.disabled = track.scrollLeft <= 2;
+    nextBtn.disabled = track.scrollLeft >= max;
+  }
+  track.addEventListener('scroll', syncArrows, { passive: true });
+  window.addEventListener('resize', syncArrows);
+  syncArrows();
 })();
 
 /* ================================================================
