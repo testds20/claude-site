@@ -104,36 +104,18 @@ section{padding:clamp(72px,9vw,140px) 0}
 .btn .arr{transition:transform .35s var(--ease)}
 .btn:hover .arr{transform:translateX(4px)}
 
-/* ============ NAV ============ */
+/* ============ NAV (persistent split bubble) ============ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  transition:background .4s,backdrop-filter .4s,border-color .4s,opacity .4s,transform .4s;
-  border-bottom:1px solid transparent;
-  opacity:0;transform:translateY(-14px);pointer-events:none;
-}
-nav.scrolled{
-  background:rgba(248,248,248,.82);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  border-bottom-color:var(--line);
-  opacity:1;transform:none;pointer-events:auto;
 }
 .nav-inner{
-  max-width:var(--max);margin:0 auto;
-  padding:18px var(--pad);
-  display:flex;align-items:center;justify-content:space-between;
+  /* align with the hero text: sides = page gutter + card inner padding;
+     top sits the same inset below the card's top edge as the sides do */
+  padding:calc(18px + clamp(18px,1.8vw,26px)) calc(var(--pad) + clamp(18px,1.8vw,26px)) 0;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
 }
 .logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16.5px;letter-spacing:.02em}
 .logo img{height:20px;width:auto;display:block}
-.nav-links{display:flex;gap:34px;font-size:14.5px;font-weight:500;color:var(--ink-soft)}
-.nav-links a{position:relative;transition:color .25s}
-.nav-links a:hover{color:var(--ink)}
-.nav-links a::after{
-  content:"";position:absolute;left:0;bottom:-5px;height:1.5px;width:0;
-  background:var(--ink);transition:width .35s var(--ease);
-}
-.nav-links a:hover::after{width:100%}
-.nav-cta{padding:11px 22px;font-size:14px}
-@media(max-width:880px){.nav-links{display:none}}
 
 /* ============ HERO — CARD + SPLIT BUBBLE MENU ============ */
 .hero{
@@ -145,24 +127,28 @@ nav.scrolled{
   background:var(--bg-soft);
   border:1px solid var(--line);
   border-radius:clamp(26px,3vw,40px);
-  padding:clamp(18px,1.8vw,26px);
+  padding:clamp(64px,6vw,84px) clamp(18px,1.8vw,26px) 0;
   overflow:hidden;
-  min-height:min(88vh,880px);
+  min-height:min(84vh,860px);
   display:flex;flex-direction:column;
-  gap:clamp(28px,4vw,56px);
+  gap:clamp(18px,2.4vw,36px);
 }
 /* soft ambient wash behind the visual */
 .hero-card::before{
   content:"";position:absolute;top:-30%;right:-10%;width:70%;height:90%;
-  background:radial-gradient(circle at 60% 40%,rgba(22,192,121,.10),transparent 62%);
+  background:radial-gradient(circle at 60% 40%,rgba(150,130,230,.12),transparent 62%);
   pointer-events:none;z-index:0;
 }
+/* client logos inside the hero card (above the fold) */
+.hero-clients{
+  position:relative;z-index:2;margin-top:auto;
+  border-top:1px solid var(--line);
+  /* equal top/bottom so the label + logos sit centered in the band */
+  padding:clamp(20px,2.2vw,30px) 0;
+}
+.hero-clients .clients-label{margin-bottom:clamp(14px,1.6vw,20px)}
 
 /* --- split bubble menu --- */
-.bubble-nav{
-  position:relative;z-index:6;
-  display:flex;align-items:center;justify-content:space-between;gap:14px;
-}
 .bubble{
   display:flex;align-items:center;gap:4px;
   background:var(--bg-card);
@@ -175,20 +161,31 @@ nav.scrolled{
 .bubble .logo img{height:19px}
 .bnav-link{
   padding:10px 16px;border-radius:100px;
-  font-size:14px;font-weight:500;color:var(--ink-soft);
+  font-size:14px;font-weight:500;color:var(--ink);
   transition:background .25s,color .25s;white-space:nowrap;
 }
-.bnav-link:hover{background:var(--bg-soft);color:var(--ink)}
+.bnav-link:hover{background:var(--bg-soft)}
 .bnav-cta{
+  display:inline-flex;align-items:center;gap:8px;
   padding:11px 20px;border-radius:100px;
   background:var(--ink);color:var(--bg);
   font-size:14px;font-weight:600;white-space:nowrap;
   transition:transform .3s var(--ease),box-shadow .3s;
 }
 .bnav-cta:hover{transform:translateY(-1px);box-shadow:0 12px 26px -12px rgba(0,0,0,.5)}
+.bnav-cta .arr{transition:transform .35s var(--ease)}
+.bnav-cta:hover .arr{transform:translateX(4px)}
 @media(max-width:880px){
+  /* collapse the two bubbles into one single nav pill */
+  nav{padding:14px var(--pad)}
+  .nav-inner{
+    padding:7px 7px 7px 16px;gap:8px;
+    background:var(--bg-card);border:1px solid var(--line);
+    border-radius:100px;box-shadow:0 10px 30px -18px rgba(0,0,0,.22);
+  }
+  .nav-inner .bubble{background:none;border:none;box-shadow:none;padding:0;flex:none}
   .bubble .bnav-link{display:none}
-  .bubble{padding:6px}
+  .bubble .logo{padding:0}
 }
 
 /* --- hero stage: big copy + tilted visual --- */
@@ -197,61 +194,51 @@ nav.scrolled{
   display:grid;grid-template-columns:1.05fr .95fr;
   align-items:end;gap:clamp(20px,3vw,48px);
 }
-.hero-text{align-self:end;max-width:18ch}
-.hero-kicker{
-  font-size:clamp(14px,1.1vw,16px);color:var(--ink-soft);
-  font-weight:500;line-height:1.45;margin-bottom:clamp(18px,2vw,26px);
-}
+.hero-text{align-self:end;max-width:640px}
+.hero-text .eyebrow{margin-bottom:clamp(16px,1.8vw,22px)}
 .hero-h1{
-  font-size:clamp(54px,8.6vw,132px);
-  line-height:.9;letter-spacing:-.05em;font-weight:600;
-  margin-bottom:clamp(24px,3vw,36px);
+  font-size:clamp(40px,5.2vw,68px);
+  line-height:.98;letter-spacing:-.04em;font-weight:600;
+  margin-bottom:clamp(16px,1.8vw,22px);
 }
 .hero-h1 .serif{display:block;color:var(--ink-soft)}
+.hero-sub{
+  font-size:clamp(16px,1.35vw,19px);color:var(--ink-soft);
+  font-weight:400;line-height:1.55;max-width:44ch;
+  margin-bottom:clamp(26px,3vw,38px);
+}
 .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero-ctas .btn{white-space:nowrap}
 
-/* tilted app/device preview */
+/* tilted gradient panel with overlaid design mockups */
 .hero-visual{
   position:relative;align-self:center;
   display:flex;justify-content:flex-end;
   min-height:clamp(320px,38vw,520px);
 }
-.hero-device{
-  position:relative;width:min(100%,440px);
-  background:var(--bg-card);
-  border:1px solid var(--line);
-  border-radius:26px;overflow:hidden;
-  box-shadow:0 60px 110px -55px rgba(0,0,0,.45);
-  transform:rotate(2.6deg);
+.hero-gradient{
+  position:relative;width:min(100%,460px);margin-left:auto;
+  aspect-ratio:4/5;border-radius:30px;overflow:hidden;
+  box-shadow:0 60px 110px -55px rgba(0,0,0,.4);
+  transform:rotate(2.4deg);
   transition:transform .7s var(--ease);
 }
-.hero-card:hover .hero-device{transform:rotate(1.4deg) translateY(-4px)}
-.hero-device img{width:100%;display:block}
-.hero-chip{
-  position:absolute;z-index:3;left:-6%;bottom:14%;
-  background:var(--bg-card);border:1px solid var(--line);
-  border-radius:16px;padding:14px 18px;
-  box-shadow:0 26px 50px -26px rgba(0,0,0,.32);
-  display:flex;align-items:center;gap:12px;
+.hero-card:hover .hero-gradient{transform:rotate(1.3deg) translateY(-4px)}
+.hero-art{
+  position:absolute;border-radius:12px;
+  box-shadow:0 24px 50px -18px rgba(0,0,0,.35);
+  transition:transform .8s var(--ease);
 }
-.hero-chip .chip-dot{
-  width:38px;height:38px;border-radius:11px;flex:none;
-  background:#16C079;display:flex;align-items:center;justify-content:center;
-}
-.hero-chip .chip-dot svg{width:19px;height:19px;stroke:#fff;stroke-width:2;fill:none}
-.hero-chip .chip-num{font-size:18px;font-weight:700;letter-spacing:-.02em;line-height:1}
-.hero-chip .chip-sub{font-size:12px;color:var(--ink-faint);font-weight:500;margin-top:2px}
-.hero-plane{position:absolute;z-index:3;top:2%;right:-2%;width:clamp(74px,9vw,118px);pointer-events:none}
-.hero-plane svg{width:100%;height:auto;overflow:visible}
-.hero-plane .trail{stroke:var(--ink);stroke-width:1.4;stroke-dasharray:3 6;fill:none;opacity:.32}
-.hero-plane .plane{fill:var(--ink)}
+.hero-art-a{width:60%;left:9%;top:13%;transform:rotate(-6deg);z-index:2}
+.hero-art-b{width:50%;right:7%;bottom:12%;transform:rotate(6deg);z-index:1}
+.hero-card:hover .hero-art-a{transform:rotate(-7.5deg) translateY(-5px)}
+.hero-card:hover .hero-art-b{transform:rotate(7.5deg) translateY(-3px)}
 
 @media(max-width:860px){
   .hero-stage{grid-template-columns:1fr;align-items:start}
   .hero-text{order:2;max-width:100%}
   .hero-visual{order:1;justify-content:center;min-height:0;margin-bottom:8px}
-  .hero-device{transform:rotate(1.5deg);width:min(86%,400px)}
-  .hero-chip{left:2%}
+  .hero-gradient{transform:rotate(1.5deg);width:min(86%,400px)}
 }
 
 /* ============ WORK SHOWCASE (below hero) ============ */
@@ -346,12 +333,10 @@ nav.scrolled{
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
 }
-.marquee-track{display:flex;gap:74px;width:max-content;animation:marquee 36s linear infinite}
-.marquee:hover .marquee-track{animation-play-state:paused}
-@keyframes marquee{to{transform:translateX(-50%)}}
+.marquee-track{display:flex;gap:74px;width:max-content;will-change:transform}
 .client-logo{
   height:26px;width:auto;flex:none;
-  opacity:.6;filter:brightness(0);
+  opacity:.82;filter:brightness(0);
   transition:opacity .3s;
   align-self:center;
 }
@@ -440,40 +425,58 @@ nav.scrolled{
 }
 .cap-client img{max-height:26px;max-width:52%;object-fit:contain}
 
-/* ============ WHY GRID ============ */
-.why-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:300px;gap:18px;
+/* ============ WHY — PINNED HORIZONTAL SCROLL ============ */
+.hwrap{padding:0;position:relative}
+.hpin{
+  height:100vh;min-height:600px;
+  display:flex;flex-direction:column;justify-content:center;
+  gap:clamp(26px,4.5vh,56px);overflow:hidden;
 }
-.why-card{
+.hhead{
+  flex:none;
+  /* identical gutter to .htrack below AND to .wrap sections elsewhere */
+  padding-left:max(var(--pad), calc((100% - var(--max)) / 2 + var(--pad)));
+  padding-right:var(--pad);
+}
+.hhead .eyebrow{margin-bottom:14px}
+.hhead .lede{margin-top:16px}
+.htrack{
+  display:flex;align-items:stretch;gap:clamp(20px,2.4vw,34px);
+  /* first card starts left-aligned with the .wrap header above */
+  padding-left:max(var(--pad), calc((100% - var(--max)) / 2 + var(--pad)));
+  padding-right:var(--pad);
+  will-change:transform;
+}
+.hcard{
+  flex:none;width:clamp(330px,40vw,500px);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.hcard-media{
   position:relative;border:1px solid var(--line);
-  border-radius:var(--radius-md);padding:32px;
-  overflow:hidden;
-  transition:transform .45s var(--ease),box-shadow .45s var(--ease);
+  border-radius:var(--radius-lg);overflow:hidden;
+  aspect-ratio:16/11;
+  background:var(--bg-soft);
+  background-image:radial-gradient(rgba(16,16,16,.07) 1px,transparent 1px);
+  background-size:18px 18px;
+  display:flex;align-items:center;justify-content:center;
 }
-.why-card:hover{transform:translateY(-5px);box-shadow:0 30px 56px -30px rgba(0,0,0,.16)}
-.why-card h3{position:relative;z-index:1;font-size:20px;letter-spacing:-.015em;margin-bottom:8px;line-height:1.3;max-width:80%}
-.why-card p{position:relative;z-index:1;color:var(--ink-soft);font-size:14.5px;max-width:75%}
-.why-card-media{
-  position:absolute;right:-8%;bottom:-10%;width:62%;
-  pointer-events:none;
+.hcard-media img{
+  width:82%;height:auto;border-radius:12px;
+  box-shadow:0 30px 60px -28px rgba(0,0,0,.28);
+  transition:transform .6s var(--ease);
 }
-.why-card-media img{display:block;width:100%;height:auto;border-radius:10px;box-shadow:0 24px 48px -20px rgba(0,0,0,.25)}
-.why-bg-1{background:linear-gradient(135deg,#f3f3f1,#e7e6e2)}
-.why-bg-2{background:linear-gradient(135deg,#f2edfb,#e3d9f7)}
-.why-bg-3{background:linear-gradient(135deg,#e8f7ee,#d6f0e0)}
-.why-bg-4{background:linear-gradient(135deg,#fdf1ea,#fae1d2)}
-.why-bg-5{background:linear-gradient(135deg,#eef1fb,#dfe5f8)}
-.why-bg-6{background:linear-gradient(135deg,#f8f4ee,#efe6d8)}
-.why-lg{grid-column:span 2}
-.why-sm{grid-column:span 1}
-@media(max-width:980px){
-  .why-grid{grid-template-columns:1fr 1fr;grid-auto-rows:260px}
-  .why-lg,.why-sm{grid-column:span 1}
-}
-@media(max-width:640px){
-  .why-grid{grid-template-columns:1fr;grid-auto-rows:280px}
-  .why-card h3,.why-card p{max-width:65%}
-  .why-card-media{width:58%}
+.hcard:hover .hcard-media img{transform:translateY(-6px) scale(1.02)}
+.hcard h3{font-size:clamp(22px,2vw,28px);letter-spacing:-.02em;margin-top:clamp(20px,2vw,28px);line-height:1.2}
+.hcard p{color:var(--ink-soft);font-size:15px;line-height:1.55;margin-top:12px;max-width:42ch}
+@media(max-width:880px){
+  .hpin{height:auto;display:block;overflow:visible;padding-top:clamp(48px,9vw,72px)}
+  .htrack{
+    overflow-x:auto;scroll-snap-type:x mandatory;
+    transform:none!important;
+    padding:clamp(28px,5vw,40px) var(--pad) clamp(48px,9vw,72px);
+    -webkit-overflow-scrolling:touch;
+  }
+  .hcard{width:min(80vw,360px);scroll-snap-align:start}
 }
 
 /* ============ STATS ============ */
@@ -874,14 +877,16 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 <!-- ============ NAV ============ -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="#" class="logo"><img src="logo.svg" alt="DesignSpace" style="height:21px" /></a>
-    <div class="nav-links">
-      <a href="#process">Our Process</a>
-      <a href="#work">Projects</a>
-      <a href="#why">Why Us</a>
-      <a href="#pricing">Pricing</a>
+    <div class="bubble">
+      <a href="#" class="logo"><img src="logo.svg" alt="DesignSpace" /></a>
+      <a href="#work" class="bnav-link">Projects</a>
+      <a href="#process" class="bnav-link">Process</a>
+      <a href="#why" class="bnav-link">Why Us</a>
     </div>
-    <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary nav-cta">Book a Discovery Call</a>
+    <div class="bubble">
+      <a href="#pricing" class="bnav-link">Pricing</a>
+      <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="bnav-cta">Book a Discovery Call <span class="arr">→</span></a>
+    </div>
   </div>
 </nav>
 
@@ -889,65 +894,43 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 <header class="hero">
   <div class="hero-card">
 
-    <!-- split bubble menu -->
-    <div class="bubble-nav">
-      <div class="bubble">
-        <a href="#" class="logo"><img src="logo.svg" alt="DesignSpace" /></a>
-        <a href="#work" class="bnav-link">Projects</a>
-        <a href="#process" class="bnav-link">Process</a>
-      </div>
-      <div class="bubble">
-        <a href="#why" class="bnav-link">Why Us</a>
-        <a href="#pricing" class="bnav-link">Pricing</a>
-        <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="bnav-cta">Book a Call</a>
-      </div>
-    </div>
-
     <!-- big copy + tilted visual -->
     <div class="hero-stage">
       <div class="hero-text">
-        <p class="hero-kicker">One subscription.<br />All your marketing design, covered.</p>
-        <h1 class="hero-h1">Designed<span class="serif">Better.</span></h1>
+        <div class="eyebrow">Flexible B2B Design Subscription</div>
+        <h1 class="hero-h1">Tech Marketing,<br /><span class="serif">Designed Better</span></h1>
+        <h2 class="hero-sub">Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams, of all sizes.</h2>
         <div class="hero-ctas">
           <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
           <a href="#work" class="btn btn-ghost">Explore Designs</a>
         </div>
       </div>
       <div class="hero-visual">
-        <div class="hero-plane" aria-hidden="true">
-          <svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
-            <path class="trail" d="M2 86 C 30 80, 52 64, 66 40 S 92 8, 112 8" />
-            <path class="plane" d="M112 6 L88 22 L96 28 L92 40 L100 32 L116 36 L120 8 Z" />
-          </svg>
+        <div class="hero-gradient tv-g2">
+          <img class="hero-art hero-art-a" src="https://framerusercontent.com/images/dYnTlA8O71As8CCoKhlIVKOLMAE.png?width=560&height=840" alt="DesignSpace report design" loading="lazy" />
+          <img class="hero-art hero-art-b" src="https://framerusercontent.com/images/VJPlRfJINbYC3Wjw3ivpq7nAYg.png?width=560&height=840" alt="DesignSpace deck design" loading="lazy" />
         </div>
-        <div class="hero-device">
-          <img src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=880&height=1120" alt="DesignSpace client work preview" />
-        </div>
-        <div class="hero-chip">
-          <span class="chip-dot"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5M16 7h5"/></svg></span>
-          <span><span class="chip-num">3× output</span><span class="chip-sub">in 90 days, no new hires</span></span>
+      </div>
+    </div>
+
+    <!-- client logos (in-card, above the fold) -->
+    <div class="clients hero-clients">
+      <p class="clients-label">Trusted by leading tech and cybersecurity teams</p>
+      <div class="marquee">
+        <div class="marquee-track" id="marquee-track">
+          <img class="client-logo" src="https://framerusercontent.com/images/LRoJk6Nmk71OZIJsfRIUJIFCrY4.png?width=2111&height=519" alt="OnePlus" loading="lazy" />
+          <img class="client-logo" src="https://framerusercontent.com/images/Y0G7v3UxyD48fS3GY331AhQCJ8.png?width=4096&height=660" alt="Seemplicity" loading="lazy" />
+          <img class="client-logo" src="https://framerusercontent.com/images/5DGhMkZ7Wsh7VHCuNTxbQPaWa7g.png?width=2377&height=446" alt="Hyperproof" loading="lazy" />
+          <img class="client-logo" src="https://framerusercontent.com/images/m2SE8EN7IeuuhusPlMMexsDGi9s.png?width=1115&height=241" alt="MazeBolt" loading="lazy" />
+          <img class="client-logo" src="https://framerusercontent.com/images/vigE96GowV0s18sNBdKTBseaHJ4.png?width=900&height=202" alt="Kasada" loading="lazy" />
+          <img class="client-logo" src="https://framerusercontent.com/images/qLqgs8ptSp8F6VY2envbKZ0Cg.png?width=1920&height=423" alt="Client logo" loading="lazy" />
+          <img class="client-logo" src="https://framerusercontent.com/images/O5RSL9vzuR67jB3g9ESCiwkbok.svg?width=225&height=41" alt="Client logo" loading="lazy" />
+          <img class="client-logo" src="https://framerusercontent.com/images/KPQv29zchiWzL9RdKzNAjllRZlE.png?width=600&height=148" alt="Client logo" loading="lazy" />
         </div>
       </div>
     </div>
   </div>
 </header>
-
-<!-- ============ CLIENT LOGOS ============ -->
-<div class="clients hero-clients">
-  <p class="clients-label">Trusted by leading tech and cybersecurity teams</p>
-  <div class="marquee">
-    <div class="marquee-track" id="marquee-track">
-      <img class="client-logo" src="https://framerusercontent.com/images/LRoJk6Nmk71OZIJsfRIUJIFCrY4.png?width=2111&height=519" alt="OnePlus" loading="lazy" />
-      <img class="client-logo" src="https://framerusercontent.com/images/Y0G7v3UxyD48fS3GY331AhQCJ8.png?width=4096&height=660" alt="Seemplicity" loading="lazy" />
-      <img class="client-logo" src="https://framerusercontent.com/images/5DGhMkZ7Wsh7VHCuNTxbQPaWa7g.png?width=2377&height=446" alt="Hyperproof" loading="lazy" />
-      <img class="client-logo" src="https://framerusercontent.com/images/m2SE8EN7IeuuhusPlMMexsDGi9s.png?width=1115&height=241" alt="MazeBolt" loading="lazy" />
-      <img class="client-logo" src="https://framerusercontent.com/images/vigE96GowV0s18sNBdKTBseaHJ4.png?width=900&height=202" alt="Kasada" loading="lazy" />
-      <img class="client-logo" src="https://framerusercontent.com/images/qLqgs8ptSp8F6VY2envbKZ0Cg.png?width=1920&height=423" alt="Client logo" loading="lazy" />
-      <img class="client-logo" src="https://framerusercontent.com/images/O5RSL9vzuR67jB3g9ESCiwkbok.svg?width=225&height=41" alt="Client logo" loading="lazy" />
-      <img class="client-logo" src="https://framerusercontent.com/images/KPQv29zchiWzL9RdKzNAjllRZlE.png?width=600&height=148" alt="Client logo" loading="lazy" />
-    </div>
-  </div>
-</div>
 
 <!-- ============ WORK SHOWCASE (below hero) ============ -->
 <section class="work-strip-section" id="work">
@@ -1174,45 +1157,52 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
   </div>
 </section>
 
-<!-- ============ WHY ============ -->
-<section id="why">
-  <div class="wrap">
-    <div class="section-head reveal">
+<!-- ============ WHY — PINNED HORIZONTAL SCROLL ============ -->
+<section id="why" class="hwrap">
+  <div class="hpin">
+
+    <div class="hhead">
       <div class="eyebrow">For B2B Tech &amp; Cybersecurity Teams</div>
       <h2 class="h-xl">One creative partner.<br /><span class="serif">All design assets covered.</span></h2>
-      <p class="lede" style="margin-top:20px">Branded creatives whenever you need them. A team that already knows your industry and keeps your creative output moving.</p>
+      <p class="lede">Branded creatives whenever you need them — from a team that already knows your industry and keeps your output moving.</p>
     </div>
-    <div class="why-grid">
-      <div class="why-card why-lg why-bg-1 reveal">
+
+    <div class="htrack">
+      <article class="hcard">
+        <div class="hcard-media"><img src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=800" alt="Tech & cyber marketing work" loading="lazy" /></div>
         <h3>Built for tech &amp; cyber marketing teams</h3>
-        <p>We're deeply rooted in your industry. We understand the landscape, the language, what your buyers respond to, and what the competition is doing.</p>
-        <div class="why-card-media"><img src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=800" alt="" loading="lazy" /></div>
-      </div>
-      <div class="why-card why-sm why-bg-2 reveal">
-        <h3>Founder-led quality control, on every output</h3>
-        <p>Every deliverable is reviewed and refined by our creative director before it reaches you — the person who built the standard in the first place.</p>
-        <div class="why-card-media"><img src="https://framerusercontent.com/images/Cx3Rw7mQccGjeuJGUbE3klCs.png?width=800" alt="" loading="lazy" /></div>
-      </div>
-      <div class="why-card why-sm why-bg-3 reveal">
+        <p>We're deeply rooted in your industry — the landscape, the language, and exactly what your buyers respond to.</p>
+      </article>
+
+      <article class="hcard">
+        <div class="hcard-media"><img src="https://framerusercontent.com/images/Cx3Rw7mQccGjeuJGUbE3klCs.png?width=800" alt="Founder-led quality control" loading="lazy" /></div>
+        <h3>Founder-led quality control</h3>
+        <p>Every deliverable is reviewed and refined by our creative director — the person who set the standard in the first place.</p>
+      </article>
+
+      <article class="hcard">
+        <div class="hcard-media"><img src="https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=800" alt="Dedicated project manager" loading="lazy" /></div>
         <h3>One point of contact. Always.</h3>
-        <p>You're not submitting into a black box. Every account has a dedicated project manager — a real person who knows your priorities and keeps things moving.</p>
-        <div class="why-card-media"><img src="https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=800" alt="" loading="lazy" /></div>
-      </div>
-      <div class="why-card why-lg why-bg-4 reveal">
+        <p>No black box. Every account has a dedicated project manager who knows your priorities and keeps things moving.</p>
+      </article>
+
+      <article class="hcard">
+        <div class="hcard-media"><img src="https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=800" alt="Full visibility on your Asana board" loading="lazy" /></div>
         <h3>Full visibility at every stage</h3>
-        <p>Your Asana board shows exactly where every task sits — timelines, priorities, in progress, awaiting assets, or ready for review. No more chasing updates.</p>
-        <div class="why-card-media"><img src="https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=800" alt="" loading="lazy" /></div>
-      </div>
-      <div class="why-card why-lg why-bg-5 reveal">
+        <p>Your Asana board shows exactly where every task sits — in progress, awaiting assets, or ready for review. No chasing updates.</p>
+      </article>
+
+      <article class="hcard">
+        <div class="hcard-media"><img src="https://framerusercontent.com/images/VJPlRfJINbYC3Wjw3ivpq7nAYg.png?width=800" alt="Flexible subscription" loading="lazy" /></div>
         <h3>A subscription, not a contract</h3>
-        <p>One flat monthly rate, full flexibility. Upgrade or downgrade as your needs change — and if you ever need to step away, just give us 30 days notice.</p>
-        <div class="why-card-media"><img src="https://framerusercontent.com/images/VJPlRfJINbYC3Wjw3ivpq7nAYg.png?width=800" alt="" loading="lazy" /></div>
-      </div>
-      <div class="why-card why-sm why-bg-6 reveal">
+        <p>One flat monthly rate, full flexibility. Upgrade, downgrade, or pause as your roadmap changes — 30 days notice, anytime.</p>
+      </article>
+
+      <article class="hcard">
+        <div class="hcard-media"><img src="https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=800" alt="All design assets covered" loading="lazy" /></div>
         <h3>All design assets covered</h3>
-        <p>Branded creatives whenever you need them. A team that already knows your industry and keeps your creative output moving.</p>
-        <div class="why-card-media"><img src="https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=800" alt="" loading="lazy" /></div>
-      </div>
+        <p>Decks, reports, ads, carousels, eBooks, diagrams — whatever your marketing needs, one team handles every format.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -1620,7 +1610,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 ================================================================ */
 (function () {
   if (!window.gsap) return;
-  gsap.from('.bubble-nav .bubble', { y: -16, opacity: 0, duration: .8, ease: 'power3.out', stagger: .12, delay: .1 });
+  gsap.from('#nav .bubble', { y: -16, opacity: 0, duration: .8, ease: 'power3.out', stagger: .12, delay: .1 });
   gsap.from('.hero-text > *', { y: 30, opacity: 0, duration: 1, ease: 'power3.out', stagger: .1, delay: .25 });
   gsap.from('.hero-visual', { y: 40, opacity: 0, duration: 1.1, ease: 'power3.out', delay: .35 });
 })();
@@ -1664,11 +1654,89 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 })();
 
 /* ================================================================
-   Marquee duplication (seamless loop)
+   WHY — pinned horizontal scroll (desktop). Vertical scroll drives
+   the card track left until the last card sits flush at the right,
+   then the page continues to the next section.
+================================================================ */
+(function () {
+  if (!window.gsap || !window.ScrollTrigger) return;
+  var section = document.querySelector('.hwrap');
+  var track = document.querySelector('.htrack');
+  if (!section || !track) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var mm = gsap.matchMedia();
+  mm.add('(min-width: 881px)', function () {
+    // travel = horizontal distance; dwell = read-pause held at each end
+    // (first card on the left, then last card on the right).
+    var travel = 0, lead = 0, tail = 0, total = 0;
+    function calc() {
+      travel = Math.max(0, track.scrollWidth - window.innerWidth);
+      lead = tail = Math.round(window.innerHeight * 0.45);
+      total = lead + travel + tail;
+    }
+    calc();
+
+    var st = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: function () { calc(); return '+=' + total; },
+      pin: true,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onRefresh: calc,
+      onUpdate: function (self) {
+        var scrolled = self.progress * total;
+        var x;
+        if (scrolled <= lead) x = 0;                       // hold first card
+        else if (scrolled >= lead + travel) x = -travel;   // hold last card
+        else x = -(scrolled - lead);                       // travel
+        gsap.set(track, { x: x });
+      }
+    });
+
+    return function () {
+      st.kill();
+      gsap.set(track, { clearProps: 'transform' });
+    };
+  });
+})();
+
+/* ================================================================
+   Logo marquee — rAF-driven so hover can smoothly change speed
+   without the jump that re-timing a CSS animation causes.
 ================================================================ */
 (function () {
   var track = document.getElementById('marquee-track');
-  if (track) track.innerHTML += track.innerHTML;
+  if (!track) return;
+  var marquee = track.parentElement;            // .marquee
+  track.innerHTML += track.innerHTML;           // duplicate for seamless loop
+
+  var FULL_SECONDS = 36;                        // time to travel one full set
+  var half = 0, base = 0, speed = 0, target = 0, x = 0;
+
+  function measure() {
+    half = track.scrollWidth / 2;               // width of one (un-duplicated) set
+    base = half > 0 ? half / FULL_SECONDS : 0;  // px/sec at full speed
+    if (target !== 0) target = (target < 0 ? -1 : 1) * base; // keep sign on resize
+  }
+  measure();
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+
+  target = base;                                // start at full speed
+  marquee.addEventListener('mouseenter', function () { target = base * 0.5; }); // 50% slower
+  marquee.addEventListener('mouseleave', function () { target = base; });
+
+  var last = performance.now();
+  (function loop(now) {
+    var dt = Math.min((now - last) / 1000, 0.05); last = now;
+    speed += (target - speed) * Math.min(1, dt * 6); // smooth ease toward target
+    x -= speed * dt;
+    if (half > 0) { while (-x >= half) x += half; while (x > 0) x -= half; }
+    track.style.transform = 'translate3d(' + x + 'px,0,0)';
+    requestAnimationFrame(loop);
+  })(last);
 })();
 
 /* ================================================================
