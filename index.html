@@ -208,7 +208,7 @@ nav{
 .hero-text{align-self:end;max-width:640px}
 .hero-text .eyebrow{margin-bottom:clamp(16px,1.8vw,22px)}
 .hero-h1{
-  font-size:clamp(2.75rem,6.6vw,4.768rem);  /* 44→76.3px — one step above H1 */
+  font-size:clamp(2.25rem,6.6vw,4.768rem);  /* 36(mobile)→76.3px(desktop) */
   line-height:1.02;letter-spacing:-.038em;font-weight:400;
   margin-bottom:clamp(16px,1.8vw,22px);
 }
@@ -1357,8 +1357,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/openai.svg" alt="" loading="lazy" onerror="this.replaceWith('AI')" /></span>ChatGPT</div>
         <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/claude.svg" alt="" loading="lazy" onerror="this.replaceWith('Cl')" /></span>Claude</div>
         <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/framer.svg" alt="" loading="lazy" onerror="this.replaceWith('Fr')" /></span>Framer</div>
-        <div class="int-item"><span class="int-ico int-ico-fav"><img src="https://www.google.com/s2/favicons?sz=128&domain=lovable.dev" alt="" loading="lazy" onerror="this.replaceWith('Lo')" /></span>Lovable</div>
-        <div class="int-item"><span class="int-ico int-ico-fav"><img src="https://www.google.com/s2/favicons?sz=128&domain=jitter.video" alt="" loading="lazy" onerror="this.replaceWith('Ji')" /></span>Jitter</div>
+        <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24" style="fill:var(--ink);stroke:none"><path d="M12 21.2s-7.6-4.9-10.1-9.4C.2 8.4 2 4.6 5.7 4.6c2.2 0 3.5 1.3 4.3 2.5.8-1.2 2.1-2.5 4.3-2.5 3.7 0 5.5 3.8 3.8 7.2C19.6 16.3 12 21.2 12 21.2z"/></svg></span>Lovable</div>
+        <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24" style="stroke:none"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="var(--ink)"/><path d="M10 8.4l6 3.6-6 3.6z" fill="#fff"/></svg></span>Jitter</div>
         <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/asana.svg" alt="" loading="lazy" onerror="this.replaceWith('As')" /></span>Asana</div>
         <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/slack.svg" alt="" loading="lazy" onerror="this.replaceWith('Sl')" /></span>Slack</div>
         <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/googledrive.svg" alt="" loading="lazy" onerror="this.replaceWith('GD')" /></span>Google Drive</div>
@@ -1665,7 +1665,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       <h2 class="h-xl">Ready to go?<br /><span class="serif">Book a Discovery Call</span></h2>
     </div>
     <iframe src="https://cal.com/ian-barin/discovery?embed=true&layout=month_view&theme=light"
-      title="Book a Discovery Call" loading="lazy"></iframe>
+      title="Book a Discovery Call" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
   </div>
 </section>
 
@@ -2218,5 +2218,25 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 })();
 </script>
 
+<!-- Safety net: if the GSAP CDN fails to load, reveal all scroll-animated
+     content so the page is never left blank. -->
+<script>
+(function () {
+  function reveal() {
+    document.querySelectorAll('.reveal').forEach(function (e) {
+      e.style.opacity = '1'; e.style.transform = 'none';
+    });
+  }
+  if (!window.gsap) { reveal(); return; }
+  // Fallback in case ScrollTrigger never fires (e.g. blocked mid-load).
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      document.querySelectorAll('.reveal').forEach(function (e) {
+        if (getComputedStyle(e).opacity === '0') { e.style.opacity = '1'; e.style.transform = 'none'; }
+      });
+    }, 2500);
+  });
+})();
+</script>
 </body>
 </html>
