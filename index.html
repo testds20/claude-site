@@ -7,23 +7,25 @@
 <meta name="description" content="Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams. One subscription, all design assets covered." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="icon" type="image/png" href="https://framerusercontent.com/images/jPhwNH3UTuBDYSHmKOBd1KZxkUk.png?width=64&height=64" />
 <style>
 /* ============ DESIGN TOKENS ============ */
 :root{
-  --bg:#f8f8f8;
-  --bg-soft:#f5f5f5;
+  /* ElevenLabs-inspired warm neutral palette */
+  --bg:#FDFCFC;
+  --bg-soft:#F5F3F1;
+  --bg-warm:#EBE8E4;
   --bg-card:#FFFFFF;
-  --ink:#101010;
-  --ink-soft:#55554F;
-  --ink-faint:#8C8C85;
-  --line:rgba(16,16,16,.09);
-  --accent:#101010;
-  --radius-lg:28px;
-  --radius-md:18px;
+  --ink:#000000;
+  --ink-soft:#56544E;
+  --ink-faint:#8C887E;
+  --line:rgba(0,0,0,.08);
+  --accent:#000000;
+  --radius-lg:24px;
+  --radius-md:16px;
   --radius-sm:12px;
-  --font-sans:'Geist','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --max:1280px;
   --pad:clamp(20px,4vw,56px);
   --ease:cubic-bezier(.22,1,.36,1);
@@ -34,8 +36,9 @@ body{
   background:var(--bg);
   color:var(--ink);
   font-family:var(--font-sans);
-  font-size:16px;
-  line-height:1.55;
+  font-size:17px;
+  line-height:1.6;
+  font-weight:400;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
@@ -43,28 +46,30 @@ body{
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
+/* ElevenLabs-style: hierarchy by size, not heavy weight */
+h1,h2,h3,h4,h5,h6{font-weight:500;letter-spacing:-.01em}
 
 /* ============ TYPE ============ */
 .h-display{
-  font-size:clamp(42px,5.4vw,80px);
-  line-height:1.0;
-  letter-spacing:-.045em;
-  font-weight:600;
+  font-size:clamp(40px,4.8vw,68px);
+  line-height:1.05;
+  letter-spacing:-.035em;
+  font-weight:400;
 }
 .h-xl{
-  font-size:clamp(32px,3.8vw,54px);
-  line-height:1.05;
-  letter-spacing:-.038em;
-  font-weight:600;
+  font-size:clamp(29px,3.3vw,46px);
+  line-height:1.1;
+  letter-spacing:-.032em;
+  font-weight:400;
 }
 .h-md{
   font-size:clamp(22px,2.2vw,30px);
-  letter-spacing:-.02em;
-  font-weight:600;
-  line-height:1.2;
+  letter-spacing:-.018em;
+  font-weight:500;
+  line-height:1.25;
 }
 .serif{
-  font-weight:500;
+  font-weight:400;
   color:var(--ink-soft);
 }
 .lede{
@@ -114,7 +119,7 @@ nav{
   padding:calc(18px + clamp(18px,1.8vw,26px)) calc(var(--pad) + clamp(18px,1.8vw,26px)) 0;
   display:flex;align-items:center;justify-content:space-between;gap:14px;
 }
-.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16.5px;letter-spacing:.02em}
+.logo{display:flex;align-items:center;gap:9px;font-weight:600;font-size:16.5px;letter-spacing:.02em}
 .logo img{height:20px;width:auto;display:block}
 
 /* ============ HERO — CARD + SPLIT BUBBLE MENU ============ */
@@ -124,7 +129,7 @@ nav{
 }
 .hero-card{
   position:relative;
-  background:var(--bg-soft);
+  background:var(--bg-card);
   border:1px solid var(--line);
   border-radius:clamp(26px,3vw,40px);
   padding:clamp(64px,6vw,84px) clamp(18px,1.8vw,26px) 0;
@@ -146,7 +151,7 @@ nav{
   /* equal top/bottom so the label + logos sit centered in the band */
   padding:clamp(20px,2.2vw,30px) 0;
 }
-.hero-clients .clients-label{margin-bottom:clamp(14px,1.6vw,20px)}
+.hero-clients .clients-label{text-align:left;margin-bottom:clamp(22px,2.2vw,30px)}
 
 /* --- split bubble menu --- */
 .bubble{
@@ -197,8 +202,8 @@ nav{
 .hero-text{align-self:end;max-width:640px}
 .hero-text .eyebrow{margin-bottom:clamp(16px,1.8vw,22px)}
 .hero-h1{
-  font-size:clamp(40px,5.2vw,68px);
-  line-height:.98;letter-spacing:-.04em;font-weight:600;
+  font-size:clamp(38px,4.6vw,58px);
+  line-height:1.02;letter-spacing:-.038em;font-weight:400;
   margin-bottom:clamp(16px,1.8vw,22px);
 }
 .hero-h1 .serif{display:block;color:var(--ink-soft)}
@@ -209,6 +214,9 @@ nav{
 }
 .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
 .hero-ctas .btn{white-space:nowrap}
+/* Explore Designs: filled with the page's light-gray surface */
+.hero-ctas .btn-ghost{background:var(--bg-soft);border-color:transparent}
+.hero-ctas .btn-ghost:hover{background:var(--ink);color:var(--bg)}
 
 /* tilted gradient panel with overlaid design mockups */
 .hero-visual{
@@ -315,11 +323,15 @@ nav{
 .app-tab:hover{background:rgba(255,255,255,.08)}
 .app-tab.active{background:#fff;color:#0D0D0D}
 .app-tab.active:hover{background:#fff}
+.app-tab .tab-short{display:none}
 @media(max-width:720px){.app-tab{font-size:13px;padding:11px 13px;gap:7px}}
 @media(max-width:520px){
   .hero-app{padding:8px 16px 16px}
-  .app-tab span{display:none}
+  /* swap to short tab labels (Team / Projects / Fulfillment) instead of hiding */
+  .app-tab .tab-full{display:none}
+  .app-tab .tab-short{display:inline}
   .app-tab{padding:11px 14px}
+  /* hide all secondary dates incl. the "N Active Projects" team counts */
   .app-date{display:none}
 }
 
@@ -441,15 +453,18 @@ nav{
 .hhead .eyebrow{margin-bottom:14px}
 .hhead .lede{margin-top:16px}
 .htrack{
+  position:relative;
   display:flex;align-items:stretch;gap:clamp(20px,2.4vw,34px);
-  /* first card starts left-aligned with the .wrap header above */
+  /* intro gutter matches the .wrap sections; outro gutter is applied in JS
+     (flex scrollWidth ignores trailing padding) so the last card finishes
+     flush with the "Plugged Into Your Workflow" cards. */
   padding-left:max(var(--pad), calc((100% - var(--max)) / 2 + var(--pad)));
-  padding-right:var(--pad);
+  padding-right:0;
   will-change:transform;
 }
 .hcard{
   flex:none;width:clamp(330px,40vw,500px);
-  display:flex;flex-direction:column;justify-content:center;
+  display:flex;flex-direction:column;justify-content:flex-start;
 }
 .hcard-media{
   position:relative;border:1px solid var(--line);
@@ -490,7 +505,7 @@ nav{
 }
 .stat:last-child{border-right:none}
 .stat-num{
-  font-size:clamp(52px,6vw,88px);font-weight:600;letter-spacing:-.04em;line-height:1;
+  font-size:clamp(34px,3.4vw,48px);font-weight:600;letter-spacing:-.035em;line-height:1;
   margin-bottom:16px;
 }
 .stat p{color:var(--ink-soft);font-size:14.5px;max-width:30ch}
@@ -523,7 +538,7 @@ nav{
   width:52px;height:52px;border-radius:50%;flex:none;object-fit:cover;
   background:var(--bg-soft);
 }
-.testi-person .name{font-size:15px;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+.testi-person .name{font-size:15px;font-weight:600;letter-spacing:.02em;text-transform:uppercase}
 .testi-person .role{font-size:13.5px;color:var(--ink-soft)}
 .testi-visual{
   position:relative;overflow:hidden;
@@ -577,7 +592,7 @@ nav{
 }
 .price-name{font-size:21px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
 .price-desc{font-size:14px;color:var(--ink-soft);margin-bottom:26px;min-height:42px}
-.price-amount{font-size:clamp(34px,3vw,44px);font-weight:600;letter-spacing:-.035em;line-height:1}
+.price-amount{font-size:clamp(28px,2.5vw,38px);font-weight:600;letter-spacing:-.035em;line-height:1}
 .price-amount span{font-size:15px;font-weight:500;color:var(--ink-faint);letter-spacing:0}
 .price-flex{font-size:12.5px;color:var(--ink-faint);margin:12px 0 26px}
 .price-feats{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px;flex:1}
@@ -592,7 +607,7 @@ nav{
 .price-card .btn{justify-content:center}
 @media(max-width:980px){.pricing-grid{grid-template-columns:1fr;max-width:480px;margin-left:auto;margin-right:auto}}
 .includes{
-  background:#ececec;border-radius:var(--radius-md);
+  background:var(--bg-warm);border-radius:var(--radius-md);
   padding:clamp(32px,4vw,52px);
 }
 .includes h3{font-size:18px;letter-spacing:-.015em;margin-bottom:26px}
@@ -609,23 +624,111 @@ nav{
 }
 @media(max-width:700px){.includes-grid{grid-template-columns:1fr}}
 
-/* ============ PROCESS ============ */
-.process-row{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
-  counter-reset:step;
+/* ============ PRICING — ALT (tier slider, test) ============ */
+.palt-toggle{
+  display:inline-flex;position:relative;align-self:flex-start;
+  background:var(--bg-soft);border:1px solid var(--line);
+  border-radius:100px;padding:5px;margin-bottom:clamp(28px,3.5vw,44px);
 }
-.process-step{
-  border-top:1px solid var(--ink);
-  padding-top:28px;position:relative;
+.palt-seg{
+  position:relative;z-index:2;
+  padding:11px 28px;border-radius:100px;
+  font-size:15px;font-weight:600;color:var(--ink-soft);
+  white-space:nowrap;transition:color .35s var(--ease);
 }
-.step-num{
-  font-family:ui-monospace,'SF Mono',Menlo,monospace;
-  text-transform:uppercase;letter-spacing:.12em;
-  font-size:12px;color:var(--ink-faint);margin-bottom:18px;display:block;
+.palt-seg.active{color:var(--bg)}
+.palt-ind{
+  position:absolute;z-index:1;top:5px;bottom:5px;left:5px;width:0;
+  background:var(--ink);border-radius:100px;
+  transition:left .4s var(--ease),width .4s var(--ease);
 }
-.process-step h3{font-size:21px;letter-spacing:-.02em;margin-bottom:12px;line-height:1.25}
-.process-step p{color:var(--ink-soft);font-size:14.5px;max-width:34ch}
-@media(max-width:760px){.process-row{grid-template-columns:1fr;gap:40px}}
+.palt-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
+.palt-card{
+  background:var(--bg-card);border:1px solid var(--line);
+  border-radius:var(--radius-md);padding:clamp(28px,3vw,40px);
+  display:flex;flex-direction:column;
+}
+.palt-plan{position:relative;border-color:var(--ink)}
+.palt-name-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.palt-name{font-size:clamp(24px,2.4vw,32px);font-weight:600;letter-spacing:-.02em}
+.palt-badge{
+  background:var(--ink);color:var(--bg);
+  font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 12px;border-radius:100px;
+}
+.palt-desc{color:var(--ink-soft);font-size:14.5px;margin-bottom:24px;min-height:42px}
+.palt-price{font-size:clamp(34px,3.4vw,48px);font-weight:600;letter-spacing:-.035em;line-height:1;margin-bottom:6px}
+.palt-price span{font-size:15px;font-weight:500;color:var(--ink-faint);letter-spacing:0}
+.palt-flex{font-size:12.5px;color:var(--ink-faint);margin-bottom:24px}
+.palt-specs{list-style:none;display:flex;flex-direction:column;margin-bottom:30px}
+.palt-spec{
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding:15px 0;border-top:1px solid var(--line);
+  font-size:14.5px;color:var(--ink-soft);
+}
+.palt-spec:last-child{border-bottom:1px solid var(--line)}
+.palt-spec b{color:var(--ink);font-weight:600;font-size:16px;font-variant-numeric:tabular-nums}
+.palt-plan .btn{justify-content:center;margin-top:auto}
+.palt-inc h3{font-size:18px;letter-spacing:-.015em;margin-bottom:22px;flex:none}
+.palt-inc ul{list-style:none;display:flex;flex-direction:column;flex:1;justify-content:space-between;gap:14px}
+.palt-inc li{font-size:14.5px;color:var(--ink-soft);display:flex;gap:11px;align-items:flex-start}
+.palt-inc li::before{
+  content:"";flex:none;width:16px;height:16px;margin-top:2px;border-radius:50%;
+  background:var(--bg-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23101010' stroke-width='3'%3E%3Cpath d='M5 13l4 4 10-10'/%3E%3C/svg%3E") center/9px no-repeat;
+}
+@media(max-width:880px){
+  .palt-grid{grid-template-columns:1fr}
+}
+
+/* ============ PROCESS (auto-loop steps + figure) ============ */
+/* Split header: heading left, supporting copy right, bottom-aligned */
+.head-split{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:clamp(24px,4vw,64px);align-items:end;
+}
+.head-split .lede{margin:0}
+@media(max-width:760px){
+  .head-split{grid-template-columns:1fr;gap:14px;align-items:start}
+}
+.proc-head{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:clamp(24px,4vw,64px);align-items:end;
+  margin-bottom:clamp(28px,3.5vw,48px);
+}
+.proc-head .lede{margin:0}
+@media(max-width:760px){.proc-head{align-items:start}}
+.proc-figure{
+  position:relative;border:1px solid var(--line);
+  border-radius:var(--radius-lg);overflow:hidden;
+  background:var(--bg-soft);
+  background-image:radial-gradient(rgba(16,16,16,.06) 1px,transparent 1px);
+  background-size:20px 20px;
+  aspect-ratio:16/8;
+  margin-bottom:clamp(28px,3.5vw,44px);
+}
+.proc-fig{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .7s var(--ease);
+}
+.proc-fig.active{opacity:1}
+.proc-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(22px,3vw,44px);align-items:start}
+.proc-step{
+  display:block;text-align:left;cursor:pointer;background:none;width:100%;
+  position:relative;
+}
+.proc-bar{display:block;height:2px;background:var(--line);overflow:hidden;border-radius:2px;margin-bottom:clamp(18px,2vw,24px)}
+.proc-bar i{display:block;height:100%;width:0;background:var(--ink);border-radius:2px}
+.proc-step.active .proc-bar i{width:100%;transition:width var(--aloop-dur,5000ms) linear}
+.proc-step h3{font-size:clamp(18px,1.7vw,22px);letter-spacing:-.02em;margin-bottom:10px;line-height:1.25;transition:color .3s}
+.proc-step p{color:var(--ink-soft);font-size:14.5px;line-height:1.55;max-width:34ch}
+.proc-step:not(.active) h3{color:var(--ink-faint)}
+@media(max-width:760px){
+  .proc-head{grid-template-columns:1fr;gap:14px}
+  .proc-figure{aspect-ratio:16/10}
+  .proc-steps{grid-template-columns:1fr;gap:0}
+  .proc-step{padding:22px 0;border-top:1px solid var(--line)}
+  .proc-step .proc-bar{display:none}
+}
 
 /* ============ FAQ ============ */
 .faq-list{max-width:780px}
@@ -724,7 +827,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
   width:42px;height:42px;border-radius:50%;flex:none;
   background:transparent;border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;
-  font-size:12.5px;font-weight:700;
+  font-size:12.5px;font-weight:600;
 }
 .int-ico img{width:18px;height:18px;object-fit:contain}
 .int-ico.ps img,.int-ico.ai img,.int-ico.id img,.int-ico.ae img{width:24px;height:24px;border-radius:5px}
@@ -737,94 +840,46 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 @media(max-width:560px){.int-grid{grid-template-columns:1fr}}
 .marquee img{-webkit-user-drag:none;user-select:none}
 
-/* ============ WHY CHOOSE (image + feature list + stat) ============ */
-.wc-grid{
-  display:grid;grid-template-columns:1.02fr 1.28fr;
-  gap:18px;align-items:stretch;
+/* ============ WHY CHOOSE (auto-loop list + image) ============ */
+.wcx{
+  display:grid;grid-template-columns:1fr 1.05fr;
+  gap:clamp(28px,4.5vw,72px);align-items:stretch;
   margin-top:clamp(36px,4vw,56px);
 }
-.wc-media{
-  position:relative;grid-row:span 2;
-  border-radius:var(--radius-lg);overflow:hidden;
-  min-height:clamp(440px,46vw,600px);
-  background:#0d0d0d;
-  display:flex;align-items:flex-end;
-}
-.wc-media img{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;opacity:.92;
-  transition:transform .9s var(--ease);
-}
-.wc-media:hover img{transform:scale(1.04)}
-.wc-media::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(13,13,13,.05) 38%,rgba(13,13,13,.58));
-}
-.wc-media-bar{
-  position:relative;z-index:2;width:100%;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:clamp(18px,2vw,26px);gap:14px;
-}
-.wc-pill{
-  background:#fff;color:var(--ink);
-  padding:14px 24px;border-radius:100px;
-  font-size:15px;font-weight:600;
-  transition:transform .3s var(--ease);
-}
-.wc-pill:hover{transform:translateY(-2px)}
-.wc-arrow{
-  width:52px;height:52px;border-radius:50%;flex:none;
-  background:#fff;display:flex;align-items:center;justify-content:center;
-  transition:transform .3s var(--ease);
-}
-.wc-arrow:hover{transform:translateX(3px)}
-.wc-arrow svg{width:18px;height:18px;stroke:var(--ink);stroke-width:2;fill:none}
-
-.wc-list{
-  display:flex;flex-direction:column;justify-content:center;
+.wcx-list{display:flex;flex-direction:column;justify-content:flex-end}
+.wcx-item{
+  display:block;text-align:left;cursor:pointer;background:none;width:100%;
+  position:relative;padding:clamp(18px,2.2vw,26px) 0;
   border-top:1px solid var(--line);
 }
-.wc-row{
-  display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1.15fr);
-  gap:clamp(16px,2vw,32px);align-items:center;
-  padding:clamp(20px,2.6vw,32px) 0;
-  border-bottom:1px solid var(--line);
+.wcx-item:first-child{border-top:none}
+.wcx-bar{position:absolute;top:-1px;left:0;right:0;height:2px;overflow:hidden}
+.wcx-bar i{display:block;height:100%;width:0;background:var(--ink)}
+.wcx-item.active .wcx-bar i{width:100%;transition:width var(--aloop-dur,5000ms) linear}
+.wcx-item h3{font-size:clamp(20px,2vw,27px);letter-spacing:-.02em;line-height:1.2;transition:color .35s}
+.wcx-item p{
+  color:var(--ink-soft);font-size:14.5px;line-height:1.55;max-width:48ch;
+  opacity:0;max-height:0;overflow:hidden;
+  transition:opacity .4s var(--ease),max-height .5s var(--ease),margin-top .4s var(--ease);
 }
-.wc-num{
-  width:46px;height:46px;border-radius:50%;flex:none;
-  border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;
-  font-family:ui-monospace,'SF Mono',Menlo,monospace;
-  font-size:13px;color:var(--ink-faint);
+.wcx-item:not(.active) h3{color:var(--ink-faint)}
+.wcx-item.active p{opacity:1;max-height:200px;margin-top:12px}
+.wcx-figure{
+  position:relative;border:1px solid var(--line);
+  border-radius:var(--radius-lg);overflow:hidden;
+  background:var(--bg-soft);
+  background-image:radial-gradient(rgba(16,16,16,.05) 1px,transparent 1px);
+  background-size:20px 20px;
+  min-height:clamp(360px,42vw,540px);
 }
-.wc-row h3{font-size:clamp(19px,1.9vw,25px);font-weight:600;letter-spacing:-.02em;line-height:1.18}
-.wc-row p{color:var(--ink-soft);font-size:14.5px;line-height:1.55}
-
-.wc-bottom{
-  display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch;
+.wcx-fig{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .7s var(--ease);
 }
-.wc-note{
-  display:flex;align-items:flex-end;
-  font-size:clamp(16px,1.45vw,20px);color:var(--ink-soft);
-  line-height:1.45;letter-spacing:-.01em;padding:6px 4px 6px 0;max-width:34ch;
-}
-.wc-stat{
-  background:#16C079;color:#fff;
-  border-radius:var(--radius-lg);
-  padding:clamp(24px,3vw,36px);
-  display:flex;flex-direction:column;justify-content:space-between;gap:24px;
-  min-height:210px;overflow:hidden;position:relative;
-}
-.wc-stat .big{font-size:clamp(50px,6vw,80px);font-weight:600;letter-spacing:-.04em;line-height:1}
-.wc-stat p{font-size:14.5px;color:rgba(255,255,255,.88);max-width:24ch;line-height:1.5}
+.wcx-fig.active{opacity:1}
 @media(max-width:880px){
-  .wc-grid{grid-template-columns:1fr}
-  .wc-media{grid-row:auto;min-height:360px}
-  .wc-list{border-top:none}
-  .wc-row{grid-template-columns:auto 1fr}
-  .wc-row p{grid-column:2}
-  .wc-bottom{grid-template-columns:1fr}
-  .wc-note{max-width:100%}
+  .wcx{grid-template-columns:1fr;gap:24px}
+  .wcx-figure{order:-1;min-height:300px}
 }
 
 /* ============ ASSETS COLLAGE (word wheel) ============ */
@@ -840,7 +895,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 }
 .assets-label{
   position:relative;z-index:3;
-  font-weight:600;
+  font-weight:500;
   font-size:clamp(24px,3vw,40px);color:var(--ink);
   white-space:nowrap;letter-spacing:-.025em;
 }
@@ -852,7 +907,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 }
 .word-track{display:flex;flex-direction:column;gap:14px;animation:wheel 10s linear infinite}
 .word-track span{
-  font-size:clamp(26px,3.2vw,42px);font-weight:600;
+  font-size:clamp(24px,3vw,40px);font-weight:500;
   letter-spacing:-.025em;line-height:1.12;color:var(--ink);
   white-space:nowrap;
 }
@@ -937,7 +992,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
   <div class="wrap">
     <h1 class="h-xl reveal">Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams, of all sizes.</h1>
   </div>
-  <div class="ds-carousel work-strip reveal" data-speed="34">
+  <div class="ds-carousel work-strip reveal" data-speed="34" data-center>
     <div class="ds-rail"><div class="ds-track">
       <div class="cap-card reveal">
         <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=660&height=900" alt="Product mockups client work" loading="lazy" /></div>
@@ -995,25 +1050,25 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
               <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
               <img class="app-avatar" src="https://framerusercontent.com/images/LvgYJ9klzRyqxco2w5piarzLq8.webp?width=300&height=300" alt="Pablo Picasso" loading="lazy" />
               <div><div class="row-title">Pablo Picasso</div><div class="row-sub">CMO</div></div>
-              <div class="row-end"><span class="app-date" style="display:block">2 Active Projects</span></div>
+              <div class="row-end"><span class="app-date app-team-count">2 Active Projects</span></div>
             </div>
             <div class="app-row">
               <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
               <img class="app-avatar" src="https://framerusercontent.com/images/QMJQby2GSM1LxBOUQSRvXkPky04.png?width=300&height=300" alt="Leonardo da Vinci" loading="lazy" />
               <div><div class="row-title">Leonardo da Vinci</div><div class="row-sub">VP Marketing</div></div>
-              <div class="row-end"><span class="app-date" style="display:block">5 Active Projects</span></div>
+              <div class="row-end"><span class="app-date app-team-count">5 Active Projects</span></div>
             </div>
             <div class="app-row">
               <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
               <img class="app-avatar" src="https://framerusercontent.com/images/kjtCn1FFkVpSiCoaISG00zLqJJY.jpg?width=300&height=300" alt="Andy Warhol" loading="lazy" />
               <div><div class="row-title">Andy Warhol</div><div class="row-sub">Content Marketer</div></div>
-              <div class="row-end"><span class="app-date" style="display:block">9 Active Projects</span></div>
+              <div class="row-end"><span class="app-date app-team-count">9 Active Projects</span></div>
             </div>
             <div class="app-row">
               <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
               <img class="app-avatar" src="frida.jpg" alt="Frida Kahlo" loading="lazy" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Frida_Kahlo,_by_Guillermo_Kahlo.jpg?width=200'}else{var d=document.createElement('div');d.className='app-avatar initials';d.textContent='FK';this.replaceWith(d)}" />
               <div><div class="row-title">Frida Kahlo</div><div class="row-sub">Demand Gen Lead</div></div>
-              <div class="row-end"><span class="app-date" style="display:block">4 Active Projects</span></div>
+              <div class="row-end"><span class="app-date app-team-count">4 Active Projects</span></div>
             </div>
           </div>
   
@@ -1074,15 +1129,15 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
         <div class="app-tabs">
           <button class="app-tab" data-tab="0" aria-label="Your Entire Team">
             <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
-            <span>Your Entire Team</span>
+            <span class="tab-full">Your Entire Team</span><span class="tab-short">Team</span>
           </button>
           <button class="app-tab active" data-tab="1" aria-label="Active Design Projects">
             <svg viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
-            <span>Active Design Projects</span>
+            <span class="tab-full">Active Design Projects</span><span class="tab-short">Projects</span>
           </button>
           <button class="app-tab" data-tab="2" aria-label="Ongoing Fulfillment">
             <svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-            <span>Ongoing Fulfillment</span>
+            <span class="tab-full">Ongoing Fulfillment</span><span class="tab-short">Fulfillment</span>
           </button>
         </div>
       </div>
@@ -1097,39 +1152,28 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
       <div class="eyebrow">Why Choose DesignSpace</div>
       <h2 class="h-xl">Your dedicated design team.<br /><span class="serif">Built around your priorities.</span></h2>
     </div>
-    <div class="wc-grid">
-      <div class="wc-media reveal">
-        <img src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=900&height=1200" alt="DesignSpace client work" loading="lazy" />
-        <div class="wc-media-bar">
-          <a href="#work" class="wc-pill">Explore client work</a>
-          <a href="#work" class="wc-arrow" aria-label="Explore client work"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </div>
-      </div>
-
-      <div class="wc-list reveal">
-        <div class="wc-row">
-          <span class="wc-num">01</span>
+    <div class="wcx reveal" data-autoloop data-interval="5000">
+      <div class="wcx-list">
+        <button class="wcx-item active" data-step="0">
+          <span class="wcx-bar"><i></i></span>
           <h3>Every asset, handled.</h3>
           <p>From product mockups to pitch decks, ad campaigns to diagrams — one team covers every format you need.</p>
-        </div>
-        <div class="wc-row">
-          <span class="wc-num">02</span>
+        </button>
+        <button class="wcx-item" data-step="1">
+          <span class="wcx-bar"><i></i></span>
           <h3>Specialists, not generalists.</h3>
           <p>Built for B2B tech and cybersecurity marketing — we know the landscape, the language, and what your buyers respond to.</p>
-        </div>
-        <div class="wc-row">
-          <span class="wc-num">03</span>
+        </button>
+        <button class="wcx-item" data-step="2">
+          <span class="wcx-bar"><i></i></span>
           <h3>Your whole team, covered.</h3>
           <p>Add your whole team — marketing, design, sales, events — with a dedicated PM keeping every request on track.</p>
-        </div>
+        </button>
       </div>
-
-      <div class="wc-bottom reveal">
-        <p class="wc-note">Explore the benefits — meticulously tailored to the way fast-moving B2B tech and cybersecurity teams work.</p>
-        <div class="wc-stat">
-          <span class="big">3×</span>
-          <p>More creative output within 90 days — without growing your headcount.</p>
-        </div>
+      <div class="wcx-figure">
+        <img class="wcx-fig active" data-fig="0" src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=1000&height=1200" alt="Every asset handled — full-suite design" loading="lazy" />
+        <img class="wcx-fig" data-fig="1" src="https://framerusercontent.com/images/Cx3Rw7mQccGjeuJGUbE3klCs.png?width=1000&height=1200" alt="Specialists in B2B tech and cybersecurity" loading="lazy" />
+        <img class="wcx-fig" data-fig="2" src="https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=1000&height=1200" alt="Your whole team, covered" loading="lazy" />
       </div>
     </div>
   </div>
@@ -1161,9 +1205,11 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 <section id="why" class="hwrap">
   <div class="hpin">
 
-    <div class="hhead">
-      <div class="eyebrow">For B2B Tech &amp; Cybersecurity Teams</div>
-      <h2 class="h-xl">One creative partner.<br /><span class="serif">All design assets covered.</span></h2>
+    <div class="hhead head-split">
+      <div>
+        <div class="eyebrow">For B2B Tech &amp; Cybersecurity Teams</div>
+        <h2 class="h-xl">One creative partner.<br /><span class="serif">All design assets covered.</span></h2>
+      </div>
       <p class="lede">Branded creatives whenever you need them — from a team that already knows your industry and keeps your output moving.</p>
     </div>
 
@@ -1280,10 +1326,12 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 <!-- ============ TESTIMONIALS ============ -->
 <section style="padding-top:0">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Glowing Reviews</div>
-      <h2 class="h-xl">The go-to creative partner<br /><span class="serif">for cybersecurity teams.</span></h2>
-      <p class="lede" style="margin-top:20px">Why marketers say DesignSpace is their favorite creative partner.</p>
+    <div class="section-head head-split reveal">
+      <div>
+        <div class="eyebrow">Glowing Reviews</div>
+        <h2 class="h-xl">The go-to creative partner<br /><span class="serif">for cybersecurity teams.</span></h2>
+      </div>
+      <p class="lede">Why marketers say DesignSpace is their favorite creative partner.</p>
     </div>
   </div>
   <div class="ds-carousel" data-speed="32" data-center>
@@ -1386,7 +1434,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
   </div>
 </section>
 
-<!-- ============ PRICING ============ -->
+<!-- ============ PRICING (tier slider) ============ -->
 <section id="pricing">
   <div class="wrap">
     <div class="section-head reveal">
@@ -1394,83 +1442,84 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
       <h2 class="h-xl">Dedicated design.<br /><span class="serif">Built around your priorities.</span></h2>
       <p class="lede" style="margin-top:20px">A subscription built for marketing teams with more projects than design bandwidth.</p>
     </div>
-    <div class="pricing-grid">
-      <div class="price-card reveal">
-        <div class="price-name">Pro</div>
-        <p class="price-desc">Steady creative support for teams with consistent output needs.</p>
-        <div class="price-amount">$4,999 <span>/ month</span></div>
-        <p class="price-flex">Upgrade, downgrade, pause, or cancel anytime</p>
-        <ul class="price-feats">
-          <li>40 hours / month</li>
-          <li>Typically 4–8 projects / month</li>
-          <li>Up to 10 rollover hours / month</li>
-        </ul>
-        <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-ghost">Book a Discovery Call</a>
+
+    <div class="palt reveal" data-palt>
+      <div class="palt-toggle" role="tablist" aria-label="Pricing tiers">
+        <span class="palt-ind" data-ind></span>
+        <button class="palt-seg" data-tier="0">Pro</button>
+        <button class="palt-seg active" data-tier="1">Extra</button>
+        <button class="palt-seg" data-tier="2">Mega</button>
       </div>
-      <div class="price-card popular reveal">
-        <span class="pop-badge">Popular</span>
-        <div class="price-name">Extra</div>
-        <p class="price-desc">More bandwidth for teams producing content at higher volume.</p>
-        <div class="price-amount">$8,999 <span>/ month</span></div>
-        <p class="price-flex">Upgrade, downgrade, pause, or cancel anytime</p>
-        <ul class="price-feats">
-          <li>80 hours / month</li>
-          <li>Typically 6–12 projects / month</li>
-          <li>Up to 15 rollover hours / month</li>
-        </ul>
-        <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call</a>
+
+      <div class="palt-grid">
+        <!-- LEFT: the changing plan -->
+        <div class="palt-card palt-plan popular" data-plan>
+          <div class="palt-name-row">
+            <span class="palt-name" data-name>Extra</span>
+            <span class="palt-badge" data-badge>Most popular</span>
+          </div>
+          <p class="palt-desc" data-desc>More bandwidth for teams producing content at higher volume.</p>
+          <div class="palt-price" data-price>$8,999 <span>/ month</span></div>
+          <p class="palt-flex">Upgrade, downgrade, pause, or cancel anytime</p>
+          <ul class="palt-specs">
+            <li class="palt-spec"><span>Hours / month</span><b data-hours>80 hours</b></li>
+            <li class="palt-spec"><span>Projects / month</span><b data-projects>6–12 projects</b></li>
+            <li class="palt-spec"><span>Rollover / month</span><b data-rollover>Up to 15 hours</b></li>
+          </ul>
+          <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
+        </div>
+
+        <!-- RIGHT: constant, every plan includes -->
+        <div class="palt-card palt-inc">
+          <h3>Every plan includes…</h3>
+          <ul>
+            <li>Expert B2B tech designers &amp; dedicated project manager</li>
+            <li>Unlimited active projects, asset types &amp; design revisions</li>
+            <li>Add your entire team — marketing, design, sales, events</li>
+            <li>Stress-free tools: Asana, Figma, Canva &amp; Google Drive</li>
+            <li>No submission forms — just send a task on Asana</li>
+            <li>Flexible monthly plans — start small, scale when ready</li>
+            <li>Portion of unused hours roll over every month</li>
+            <li>Upgrade, downgrade, pause, or cancel anytime</li>
+          </ul>
+        </div>
       </div>
-      <div class="price-card reveal">
-        <div class="price-name">Mega</div>
-        <p class="price-desc">Maximum output for teams running full-scale creative programs.</p>
-        <div class="price-amount">$12,999 <span>/ month</span></div>
-        <p class="price-flex">Upgrade, downgrade, pause, or cancel anytime</p>
-        <ul class="price-feats">
-          <li>120 hours / month</li>
-          <li>Typically 8–16 projects / month</li>
-          <li>Up to 20 rollover hours / month</li>
-        </ul>
-        <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-ghost">Book a Discovery Call</a>
-      </div>
-    </div>
-    <div class="includes reveal">
-      <h3>Every plan includes…</h3>
-      <ul class="includes-grid">
-        <li>Expert B2B tech designers &amp; dedicated project manager</li>
-        <li>Unlimited active projects, asset types &amp; design revisions</li>
-        <li>Add your entire team — marketing, design, sales, events</li>
-        <li>Stress-free tools: Asana, Figma, Canva &amp; Google Drive</li>
-        <li>No submission forms — just send a task on Asana</li>
-        <li>Flexible monthly plans — start small, scale when ready</li>
-        <li>Portion of unused hours roll over every month</li>
-        <li>Upgrade, downgrade, pause, or cancel anytime</li>
-      </ul>
     </div>
   </div>
 </section>
 
-<!-- ============ PROCESS ============ -->
+<!-- ============ PROCESS (auto-loop steps + figure) ============ -->
 <section id="process" style="padding-top:0">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Our Process</div>
-      <h2 class="h-xl">Your creative extension,<br /><span class="serif">at every step of the way.</span></h2>
+    <div class="proc-head reveal">
+      <div>
+        <div class="eyebrow">Our Process</div>
+        <h2 class="h-xl">Your creative extension,<br /><span class="serif">at every step of the way.</span></h2>
+      </div>
+      <p class="lede">From kickoff to delivery, one flexible subscription that flexes with your roadmap — no forms, no bottlenecks, no waiting on design.</p>
     </div>
-    <div class="process-row">
-      <div class="process-step reveal">
-        <span class="step-num">Step 1</span>
-        <h3>Kickoff with DesignSpace.</h3>
-        <p>We align on your team, priorities, and workflows — then set up your Asana board, shared Figma file, and brand assets folder.</p>
+    <div class="reveal" data-autoloop data-interval="5000">
+      <div class="proc-figure">
+        <img class="proc-fig active" data-fig="0" src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=1200" alt="Kickoff: shared board, Figma file and brand assets" loading="lazy" />
+        <img class="proc-fig" data-fig="1" src="https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=1200" alt="Submit tasks on Asana and receive polished work" loading="lazy" />
+        <img class="proc-fig" data-fig="2" src="https://framerusercontent.com/images/VJPlRfJINbYC3Wjw3ivpq7nAYg.png?width=1200" alt="Scale your subscription up or down" loading="lazy" />
       </div>
-      <div class="process-step reveal">
-        <span class="step-num">Step 2</span>
-        <h3>Submit tasks. We deliver.</h3>
-        <p>Drop tasks straight into Asana — no forms, no briefs templates. Your team designs, your creative director reviews, you receive polished work.</p>
-      </div>
-      <div class="process-step reveal">
-        <span class="step-num">Step 3</span>
-        <h3>Scale on your terms.</h3>
-        <p>Upgrade for launches, downgrade in quiet months, pause when you need to. Your subscription flexes with your roadmap.</p>
+      <div class="proc-steps">
+        <button class="proc-step active" data-step="0">
+          <span class="proc-bar"><i></i></span>
+          <h3>Kickoff with DesignSpace.</h3>
+          <p>We align on your team, priorities, and workflows — then set up your Asana board, shared Figma file, and brand assets folder.</p>
+        </button>
+        <button class="proc-step" data-step="1">
+          <span class="proc-bar"><i></i></span>
+          <h3>Submit tasks. We deliver.</h3>
+          <p>Drop tasks straight into Asana — no forms, no brief templates. Your team designs, your creative director reviews, you receive polished work.</p>
+        </button>
+        <button class="proc-step" data-step="2">
+          <span class="proc-bar"><i></i></span>
+          <h3>Scale on your terms.</h3>
+          <p>Upgrade for launches, downgrade in quiet months, pause when you need to. Your subscription flexes with your roadmap.</p>
+        </button>
       </div>
     </div>
   </div>
@@ -1671,8 +1720,15 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
     // (first card on the left, then last card on the right).
     var travel = 0, lead = 0, tail = 0, total = 0;
     function calc() {
-      travel = Math.max(0, track.scrollWidth - window.innerWidth);
-      lead = tail = Math.round(window.innerHeight * 0.45);
+      // A flex container's scrollWidth ignores trailing padding, so measure the
+      // last card's real right edge and leave a matching gutter (= padding-left,
+      // the same gutter as .wrap sections like "Plugged Into Your Workflow").
+      var gutter = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+      var cards = track.children;
+      var lastCard = cards[cards.length - 1];
+      var lastRight = lastCard ? (lastCard.offsetLeft + lastCard.offsetWidth) : 0;
+      travel = Math.max(0, lastRight + gutter - window.innerWidth);
+      lead = tail = Math.round(window.innerHeight * 0.22);
       total = lead + travel + tail;
     }
     calc();
@@ -1856,7 +1912,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
       idx = n; fill = 0; tweening = true;
       var target = offset + idx * step;
       tween = gsap.to({ v: x }, {
-        v: target, duration: fast ? 0.5 : 0.85, ease: 'power3.inOut',
+        v: target, duration: fast ? 0.65 : 0.85, ease: fast ? 'power2.out' : 'power3.inOut',
         onUpdate: function () { x = this.targets()[0].v; render(); },
         onComplete: function () { tweening = false; normalize(); setDots(); }
       });
@@ -1879,22 +1935,28 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
     rail.addEventListener('mouseenter', function () { hovering = true; });
     rail.addEventListener('mouseleave', function () { hovering = false; });
 
-    // ---- drag rail ----
-    var startX = 0, startPos = 0;
+    // ---- drag rail (light momentum so gentle mobile swipes carry) ----
+    var startX = 0, startPos = 0, lastX = 0, lastT = 0, vel = 0;
     rail.addEventListener('pointerdown', function (e) {
       dragging = true; root.classList.add('dragging');
       if (tween) tween.kill(); tweening = false;
       startX = e.clientX; startPos = x;
+      lastX = e.clientX; lastT = performance.now(); vel = 0;
     });
     window.addEventListener('pointermove', function (e) {
       if (!dragging) return;
+      var t = performance.now(), dt2 = t - lastT;
+      if (dt2 > 0) vel = (e.clientX - lastX) / dt2; // finger px / ms
+      lastX = e.clientX; lastT = t;
       x = startPos - (e.clientX - startX);
       render();
     });
     window.addEventListener('pointerup', function () {
       if (!dragging) return;
       dragging = false; root.classList.remove('dragging');
-      goTo(Math.round((x - offset) / step), true);
+      // project a little momentum so a soft flick still advances smoothly
+      var projected = x - vel * 140;
+      goTo(Math.round((projected - offset) / step), true);
     });
 
     // ---- scrub interaction: click/drag to jump straight to a dot ----
@@ -1945,6 +2007,91 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
       yoyo: true, repeat: -1, delay: i * 0.3
     });
   });
+})();
+
+/* ================================================================
+   Auto-loop tabs — cycles [data-step] items on an interval, fills the
+   active progress bar (CSS), and crossfades the matching [data-fig].
+   Click a step to jump; hovering the figure pauses advancing.
+================================================================ */
+(function () {
+  document.querySelectorAll('[data-autoloop]').forEach(function (root) {
+    var steps = Array.prototype.slice.call(root.querySelectorAll('[data-step]'));
+    var figs = Array.prototype.slice.call(root.querySelectorAll('[data-fig]'));
+    if (!steps.length) return;
+    var n = steps.length;
+    var dur = parseInt(root.getAttribute('data-interval') || '5000', 10);
+    root.style.setProperty('--aloop-dur', dur + 'ms');
+    var cur = -1, timer = null, paused = false;
+
+    function activate(i) {
+      cur = (i + n) % n;
+      steps.forEach(function (s, si) { s.classList.toggle('active', si === cur); });
+      figs.forEach(function (f) { f.classList.toggle('active', +f.getAttribute('data-fig') === cur); });
+    }
+    function start() { stop(); timer = setInterval(function () { if (!paused) activate(cur + 1); }, dur); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+    steps.forEach(function (s, si) {
+      s.addEventListener('click', function () { activate(si); start(); });
+      s.addEventListener('mouseenter', function () { paused = true; });
+      s.addEventListener('mouseleave', function () { paused = false; });
+    });
+    root.addEventListener('mouseenter', function () { paused = true; });
+    root.addEventListener('mouseleave', function () { paused = false; });
+
+    activate(0);
+    start();
+  });
+})();
+
+/* ================================================================
+   Pricing ALT — tier slider. Only the changing numbers update;
+   the "Every plan includes" panel stays constant.
+================================================================ */
+(function () {
+  var root = document.querySelector('[data-palt]');
+  if (!root) return;
+  var TIERS = [
+    { name: 'Pro',   popular: false, desc: 'Steady creative support for teams with consistent output needs.',  price: '$4,999',  hours: '40 hours',  projects: '4–8 projects',  rollover: 'Up to 10 hours' },
+    { name: 'Extra', popular: true,  desc: 'More bandwidth for teams producing content at higher volume.',      price: '$8,999',  hours: '80 hours',  projects: '6–12 projects', rollover: 'Up to 15 hours' },
+    { name: 'Mega',  popular: false, desc: 'Maximum output for teams running full-scale creative programs.',     price: '$12,999', hours: '120 hours', projects: '8–16 projects', rollover: 'Up to 20 hours' }
+  ];
+  var toggle = root.querySelector('.palt-toggle');
+  var segs = Array.prototype.slice.call(root.querySelectorAll('.palt-seg'));
+  var ind = root.querySelector('[data-ind]');
+  var plan = root.querySelector('[data-plan]');
+  var q = function (s) { return root.querySelector(s); };
+  var el = {
+    name: q('[data-name]'), desc: q('[data-desc]'), price: q('[data-price]'),
+    hours: q('[data-hours]'), projects: q('[data-projects]'),
+    rollover: q('[data-rollover]'), badge: q('[data-badge]')
+  };
+  function moveInd(seg) {
+    var pr = toggle.getBoundingClientRect();
+    var sr = seg.getBoundingClientRect();
+    var bl = parseFloat(getComputedStyle(toggle).borderLeftWidth) || 0;
+    ind.style.left = (sr.left - pr.left - bl) + 'px';
+    ind.style.width = sr.width + 'px';
+  }
+  function select(i) {
+    var t = TIERS[i];
+    segs.forEach(function (s, si) { s.classList.toggle('active', si === i); });
+    el.name.textContent = t.name;
+    el.desc.textContent = t.desc;
+    el.price.innerHTML = t.price + ' <span>/ month</span>';
+    el.hours.textContent = t.hours;
+    el.projects.textContent = t.projects;
+    el.rollover.textContent = t.rollover;
+    plan.classList.toggle('popular', t.popular);
+    el.badge.style.display = t.popular ? 'inline-block' : 'none';
+    moveInd(segs[i]);
+  }
+  segs.forEach(function (s, i) { s.addEventListener('click', function () { select(i); }); });
+  select(1); // default to Extra (popular)
+  function reflow() { var a = root.querySelector('.palt-seg.active'); if (a) moveInd(a); }
+  window.addEventListener('resize', reflow);
+  window.addEventListener('load', reflow);
 })();
 
 /* ================================================================
