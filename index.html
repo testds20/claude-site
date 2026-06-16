@@ -446,9 +446,10 @@ nav{
 }
 .hhead{
   flex:none;
-  /* identical gutter to .htrack below AND to .wrap sections elsewhere */
+  /* gutters match .wrap sections on BOTH sides: left aligns with the first
+     card, right aligns with where the cards finish (Plugged Into Your Workflow). */
   padding-left:max(var(--pad), calc((100% - var(--max)) / 2 + var(--pad)));
-  padding-right:var(--pad);
+  padding-right:max(var(--pad), calc((100% - var(--max)) / 2 + var(--pad)));
 }
 .hhead .eyebrow{margin-bottom:14px}
 .hhead .lede{margin-top:16px}
@@ -686,7 +687,7 @@ nav{
   display:grid;grid-template-columns:1.15fr .85fr;
   gap:clamp(24px,4vw,64px);align-items:end;
 }
-.head-split .lede{margin:0}
+.head-split .lede{margin:0;max-width:none}
 @media(max-width:760px){
   .head-split{grid-template-columns:1fr;gap:14px;align-items:start}
 }
@@ -695,7 +696,7 @@ nav{
   gap:clamp(24px,4vw,64px);align-items:end;
   margin-bottom:clamp(28px,3.5vw,48px);
 }
-.proc-head .lede{margin:0}
+.proc-head .lede{margin:0;max-width:none}
 @media(max-width:760px){.proc-head{align-items:start}}
 .proc-figure{
   position:relative;border:1px solid var(--line);
@@ -856,14 +857,19 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 .wcx-bar{position:absolute;top:-1px;left:0;right:0;height:2px;overflow:hidden}
 .wcx-bar i{display:block;height:100%;width:0;background:var(--ink)}
 .wcx-item.active .wcx-bar i{width:100%;transition:width var(--aloop-dur,5000ms) linear}
-.wcx-item h3{font-size:clamp(20px,2vw,27px);letter-spacing:-.02em;line-height:1.2;transition:color .35s}
-.wcx-item p{
+.wcx-item h3{font-size:clamp(20px,2vw,27px);letter-spacing:-.02em;line-height:1.2;transition:color .45s var(--ease)}
+/* smooth height via grid-template-rows (no max-height snap) */
+.wcx-desc{
+  display:grid;grid-template-rows:0fr;opacity:0;
+  transition:grid-template-rows .55s var(--ease),opacity .45s var(--ease);
+}
+.wcx-desc > p{
+  overflow:hidden;min-height:0;
   color:var(--ink-soft);font-size:14.5px;line-height:1.55;max-width:48ch;
-  opacity:0;max-height:0;overflow:hidden;
-  transition:opacity .4s var(--ease),max-height .5s var(--ease),margin-top .4s var(--ease);
+  padding-top:12px;
 }
 .wcx-item:not(.active) h3{color:var(--ink-faint)}
-.wcx-item.active p{opacity:1;max-height:200px;margin-top:12px}
+.wcx-item.active .wcx-desc{grid-template-rows:1fr;opacity:1}
 .wcx-figure{
   position:relative;border:1px solid var(--line);
   border-radius:var(--radius-lg);overflow:hidden;
@@ -1157,17 +1163,17 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
         <button class="wcx-item active" data-step="0">
           <span class="wcx-bar"><i></i></span>
           <h3>Every asset, handled.</h3>
-          <p>From product mockups to pitch decks, ad campaigns to diagrams — one team covers every format you need.</p>
+          <div class="wcx-desc"><p>From product mockups to pitch decks, ad campaigns to diagrams — one team covers every format you need.</p></div>
         </button>
         <button class="wcx-item" data-step="1">
           <span class="wcx-bar"><i></i></span>
           <h3>Specialists, not generalists.</h3>
-          <p>Built for B2B tech and cybersecurity marketing — we know the landscape, the language, and what your buyers respond to.</p>
+          <div class="wcx-desc"><p>Built for B2B tech and cybersecurity marketing — we know the landscape, the language, and what your buyers respond to.</p></div>
         </button>
         <button class="wcx-item" data-step="2">
           <span class="wcx-bar"><i></i></span>
           <h3>Your whole team, covered.</h3>
-          <p>Add your whole team — marketing, design, sales, events — with a dedicated PM keeping every request on track.</p>
+          <div class="wcx-desc"><p>Add your whole team — marketing, design, sales, events — with a dedicated PM keeping every request on track.</p></div>
         </button>
       </div>
       <div class="wcx-figure">
