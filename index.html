@@ -485,14 +485,14 @@ nav{
 .hcard h3{font-size:clamp(22px,2vw,28px);letter-spacing:-.02em;margin-top:clamp(20px,2vw,28px);line-height:1.2}
 .hcard p{color:var(--ink-soft);font-size:15px;line-height:1.55;margin-top:12px;max-width:42ch}
 @media(max-width:880px){
-  .hpin{height:auto;display:block;overflow:visible;padding-top:clamp(48px,9vw,72px)}
+  /* No pin/horizontal scroll on mobile/tablet — stack the cards vertically */
+  .hpin{height:auto;display:block;overflow:visible;padding:clamp(40px,8vw,64px) 0}
   .htrack{
-    overflow-x:auto;scroll-snap-type:x mandatory;
+    display:flex;flex-direction:column;gap:clamp(34px,7vw,52px);
     transform:none!important;
-    padding:clamp(28px,5vw,40px) var(--pad) clamp(48px,9vw,72px);
-    -webkit-overflow-scrolling:touch;
+    padding:0 var(--pad);
   }
-  .hcard{width:min(80vw,360px);scroll-snap-align:start}
+  .hcard{width:auto}
 }
 
 /* ============ STATS ============ */
@@ -778,27 +778,31 @@ nav{
 }
 
 /* ============ FOOTER ============ */
-footer{padding:clamp(56px,6vw,90px) 0 40px}
+footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 .foot-top{
-  display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;
-  padding-bottom:56px;border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:1.6fr 1fr 1fr;
+  gap:clamp(32px,4vw,56px);
+  padding-bottom:clamp(36px,4vw,56px);
 }
-.foot-brand .logo{margin-bottom:18px}
-.foot-brand p{color:var(--ink-soft);font-size:15px;max-width:26ch}
+.foot-head{font-size:clamp(26px,3vw,40px);font-weight:400;letter-spacing:-.025em;line-height:1.12}
+.foot-head .serif{color:var(--ink-soft)}
+.foot-copy{margin-top:clamp(18px,2vw,26px);font-size:13px;color:var(--ink-faint)}
 .foot-col h4{
   font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
   color:var(--ink-faint);margin-bottom:18px;
 }
 .foot-col a{
-  display:block;font-size:14.5px;color:var(--ink-soft);
+  display:block;font-size:15px;color:var(--ink);
   margin-bottom:12px;transition:color .25s;
 }
-.foot-col a:hover{color:var(--ink)}
-.foot-bottom{
-  display:flex;justify-content:space-between;align-items:center;gap:20px;
-  padding-top:28px;font-size:13px;color:var(--ink-faint);flex-wrap:wrap;
+.foot-col a:hover{color:var(--ink-soft)}
+.foot-col-stack{display:flex;flex-direction:column;gap:clamp(24px,3vw,38px)}
+.foot-word{padding:0 var(--pad);margin-top:clamp(32px,5vw,64px)}
+.foot-word img{width:100%;height:auto;display:block}
+@media(max-width:820px){
+  .foot-top{grid-template-columns:1fr 1fr;gap:36px 32px}
+  .foot-brand{grid-column:1/-1}
 }
-@media(max-width:820px){.foot-top{grid-template-columns:1fr 1fr}}
 
 /* ============ TOOLS & ASSET TYPES (integrations style) ============ */
 .int-head{text-align:center;display:flex;flex-direction:column;align-items:center}
@@ -838,7 +842,23 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
 .int-ico.id{background:#49021F;color:#FF3366;border:none}
 .int-ico.ae{background:#00005B;color:#9999FF;border:none}
 @media(max-width:980px){.int-panel{grid-template-columns:1fr}.int-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.int-grid{grid-template-columns:1fr}}
+.int-more{
+  display:none;align-items:center;gap:9px;margin-top:20px;
+  font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;
+}
+.int-more-ico{
+  width:22px;height:22px;border-radius:50%;border:1px solid var(--line);flex:none;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:16px;line-height:1;transition:transform .3s var(--ease);
+}
+.int-more.open .int-more-ico{transform:rotate(45deg)}
+@media(max-width:560px){
+  .int-grid{grid-template-columns:1fr}
+  /* mobile: show 5 icons, reveal the rest behind "See more" */
+  .int-grid .int-item:nth-child(n+6){display:none}
+  .int-grid.expanded .int-item:nth-child(n+6){display:flex}
+  .int-more{display:inline-flex}
+}
 .marquee img{-webkit-user-drag:none;user-select:none}
 
 /* ============ WHY CHOOSE (auto-loop list + image) ============ */
@@ -1272,19 +1292,20 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
         <a class="int-pill-btn" href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener">See how we work</a>
       </div>
       <div class="int-grid">
-        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/figma" alt="" loading="lazy" /></span>Figma</div>
-        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/canva" alt="" loading="lazy" /></span>Canva</div>
-        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/asana" alt="" loading="lazy" /></span>Asana</div>
-        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/googledrive" alt="" loading="lazy" /></span>Google Drive</div>
-        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/slack" alt="" loading="lazy" /></span>Slack</div>
-        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/googleslides" alt="" loading="lazy" /></span>Google Slides</div>
-        <div class="int-item"><span class="int-ico ps"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Adobe_Photoshop_CC_icon.svg?width=40" alt="" loading="lazy" onerror="this.replaceWith('Ps')" /></span>Photoshop</div>
-        <div class="int-item"><span class="int-ico ai"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Adobe_Illustrator_CC_icon.svg?width=40" alt="" loading="lazy" onerror="this.replaceWith('Ai')" /></span>Illustrator</div>
-        <div class="int-item"><span class="int-ico id"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Adobe_InDesign_CC_icon.svg?width=40" alt="" loading="lazy" onerror="this.replaceWith('Id')" /></span>InDesign</div>
-        <div class="int-item"><span class="int-ico ae"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Adobe_After_Effects_CC_icon.svg?width=40" alt="" loading="lazy" onerror="this.replaceWith('Ae')" /></span>After Effects</div>
-        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/openai" alt="" loading="lazy" /></span>ChatGPT</div>
-        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/midjourney" alt="" loading="lazy" /></span>Midjourney</div>
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/figma" alt="" loading="lazy" onerror="this.replaceWith('Fi')" /></span>Figma</div>
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/canva" alt="" loading="lazy" onerror="this.replaceWith('Cv')" /></span>Canva</div>
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/adobe" alt="" loading="lazy" onerror="this.replaceWith('Ad')" /></span>Adobe Suite</div>
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/openai" alt="" loading="lazy" onerror="this.replaceWith('AI')" /></span>ChatGPT</div>
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/anthropic" alt="" loading="lazy" onerror="this.replaceWith('Cl')" /></span>Claude</div>
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/framer" alt="" loading="lazy" onerror="this.replaceWith('Fr')" /></span>Framer</div>
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/lovable" alt="" loading="lazy" onerror="this.replaceWith('Lo')" /></span>Lovable</div>
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/jitter" alt="" loading="lazy" onerror="this.replaceWith('Ji')" /></span>Jitter</div>
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/asana" alt="" loading="lazy" onerror="this.replaceWith('As')" /></span>Asana</div>
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/slack" alt="" loading="lazy" onerror="this.replaceWith('Sl')" /></span>Slack</div>
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/googledrive" alt="" loading="lazy" onerror="this.replaceWith('GD')" /></span>Google Drive</div>
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.simpleicons.org/googleslides" alt="" loading="lazy" onerror="this.replaceWith('GS')" /></span>Google Slides</div>
       </div>
+      <button class="int-more" type="button" data-int-more>See more <span class="int-more-ico">+</span></button>
     </div>
     <div class="int-panel reveal">
       <div class="int-label">
@@ -1305,6 +1326,7 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
         <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 012-2h13v16H6a2 2 0 000 4h13"/></svg></span>eBooks</div>
         <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24"><path d="M14 3v5h5M6 3h9l4 4v14H6z"/><path d="M9 12h6M9 16h4"/></svg></span>Case Studies</div>
       </div>
+      <button class="int-more" type="button" data-int-more>See more <span class="int-more-ico">+</span></button>
     </div>
   </div>
 </section>
@@ -1586,32 +1608,32 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
-        <a href="#" class="logo"><img src="logo.svg" alt="DesignSpace" style="height:21px" /></a>
-        <p>Creative fulfillment for tech and cyber marketers.</p>
+        <h2 class="foot-head">Creative fulfillment for<br /><span class="serif">tech and cyber marketers.</span></h2>
+        <p class="foot-copy">© DesignSpace 2026&nbsp;&nbsp;|&nbsp;&nbsp;All rights reserved</p>
       </div>
       <div class="foot-col">
         <h4>Company</h4>
-        <a href="#work">Project Types</a>
-        <a href="#why">Why DesignSpace</a>
-        <a href="#work">Client Work</a>
-        <a href="#process">Our Process</a>
+        <a href="#work">Projects</a>
+        <a href="#process">Process</a>
+        <a href="#why">Why Us</a>
         <a href="#pricing">Pricing</a>
       </div>
-      <div class="foot-col">
-        <h4>Connect</h4>
-        <a href="https://www.linkedin.com/company/designspace-agency/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener">Book a Discovery Call</a>
-      </div>
-      <div class="foot-col">
-        <h4>Legal</h4>
-        <a href="#">Terms &amp; Conditions</a>
-        <a href="#">Privacy Policy</a>
+      <div class="foot-col foot-col-stack">
+        <div>
+          <h4>Connect</h4>
+          <a href="https://www.linkedin.com/company/designspace-agency/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener">Book a Discovery Call</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="#">Terms &amp; Conditions</a>
+          <a href="#">Privacy Policy</a>
+        </div>
       </div>
     </div>
-    <div class="foot-bottom">
-      <span>© DesignSpace 2026. All rights reserved.</span>
-      <span>Made for fast-moving B2B teams.</span>
-    </div>
+  </div>
+  <div class="foot-word" aria-hidden="true">
+    <img src="logo.svg" alt="DesignSpace" />
   </div>
 </footer>
 
@@ -1720,45 +1742,41 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
   if (!section || !track) return;
   gsap.registerPlugin(ScrollTrigger);
 
+  // Desktop only: pin + scrub. Below 881px the cards stack vertically (CSS),
+  // which is the most reliable mobile/tablet behaviour.
   var mm = gsap.matchMedia();
   mm.add('(min-width: 881px)', function () {
-    // travel = horizontal distance; dwell = read-pause held at each end
-    // (first card on the left, then last card on the right).
-    var travel = 0, lead = 0, tail = 0, total = 0;
-    function calc() {
-      // A flex container's scrollWidth ignores trailing padding, so measure the
-      // last card's real right edge and leave a matching gutter (= padding-left,
-      // the same gutter as .wrap sections like "Plugged Into Your Workflow").
+    // Horizontal travel measured from the last card's real right edge, leaving a
+    // gutter equal to the left gutter so it finishes flush with .wrap sections.
+    function travel() {
       var gutter = parseFloat(getComputedStyle(track).paddingLeft) || 0;
       var cards = track.children;
-      var lastCard = cards[cards.length - 1];
-      var lastRight = lastCard ? (lastCard.offsetLeft + lastCard.offsetWidth) : 0;
-      travel = Math.max(0, lastRight + gutter - window.innerWidth);
-      lead = tail = Math.round(window.innerHeight * 0.22);
-      total = lead + travel + tail;
+      var last = cards[cards.length - 1];
+      var lastRight = last ? (last.offsetLeft + last.offsetWidth) : 0;
+      return Math.max(0, lastRight + gutter - window.innerWidth);
     }
-    calc();
-
-    var st = ScrollTrigger.create({
-      trigger: section,
-      start: 'top top',
-      end: function () { calc(); return '+=' + total; },
-      pin: true,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onRefresh: calc,
-      onUpdate: function (self) {
-        var scrolled = self.progress * total;
-        var x;
-        if (scrolled <= lead) x = 0;                       // hold first card
-        else if (scrolled >= lead + travel) x = -travel;   // hold last card
-        else x = -(scrolled - lead);                       // travel
-        gsap.set(track, { x: x });
+    // Lead/tail read-pauses as timeline fractions (resize-safe); the move
+    // segment carries the cards across.
+    var LEAD = 0.12, MOVE = 0.76;
+    var tween = gsap.to(track, {
+      keyframes: [
+        { x: 0, duration: LEAD },
+        { x: function () { return -travel(); }, ease: 'none', duration: MOVE },
+        { x: function () { return -travel(); }, duration: 1 - LEAD - MOVE }
+      ],
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: function () { return '+=' + (travel() / MOVE); },
+        pin: true,
+        scrub: 0.6,
+        anticipatePin: 1,
+        invalidateOnRefresh: true
       }
     });
-
     return function () {
-      st.kill();
+      if (tween.scrollTrigger) tween.scrollTrigger.kill();
+      tween.kill();
       gsap.set(track, { clearProps: 'transform' });
     };
   });
@@ -2098,6 +2116,24 @@ footer{padding:clamp(56px,6vw,90px) 0 40px}
   function reflow() { var a = root.querySelector('.palt-seg.active'); if (a) moveInd(a); }
   window.addEventListener('resize', reflow);
   window.addEventListener('load', reflow);
+})();
+
+/* ================================================================
+   Integrations "See more" (mobile) — reveal the rest of the icons
+================================================================ */
+(function () {
+  document.querySelectorAll('[data-int-more]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var grid = btn.previousElementSibling;
+      if (!grid || !grid.classList.contains('int-grid')) {
+        grid = btn.parentElement.querySelector('.int-grid');
+      }
+      if (!grid) return;
+      var open = grid.classList.toggle('expanded');
+      btn.classList.toggle('open', open);
+      if (btn.firstChild) btn.firstChild.nodeValue = open ? 'See less ' : 'See more ';
+    });
+  });
 })();
 
 /* ================================================================
