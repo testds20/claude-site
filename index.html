@@ -775,9 +775,8 @@ nav{
   margin-top:clamp(32px,4vw,52px);
   min-height:560px;
 }
-.cal-card #cal-inline{width:100%;min-height:560px}
-.cal-card #cal-inline iframe{width:100%!important;border:0;display:block}
-.cal-fallback{display:flex;align-items:center;justify-content:center;min-height:560px;padding:24px;text-align:center;color:var(--ink-soft);font-weight:500}
+.cal-card iframe{width:100%;min-height:680px;border:0;display:block;background:var(--bg-card)}
+@media(max-width:560px){.cal-card iframe{min-height:760px}}
 
 /* ============ FOOTER ============ */
 footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
@@ -1612,9 +1611,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       <h2 class="h-xl">Ready to go?<br /><span class="serif">Book a Discovery Call</span></h2>
     </div>
     <div class="cal-card reveal">
-      <div id="cal-inline" aria-label="Book a discovery call">
-        <a class="cal-fallback" href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener">Loading calendar… tap to book a Discovery Call →</a>
-      </div>
+      <iframe src="https://cal.com/ian-barin/discovery?embed=true&layout=month_view&theme=light"
+        title="Book a Discovery Call" loading="lazy"></iframe>
     </div>
   </div>
 </section>
@@ -2148,16 +2146,5 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 })();
 </script>
 
-<!-- ============ Cal.com inline embed (booking widget in CTA) ============ -->
-<script type="text/javascript">
-(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-Cal("init", { origin: "https://cal.com" });
-Cal("inline", {
-  elementOrId: "cal-inline",
-  calLink: "ian-barin/discovery",
-  config: { layout: "month_view", theme: "light" }
-});
-Cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
-</script>
 </body>
 </html>
