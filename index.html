@@ -471,6 +471,7 @@ nav{
   display:flex;align-items:stretch;gap:clamp(20px,2.4vw,34px);
   overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x proximity;
+  scroll-padding-left:max(var(--pad), calc((100% - var(--max)) / 2 + var(--pad)));
   -webkit-overflow-scrolling:touch;
   scrollbar-width:none;
   cursor:grab;
