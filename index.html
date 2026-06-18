@@ -230,6 +230,29 @@ nav{
   display:flex;justify-content:flex-end;
   min-height:clamp(320px,38vw,520px);
 }
+/* ---- 3D floating-card conveyor ---- */
+.hc-stage{
+  position:relative;width:100%;
+  height:clamp(360px,40vw,520px);
+  background:#ECECEC;border-radius:clamp(20px,2.4vw,30px);
+  overflow:hidden;
+  perspective:1200px;perspective-origin:50% 45%;
+  transform-style:preserve-3d;
+}
+.hc-card{
+  position:absolute;top:50%;left:50%;
+  width:clamp(190px,23vw,300px);aspect-ratio:4/5;
+  border-radius:var(--hc-radius,22px);overflow:hidden;
+  background:var(--bg-soft);
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.25);
+  will-change:transform,opacity;transform-style:preserve-3d;backface-visibility:hidden;
+}
+.hc-card img,.hc-card video{width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none}
+.hc-cap{
+  position:absolute;left:0;right:0;bottom:16px;text-align:center;
+  color:#fff;font-weight:600;font-size:clamp(20px,2vw,28px);letter-spacing:-.01em;
+  text-shadow:0 2px 14px rgba(0,0,0,.45);pointer-events:none;
+}
 .hero-gradient{
   position:relative;width:min(100%,460px);margin-left:auto;
   aspect-ratio:4/5;border-radius:30px;overflow:hidden;
@@ -1031,10 +1054,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         </div>
       </div>
       <div class="hero-visual">
-        <div class="hero-gradient tv-g2">
-          <img class="hero-art hero-art-a" src="https://framerusercontent.com/images/dYnTlA8O71As8CCoKhlIVKOLMAE.png?width=560&height=840" alt="DesignSpace report design" loading="lazy" />
-          <img class="hero-art hero-art-b" src="https://framerusercontent.com/images/VJPlRfJINbYC3Wjw3ivpq7nAYg.png?width=560&height=840" alt="DesignSpace deck design" loading="lazy" />
-        </div>
+        <div id="hero-conveyor" class="hc-stage" aria-hidden="true"></div>
       </div>
     </div>
 
@@ -2220,6 +2240,134 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       }
     });
   });
+})();
+</script>
+
+<!-- ================================================================
+  HERO 3D FLOATING-CARD CONVEYOR
+  Swap images: edit HERO_CARDS below (src + alt, optional caption; .mp4/.webm
+  render as muted looping video). Tune motion via HERO_CONFIG
+  (speed, visibleSpread, direction "ltr"/"rtl", pauseOnHover, perspective).
+  API: window.heroConveyor.{play(), pause(), destroy(), setCards(arr)}
+================================================================ -->
+<script>
+(function () {
+  var HERO_CARDS = [
+    { src: 'https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=660&height=900', alt: 'Product mockup design' },
+    { src: 'https://framerusercontent.com/images/n0YP32ZIZM8bBOcyoaarS35Ws.png?width=660&height=900', alt: 'Report & docs design' },
+    { src: 'https://framerusercontent.com/images/w2PBu9y5PW7w0pJMBg20EXzq0VE.png?width=660&height=900', alt: 'Ad campaign design' },
+    { src: 'https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=660&height=900', alt: 'Technical diagram design' },
+    { src: 'https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=660&height=900', alt: 'Dashboard design' }
+  ];
+  var HERO_CONFIG = {
+    visibleSpread: 0.82,   // path width multiplier (lower = neighbours closer in)
+    speed: 0.05,           // progress units / second (lower = slower glide)
+    perspective: 1200,
+    cardRadius: 22,
+    pauseOnHover: true,
+    direction: 'ltr',      // 'ltr' = in-from-left -> out-right ; 'rtl' reverses
+    respectReducedMotion: true
+  };
+
+  // p -> visual properties (reverse-engineered motion table)
+  var KEYS = [
+    { p: 0.00, x: -65, y: 4, ry: 48,  rz: 5,  s: 0.62 },
+    { p: 0.25, x: -28, y: 1, ry: 30,  rz: 2,  s: 0.82 },
+    { p: 0.50, x: 0,   y: 0, ry: 0,   rz: 0,  s: 1.00 },
+    { p: 0.75, x: 28,  y: 1, ry: -30, rz: -2, s: 0.82 },
+    { p: 1.00, x: 65,  y: 4, ry: -48, rz: -5, s: 0.62 }
+  ];
+  function sample(p) {
+    if (p <= 0) return KEYS[0];
+    if (p >= 1) return KEYS[KEYS.length - 1];
+    for (var i = 0; i < KEYS.length - 1; i++) {
+      var a = KEYS[i], b = KEYS[i + 1];
+      if (p >= a.p && p <= b.p) {
+        var t = (p - a.p) / (b.p - a.p);
+        return {
+          x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t,
+          ry: a.ry + (b.ry - a.ry) * t, rz: a.rz + (b.rz - a.rz) * t,
+          s: a.s + (b.s - a.s) * t
+        };
+      }
+    }
+    return KEYS[2];
+  }
+  function fade(p) { if (p < 0.08) return p / 0.08; if (p > 0.92) return (1 - p) / 0.08; return 1; }
+  function wrap(v) { v = v % 1; return v < 0 ? v + 1 : v; }
+
+  var stage, cards = [], baseOffset = [], t = 0, paused = false, tickerFn = null, ro = null, destroyed = false;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function makeCard(d) {
+    var el = document.createElement('div');
+    el.className = 'hc-card';
+    var media;
+    if (/\.(mp4|webm)(\?|$)/i.test(d.src)) {
+      media = document.createElement('video');
+      media.src = d.src; media.autoplay = media.muted = media.loop = media.playsInline = true; media.setAttribute('playsinline', '');
+    } else {
+      media = document.createElement('img');
+      media.src = d.src; media.alt = d.alt || ''; media.loading = 'lazy'; media.decoding = 'async';
+    }
+    el.appendChild(media);
+    if (d.caption) { var c = document.createElement('span'); c.className = 'hc-cap'; c.textContent = d.caption; el.appendChild(c); }
+    return el;
+  }
+  function build() {
+    stage.innerHTML = ''; cards = []; baseOffset = [];
+    var n = HERO_CARDS.length;
+    HERO_CARDS.forEach(function (d, i) {
+      var el = makeCard(d); stage.appendChild(el); cards.push(el); baseOffset.push(i / n);
+    });
+    stage.style.setProperty('--hc-radius', HERO_CONFIG.cardRadius + 'px');
+    stage.style.perspective = HERO_CONFIG.perspective + 'px';
+  }
+  function render() {
+    var w = stage.clientWidth, h = stage.clientHeight, spread = HERO_CONFIG.visibleSpread;
+    for (var i = 0; i < cards.length; i++) {
+      var p = HERO_CONFIG.direction === 'rtl' ? wrap(baseOffset[i] - t) : wrap(baseOffset[i] + t);
+      var k = sample(p);
+      var x = (k.x / 100) * w * spread, y = (k.y / 100) * h;
+      cards[i].style.transform = 'translate(-50%,-50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) rotateY(' + k.ry.toFixed(1) + 'deg) rotateZ(' + k.rz.toFixed(1) + 'deg) scale(' + k.s.toFixed(3) + ')';
+      cards[i].style.opacity = fade(p);
+      cards[i].style.zIndex = Math.round(k.s * 1000);
+    }
+  }
+  function loop(time, dt) { if (!paused) { t = wrap(t + (dt / 1000) * HERO_CONFIG.speed); } render(); }
+  function staticFeatured() {
+    var mid = Math.floor(cards.length / 2);
+    cards.forEach(function (el, i) {
+      if (i === mid) { el.style.transform = 'translate(-50%,-50%) scale(1)'; el.style.opacity = 1; el.style.zIndex = 1000; }
+      else { el.style.opacity = 0; }
+    });
+  }
+  function init() {
+    stage = document.getElementById('hero-conveyor');
+    if (!stage) return;
+    build();
+    if ((HERO_CONFIG.respectReducedMotion && reduce) || !window.gsap) { staticFeatured(); return; }
+    render();
+    tickerFn = loop; gsap.ticker.add(tickerFn);
+    if (HERO_CONFIG.pauseOnHover) {
+      stage.addEventListener('pointerenter', function () { paused = true; });
+      stage.addEventListener('pointerleave', function () { paused = false; });
+    }
+    if ('ResizeObserver' in window) { ro = new ResizeObserver(function () { render(); }); ro.observe(stage); }
+    window.heroConveyor = {
+      play: function () { paused = false; },
+      pause: function () { paused = true; },
+      destroy: function () {
+        if (destroyed) return; destroyed = true;
+        if (tickerFn && window.gsap) gsap.ticker.remove(tickerFn);
+        if (ro) ro.disconnect();
+        stage.innerHTML = '';
+      },
+      setCards: function (arr) { HERO_CARDS = arr; build(); render(); }
+    };
+  }
+  if (document.readyState !== 'loading') init();
+  else document.addEventListener('DOMContentLoaded', init);
 })();
 </script>
 
