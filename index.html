@@ -7,7 +7,7 @@
 <meta name="description" content="Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams. One subscription, all design assets covered." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
 <link rel="icon" type="image/png" href="https://framerusercontent.com/images/jPhwNH3UTuBDYSHmKOBd1KZxkUk.png?width=64&height=64" />
 <style>
 /* ============ DESIGN TOKENS ============ */
@@ -68,6 +68,7 @@ h1,h2,h3,h4,h5,h6{font-weight:500;letter-spacing:-.01em}
   line-height:1.1;
   letter-spacing:-.03em;
   font-weight:400;
+  text-wrap:balance;
 }
 .h-md{
   font-size:clamp(1.5rem,2.3vw,var(--fs-h4));  /* H4 — 24→31.25px */
@@ -88,8 +89,8 @@ h1,h2,h3,h4,h5,h6{font-weight:500;letter-spacing:-.01em}
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   font-family:var(--mono);
-  font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--ink-faint);
+  font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);
   margin-bottom:22px;
 }
 .eyebrow::before{
@@ -166,6 +167,10 @@ nav{
   .hero-clients .clients-label{flex:none;max-width:26ch;margin-bottom:0}
   .hero-clients .marquee{flex:1 1 auto;min-width:0}
 }
+/* mobile: let the label flow to one line if it fits (drop the forced break) */
+@media(max-width:880px){
+  .clients-label br{display:none}
+}
 
 /* --- split bubble menu --- */
 .bubble{
@@ -219,6 +224,7 @@ nav{
   font-size:clamp(2.25rem,6.6vw,4.768rem);  /* 36(mobile)→76.3px(desktop) */
   line-height:1.02;letter-spacing:-.038em;font-weight:400;
   margin-bottom:clamp(16px,1.8vw,22px);
+  text-wrap:balance;
 }
 .hero-h1 .serif{display:block;color:var(--ink-soft)}
 .hero-sub{
@@ -384,8 +390,8 @@ nav{
 /* ============ LOGO MARQUEE ============ */
 .clients{padding:40px 0 64px;border-top:1px solid var(--line)}
 .clients-label{
-  text-align:center;font-family:var(--mono);font-size:12px;color:var(--ink-faint);
-  font-weight:500;margin-bottom:34px;letter-spacing:.06em;text-transform:uppercase;line-height:1.5;
+  text-align:center;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+  font-weight:700;margin-bottom:34px;letter-spacing:.06em;text-transform:uppercase;line-height:1.5;
 }
 .marquee{overflow:hidden;position:relative;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
@@ -544,8 +550,8 @@ nav{
   transition:transform .6s var(--ease);
 }
 .hcard:hover .hcard-media img{transform:translateY(-6px) scale(1.02)}
-.hcard h3{font-size:clamp(1.25rem,2vw,var(--fs-h5));letter-spacing:-.02em;margin-top:clamp(20px,2vw,28px);line-height:1.22}
-.hcard p{color:var(--ink-soft);font-size:15px;line-height:1.55;margin-top:12px;max-width:42ch}
+.hcard h3{font-size:clamp(1.25rem,2vw,var(--fs-h5));letter-spacing:-.02em;margin-top:clamp(20px,2vw,28px);line-height:1.22;padding-right:9%}
+.hcard p{color:var(--ink-soft);font-size:15px;line-height:1.55;margin-top:12px;padding-right:9%;max-width:none}
 @media(max-width:880px){
   .hwrap{padding:clamp(72px,11vw,110px) 0}
   .hhead{margin-bottom:clamp(20px,5vw,32px)}
@@ -792,9 +798,9 @@ nav{
 .proc-bar i{display:block;height:100%;width:0;background:var(--ink);border-radius:2px}
 .proc-step.active .proc-bar i{width:100%;transition:width var(--aloop-dur,6500ms) linear}
 .proc-step-num{
-  display:block;font-family:var(--mono);font-weight:500;
+  display:block;font-family:var(--mono);font-weight:700;
   font-size:12px;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--ink-faint);margin-bottom:12px;
+  color:var(--ink-soft);margin-bottom:12px;
 }
 .proc-step h3{font-size:clamp(1.125rem,1.6vw,var(--fs-h6));letter-spacing:-.02em;margin-bottom:10px;line-height:1.25;transition:color .3s}
 .proc-step p{color:var(--ink-soft);font-size:14.5px;line-height:1.55;max-width:34ch}
@@ -870,11 +876,11 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 }
 .foot-head{font-size:clamp(1.4rem,2.2vw,var(--fs-h4));font-weight:400;letter-spacing:-.025em;line-height:1.14;max-width:none}
 .foot-head .serif{color:var(--ink-soft)}
-.foot-copy{margin-top:clamp(18px,2vw,26px);font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+.foot-copy{margin-top:clamp(18px,2vw,26px);font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
 .foot-col h4{
   font-family:var(--mono);
-  font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--ink-faint);margin-bottom:18px;
+  font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);margin-bottom:18px;
 }
 .foot-col a{
   display:block;font-size:15px;color:var(--ink);
@@ -961,6 +967,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   margin-top:clamp(36px,4vw,56px);
 }
 .wcx-list{display:flex;flex-direction:column;justify-content:flex-start}
+/* desktop/tablet: spread the 3 points to fill the image height */
+@media(min-width:881px){.wcx-list{justify-content:space-between}}
 .wcx-item{
   display:block;text-align:left;cursor:pointer;background:none;width:100%;
   position:relative;padding:clamp(18px,2.2vw,26px) 0;
