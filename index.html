@@ -145,7 +145,7 @@ nav{
   overflow:hidden;
   min-height:min(84vh,860px);
   display:flex;flex-direction:column;
-  gap:clamp(18px,2.4vw,36px);
+  gap:clamp(40px,5vw,64px);
 }
 /* soft ambient wash behind the visual */
 .hero-card::before{display:none}
@@ -216,15 +216,17 @@ nav{
 .hero-collage{
   position:absolute;inset:0;z-index:0;overflow:hidden;border-radius:inherit;
   touch-action:pan-y;cursor:grab;
+  user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;
 }
 .hero-collage.dragging{cursor:grabbing}
 .hero-collage .col-item{
   position:absolute;top:0;left:0;will-change:transform;
   display:flex;flex-direction:column;gap:7px;
+  pointer-events:none;user-select:none;-webkit-user-select:none;
 }
 .hero-collage .col-media{
   width:100%;border-radius:3px;overflow:hidden;display:block;
-  background:var(--bg-soft);
+  background:var(--bg-soft);-webkit-user-drag:none;user-select:none;
 }
 .hero-collage img.col-media,.hero-collage video.col-media{object-fit:cover}
 .hero-collage .col-card{
@@ -240,8 +242,8 @@ nav{
 .hero-fade{
   position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;
   background:linear-gradient(90deg,
-    var(--bg-card) 0%, var(--bg-card) 40%,
-    rgba(255,255,255,.55) 58%, rgba(255,255,255,0) 78%);
+    var(--bg-card) 0%, var(--bg-card) 52%,
+    rgba(255,255,255,0) 76%);
 }
 .hero-stage{
   position:relative;z-index:2;flex:1;
@@ -329,8 +331,8 @@ nav{
   .hero-ctas{justify-content:center}
   .hero-fade{
     background:linear-gradient(180deg,
-      rgba(255,255,255,0) 0%, rgba(255,255,255,.35) 42%,
-      var(--bg-card) 66%, var(--bg-card) 100%);
+      rgba(255,255,255,0) 0%, rgba(255,255,255,0) 26%,
+      var(--bg-card) 50%, var(--bg-card) 100%);
   }
   .hero-clients .clients-label{text-align:center}
 }
@@ -2312,10 +2314,12 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 </script>
 
 <!-- ================================================================
-  HERO INFINITE-SCROLL COLLAGE
+  HERO INFINITE-SCROLL COLLAGE  (2D infinite, no-overlap)
   Swap content: edit COLLAGE_ITEMS (type "image" | "video" | "card";
   card supports \n in glyph). Tuning: COLLAGE_CONFIG.speed (idle px/s),
-  .parallax, .columns, .seed. API: window.heroCollage.{play,pause,destroy,setItems}
+  .parallax, .columns, .seed. Items never overlap (per-column tiling),
+  drift up forever, and can be dragged freely in all directions.
+  API: window.heroCollage.{play,pause,destroy,setItems}
 ================================================================ -->
 <script>
 (function () {
@@ -2335,16 +2339,19 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     { type:'image', src:'https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=480', caption:'Slide Decks', size:'md' },
     { type:'card',  glyph:'Aa', bg:'#ECECEC', fg:'#111111', caption:'Typography', size:'sm' }
   ];
-  var COLLAGE_CONFIG = { columns:4, speed:46, parallax:0.18, seed:14, pauseOnHover:false, respectReducedMotion:true };
+  var COLLAGE_CONFIG = { columns:4, speed:42, parallax:0.18, seed:14, pauseOnHover:false, respectReducedMotion:true };
 
   function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
   function mod(n,m){ return ((n%m)+m)%m; }
 
-  var SIZE = { sm:[0.085,0.115], md:[0.12,0.17], lg:[0.2,0.265] };
-  var el, items=[], offset=0, scrubVel=0, paused=false, raf=null, last=0, trackH=0, destroyed=false, ro=null;
+  // size = fraction of one column width (kept within the column → never overlaps a neighbour)
+  var SIZE = { sm:[0.5,0.68], md:[0.72,0.9], lg:[0.92,1.0] };
+
+  var el, items=[], cols=[], offsetX=0, offsetY=0, velX=0, velY=0, paused=false, raf=null, last=0;
+  var tileW=0, topBuf=0, bufX=0, destroyed=false, ro=null;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function clearItems(){ for(var i=0;i<items.length;i++){ var n=items[i].node; if(n&&n.parentNode) n.parentNode.removeChild(n); } items=[]; }
+  function clearItems(){ for(var i=0;i<items.length;i++){ var n=items[i].node; if(n&&n.parentNode) n.parentNode.removeChild(n); } items=[]; cols=[]; }
 
   function makeNode(d){
     var wrap=document.createElement('div'); wrap.className='col-item';
@@ -2357,7 +2364,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       media.src=d.src; media.muted=true; media.loop=true; media.autoplay=true; media.playsInline=true; media.setAttribute('playsinline',''); media.setAttribute('aria-hidden','true');
     } else {
       media=document.createElement('img'); media.className='col-media';
-      media.src=d.src; media.alt=''; media.loading='lazy'; media.decoding='async'; media.draggable=false;
+      media.src=d.src; media.alt=''; media.decoding='async'; media.draggable=false;
     }
     wrap.appendChild(media);
     if(d.caption){ var c=document.createElement('span'); c.className='col-cap'; c.textContent=d.caption; wrap.appendChild(c); }
@@ -2367,28 +2374,32 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   function layout(){
     if(!el) return;
     var W=el.clientWidth, H=el.clientHeight; if(!W||!H) return;
-    var ncols = W<560 ? 2 : (W<900 ? 3 : COLLAGE_CONFIG.columns);
+    var vis = W<560 ? 2 : (W<900 ? 3 : COLLAGE_CONFIG.columns);
     var rng = mulberry32(COLLAGE_CONFIG.seed);
-    trackH = Math.round(H*1.9 + 200);
+    var colGap = Math.max(12, W*0.016);
+    var colW = (W - colGap*(vis-1))/vis;
+    var pitch = colW + colGap;
+    var totalCols = vis + 3;                 // extra columns → horizontal drag buffer
+    tileW = totalCols * pitch;               // exact seamless horizontal period
+    bufX = colW + 24;
+    topBuf = Math.round(colW*1.6 + 60);      // big enough that items leave the top fully before wrapping
+    var fillTo = Math.max(H + topBuf + 80, H*1.7);
+    var pAmt = (COLLAGE_CONFIG.parallax/0.18) || 1;
     clearItems();
-    var colGap = Math.max(10, W*0.014);
-    var colW = (W - colGap*(ncols-1))/ncols;
     var src = COLLAGE_ITEMS, n = src.length, idx=0;
-    var frag=document.createDocumentFragment();
-    for(var c=0;c<ncols;c++){
-      var x0 = c*(colW+colGap);
-      var y = -rng()*H*0.5;
-      while(y < trackH){
+    var frag = document.createDocumentFragment();
+    for(var c=0;c<totalCols;c++){
+      var colX = c*pitch;
+      var depth = 1 + (rng()-0.5)*0.28*pAmt; // per-column vertical parallax (~0.86..1.14)
+      var y = 0;
+      while(y < fillTo){
         var d = src[idx % n]; idx++;
         var it = makeNode(d);
         var range = SIZE[d.size] || SIZE.md;
-        var w = Math.round(W*(range[0] + rng()*(range[1]-range[0])));
-        if(w > colW) w = Math.round(colW*(0.72 + rng()*0.26));
-        var jx = x0 + (colW - w)*rng();
-        var aspect = (d.type==='card') ? 1 : (0.92 + rng()*0.55);
+        var w = Math.round(colW*(range[0] + rng()*(range[1]-range[0])));
+        var jx = colX + (colW - w)*rng();
+        var aspect = (d.type==='card') ? 1 : (0.95 + rng()*0.55);
         var mh = Math.round(w*aspect);
-        var depth = 0.82 + rng()*0.36*((COLLAGE_CONFIG.parallax/0.18)||1);
-        var scale = 0.95 + (depth-0.82)*0.14;
         it.node.style.width = w+'px';
         if(d.type==='card'){
           var lines=(d.glyph||'').split('\n'), maxLen=1;
@@ -2397,12 +2408,13 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         } else {
           it.media.style.height = mh+'px';
         }
-        it.baseX=jx; it.depth=depth; it.scale=scale; it.baseY=y;
+        it.baseX=jx; it.baseY=y; it.col=c;
         var blockH = mh + (d.caption?22:0);
-        y += blockH + H*(0.055 + rng()*0.11);
+        y += blockH + H*(0.05 + rng()*0.09);
         frag.appendChild(it.node);
         items.push(it);
       }
+      cols.push({ depth:depth, period:y, phase:rng()*y });
     }
     el.appendChild(frag);
     renderFrame();
@@ -2410,9 +2422,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 
   function renderFrame(){
     for(var i=0;i<items.length;i++){
-      var it=items[i];
-      var y = mod(it.baseY - offset*it.depth, trackH) - 70;
-      it.node.style.transform = 'translate3d('+it.baseX.toFixed(1)+'px,'+y.toFixed(1)+'px,0) scale('+it.scale.toFixed(3)+')';
+      var it=items[i], col=cols[it.col];
+      var sx = mod(it.baseX - offsetX + bufX, tileW) - bufX;
+      var sy = mod(it.baseY - offsetY*col.depth + col.phase, col.period) - topBuf;
+      it.node.style.transform = 'translate3d('+sx.toFixed(1)+'px,'+sy.toFixed(1)+'px,0)';
     }
   }
 
@@ -2420,18 +2433,21 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     if(destroyed) return;
     var dt = last ? Math.min(0.05,(now-last)/1000) : 0; last=now;
     if(!paused){
-      offset += (COLLAGE_CONFIG.speed + scrubVel)*dt;
-      scrubVel *= 0.92; if(Math.abs(scrubVel)<0.4) scrubVel=0;
+      offsetY += (COLLAGE_CONFIG.speed + velY)*dt;
+      offsetX += velX*dt;
+      velY *= 0.92; velX *= 0.92;
+      if(Math.abs(velY)<0.4) velY=0;
+      if(Math.abs(velX)<0.4) velX=0;
       renderFrame();
     }
     raf=requestAnimationFrame(frame);
   }
 
-  var dragging=false, lastPY=0;
-  function onDown(e){ if(e.pointerType && e.pointerType!=='mouse') return; dragging=true; lastPY=e.clientY; el.classList.add('dragging'); }
-  function onMove(e){ if(!dragging) return; var dy=e.clientY-lastPY; lastPY=e.clientY; offset -= dy*1.1; scrubVel = -dy*7; renderFrame(); }
+  var dragging=false, lpx=0, lpy=0;
+  function onDown(e){ if(e.pointerType && e.pointerType!=='mouse') return; dragging=true; lpx=e.clientX; lpy=e.clientY; el.classList.add('dragging'); if(e.preventDefault) e.preventDefault(); }
+  function onMove(e){ if(!dragging) return; var dx=e.clientX-lpx, dy=e.clientY-lpy; lpx=e.clientX; lpy=e.clientY; offsetX -= dx; offsetY -= dy; velX = -dx*7; velY = -dy*7; renderFrame(); }
   function onUp(){ dragging=false; if(el) el.classList.remove('dragging'); }
-  function onWheel(e){ scrubVel += e.deltaY*0.22; }
+  function onWheel(e){ velY += e.deltaY*0.22; }
 
   function init(){
     el=document.getElementById('hero-collage'); if(!el) return;
@@ -2445,13 +2461,13 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     el.addEventListener('wheel',onWheel,{passive:true});
     if(COLLAGE_CONFIG.pauseOnHover){ el.addEventListener('pointerenter',function(){paused=true;}); el.addEventListener('pointerleave',function(){paused=false;}); }
     var rt;
-    if('ResizeObserver' in window){ ro=new ResizeObserver(function(){ clearTimeout(rt); rt=setTimeout(function(){ offset=0; layout(); },180); }); ro.observe(el); }
+    if('ResizeObserver' in window){ ro=new ResizeObserver(function(){ clearTimeout(rt); rt=setTimeout(function(){ offsetX=0; offsetY=0; layout(); },180); }); ro.observe(el); }
     window.heroCollage = {
       play:function(){ paused=false; },
       pause:function(){ paused=true; },
       destroy:function(){ destroyed=true; if(raf) cancelAnimationFrame(raf); if(ro) ro.disconnect();
         el.removeEventListener('pointerdown',onDown); window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp); el.removeEventListener('wheel',onWheel); clearItems(); },
-      setItems:function(arr){ COLLAGE_ITEMS=arr; offset=0; layout(); }
+      setItems:function(arr){ COLLAGE_ITEMS=arr; offsetX=0; offsetY=0; layout(); }
     };
   }
   if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded', init);
