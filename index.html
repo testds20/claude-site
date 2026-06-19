@@ -238,12 +238,11 @@ nav{
   font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.03em;
   text-transform:uppercase;color:var(--ink-faint);text-align:center;line-height:1.2;
 }
-/* fade the collage out behind the copy — left→right on desktop */
+/* fade the collage out behind the copy — anchored to the bottom-left copy block */
 .hero-fade{
   position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;
-  background:linear-gradient(90deg,
-    var(--bg-card) 0%, var(--bg-card) 52%,
-    rgba(255,255,255,0) 76%);
+  background:radial-gradient(125% 138% at -8% 108%,
+    var(--bg-card) 0%, var(--bg-card) 50%, rgba(255,255,255,0) 74%);
 }
 .hero-stage{
   position:relative;z-index:2;flex:1;
