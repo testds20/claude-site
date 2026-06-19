@@ -147,6 +147,15 @@ nav{
   display:flex;flex-direction:column;
   gap:clamp(40px,5vw,64px);
 }
+/* desktop/tablet: fill the viewport so the copy clears the floating nav (13" MacBook etc.) */
+@media(min-width:861px){
+  .hero{padding-top:16px;padding-bottom:16px}
+  .hero-card{
+    min-height:min(92vh,1180px);
+    min-height:min(calc(100svh - 32px),1180px);
+    padding-top:clamp(56px,7vh,84px);
+  }
+}
 /* soft ambient wash behind the visual */
 .hero-card::before{display:none}
 /* client logos inside the hero card (above the fold) */
