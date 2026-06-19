@@ -148,14 +148,11 @@ nav{
   gap:clamp(18px,2.4vw,36px);
 }
 /* soft ambient wash behind the visual */
-.hero-card::before{
-  content:"";position:absolute;top:-30%;right:-10%;width:70%;height:90%;
-  background:radial-gradient(circle at 60% 40%,rgba(150,130,230,.12),transparent 62%);
-  pointer-events:none;z-index:0;
-}
+.hero-card::before{display:none}
 /* client logos inside the hero card (above the fold) */
 .hero-clients{
   position:relative;z-index:2;margin-top:auto;
+  background:var(--bg-card);
   border-top:1px solid var(--line);
   /* equal top/bottom so the label + logos sit centered in the band */
   padding:clamp(20px,2.2vw,30px) 0;
@@ -215,13 +212,43 @@ nav{
   .bubble .logo{padding:0}
 }
 
-/* --- hero stage: big copy + tilted visual --- */
+/* --- hero stage: full-bleed infinite collage bg + copy overlay --- */
+.hero-collage{
+  position:absolute;inset:0;z-index:0;overflow:hidden;border-radius:inherit;
+  touch-action:pan-y;cursor:grab;
+}
+.hero-collage.dragging{cursor:grabbing}
+.hero-collage .col-item{
+  position:absolute;top:0;left:0;will-change:transform;
+  display:flex;flex-direction:column;gap:7px;
+}
+.hero-collage .col-media{
+  width:100%;border-radius:3px;overflow:hidden;display:block;
+  background:var(--bg-soft);
+}
+.hero-collage img.col-media,.hero-collage video.col-media{object-fit:cover}
+.hero-collage .col-card{
+  width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;
+  font-weight:800;line-height:.92;text-align:center;letter-spacing:-.02em;
+  white-space:pre-line;border-radius:3px;font-size:clamp(20px,2.4vw,34px);
+}
+.hero-collage .col-cap{
+  font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.03em;
+  text-transform:uppercase;color:var(--ink-faint);text-align:center;line-height:1.2;
+}
+/* fade the collage out behind the copy — left→right on desktop */
+.hero-fade{
+  position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(90deg,
+    var(--bg-card) 0%, var(--bg-card) 40%,
+    rgba(255,255,255,.55) 58%, rgba(255,255,255,0) 78%);
+}
 .hero-stage{
   position:relative;z-index:2;flex:1;
-  display:grid;grid-template-columns:1.05fr .95fr;
-  align-items:end;gap:clamp(20px,3vw,48px);
+  display:flex;align-items:flex-end;
+  pointer-events:none;
 }
-.hero-text{align-self:end;max-width:640px}
+.hero-text{align-self:end;max-width:600px;pointer-events:auto}
 .hero-text .eyebrow{margin-bottom:clamp(16px,1.8vw,22px)}
 .hero-h1{
   font-size:clamp(2.25rem,6.6vw,4.768rem);  /* 36(mobile)→76.3px(desktop) */
@@ -294,13 +321,17 @@ nav{
 .hero-card:hover .hero-art-b{transform:rotate(7.5deg) translateY(-3px)}
 
 @media(max-width:860px){
-  .hero-stage{grid-template-columns:1fr;align-items:center;text-align:center}
-  .hero-text{order:2;max-width:100%;display:flex;flex-direction:column;align-items:center}
+  /* copy sits at the bottom, centered; collage fills above and fades down into it */
+  .hero-stage{justify-content:center;align-items:flex-end;text-align:center}
+  .hero-text{max-width:100%;display:flex;flex-direction:column;align-items:center}
   .hero-text .eyebrow{justify-content:center}
   .hero-sub{margin-left:auto;margin-right:auto}
   .hero-ctas{justify-content:center}
-  .hero-visual{order:1;justify-content:center;min-height:0;margin-bottom:8px}
-  .hero-gradient{transform:rotate(1.5deg);width:min(86%,400px)}
+  .hero-fade{
+    background:linear-gradient(180deg,
+      rgba(255,255,255,0) 0%, rgba(255,255,255,.35) 42%,
+      var(--bg-card) 66%, var(--bg-card) 100%);
+  }
   .hero-clients .clients-label{text-align:center}
 }
 
@@ -1085,8 +1116,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 <!-- ============ HERO — CARD + SPLIT BUBBLE MENU ============ -->
 <header class="hero">
   <div class="hero-card">
+    <div id="hero-collage" class="hero-collage" aria-hidden="true"></div>
+    <div class="hero-fade" aria-hidden="true"></div>
 
-    <!-- big copy + tilted visual -->
+    <!-- copy overlay -->
     <div class="hero-stage">
       <div class="hero-text">
         <div class="eyebrow">Flexible B2B Design Subscription</div>
@@ -1096,9 +1129,6 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
           <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
           <a href="#work" class="btn btn-ghost">Explore Designs</a>
         </div>
-      </div>
-      <div class="hero-visual">
-        <div id="hero-conveyor" class="hc-stage" aria-hidden="true"></div>
       </div>
     </div>
 
@@ -1802,7 +1832,6 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   if (!window.gsap) return;
   gsap.from('#nav .bubble', { y: -16, opacity: 0, duration: .8, ease: 'power3.out', stagger: .12, delay: .1 });
   gsap.from('.hero-text > *', { y: 30, opacity: 0, duration: 1, ease: 'power3.out', stagger: .1, delay: .25 });
-  gsap.from('.hero-visual', { y: 40, opacity: 0, duration: 1.1, ease: 'power3.out', delay: .35 });
 })();
 
 /* ---- COSMOS RING hero fully removed; replaced by static card hero ---- */
@@ -2283,140 +2312,149 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 </script>
 
 <!-- ================================================================
-  HERO 3D FLOATING-CARD CONVEYOR
-  Swap images: edit HERO_CARDS below (src + alt, optional caption; .mp4/.webm
-  render as muted looping video). Tune motion via HERO_CONFIG
-  (speed, visibleSpread, direction "ltr"/"rtl", pauseOnHover, perspective).
-  API: window.heroConveyor.{play(), pause(), destroy(), setCards(arr)}
+  HERO INFINITE-SCROLL COLLAGE
+  Swap content: edit COLLAGE_ITEMS (type "image" | "video" | "card";
+  card supports \n in glyph). Tuning: COLLAGE_CONFIG.speed (idle px/s),
+  .parallax, .columns, .seed. API: window.heroCollage.{play,pause,destroy,setItems}
 ================================================================ -->
 <script>
 (function () {
-  var HERO_CARDS = [
-    { src: 'https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=660&height=900', alt: 'Product mockup design' },
-    { src: 'https://framerusercontent.com/images/n0YP32ZIZM8bBOcyoaarS35Ws.png?width=660&height=900', alt: 'Report & docs design' },
-    { src: 'https://framerusercontent.com/images/w2PBu9y5PW7w0pJMBg20EXzq0VE.png?width=660&height=900', alt: 'Ad campaign design' },
-    { src: 'https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=660&height=900', alt: 'Technical diagram design' },
-    { src: 'https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=660&height=900', alt: 'Dashboard design' }
+  var COLLAGE_ITEMS = [
+    { type:'image', src:'https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=480', caption:'Product Mockups', size:'lg' },
+    { type:'card',  glyph:'GROW\nGROW\nGROW', bg:'#111111', fg:'#ffffff', caption:'Brand Systems', size:'sm' },
+    { type:'image', src:'https://framerusercontent.com/images/n0YP32ZIZM8bBOcyoaarS35Ws.png?width=480', caption:'Reports + Docs', size:'md' },
+    { type:'card',  glyph:'A+', bg:'#E8351E', fg:'#ffffff', caption:'Ad Creative', size:'sm' },
+    { type:'image', src:'https://framerusercontent.com/images/w2PBu9y5PW7w0pJMBg20EXzq0VE.png?width=480', caption:'Ad Campaigns', size:'md' },
+    { type:'image', src:'https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=480', caption:'Dashboards', size:'lg' },
+    { type:'card',  glyph:'UI', bg:'#2F4FE0', fg:'#ffffff', caption:'Product Design', size:'sm' },
+    { type:'image', src:'https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=480', caption:'Diagrams', size:'md' },
+    { type:'card',  glyph:'B2B', bg:'#F39A2B', fg:'#111111', caption:'Demand Gen', size:'sm' },
+    { type:'image', src:'https://framerusercontent.com/images/VJPlRfJINbYC3Wjw3ivpq7nAYg.png?width=480', caption:'Pricing Pages', size:'md' },
+    { type:'image', src:'https://framerusercontent.com/images/Cx3Rw7mQccGjeuJGUbE3klCs.png?width=480', caption:'Case Studies', size:'lg' },
+    { type:'card',  glyph:'✦', bg:'#1FA463', fg:'#ffffff', caption:'Social Content', size:'sm' },
+    { type:'image', src:'https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=480', caption:'Slide Decks', size:'md' },
+    { type:'card',  glyph:'Aa', bg:'#ECECEC', fg:'#111111', caption:'Typography', size:'sm' }
   ];
-  var HERO_CONFIG = {
-    visibleSpread: 0.82,   // path width multiplier (lower = neighbours closer in)
-    speed: 0.05,           // progress units / second (lower = slower glide)
-    perspective: 1200,
-    cardRadius: 22,
-    pauseOnHover: true,
-    direction: 'ltr',      // 'ltr' = in-from-left -> out-right ; 'rtl' reverses
-    respectReducedMotion: true
-  };
+  var COLLAGE_CONFIG = { columns:4, speed:46, parallax:0.18, seed:14, pauseOnHover:false, respectReducedMotion:true };
 
-  // p -> visual properties (reverse-engineered motion table)
-  var KEYS = [
-    { p: 0.00, x: -65, y: 4, ry: 48,  rz: 5,  s: 0.62 },
-    { p: 0.25, x: -28, y: 1, ry: 30,  rz: 2,  s: 0.82 },
-    { p: 0.50, x: 0,   y: 0, ry: 0,   rz: 0,  s: 1.00 },
-    { p: 0.75, x: 28,  y: 1, ry: -30, rz: -2, s: 0.82 },
-    { p: 1.00, x: 65,  y: 4, ry: -48, rz: -5, s: 0.62 }
-  ];
-  function sample(p) {
-    if (p <= 0) return KEYS[0];
-    if (p >= 1) return KEYS[KEYS.length - 1];
-    for (var i = 0; i < KEYS.length - 1; i++) {
-      var a = KEYS[i], b = KEYS[i + 1];
-      if (p >= a.p && p <= b.p) {
-        var t = (p - a.p) / (b.p - a.p);
-        return {
-          x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t,
-          ry: a.ry + (b.ry - a.ry) * t, rz: a.rz + (b.rz - a.rz) * t,
-          s: a.s + (b.s - a.s) * t
-        };
+  function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+  function mod(n,m){ return ((n%m)+m)%m; }
+
+  var SIZE = { sm:[0.085,0.115], md:[0.12,0.17], lg:[0.2,0.265] };
+  var el, items=[], offset=0, scrubVel=0, paused=false, raf=null, last=0, trackH=0, destroyed=false, ro=null;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function clearItems(){ for(var i=0;i<items.length;i++){ var n=items[i].node; if(n&&n.parentNode) n.parentNode.removeChild(n); } items=[]; }
+
+  function makeNode(d){
+    var wrap=document.createElement('div'); wrap.className='col-item';
+    var media;
+    if(d.type==='card'){
+      media=document.createElement('div'); media.className='col-card col-media';
+      media.style.background=d.bg||'#111'; media.style.color=d.fg||'#fff'; media.textContent=d.glyph||'';
+    } else if(d.type==='video' || /\.(mp4|webm)(\?|$)/i.test(d.src||'')){
+      media=document.createElement('video'); media.className='col-media';
+      media.src=d.src; media.muted=true; media.loop=true; media.autoplay=true; media.playsInline=true; media.setAttribute('playsinline',''); media.setAttribute('aria-hidden','true');
+    } else {
+      media=document.createElement('img'); media.className='col-media';
+      media.src=d.src; media.alt=''; media.loading='lazy'; media.decoding='async'; media.draggable=false;
+    }
+    wrap.appendChild(media);
+    if(d.caption){ var c=document.createElement('span'); c.className='col-cap'; c.textContent=d.caption; wrap.appendChild(c); }
+    return { node:wrap, media:media, data:d };
+  }
+
+  function layout(){
+    if(!el) return;
+    var W=el.clientWidth, H=el.clientHeight; if(!W||!H) return;
+    var ncols = W<560 ? 2 : (W<900 ? 3 : COLLAGE_CONFIG.columns);
+    var rng = mulberry32(COLLAGE_CONFIG.seed);
+    trackH = Math.round(H*1.9 + 200);
+    clearItems();
+    var colGap = Math.max(10, W*0.014);
+    var colW = (W - colGap*(ncols-1))/ncols;
+    var src = COLLAGE_ITEMS, n = src.length, idx=0;
+    var frag=document.createDocumentFragment();
+    for(var c=0;c<ncols;c++){
+      var x0 = c*(colW+colGap);
+      var y = -rng()*H*0.5;
+      while(y < trackH){
+        var d = src[idx % n]; idx++;
+        var it = makeNode(d);
+        var range = SIZE[d.size] || SIZE.md;
+        var w = Math.round(W*(range[0] + rng()*(range[1]-range[0])));
+        if(w > colW) w = Math.round(colW*(0.72 + rng()*0.26));
+        var jx = x0 + (colW - w)*rng();
+        var aspect = (d.type==='card') ? 1 : (0.92 + rng()*0.55);
+        var mh = Math.round(w*aspect);
+        var depth = 0.82 + rng()*0.36*((COLLAGE_CONFIG.parallax/0.18)||1);
+        var scale = 0.95 + (depth-0.82)*0.14;
+        it.node.style.width = w+'px';
+        if(d.type==='card'){
+          var lines=(d.glyph||'').split('\n'), maxLen=1;
+          for(var li=0;li<lines.length;li++){ if(lines[li].length>maxLen) maxLen=lines[li].length; }
+          it.media.style.fontSize = Math.round(w*(maxLen<=2?0.42:(maxLen<=4?0.26:0.2)))+'px';
+        } else {
+          it.media.style.height = mh+'px';
+        }
+        it.baseX=jx; it.depth=depth; it.scale=scale; it.baseY=y;
+        var blockH = mh + (d.caption?22:0);
+        y += blockH + H*(0.055 + rng()*0.11);
+        frag.appendChild(it.node);
+        items.push(it);
       }
     }
-    return KEYS[2];
+    el.appendChild(frag);
+    renderFrame();
   }
-  function fade(p) { if (p < 0.08) return p / 0.08; if (p > 0.92) return (1 - p) / 0.08; return 1; }
-  function wrap(v) { v = v % 1; return v < 0 ? v + 1 : v; }
 
-  var stage, cards = [], baseOffset = [], t = 0, paused = false, hovering = false, tickerFn = null, ro = null, destroyed = false;
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var canHover = !window.matchMedia || window.matchMedia('(hover: hover)').matches;
+  function renderFrame(){
+    for(var i=0;i<items.length;i++){
+      var it=items[i];
+      var y = mod(it.baseY - offset*it.depth, trackH) - 70;
+      it.node.style.transform = 'translate3d('+it.baseX.toFixed(1)+'px,'+y.toFixed(1)+'px,0) scale('+it.scale.toFixed(3)+')';
+    }
+  }
 
-  function makeCard(d) {
-    var el = document.createElement('div');
-    el.className = 'hc-card';
-    var media;
-    if (/\.(mp4|webm)(\?|$)/i.test(d.src)) {
-      media = document.createElement('video');
-      media.src = d.src; media.autoplay = media.muted = media.loop = media.playsInline = true; media.setAttribute('playsinline', '');
-    } else {
-      media = document.createElement('img');
-      media.src = d.src; media.alt = d.alt || ''; media.loading = 'lazy'; media.decoding = 'async';
+  function frame(now){
+    if(destroyed) return;
+    var dt = last ? Math.min(0.05,(now-last)/1000) : 0; last=now;
+    if(!paused){
+      offset += (COLLAGE_CONFIG.speed + scrubVel)*dt;
+      scrubVel *= 0.92; if(Math.abs(scrubVel)<0.4) scrubVel=0;
+      renderFrame();
     }
-    el.appendChild(media);
-    if (d.caption) { var c = document.createElement('span'); c.className = 'hc-cap'; c.textContent = d.caption; el.appendChild(c); }
-    return el;
+    raf=requestAnimationFrame(frame);
   }
-  function build() {
-    stage.innerHTML = ''; cards = []; baseOffset = [];
-    var n = HERO_CARDS.length;
-    HERO_CARDS.forEach(function (d, i) {
-      var el = makeCard(d); stage.appendChild(el); cards.push(el); baseOffset.push(i / n);
-    });
-    stage.style.setProperty('--hc-radius', HERO_CONFIG.cardRadius + 'px');
-    stage.style.perspective = HERO_CONFIG.perspective + 'px';
-  }
-  function render() {
-    var w = stage.clientWidth, h = stage.clientHeight, spread = HERO_CONFIG.visibleSpread;
-    var ps = [], best = 0, bestD = 2;
-    for (var i = 0; i < cards.length; i++) {
-      var p = HERO_CONFIG.direction === 'rtl' ? wrap(baseOffset[i] - t) : wrap(baseOffset[i] + t);
-      ps[i] = p;
-      var d = Math.abs(p - 0.5);
-      if (d < bestD) { bestD = d; best = i; }
-    }
-    for (var i = 0; i < cards.length; i++) {
-      var p = ps[i];
-      var k = sample(p);
-      var x = (k.x / 100) * w * spread, y = (k.y / 100) * h;
-      var lift = (hovering && i === best) ? -12 : 0;
-      var sc = (hovering && i === best) ? k.s * 1.04 : k.s;
-      cards[i].style.transform = 'translate(-50%,-50%) translate3d(' + x.toFixed(1) + 'px,' + (y + lift).toFixed(1) + 'px,0) rotateY(' + k.ry.toFixed(1) + 'deg) rotateZ(' + k.rz.toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')';
-      cards[i].style.opacity = fade(p);
-      cards[i].style.zIndex = Math.round(k.s * 1000);
-    }
-  }
-  function loop(time, dt) { if (!paused) { t = wrap(t + (dt / 1000) * HERO_CONFIG.speed); } render(); }
-  function staticFeatured() {
-    var mid = Math.floor(cards.length / 2);
-    cards.forEach(function (el, i) {
-      if (i === mid) { el.style.transform = 'translate(-50%,-50%) scale(1)'; el.style.opacity = 1; el.style.zIndex = 1000; }
-      else { el.style.opacity = 0; }
-    });
-  }
-  function init() {
-    stage = document.getElementById('hero-conveyor');
-    if (!stage) return;
-    build();
-    if ((HERO_CONFIG.respectReducedMotion && reduce) || !window.gsap) { staticFeatured(); return; }
-    render();
-    tickerFn = loop; gsap.ticker.add(tickerFn);
-    if (HERO_CONFIG.pauseOnHover) {
-      stage.addEventListener('pointerenter', function () { paused = true; if (canHover) hovering = true; });
-      stage.addEventListener('pointerleave', function () { paused = false; hovering = false; });
-    }
-    if ('ResizeObserver' in window) { ro = new ResizeObserver(function () { render(); }); ro.observe(stage); }
-    window.heroConveyor = {
-      play: function () { paused = false; },
-      pause: function () { paused = true; },
-      destroy: function () {
-        if (destroyed) return; destroyed = true;
-        if (tickerFn && window.gsap) gsap.ticker.remove(tickerFn);
-        if (ro) ro.disconnect();
-        stage.innerHTML = '';
-      },
-      setCards: function (arr) { HERO_CARDS = arr; build(); render(); }
+
+  var dragging=false, lastPY=0;
+  function onDown(e){ if(e.pointerType && e.pointerType!=='mouse') return; dragging=true; lastPY=e.clientY; el.classList.add('dragging'); }
+  function onMove(e){ if(!dragging) return; var dy=e.clientY-lastPY; lastPY=e.clientY; offset -= dy*1.1; scrubVel = -dy*7; renderFrame(); }
+  function onUp(){ dragging=false; if(el) el.classList.remove('dragging'); }
+  function onWheel(e){ scrubVel += e.deltaY*0.22; }
+
+  function init(){
+    el=document.getElementById('hero-collage'); if(!el) return;
+    layout();
+    if(!(reduce && COLLAGE_CONFIG.respectReducedMotion)){ last=0; raf=requestAnimationFrame(frame); }
+    el.style.opacity='0'; el.style.transition='opacity .8s ease';
+    requestAnimationFrame(function(){ el.style.opacity='1'; });
+    el.addEventListener('pointerdown',onDown);
+    window.addEventListener('pointermove',onMove);
+    window.addEventListener('pointerup',onUp);
+    el.addEventListener('wheel',onWheel,{passive:true});
+    if(COLLAGE_CONFIG.pauseOnHover){ el.addEventListener('pointerenter',function(){paused=true;}); el.addEventListener('pointerleave',function(){paused=false;}); }
+    var rt;
+    if('ResizeObserver' in window){ ro=new ResizeObserver(function(){ clearTimeout(rt); rt=setTimeout(function(){ offset=0; layout(); },180); }); ro.observe(el); }
+    window.heroCollage = {
+      play:function(){ paused=false; },
+      pause:function(){ paused=true; },
+      destroy:function(){ destroyed=true; if(raf) cancelAnimationFrame(raf); if(ro) ro.disconnect();
+        el.removeEventListener('pointerdown',onDown); window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp); el.removeEventListener('wheel',onWheel); clearItems(); },
+      setItems:function(arr){ COLLAGE_ITEMS=arr; offset=0; layout(); }
     };
   }
-  if (document.readyState !== 'loading') init();
-  else document.addEventListener('DOMContentLoaded', init);
+  if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded', init);
 })();
 </script>
 
