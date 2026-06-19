@@ -70,8 +70,6 @@ h1,h2,h3,h4,h5,h6{font-weight:500;letter-spacing:-.01em}
   font-weight:400;
   text-wrap:balance;
 }
-/* long intro statement above the work strip — size down so it balances to 2 lines */
-.work-strip-section .wrap h1{font-size:clamp(1.4rem,3.1vw,2.5rem)}
 .h-md{
   font-size:clamp(1.5rem,2.3vw,var(--fs-h4));  /* H4 — 24→31.25px */
   letter-spacing:-.02em;
@@ -202,8 +200,11 @@ nav{
 .bnav-cta .arr{transition:transform .35s var(--ease)}
 .bnav-cta:hover .arr{transform:translateX(4px)}
 @media(max-width:880px){
+  /* nav stacks above the hero card (in flow) with a 10px gap to the card */
+  nav{position:static;padding:14px var(--pad) 0}
+  .hero{padding-top:10px}
+  .hero-card{padding-top:clamp(30px,7vw,46px)}
   /* collapse the two bubbles into one single nav pill */
-  nav{padding:14px var(--pad)}
   .nav-inner{
     padding:7px 7px 7px 16px;gap:8px;
     background:var(--bg-card);border:1px solid var(--line);
@@ -306,7 +307,7 @@ nav{
 /* ============ WORK SHOWCASE (below hero) ============ */
 .work-strip-section{overflow:hidden}
 .work-strip-section .wrap{text-align:center;margin-bottom:clamp(40px,5vw,64px)}
-.work-strip-section h1{max-width:50ch;margin:0 auto;color:var(--ink)}
+.work-strip-section h1{max-width:26ch;margin:0 auto;color:var(--ink)}
 .work-strip{width:100%}
 .work-strip .cap-card{width:min(360px,78vw)}
 
@@ -390,7 +391,7 @@ nav{
 }
 
 /* ============ LOGO MARQUEE ============ */
-.clients{padding:40px 0 64px;border-top:1px solid var(--line)}
+.clients{padding:clamp(40px,5vw,64px) 0;border-top:1px solid var(--line)}
 .clients-label{
   text-align:center;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
   font-weight:700;margin-bottom:34px;letter-spacing:.06em;text-transform:uppercase;line-height:1.5;
@@ -479,8 +480,8 @@ nav{
   background:rgba(255,255,255,.94);
   border:1px solid rgba(16,16,16,.55);
   border-radius:100px;padding:9px 22px;
-  font-family:ui-monospace,'SF Mono',Menlo,monospace;
-  font-size:13px;font-weight:500;color:var(--ink);
+  font-family:var(--mono);
+  font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);
   white-space:nowrap;z-index:2;
   box-shadow:0 4px 14px -6px rgba(0,0,0,.25);
 }
@@ -554,6 +555,15 @@ nav{
 .hcard:hover .hcard-media img{transform:translateY(-6px) scale(1.02)}
 .hcard h3{font-size:clamp(1.25rem,2vw,var(--fs-h5));letter-spacing:-.02em;margin-top:clamp(20px,2vw,28px);line-height:1.22;padding-right:9%}
 .hcard p{color:var(--ink-soft);font-size:15px;line-height:1.55;margin-top:12px;padding-right:9%;max-width:none}
+@media(min-width:861px){.hcard h3.nowrap-d{white-space:nowrap}}
+/* remove hover lift on touch devices (mobile) for all image cards */
+@media(hover:none){
+  .hcard:hover .hcard-media img,
+  .cap-card:hover,
+  .cap-card:hover .cap-img{transform:none}
+  .proc-figure:hover .proc-fig.active,
+  .wcx-figure:hover .wcx-fig.active{transform:translate(-50%,-50%)}
+}
 @media(max-width:880px){
   .hwrap{padding:clamp(72px,11vw,110px) 0}
   .hhead{margin-bottom:clamp(20px,5vw,32px)}
@@ -1344,8 +1354,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 
     <div class="htrack">
       <article class="hcard">
-        <div class="hcard-media"><img src="b2b-1-teams.png" alt="Built for tech & cyber marketing teams" loading="lazy" /></div>
-        <h3>Built for tech &amp; cyber marketing teams</h3>
+        <div class="hcard-media"><img src="b2b-1-teams.png" alt="Built for tech & cyber marketers" loading="lazy" /></div>
+        <h3 class="nowrap-d">Built for tech &amp; cyber marketers</h3>
         <p>We're deeply rooted in your industry — the landscape, the language, and exactly what your buyers respond to.</p>
       </article>
 
@@ -1566,7 +1576,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     <div class="section-head reveal">
       <div class="eyebrow">Pricing</div>
       <h2 class="h-xl">Dedicated design.<br /><span class="serif">Built around your priorities.</span></h2>
-      <p class="lede" style="margin-top:20px">A subscription built for marketing teams with more projects than design bandwidth.</p>
+      <p class="lede" style="margin-top:20px">A flexible design subscription built for agile marketing teams.</p>
     </div>
 
     <div class="palt reveal" data-palt>
@@ -2327,6 +2337,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 
   var stage, cards = [], baseOffset = [], t = 0, paused = false, hovering = false, tickerFn = null, ro = null, destroyed = false;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = !window.matchMedia || window.matchMedia('(hover: hover)').matches;
 
   function makeCard(d) {
     var el = document.createElement('div');
@@ -2388,7 +2399,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     render();
     tickerFn = loop; gsap.ticker.add(tickerFn);
     if (HERO_CONFIG.pauseOnHover) {
-      stage.addEventListener('pointerenter', function () { paused = true; hovering = true; });
+      stage.addEventListener('pointerenter', function () { paused = true; if (canHover) hovering = true; });
       stage.addEventListener('pointerleave', function () { paused = false; hovering = false; });
     }
     if ('ResizeObserver' in window) { ro = new ResizeObserver(function () { render(); }); ro.observe(stage); }
