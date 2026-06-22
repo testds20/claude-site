@@ -514,9 +514,7 @@ nav{
   border-radius:var(--radius-md);overflow:hidden;
   display:flex;flex-direction:column;
   background:var(--bg-card);border:1px solid var(--line);
-  transition:transform .45s var(--ease);
 }
-.cap-card:hover{transform:translateY(-6px)}
 .cap-imgwrap{
   position:relative;overflow:hidden;
   aspect-ratio:660/900;flex:none;
@@ -2059,8 +2057,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     var setW = 0, step = 0, offset = 0;
     var x = 0, idx = 0, fill = 0;
     var playing = true, hovering = false, dragging = false, tweening = false;
-    var isWork = root.classList.contains('work-strip');
-    var armed = !isWork;   // work-strip waits for its left→right intro before auto-advancing
+    var armed = true;
     var DWELL = parseFloat(root.dataset.dwell || 3800);
     var tween = null;
 
@@ -2089,22 +2086,6 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     window.addEventListener('resize', measure);
     window.addEventListener('load', measure);
 
-    // work-strip intro: slide the whole strip up (rail only — never touches card
-    // transforms, so the per-card hover lift stays consistent) + fade every card
-    // in (opacity only, no transform conflict). Avoids the clone/visible-window
-    // and stuck-transform bugs of animating a subset of a looping row.
-    if (isWork && window.gsap) {
-      var introFired = false;
-      var fire = function () {
-        if (introFired) return; introFired = true;
-        armed = true;   // resume auto-advance right away (dwell outlasts the intro)
-        gsap.from(rail, { y: 56, duration: 0.95, ease: 'power3.out', clearProps: 'transform' });
-        gsap.from(track.children, { opacity: 0, duration: 0.6, ease: 'power2.out', stagger: { amount: 0.5 }, clearProps: 'opacity' });
-      };
-      if (window.ScrollTrigger) {
-        ScrollTrigger.create({ trigger: root, start: 'top 80%', once: true, onEnter: fire });
-      } else { fire(); }
-    }
 
     // ---- dots ----
     var dots = [], fills = [];
