@@ -80,6 +80,8 @@ h1,h2,h3,h4,h5,h6{font-weight:500;letter-spacing:-.01em}
   font-weight:400;
   color:var(--ink-soft);
 }
+/* Why Choose heading: drop the forced break on mobile so it wraps smoothly */
+@media(max-width:860px){.wch-head br{display:none}}
 .lede{
   font-size:clamp(1rem,1.2vw,1.125rem);        /* 16→18px */
   color:var(--ink-soft);
@@ -174,10 +176,7 @@ nav{
   .hero-clients .clients-label{flex:none;max-width:26ch;margin-bottom:0}
   .hero-clients .marquee{flex:1 1 auto;min-width:0}
 }
-/* mobile: let the label flow to one line if it fits (drop the forced break) */
-@media(max-width:880px){
-  .clients-label br{display:none}
-}
+/* the "Trusted by…" label stays two lines on every breakpoint (matches desktop) */
 
 /* --- split bubble menu --- */
 .bubble{
@@ -207,10 +206,12 @@ nav{
 .bnav-cta .arr{transition:transform .35s var(--ease)}
 .bnav-cta:hover .arr{transform:translateX(4px)}
 @media(max-width:880px){
-  /* nav stacks above the hero card (in flow) with a 10px gap to the card */
-  nav{position:static;padding:14px var(--pad) 0}
-  .hero{padding-top:10px}
-  .hero-card{padding-top:clamp(30px,7vw,46px)}
+  /* fixed nav that hides on scroll-down and returns on scroll-up */
+  nav{position:fixed;top:0;left:0;right:0;padding:12px var(--pad);
+      transition:transform .38s var(--ease);will-change:transform}
+  nav.nav-hidden{transform:translateY(-135%)}
+  .hero{padding-top:0}
+  .hero-card{padding-top:clamp(80px,19vw,100px)}
   /* collapse the two bubbles into one single nav pill */
   .nav-inner{
     padding:7px 7px 7px 16px;gap:8px;
@@ -341,17 +342,16 @@ nav{
 .hero-card:hover .hero-art-b{transform:rotate(7.5deg) translateY(-3px)}
 
 @media(max-width:860px){
-  /* copy sits at the bottom, centered; collage fills above and fades down into it */
-  .hero-stage{justify-content:center;align-items:flex-end;text-align:center}
+  /* simplified mobile hero: no collage, centered copy, compact card lifted up */
+  #hero-collage, .hero-fade{display:none}
+  .hero-card{min-height:auto}
+  .hero-stage{flex:0 0 auto;justify-content:center;align-items:center;text-align:center}
   .hero-text{max-width:100%;display:flex;flex-direction:column;align-items:center}
   .hero-text .eyebrow{justify-content:center}
-  .hero-sub{margin-left:auto;margin-right:auto}
-  .hero-ctas{justify-content:center}
-  .hero-fade{
-    background:linear-gradient(180deg,
-      rgba(255,255,255,0) 0%, rgba(255,255,255,0) 26%,
-      var(--bg-card) 50%, var(--bg-card) 100%);
-  }
+  .hero-h1{font-size:clamp(2.6rem,10.5vw,3.3rem);margin-bottom:18px}
+  .hero-sub{margin:0 auto 28px;padding:0 clamp(22px,7.5vw,46px)}
+  .hero-ctas{flex-direction:column;width:100%;gap:10px}
+  .hero-ctas .btn{width:100%;justify-content:center}
   .hero-clients .clients-label{text-align:center}
 }
 
@@ -373,11 +373,10 @@ nav{
 .app-stage{position:relative;display:grid;overflow:hidden}
 .app-panel{
   grid-area:1/1;
-  opacity:0;visibility:hidden;
+  opacity:0;visibility:hidden;pointer-events:none;
   display:flex;flex-direction:column;justify-content:center;
-  transition:opacity .3s var(--ease);
 }
-.app-panel.active{opacity:1;visibility:visible}
+.app-panel.active{opacity:1;visibility:visible;pointer-events:auto}
 .app-row{
   display:flex;align-items:center;gap:14px;
   padding:15px 12px;color:#fff;border-radius:14px;
@@ -1334,7 +1333,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Why Choose DesignSpace</div>
-      <h2 class="h-xl">Your dedicated design team.<br /><span class="serif">Built around your priorities.</span></h2>
+      <h2 class="h-xl wch-head">Your dedicated design team.<br /><span class="serif">Built around your priorities.</span></h2>
     </div>
     <div class="wcx reveal" data-autoloop data-interval="6500">
       <div class="wcx-list">
@@ -1727,28 +1726,28 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       <div class="eyebrow">FAQ</div>
       <h2 class="h-xl">Everything<br /><span class="serif">you're wondering.</span></h2>
     </div>
-    <div class="faq-list">
-      <div class="faq-item reveal">
+    <div class="faq-list reveal">
+      <div class="faq-item">
         <button class="faq-q">How is this different from hiring an in-house designer?<span class="faq-icon"></span></button>
         <div class="faq-a"><p>One subscription gets you a full team — specialists across decks, reports, ads, diagrams, and social — plus a dedicated project manager and founder-led quality control. No recruiting, onboarding, or overhead, and you can scale up or down monthly.</p></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item">
         <button class="faq-q">How fast will I receive my designs?<span class="faq-icon"></span></button>
         <div class="faq-a"><p>Most tasks are delivered within 2–3 business days. Larger projects like reports or eBooks are broken into milestones so you see progress continuously, with timelines visible on your Asana board.</p></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item">
         <button class="faq-q">What types of design work are covered?<span class="faq-icon"></span></button>
         <div class="faq-a"><p>Everything a B2B marketing team needs: sales decks, whitepapers, reports, eBooks, ad campaigns, LinkedIn carousels, product mockups, technical diagrams, event booths, swag, and more. If it's marketing design, it's covered.</p></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item">
         <button class="faq-q">How do I submit and track requests?<span class="faq-icon"></span></button>
         <div class="faq-a"><p>Just send a task on Asana — no submission forms. Your board shows exactly where every task sits: priorities, in progress, awaiting assets, or ready for review. Files are delivered in Figma, Canva, or Google Drive.</p></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item">
         <button class="faq-q">What happens to unused hours?<span class="faq-icon"></span></button>
         <div class="faq-a"><p>A portion of unused hours rolls over each month — up to 10, 15, or 20 hours depending on your plan — so quiet months aren't wasted ones.</p></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item">
         <button class="faq-q">Can I pause or cancel anytime?<span class="faq-icon"></span></button>
         <div class="faq-a"><p>Yes. It's a subscription, not a contract. Upgrade, downgrade, or pause anytime — and if you ever need to step away, just give us 30 days notice.</p></div>
       </div>
@@ -1790,8 +1789,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       </div>
       <div class="foot-col">
         <h4>Legal</h4>
-        <a href="#">Terms &amp; Conditions</a>
-        <a href="#">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="privacy.html">Privacy Policy</a>
       </div>
     </div>
   </div>
@@ -1863,17 +1862,25 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   if (!window.gsap) return;
   gsap.registerPlugin(ScrollTrigger);
 
-  // Nav background on scroll
+  // Nav background on scroll + mobile hide-on-scroll-down / show-on-scroll-up
   var nav = document.getElementById('nav');
+  var lastY = window.scrollY || 0, navHidden = false;
+  var mq = window.matchMedia('(max-width:880px)');
   window.addEventListener('scroll', function () {
-    nav.classList.toggle('scrolled', window.scrollY > 24);
+    var y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 24);
+    if (mq.matches) {
+      if (y > 90 && y > lastY + 4 && !navHidden) { nav.classList.add('nav-hidden'); navHidden = true; }
+      else if ((y < lastY - 4 || y < 90) && navHidden) { nav.classList.remove('nav-hidden'); navHidden = false; }
+    } else if (navHidden) { nav.classList.remove('nav-hidden'); navHidden = false; }
+    lastY = y;
   }, { passive: true });
 
   // (Hero entrance handled in the dedicated hero IIFE above.)
 
   // Section reveals — smooth, staggered (Apple-inspired)
   var headSel = '.section-head, .hhead, .cta-head, .int-head';
-  var staggerSel = '.int-grid, .proc-steps';
+  var staggerSel = '.int-grid, .proc-steps, .faq-list';
   gsap.utils.toArray('.reveal').forEach(function (el) {
     var kids = null;
     if (el.matches(headSel) && el.children.length > 1) kids = el.children;
@@ -1885,10 +1892,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
           gsap.from(kids, { opacity: 0, y: 28, duration: 1.1, ease: 'power3.out', stagger: 0.12 });
         } else {
           gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' });
-          // stagger inner grids/steps if present
-          var grid = el.querySelector(staggerSel);
+          // stagger inner grids/steps/lists if present (or this element itself)
+          var grid = el.matches(staggerSel) ? el : el.querySelector(staggerSel);
           if (grid && grid.children.length > 1) {
-            gsap.from(grid.children, { opacity: 0, y: 24, duration: 0.9, ease: 'power3.out', stagger: 0.05, delay: 0.12 });
+            gsap.from(grid.children, { opacity: 0, y: 24, duration: 0.9, ease: 'power3.out', stagger: 0.07, delay: 0.1 });
           }
         }
       }
@@ -2321,6 +2328,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       if (!grid) return;
       grid.classList.add('expanded');
       btn.style.display = 'none';   // expand once; no "See less"
+      if (window.gsap) {
+        var extra = Array.prototype.slice.call(grid.children, 5);
+        gsap.from(extra, { opacity: 0, y: 14, duration: 0.55, ease: 'power3.out', stagger: 0.05 });
+      }
     });
   });
 })();
@@ -2431,10 +2442,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       while(y < fillTo){
         var d = src[idx % n]; idx++;
         var it = makeNode(d);
-        var range = SIZE[d.size] || SIZE.md;
-        var w = Math.round(colW*(range[0] + rng()*(range[1]-range[0])));
+        var w, aspect;
+        if(d.type==='card'){ var range = SIZE[d.size] || SIZE.md; w = Math.round(colW*(range[0] + rng()*(range[1]-range[0]))); aspect = 1; }
+        else { w = Math.round(colW*0.86); aspect = 1.28; }   // all images same size (uniform portrait thumbnails)
         var jx = colX + (colW - w)*rng();
-        var aspect = (d.type==='card') ? 1 : (0.95 + rng()*0.55);
         var mh = Math.round(w*aspect);
         it.node.style.width = w+'px';
         if(d.type==='card'){
