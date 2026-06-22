@@ -2089,17 +2089,17 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     window.addEventListener('resize', measure);
     window.addEventListener('load', measure);
 
-    // work-strip: smooth bottom→top staggered intro of the visible cards
+    // work-strip intro: slide the whole strip up (rail only — never touches card
+    // transforms, so the per-card hover lift stays consistent) + fade every card
+    // in (opacity only, no transform conflict). Avoids the clone/visible-window
+    // and stuck-transform bugs of animating a subset of a looping row.
     if (isWork && window.gsap) {
-      var introCards = Array.prototype.slice.call(track.children).slice(N, 2 * N);
       var introFired = false;
       var fire = function () {
         if (introFired) return; introFired = true;
         armed = true;   // resume auto-advance right away (dwell outlasts the intro)
-        gsap.from(introCards, {
-          opacity: 0, y: 50, duration: 0.85, ease: 'power3.out',
-          stagger: 0.09, clearProps: 'opacity,transform'
-        });
+        gsap.from(rail, { y: 56, duration: 0.95, ease: 'power3.out', clearProps: 'transform' });
+        gsap.from(track.children, { opacity: 0, duration: 0.6, ease: 'power2.out', stagger: { amount: 0.5 }, clearProps: 'opacity' });
       };
       if (window.ScrollTrigger) {
         ScrollTrigger.create({ trigger: root, start: 'top 80%', once: true, onEnter: fire });
