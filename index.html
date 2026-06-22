@@ -210,8 +210,9 @@ nav{
   nav{position:fixed;top:0;left:0;right:0;padding:12px var(--pad);
       transition:transform .38s var(--ease);will-change:transform}
   nav.nav-hidden{transform:translateY(-135%)}
-  .hero{padding-top:0}
-  .hero-card{padding-top:clamp(80px,19vw,100px)}
+  /* push the hero card below the fixed nav so the nav sits stacked above it */
+  .hero{padding-top:clamp(80px,21vw,102px)}
+  .hero-card{padding-top:clamp(28px,7vw,48px)}
   /* collapse the two bubbles into one single nav pill */
   .nav-inner{
     padding:7px 7px 7px 16px;gap:8px;
@@ -274,7 +275,7 @@ nav{
 .hero-h1{
   font-size:clamp(2.25rem,6.6vw,4.768rem);  /* 36(mobile)→76.3px(desktop) */
   line-height:1.02;letter-spacing:-.038em;font-weight:400;
-  margin-bottom:clamp(16px,1.8vw,22px);
+  margin-bottom:clamp(32px,3.6vw,48px);
   text-wrap:balance;
 }
 .hero-h1 .serif{display:block;color:var(--ink-soft)}
@@ -344,12 +345,11 @@ nav{
 @media(max-width:860px){
   /* simplified mobile hero: no collage, centered copy, compact card lifted up */
   #hero-collage, .hero-fade{display:none}
-  .hero-card{min-height:auto;padding-top:0}
+  .hero-card{min-height:auto;padding-top:clamp(28px,7vw,48px)}
   .hero-stage{flex:0 0 auto;justify-content:center;align-items:center;text-align:center}
-  /* top padding on the copy matches the section padding (clears the fixed nav too) */
-  .hero-text{max-width:100%;display:flex;flex-direction:column;align-items:center;padding-top:clamp(72px,9vw,140px)}
+  .hero-text{max-width:100%;display:flex;flex-direction:column;align-items:center}
   .hero-text .eyebrow{justify-content:center}
-  .hero-h1{font-size:clamp(2.6rem,10.5vw,3.3rem);margin-bottom:18px}
+  .hero-h1{font-size:clamp(2.6rem,10.5vw,3.3rem);margin-bottom:clamp(26px,7vw,38px)}
   .hero-sub{margin:0 auto 28px;padding:0 clamp(22px,7.5vw,46px)}
   .hero-ctas{flex-direction:column;width:100%;gap:10px}
   .hero-ctas .btn{width:100%;justify-content:center}
@@ -1123,8 +1123,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     <div class="bubble">
       <a href="#" class="logo"><img src="logo.svg" alt="DesignSpace" /></a>
       <a href="#work" class="bnav-link">Projects</a>
-      <a href="#process" class="bnav-link">Process</a>
       <a href="#why" class="bnav-link">Why Us</a>
+      <a href="#process" class="bnav-link">Process</a>
     </div>
     <div class="bubble">
       <a href="#pricing" class="bnav-link">Pricing</a>
@@ -1794,8 +1794,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       </div>
     </div>
   </div>
-  <div class="foot-word" aria-hidden="true">
-    <img src="logo.svg" alt="DesignSpace" />
+  <div class="foot-word">
+    <a href="index.html" style="display:block" aria-label="DesignSpace — home"><img src="logo.svg" alt="DesignSpace" /></a>
   </div>
 </footer>
 
@@ -2089,21 +2089,21 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     window.addEventListener('resize', measure);
     window.addEventListener('load', measure);
 
-    // work-strip: smooth left→right staggered intro of the visible cards
+    // work-strip: smooth bottom→top staggered intro of the visible cards
     if (isWork && window.gsap) {
       var introCards = Array.prototype.slice.call(track.children).slice(N, 2 * N);
-      var runIntro = function () {
-        gsap.set(introCards, { opacity: 1 });
+      var introFired = false;
+      var fire = function () {
+        if (introFired) return; introFired = true;
+        armed = true;   // resume auto-advance right away (dwell outlasts the intro)
         gsap.from(introCards, {
-          opacity: 0, x: -44, duration: 0.9, ease: 'power3.out',
-          stagger: 0.1, clearProps: 'opacity,transform',
-          onComplete: function () { armed = true; }
+          opacity: 0, y: 50, duration: 0.85, ease: 'power3.out',
+          stagger: 0.09, clearProps: 'opacity,transform'
         });
       };
-      gsap.set(introCards, { opacity: 0 });
       if (window.ScrollTrigger) {
-        ScrollTrigger.create({ trigger: root, start: 'top 82%', once: true, onEnter: runIntro });
-      } else { runIntro(); }
+        ScrollTrigger.create({ trigger: root, start: 'top 80%', once: true, onEnter: fire });
+      } else { fire(); }
     }
 
     // ---- dots ----
