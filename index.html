@@ -344,9 +344,10 @@ nav{
 @media(max-width:860px){
   /* simplified mobile hero: no collage, centered copy, compact card lifted up */
   #hero-collage, .hero-fade{display:none}
-  .hero-card{min-height:auto}
+  .hero-card{min-height:auto;padding-top:0}
   .hero-stage{flex:0 0 auto;justify-content:center;align-items:center;text-align:center}
-  .hero-text{max-width:100%;display:flex;flex-direction:column;align-items:center}
+  /* top padding on the copy matches the section padding (clears the fixed nav too) */
+  .hero-text{max-width:100%;display:flex;flex-direction:column;align-items:center;padding-top:clamp(72px,9vw,140px)}
   .hero-text .eyebrow{justify-content:center}
   .hero-h1{font-size:clamp(2.6rem,10.5vw,3.3rem);margin-bottom:18px}
   .hero-sub{margin:0 auto 28px;padding:0 clamp(22px,7.5vw,46px)}
@@ -1143,7 +1144,6 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       <div class="hero-text">
         <div class="eyebrow">Flexible B2B Design Subscription</div>
         <h1 class="hero-h1">Tech Marketing,<br /><span class="serif">Designed Better</span></h1>
-        <h2 class="hero-sub">Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams, of all sizes.</h2>
         <div class="hero-ctas">
           <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
           <a href="#work" class="btn btn-ghost">Explore Designs</a>
@@ -1175,7 +1175,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   <div class="wrap">
     <h1 class="h-xl reveal">Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams, of all sizes.</h1>
   </div>
-  <div class="ds-carousel work-strip reveal" data-speed="34" data-center>
+  <div class="ds-carousel work-strip" data-speed="34" data-center>
     <div class="ds-rail"><div class="ds-track">
       <div class="cap-card reveal">
         <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=660&height=900" alt="Product mockups client work" loading="lazy" /></div>
@@ -1880,7 +1880,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 
   // Section reveals — smooth, staggered (Apple-inspired)
   var headSel = '.section-head, .hhead, .cta-head, .int-head';
-  var staggerSel = '.int-grid, .proc-steps, .faq-list';
+  var staggerSel = '.proc-steps, .faq-list';
   gsap.utils.toArray('.reveal').forEach(function (el) {
     var kids = null;
     if (el.matches(headSel) && el.children.length > 1) kids = el.children;
@@ -2059,6 +2059,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     var setW = 0, step = 0, offset = 0;
     var x = 0, idx = 0, fill = 0;
     var playing = true, hovering = false, dragging = false, tweening = false;
+    var isWork = root.classList.contains('work-strip');
+    var armed = !isWork;   // work-strip waits for its left→right intro before auto-advancing
     var DWELL = parseFloat(root.dataset.dwell || 3800);
     var tween = null;
 
@@ -2086,6 +2088,23 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     requestAnimationFrame(function () { requestAnimationFrame(measure); });
     window.addEventListener('resize', measure);
     window.addEventListener('load', measure);
+
+    // work-strip: smooth left→right staggered intro of the visible cards
+    if (isWork && window.gsap) {
+      var introCards = Array.prototype.slice.call(track.children).slice(N, 2 * N);
+      var runIntro = function () {
+        gsap.set(introCards, { opacity: 1 });
+        gsap.from(introCards, {
+          opacity: 0, x: -44, duration: 0.9, ease: 'power3.out',
+          stagger: 0.1, clearProps: 'opacity,transform',
+          onComplete: function () { armed = true; }
+        });
+      };
+      gsap.set(introCards, { opacity: 0 });
+      if (window.ScrollTrigger) {
+        ScrollTrigger.create({ trigger: root, start: 'top 82%', once: true, onEnter: runIntro });
+      } else { runIntro(); }
+    }
 
     // ---- dots ----
     var dots = [], fills = [];
@@ -2129,7 +2148,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     var last = performance.now();
     (function loop(now) {
       var dt = Math.min(now - last, 64); last = now;
-      if (playing && !dragging && !tweening) {
+      if (playing && armed && !dragging && !tweening) {
         var rate = hovering ? 0.5 : 1;
         fill += (dt / DWELL) * rate;
         if (fill >= 1) { fill = 0; goTo(idx + 1); }
