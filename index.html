@@ -247,6 +247,8 @@ nav{
 }
 .hero-collage .col-item.is-hover .col-media{box-shadow:0 0 0 1px rgba(16,16,16,.08), 0 22px 46px -18px rgba(0,0,0,.34)}
 .hero-collage img.col-media,.hero-collage video.col-media{object-fit:cover}
+.hero-collage img.col-media.tp{background:transparent;box-shadow:none;border-radius:0;object-fit:contain;filter:drop-shadow(0 9px 20px rgba(0,0,0,.18))}
+.hero-collage .col-item.is-hover .col-media.tp{box-shadow:none}
 .hero-collage .col-card{
   width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;
   font-weight:800;line-height:.92;text-align:center;letter-spacing:-.02em;
@@ -1209,12 +1211,12 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       <div class="cap-card reveal">
         <div class="cap-imgwrap"><img class="cap-img" src="oneplus-card.jpg" alt="OnePlus spec sheets client work" loading="lazy" /></div>
         <span class="cap-pill">Spec Sheets</span>
-        <div class="cap-client"><img src="oneplus-logo.png" alt="OnePlus" loading="lazy" /></div>
+        <div class="cap-client"><img src="oneplus-logo.png?v=3" alt="OnePlus" loading="lazy" /></div>
       </div>
       <div class="cap-card reveal">
         <div class="cap-imgwrap"><img class="cap-img" src="cybersixgill-card.jpg" alt="Cybersixgill digital content client work" loading="lazy" /></div>
         <span class="cap-pill">Digital Content</span>
-        <div class="cap-client"><img src="cybersixgill-logo.png" alt="Cybersixgill" loading="lazy" /></div>
+        <div class="cap-client"><img src="cybersixgill-logo.png?v=3" alt="Cybersixgill" loading="lazy" /></div>
       </div>
     </div></div>
     <div class="ds-controls">
@@ -1575,7 +1577,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         </div>
         <div class="testi-slide">
           <div class="testi-left">
-            <img class="testi-logo" src="https://framerusercontent.com/images/lDN0GgM14Fxm5wk0GmnvQkkIVM0.jpg?width=384&height=93" alt="Client logo" loading="lazy" />
+            <img class="testi-logo" src="oneplus-logo.png?v=3" alt="OnePlus" loading="lazy" />
             <p class="testi-quote">&quot;When our internal design team reached its maximum capacity, DesignSpace stepped in to assist us with some of our more extensive creative requirements. Their reliability and creativity proved to be an invaluable asset during our new product launches and campaigns.&quot;</p>
             <div class="testi-person">
               <img class="testi-avatar" src="https://framerusercontent.com/images/y6UvO971xfbVqxuxOedSFupTrzo.jpeg?width=200&height=200" alt="Carlos Zúñiga" loading="lazy" />
@@ -1586,7 +1588,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         </div>
         <div class="testi-slide">
           <div class="testi-left">
-            <img class="testi-logo" src="cybersixgill-logo.png" alt="Cybersixgill" loading="lazy" />
+            <img class="testi-logo" src="cybersixgill-logo.png?v=3" alt="Cybersixgill" loading="lazy" />
             <p class="testi-quote">&quot;DesignSpace's creativity shines through every design, turning simple ideas into captivating visual narratives, without compromising on outstanding deliverables. I feel like they're an extension of my team rather than just an outsourced agency and genuinely invested in the success of my projects.&quot;</p>
             <div class="testi-person">
               <img class="testi-avatar" src="https://framerusercontent.com/images/6yQkO1N9fDokUhPaUIoa332nHb8.jpeg?width=200&height=200" alt="Tirtza Bensoussan" loading="lazy" />
@@ -2358,19 +2360,19 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 (function () {
   var COLLAGE_ITEMS = [
     { type:'image', src:'https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=480', caption:'Product Mockups', size:'lg' },
-    { type:'card',  glyph:'GROW\nGROW\nGROW', bg:'#111111', fg:'#ffffff', caption:'Brand Systems', size:'sm' },
+    { type:'sq',    src:'seemplicity-illustrations.png', caption:'Illustrations' },
     { type:'image', src:'https://framerusercontent.com/images/n0YP32ZIZM8bBOcyoaarS35Ws.png?width=480', caption:'Reports + Docs', size:'md' },
-    { type:'card',  glyph:'A+', bg:'#E8351E', fg:'#ffffff', caption:'Ad Creative', size:'sm' },
+    { type:'sq',    src:'intrusion-ebooks.png', caption:'eBooks' },
     { type:'image', src:'https://framerusercontent.com/images/w2PBu9y5PW7w0pJMBg20EXzq0VE.png?width=480', caption:'Ad Campaigns', size:'md' },
     { type:'image', src:'https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=480', caption:'Dashboards', size:'lg' },
-    { type:'card',  glyph:'UI', bg:'#2F4FE0', fg:'#ffffff', caption:'Product Design', size:'sm' },
+    { type:'sq',    src:'oneplus-landing-pages.png', caption:'Landing Pages' },
     { type:'image', src:'https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=480', caption:'Diagrams', size:'md' },
-    { type:'card',  glyph:'B2B', bg:'#F39A2B', fg:'#111111', caption:'Demand Gen', size:'sm' },
-    { type:'image', src:'https://framerusercontent.com/images/VJPlRfJINbYC3Wjw3ivpq7nAYg.png?width=480', caption:'Pricing Pages', size:'md' },
-    { type:'image', src:'https://framerusercontent.com/images/Cx3Rw7mQccGjeuJGUbE3klCs.png?width=480', caption:'Case Studies', size:'lg' },
-    { type:'card',  glyph:'✦', bg:'#1FA463', fg:'#ffffff', caption:'Social Content', size:'sm' },
-    { type:'image', src:'https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=480', caption:'Slide Decks', size:'md' },
-    { type:'card',  glyph:'Aa', bg:'#ECECEC', fg:'#111111', caption:'Typography', size:'sm' }
+    { type:'sq',    src:'cybersixgill-social-banners.png', caption:'Social Banners' },
+    { type:'image', src:'oneplus-card.jpg', caption:'Spec Sheets', size:'md' },
+    { type:'image', src:'cybersixgill-card.jpg', caption:'Digital Content', size:'lg' },
+    { type:'sq',    src:'kasada-guides.png', caption:'Guides' },
+    { type:'image', src:'https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=480', caption:'Reports', size:'md' },
+    { type:'sq',    src:'britive-carousel-posts.png', caption:'Carousel Posts' }
   ];
   var COLLAGE_CONFIG = { columns:4, speed:42, parallax:0.18, seed:14, pauseOnHover:false, respectReducedMotion:true };
 
@@ -2396,7 +2398,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       media=document.createElement('video'); media.className='col-media';
       media.src=d.src; media.muted=true; media.loop=true; media.autoplay=true; media.playsInline=true; media.setAttribute('playsinline',''); media.setAttribute('aria-hidden','true');
     } else {
-      media=document.createElement('img'); media.className='col-media';
+      media=document.createElement('img'); media.className='col-media'+(d.type==='sq'?' tp':'');
       media.src=d.src; media.alt=''; media.decoding='async'; media.draggable=false;
     }
     wrap.appendChild(media);
@@ -2432,7 +2434,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         var it = makeNode(d);
         var w, aspect;
         if(d.type==='card'){ var range = SIZE[d.size] || SIZE.md; w = Math.round(colW*(range[0] + rng()*(range[1]-range[0]))); aspect = 1; }
-        else { w = Math.round(colW*0.86); aspect = 1.28; }   // all images same size (uniform portrait thumbnails)
+        else { w = Math.round(colW*0.86); aspect = (d.type==='sq') ? 1 : 1.28; }   // sq = transparent square case-study, image = vertical gradient mockup
         var jx = colX + (colW - w)*rng();
         var mh = Math.round(w*aspect);
         it.node.style.width = w+'px';
