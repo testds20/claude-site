@@ -679,30 +679,25 @@ nav{
   margin:clamp(14px,1.6vw,22px);margin-left:0;
   border-radius:var(--radius-md);
   min-height:320px;
+  background-size:cover;background-position:center;background-color:#ece9f2;
 }
-.tv-a,.tv-b{
-  position:absolute;border-radius:10px;
-  box-shadow:0 24px 50px -18px rgba(0,0,0,.35);
-  transition:transform .8s var(--ease);
+.ts-layer{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  padding:11% 9%;opacity:0;transition:opacity .7s var(--ease);will-change:opacity;
 }
-.tv-a{width:52%;left:10%;top:16%;transform:rotate(-7deg);z-index:2}
-.tv-b{width:46%;right:7%;top:9%;transform:rotate(6deg)}
-.testi-slide:hover .tv-a{transform:rotate(-8.5deg) translateY(-6px)}
-.testi-slide:hover .tv-b{transform:rotate(7.5deg) translateY(-3px)}
+.ts-layer.is-on{opacity:1}
+.ts-layer img{max-width:100%;max-height:100%;object-fit:contain;
+  filter:drop-shadow(0 22px 46px rgba(0,0,0,.32))}
 .tv-pill{
-  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
-  background:rgba(255,255,255,.95);border:1px solid rgba(16,16,16,.5);
+  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  background:rgba(255,255,255,.94);border:1px solid rgba(16,16,16,.55);
   border-radius:100px;padding:9px 22px;
-  font-family:ui-monospace,'SF Mono',Menlo,monospace;
-  font-size:12.5px;font-weight:500;color:var(--ink);
-  letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;z-index:3;
+  font-family:var(--mono);
+  font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);
+  white-space:nowrap;z-index:3;transition:opacity .3s var(--ease);
 }
-.tv-g1{background:linear-gradient(160deg,#F0A6DF 0%,#F8C76B 55%,#FFE03D 100%)}
-.tv-g2{background:linear-gradient(160deg,#A8C6F5 0%,#CBA8F5 100%)}
-.tv-g3{background:linear-gradient(160deg,#FFB36B 0%,#FF6BBB 100%)}
-.tv-g4{background:linear-gradient(160deg,#9DE8C2 0%,#6BB8FF 100%)}
-.tv-g5{background:linear-gradient(160deg,#C3B5FD 0%,#FDA4AF 100%)}
-.tv-g6{background:linear-gradient(160deg,#FDE68A 0%,#FCA5A5 100%)}
+.tv-oneplus{background:linear-gradient(160deg,#F15A43 0%,#FF9E73 100%)}
+.tv-kaltura{background:linear-gradient(160deg,#3F63F0 0%,#79C6F0 100%)}
 @media(max-width:880px){
   .testi-slide{grid-template-columns:1fr}
   .testi-visual{margin:0 clamp(14px,4vw,22px) clamp(14px,4vw,22px);min-height:300px}
@@ -1528,11 +1523,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
               <div><div class="name">Ashley Garner</div><div class="role">Head of Marketing</div></div>
             </div>
           </div>
-          <div class="testi-visual tv-g1">
-            <img class="tv-a" src="https://framerusercontent.com/images/UZldGSNaRrueXuVYF8yi6bBSY.png?width=560&height=724" alt="Work sample" loading="lazy" />
-            <img class="tv-b" src="https://framerusercontent.com/images/xSdHejPaIGsb1xOOqROlFUxbzM.jpg?width=560&height=724" alt="Work sample" loading="lazy" />
-            <span class="tv-pill">Whitepapers</span>
-          </div>
+          <div class="testi-visual" data-client="Intrusion"></div>
         </div>
         <div class="testi-slide">
           <div class="testi-left">
@@ -1543,11 +1534,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
               <div><div class="name">Jessica Amado</div><div class="role">Content Marketing Manager</div></div>
             </div>
           </div>
-          <div class="testi-visual tv-g2">
-            <img class="tv-a" src="https://framerusercontent.com/images/dYnTlA8O71As8CCoKhlIVKOLMAE.png?width=560&height=840" alt="Work sample" loading="lazy" />
-            <img class="tv-b" src="https://framerusercontent.com/images/VJPlRfJINbYC3Wjw3ivpq7nAYg.png?width=560&height=840" alt="Work sample" loading="lazy" />
-            <span class="tv-pill">Reports + Docs</span>
-          </div>
+          <div class="testi-visual" data-client="Seemplicity"></div>
         </div>
         <div class="testi-slide">
           <div class="testi-left">
@@ -1558,11 +1545,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
               <div><div class="name">Alexa Bleecker</div><div class="role">VP Marketing</div></div>
             </div>
           </div>
-          <div class="testi-visual tv-g3">
-            <img class="tv-a" src="https://framerusercontent.com/images/lFqvt6jd1Q1lc2N27GTKfytlDzA.png?width=560&height=560" alt="Work sample" loading="lazy" />
-            <img class="tv-b" src="https://framerusercontent.com/images/iobuJRBVwjPrKeeQFRyslnYxNQ.png?width=560&height=700" alt="Work sample" loading="lazy" />
-            <span class="tv-pill">Social Content</span>
-          </div>
+          <div class="testi-visual" data-client="Kasada"></div>
         </div>
         <div class="testi-slide">
           <div class="testi-left">
@@ -1573,11 +1556,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
               <div><div class="name">Celyn Matienzo</div><div class="role">Content Strategist</div></div>
             </div>
           </div>
-          <div class="testi-visual tv-g4">
-            <img class="tv-a" src="https://framerusercontent.com/images/4aYPgfBKy2GAZa0T0dHr6Y6g5p4.png?width=560&height=700" alt="Work sample" loading="lazy" />
-            <img class="tv-b" src="https://framerusercontent.com/images/WlqRgVDo3w6OjWegBTCis4oZuHY.png?width=560&height=700" alt="Work sample" loading="lazy" />
-            <span class="tv-pill">eBooks</span>
-          </div>
+          <div class="testi-visual" data-client="Britive"></div>
         </div>
         <div class="testi-slide">
           <div class="testi-left">
@@ -1588,11 +1567,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
               <div><div class="name">Carlos Zúñiga</div><div class="role">Creative Director</div></div>
             </div>
           </div>
-          <div class="testi-visual tv-g5">
-            <img class="tv-a" src="https://framerusercontent.com/images/tFRwcbvHPchI5xjowkvFd4Ro.png?width=560&height=700" alt="Work sample" loading="lazy" />
-            <img class="tv-b" src="https://framerusercontent.com/images/Cx3Rw7mQccGjeuJGUbE3klCs.png?width=560&height=560" alt="Work sample" loading="lazy" />
-            <span class="tv-pill">Case Studies</span>
-          </div>
+          <div class="testi-visual tv-oneplus" data-client="OnePlus"></div>
         </div>
         <div class="testi-slide">
           <div class="testi-left">
@@ -1603,11 +1578,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
               <div><div class="name">Tirtza Bensoussan</div><div class="role">Director of Demand Generation</div></div>
             </div>
           </div>
-          <div class="testi-visual tv-g6">
-            <img class="tv-a" src="https://framerusercontent.com/images/T4izJTXSEZ5xZgXG6FLkp3kwC2Y.png?width=560&height=690" alt="Work sample" loading="lazy" />
-            <img class="tv-b" src="https://framerusercontent.com/images/uIxBIlcieM1DRX71NtmymFxTUI.png?width=560&height=560" alt="Work sample" loading="lazy" />
-            <span class="tv-pill">Ad Campaigns</span>
-          </div>
+          <div class="testi-visual tv-kaltura" data-client="Kaltura"></div>
         </div>
     </div></div>
     <div class="ds-controls">
@@ -2551,6 +2522,91 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       });
     }, 2500);
   });
+})();
+</script>
+<script>
+/* ===== Testimonial gradient + case-study slideshow ===== */
+(function () {
+  var GRAD = {
+    Intrusion: 'grad-intrusion.jpg',
+    Seemplicity: 'grad-seemplicity.jpg',
+    Kasada: 'grad-kasada.jpg',
+    Britive: 'grad-britive.jpg'
+  };
+  var SHOWS = {
+    Seemplicity: [
+      { src: 'seemplicity-2-pagers.png', tag: '2-Pagers' },
+      { src: 'seemplicity-diagrams.png', tag: 'Diagrams' },
+      { src: 'seemplicity-event-banners.png', tag: 'Event Banners' },
+      { src: 'seemplicity-guides.png', tag: 'Guides' },
+      { src: 'seemplicity-illustrations.png', tag: 'Illustrations' }
+    ],
+    Kasada: [
+      { src: 'kasada-2-pagers.png', tag: '2-Pagers' },
+      { src: 'kasada-ad-campaigns.png', tag: 'Ad Campaigns' },
+      { src: 'kasada-diagrams.png', tag: 'Diagrams' },
+      { src: 'kasada-guides.png', tag: 'Guides' },
+      { src: 'kasada-reports.png', tag: 'Reports' },
+      { src: 'kasada-social-campaigns.png', tag: 'Social Campaigns' },
+      { src: 'kasada-ebooks.png', tag: 'eBooks' }
+    ],
+    Britive: [
+      { src: 'britive-ad-campaigns.png', tag: 'Ad Campaigns' },
+      { src: 'britive-carousel-posts.png', tag: 'Carousel Posts' },
+      { src: 'britive-diagrams.png', tag: 'Diagrams' },
+      { src: 'britive-event-banners.png', tag: 'Event Banners' },
+      { src: 'britive-flows.png', tag: 'Flows' },
+      { src: 'britive-speaker-banners.png', tag: 'Speaker Banners' }
+    ]
+  };
+  var INTERVAL = 2000;
+  // Build slideshow layers once per card. Idempotent and clone-safe:
+  // a card cloned by the carousel either arrives empty (built here) or
+  // pre-populated (skipped); the global ticker drives whichever exists.
+  function ensureBuilt(v) {
+    var c = v.getAttribute('data-client');
+    if (GRAD[c]) v.style.backgroundImage = 'url(' + GRAD[c] + ')';
+    var imgs = SHOWS[c];
+    if (!imgs || v.querySelector('.ts-layer')) return;
+    imgs.forEach(function (o) { var p = new Image(); p.src = o.src; });
+    for (var k = 0; k < 2; k++) {
+      var l = document.createElement('div'); l.className = 'ts-layer';
+      var im = document.createElement('img');
+      im.alt = c + ' design work'; im.decoding = 'async';
+      l.appendChild(im); v.appendChild(l);
+    }
+    var pill = document.createElement('span'); pill.className = 'tv-pill';
+    v.appendChild(pill);
+    var layers = v.querySelectorAll('.ts-layer');
+    layers[0].querySelector('img').src = imgs[0].src;
+    layers[0].classList.add('is-on');
+    pill.textContent = imgs[0].tag;
+    v.dataset.tsI = '0'; v.dataset.tsCur = '0';
+  }
+  function step(v) {
+    var imgs = SHOWS[v.getAttribute('data-client')];
+    var layers = v.querySelectorAll('.ts-layer');
+    var pill = v.querySelector('.tv-pill');
+    if (!imgs || layers.length < 2 || !pill) return;
+    var i = (parseInt(v.dataset.tsI || '0', 10) + 1) % imgs.length;
+    var cur = parseInt(v.dataset.tsCur || '0', 10), nxt = 1 - cur, item = imgs[i];
+    layers[nxt].querySelector('img').src = item.src;
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        layers[nxt].classList.add('is-on');
+        layers[cur].classList.remove('is-on');
+        pill.style.opacity = '0';
+        setTimeout(function () { pill.textContent = item.tag; pill.style.opacity = '1'; }, 300);
+      });
+    });
+    v.dataset.tsI = '' + i; v.dataset.tsCur = '' + nxt;
+  }
+  document.querySelectorAll('.testi-visual[data-client]').forEach(ensureBuilt);
+  setInterval(function () {
+    document.querySelectorAll('.testi-visual[data-client]').forEach(function (v) {
+      ensureBuilt(v); step(v);
+    });
+  }, INTERVAL);
 })();
 </script>
 </body>
