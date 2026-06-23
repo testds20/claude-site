@@ -693,7 +693,7 @@ nav{
 .ts-layer img{width:100%;height:auto;max-height:100%;object-fit:contain;
   filter:drop-shadow(0 22px 46px rgba(0,0,0,.32))}
 .tv-pill{
-  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+  position:absolute;bottom:calc(clamp(28px,3.6vw,48px) - clamp(14px,1.6vw,22px) + 8px);left:50%;transform:translateX(-50%);
   background:rgba(255,255,255,.94);border:1px solid rgba(16,16,16,.55);
   border-radius:100px;padding:9px 22px;
   font-family:var(--mono);
@@ -1091,7 +1091,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   -webkit-mask-image:linear-gradient(180deg,transparent,#000 46%,#000 54%,transparent);
   mask-image:linear-gradient(180deg,transparent,#000 46%,#000 54%,transparent);
 }
-.word-track{display:flex;flex-direction:column;gap:14px;animation:wheel 10s linear infinite}
+.word-track{display:flex;flex-direction:column;gap:14px;animation:wheel 28s linear infinite}
 .word-track span{
   font-size:clamp(1.95rem,3.3vw,var(--fs-h2));font-weight:400;
   letter-spacing:-.03em;line-height:1.12;color:var(--ink-soft);
@@ -1099,14 +1099,14 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 }
 @keyframes wheel{to{transform:translateY(calc(-50% - 7px))}}
 .float-img{
-  position:absolute;border-radius:16px;object-fit:cover;
-  box-shadow:0 24px 48px -22px rgba(0,0,0,.28);
+  position:absolute;object-fit:contain;
+  filter:drop-shadow(0 16px 30px rgba(0,0,0,.20));
   z-index:2;will-change:transform;
 }
 @media(max-width:880px){
   .assets-center{flex-direction:column;gap:6px;text-align:center}
   .float-img.m-hide{display:none}
-  .float-img{opacity:.85}
+  .float-img{opacity:.92;width:22%!important;min-width:0!important}
 }
 
 /* ============ REVEAL ============ */
@@ -1122,7 +1122,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       <a href="#" class="logo"><img src="logo.svg" alt="DesignSpace" /></a>
       <a href="#why" class="bnav-link">Why Us</a>
       <a href="#case-studies" class="bnav-link">Case Studies</a>
-      <a href="#process" class="bnav-link">Process</a>
+      <a href="#process" class="bnav-link">Our Process</a>
     </div>
     <div class="bubble">
       <a href="#pricing" class="bnav-link">Pricing</a>
@@ -1173,7 +1173,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   <div class="wrap">
     <h1 class="h-xl reveal">Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams, of all sizes.</h1>
   </div>
-  <div class="ds-carousel work-strip" data-speed="34" data-center>
+  <div class="ds-carousel work-strip reveal" data-reveal-delay="0.18" data-speed="34" data-center>
     <div class="ds-rail"><div class="ds-track">
       <div class="cap-card reveal">
         <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=660&height=900" alt="Product mockups client work" loading="lazy" /></div>
@@ -1330,8 +1330,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 <section style="padding-top:0">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Why Choose DesignSpace</div>
-      <h2 class="h-xl wch-head">Your dedicated design team.<br /><span class="serif">Built around your priorities.</span></h2>
+      <div class="eyebrow">For B2B Tech &amp; Cybersecurity Teams</div>
+      <h2 class="h-xl wch-head">One creative partner.<br /><span class="serif">All design assets covered.</span></h2>
     </div>
     <div class="wcx reveal" data-autoloop data-interval="6500">
       <div class="wcx-list">
@@ -1363,19 +1363,21 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 <!-- ============ ASSETS COLLAGE ============ -->
 <section style="padding-top:0;padding-bottom:0">
   <div class="assets-wrap" id="assets-wrap">
-    <img class="float-img" src="https://framerusercontent.com/images/sNkXKPNIPc0s4E9aD7xc9g2XLlI.jpg?width=520&height=362" alt="Client work" loading="lazy" style="width:13%;min-width:120px;top:9%;left:42%" />
-    <img class="float-img" src="https://framerusercontent.com/images/AkdcJqXzGJfStOjc96Xkg16HcY.png?width=512&height=356" alt="Client work" loading="lazy" style="width:11%;min-width:104px;top:6%;left:33%" />
-    <img class="float-img m-hide" src="https://framerusercontent.com/images/CDg92RxtkVbs5PvUwNZeQmxCIrs.jpg?width=520&height=362" alt="Client work" loading="lazy" style="width:12%;min-width:110px;top:22%;right:8%" />
-    <img class="float-img m-hide" src="https://framerusercontent.com/images/vAq5EkjPCFK0VXcUDLRcJbdDNxM.jpg?width=520&height=362" alt="Client work" loading="lazy" style="width:13%;min-width:120px;top:24%;left:7%" />
-    <img class="float-img" src="https://framerusercontent.com/images/x3o3rw1l4rQOlvj9wPJYPWl4Jo.jpg?width=560&height=388" alt="Client work" loading="lazy" style="width:16%;min-width:150px;bottom:13%;left:13%" />
-    <img class="float-img" src="https://framerusercontent.com/images/mgXo7iskqixpeEnGx3cWljfMMqE.jpg?width=560&height=388" alt="Client work" loading="lazy" style="width:15%;min-width:140px;bottom:11%;right:13%" />
-    <img class="float-img m-hide" src="https://framerusercontent.com/images/iFI6z7IKwTIc1mofXmte3rlVo.jpg?width=420&height=292" alt="Client work" loading="lazy" style="width:9%;min-width:88px;bottom:7%;left:44%" />
+    <img class="float-img" src="kasada-reports.png" alt="Case study work" loading="lazy" style="width:16%;min-width:140px;top:4%;left:30%" />
+    <img class="float-img" src="britive-carousel-posts.png" alt="Case study work" loading="lazy" style="width:13%;min-width:118px;top:7%;left:53%" />
+    <img class="float-img" src="seemplicity-diagrams.png" alt="Case study work" loading="lazy" style="width:15%;min-width:132px;top:19%;left:11%" />
+    <img class="float-img" src="kasada-social-campaigns.png" alt="Case study work" loading="lazy" style="width:15%;min-width:132px;top:21%;right:8%" />
+    <img class="float-img" src="britive-event-banners.png" alt="Case study work" loading="lazy" style="width:18%;min-width:155px;bottom:12%;left:9%" />
+    <img class="float-img" src="seemplicity-guides.png" alt="Case study work" loading="lazy" style="width:17%;min-width:148px;bottom:9%;right:10%" />
+    <img class="float-img m-hide" src="kasada-ad-campaigns.png" alt="Case study work" loading="lazy" style="width:12%;min-width:108px;bottom:5%;left:40%" />
+    <img class="float-img m-hide" src="britive-diagrams.png" alt="Case study work" loading="lazy" style="width:12%;min-width:108px;top:39%;left:1%" />
+    <img class="float-img m-hide" src="seemplicity-illustrations.png" alt="Case study work" loading="lazy" style="width:12%;min-width:108px;top:41%;right:1%" />
     <div class="assets-center reveal">
       <span class="assets-label">All design assets covered</span>
       <div class="word-wheel" aria-hidden="true">
         <div class="word-track">
-          <span>Reports</span><span>Decks</span><span>Case Studies</span><span>Ad Campaigns</span><span>Carousels</span><span>eBooks</span>
-          <span>Reports</span><span>Decks</span><span>Case Studies</span><span>Ad Campaigns</span><span>Carousels</span><span>eBooks</span>
+          <span>Ad Campaigns</span><span>Reports</span><span>Decks</span><span>Social Content</span><span>Banners</span><span>Carousels</span><span>Landing Pages</span><span>Cover Images</span><span>Guides</span><span>Event Booths</span><span>Dashboards</span><span>Illustrations</span><span>Product Mockups</span><span>Icons</span><span>eBooks</span><span>Diagrams</span><span>Case Studies</span>
+          <span>Ad Campaigns</span><span>Reports</span><span>Decks</span><span>Social Content</span><span>Banners</span><span>Carousels</span><span>Landing Pages</span><span>Cover Images</span><span>Guides</span><span>Event Booths</span><span>Dashboards</span><span>Illustrations</span><span>Product Mockups</span><span>Icons</span><span>eBooks</span><span>Diagrams</span><span>Case Studies</span>
         </div>
       </div>
     </div>
@@ -1388,8 +1390,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 
     <div class="hhead head-split">
       <div>
-        <div class="eyebrow">For B2B Tech &amp; Cybersecurity Teams</div>
-        <h2 class="h-xl">One creative partner.<br /><span class="serif">All design assets covered.</span></h2>
+        <div class="eyebrow">Why Choose DesignSpace</div>
+        <h2 class="h-xl">Your dedicated design team.<br /><span class="serif">Built around your priorities.</span></h2>
       </div>
       <p class="lede">Branded creatives whenever you need them — from a team that already knows your industry and keeps your output moving.</p>
     </div>
@@ -1731,7 +1733,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   <div class="cal-card reveal">
     <div class="section-head cta-head">
       <div class="eyebrow">Let's chat</div>
-      <h2 class="h-xl">Ready to go?<br /><span class="serif">Book a Discovery Call</span></h2>
+      <h2 class="h-xl">Ready to go?</h2>
+      <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:clamp(20px,2.4vw,30px)">Book a Discovery Call <span class="arr">→</span></a>
     </div>
     <iframe src="https://cal.com/ian-barin/discovery?embed=true&layout=month_view&theme=light"
       title="Book a Discovery Call" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -1750,7 +1753,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         <h4>Company</h4>
         <a href="#why">Why Us</a>
         <a href="#case-studies">Case Studies</a>
-        <a href="#process">Process</a>
+        <a href="#process">Our Process</a>
         <a href="#pricing">Pricing</a>
       </div>
       <div class="foot-col">
@@ -1862,7 +1865,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
           gsap.set(el, { opacity: 1, y: 0 });
           gsap.from(kids, { opacity: 0, y: 28, duration: 1.1, ease: 'power3.out', stagger: 0.12 });
         } else {
-          gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' });
+          var rd = parseFloat(el.dataset.revealDelay) || 0;
+          gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', delay: rd });
           // stagger inner grids/steps/lists if present (or this element itself)
           var grid = el.matches(staggerSel) ? el : el.querySelector(staggerSel);
           if (grid && grid.children.length > 1) {
