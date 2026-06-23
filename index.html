@@ -2373,19 +2373,53 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     { type:'image', src:'https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=480', caption:'Reports' },
     { type:'image', src:'oneplus-card.jpg', caption:'Spec Sheets' },
     { type:'image', src:'cybersixgill-card.jpg', caption:'Digital Content' },
-    // Transparent square case studies (varied clients + types)
-    { type:'sq', src:'seemplicity-event-banners.png', caption:'Event Banners' },
-    { type:'sq', src:'intrusion-ebooks.png', caption:'eBooks' },
-    { type:'sq', src:'oneplus-landing-pages.png', caption:'Landing Pages' },
-    { type:'sq', src:'cybersixgill-social-banners.png', caption:'Social Banners' },
-    { type:'sq', src:'kasada-guides.png', caption:'Guides' },
+    // Transparent square case studies — every asset across all 9 clients
+    { type:'sq', src:'airmdr-ad-campaigns.png', caption:'Ad Campaigns' },
+    { type:'sq', src:'airmdr-guides.png', caption:'Guides' },
+    { type:'sq', src:'airmdr-reports.png', caption:'Reports' },
+    { type:'sq', src:'airmdr-social-banners.png', caption:'Social Banners' },
+    { type:'sq', src:'airmdr-stat-banners.png', caption:'Stat Banners' },
+    { type:'sq', src:'britive-ad-campaigns.png', caption:'Ad Campaigns' },
     { type:'sq', src:'britive-carousel-posts.png', caption:'Carousel Posts' },
+    { type:'sq', src:'britive-diagrams.png', caption:'Diagrams' },
+    { type:'sq', src:'britive-event-banners.png', caption:'Event Banners' },
     { type:'sq', src:'britive-flows.png', caption:'Flows' },
-    { type:'sq', src:'oneplus-brand-guidelines.png', caption:'Brand Guidelines' },
+    { type:'sq', src:'britive-speaker-banners.png', caption:'Speaker Banners' },
+    { type:'sq', src:'cybermarketingcon-ad-campaigns.png', caption:'Ad Campaigns' },
+    { type:'sq', src:'cybermarketingcon-event-banners.png', caption:'Event Banners' },
+    { type:'sq', src:'cybermarketingcon-postcards.png', caption:'Postcards' },
+    { type:'sq', src:'cybermarketingcon-social-campaigns.png', caption:'Social Campaigns' },
+    { type:'sq', src:'cybermarketingcon-social-templates.png', caption:'Social Templates' },
+    { type:'sq', src:'cybersixgill-ad-campaigns.png', caption:'Ad Campaigns' },
     { type:'sq', src:'cybersixgill-brand-styles.png', caption:'Brand Styles' },
-    { type:'sq', src:'kasada-social-campaigns.png', caption:'Social Campaigns' },
+    { type:'sq', src:'cybersixgill-guides.png', caption:'Guides' },
+    { type:'sq', src:'cybersixgill-social-banners.png', caption:'Social Banners' },
+    { type:'sq', src:'hyperproof-2-pagers.png', caption:'2-Pagers' },
+    { type:'sq', src:'hyperproof-carousel-posts.png', caption:'Carousel Posts' },
+    { type:'sq', src:'hyperproof-guides.png', caption:'Guides' },
+    { type:'sq', src:'hyperproof-social-banners.png', caption:'Social Banners' },
+    { type:'sq', src:'intrusion-ad-campaigns.png', caption:'Ad Campaigns' },
+    { type:'sq', src:'intrusion-guides.png', caption:'Guides' },
+    { type:'sq', src:'intrusion-reports.png', caption:'Reports' },
+    { type:'sq', src:'intrusion-ebooks.png', caption:'eBooks' },
     { type:'sq', src:'kasada-2-pagers.png', caption:'2-Pagers' },
-    { type:'sq', src:'britive-speaker-banners.png', caption:'Speaker Banners' }
+    { type:'sq', src:'kasada-ad-campaigns.png', caption:'Ad Campaigns' },
+    { type:'sq', src:'kasada-diagrams.png', caption:'Diagrams' },
+    { type:'sq', src:'kasada-guides.png', caption:'Guides' },
+    { type:'sq', src:'kasada-reports.png', caption:'Reports' },
+    { type:'sq', src:'kasada-social-campaigns.png', caption:'Social Campaigns' },
+    { type:'sq', src:'kasada-ebooks.png', caption:'eBooks' },
+    { type:'sq', src:'oneplus-ad-campaigns.png', caption:'Ad Campaigns' },
+    { type:'sq', src:'oneplus-brand-guidelines.png', caption:'Brand Guidelines' },
+    { type:'sq', src:'oneplus-landing-pages.png', caption:'Landing Pages' },
+    { type:'sq', src:'oneplus-product-launchs.png', caption:'Product Launchs' },
+    { type:'sq', src:'oneplus-reports.png', caption:'Reports' },
+    { type:'sq', src:'oneplus-spec-sheets.png', caption:'Spec Sheets' },
+    { type:'sq', src:'seemplicity-2-pagers.png', caption:'2-Pagers' },
+    { type:'sq', src:'seemplicity-diagrams.png', caption:'Diagrams' },
+    { type:'sq', src:'seemplicity-event-banners.png', caption:'Event Banners' },
+    { type:'sq', src:'seemplicity-guides.png', caption:'Guides' },
+    { type:'sq', src:'seemplicity-illustrations.png', caption:'Illustrations' }
   ];
   var COLLAGE_CONFIG = { columns:4, speed:42, parallax:0.18, seed:14, pauseOnHover:false, respectReducedMotion:true };
 
@@ -2412,7 +2446,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       media.src=d.src; media.muted=true; media.loop=true; media.autoplay=true; media.playsInline=true; media.setAttribute('playsinline',''); media.setAttribute('aria-hidden','true');
     } else {
       media=document.createElement('img'); media.className='col-media'+(d.type==='sq'?' tp':'');
-      media.src=d.src; media.alt=''; media.decoding='async'; media.draggable=false;
+      media.src=d.src; media.alt=''; media.decoding='async'; media.loading='lazy'; media.draggable=false;
     }
     wrap.appendChild(media);
     if(d.caption){ var c=document.createElement('span'); c.className='col-cap'; c.textContent=d.caption; wrap.appendChild(c); }
@@ -2453,7 +2487,9 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     var verticalH = Math.round(cardW*1.28);
     var rowGap = Math.round(colW*0.22);
     var rowH = verticalH + 40 + rowGap;           // pitch fits the tallest cell (vertical + its tag)
-    var rowsPerCol = Math.ceil(fillTo / rowH) + 2;
+    var sqCols = Math.ceil(totalCols/2);
+    // enough rows that the square deck (consumed in reading order) shows every image before the loop repeats
+    var rowsPerCol = Math.max(Math.ceil(fillTo / rowH) + 2, Math.ceil(SQ.length / sqCols));
     if(rowsPerCol % 2) rowsPerCol++;
     var period = rowsPerCol * rowH;
     var frag = document.createDocumentFragment();
@@ -2464,7 +2500,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         // 2D index: within a row the picks are consecutive (all distinct), and
         // the row stride (5, coprime with pool sizes) avoids same-column repeats.
         var ci = Math.floor(c/2);
-        var d = wantSq ? SQ[(r*5 + ci) % SQ.length] : (VE.length ? VE[(r*5 + ci) % VE.length] : SQ[(r*5 + ci) % SQ.length]);
+        // squares: reading-order tiling so all are used; verticals: coprime stride to avoid near repeats
+        var d = wantSq ? SQ[(r*sqCols + ci) % SQ.length] : (VE.length ? VE[(r*5 + ci) % VE.length] : SQ[(r*sqCols + ci) % SQ.length]);
         var it = makeNode(d);
         var mh = Math.round(cardW * ((d.type==='sq') ? 1 : 1.28));
         it.node.style.width = cardW+'px';
