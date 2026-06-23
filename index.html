@@ -243,13 +243,13 @@ nav{
 .hero-collage .col-media{
   width:100%;border-radius:3px;overflow:hidden;display:block;
   background:var(--bg-card);-webkit-user-drag:none;user-select:none;pointer-events:none;
-  box-shadow:0 0 0 1px rgba(16,16,16,.06), 0 6px 18px -12px rgba(0,0,0,.18);
-  transition:box-shadow .35s var(--ease);
+  box-shadow:none;
+  transition:box-shadow .35s var(--ease),filter .35s var(--ease);
 }
 .hero-collage .col-item.is-hover .col-media{box-shadow:0 0 0 1px rgba(16,16,16,.08), 0 22px 46px -18px rgba(0,0,0,.34)}
 .hero-collage img.col-media,.hero-collage video.col-media{object-fit:cover}
-.hero-collage img.col-media.tp{background:transparent;box-shadow:none;border-radius:0;object-fit:contain;filter:drop-shadow(0 9px 20px rgba(0,0,0,.18))}
-.hero-collage .col-item.is-hover .col-media.tp{box-shadow:none}
+.hero-collage img.col-media.tp{background:transparent;box-shadow:none;border-radius:0;object-fit:contain;filter:none}
+.hero-collage .col-item.is-hover .col-media.tp{box-shadow:none;filter:drop-shadow(0 18px 34px rgba(0,0,0,.26))}
 .hero-collage .col-card{
   width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;
   font-weight:800;line-height:.92;text-align:center;letter-spacing:-.02em;
@@ -1346,7 +1346,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">For B2B Tech &amp; Cybersecurity Teams</div>
-      <h2 class="h-xl wch-head">One creative partner.<br /><span class="serif">All design assets covered.</span></h2>
+      <h2 class="h-xl wch-head">One creative partner.&nbsp;&nbsp;<br /><span class="serif">All design assets covered.</span></h2>
     </div>
     <div class="wcx reveal" data-autoloop data-interval="6500">
       <div class="wcx-list">
@@ -1406,7 +1406,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     <div class="hhead head-split">
       <div>
         <div class="eyebrow">Why Choose DesignSpace</div>
-        <h2 class="h-xl">Your dedicated design team.<br /><span class="serif">Built around your priorities.</span></h2>
+        <h2 class="h-xl wch-head">Your dedicated design team.&nbsp;&nbsp;<br /><span class="serif">Built around your priorities.</span></h2>
       </div>
       <p class="lede">Branded creatives whenever you need them — from a team that already knows your industry and keeps your output moving.</p>
     </div>
@@ -2431,36 +2431,32 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     var VE = COLLAGE_ITEMS.filter(function(q){return q.type!=='sq';});  // vertical gradient mockups
     var SQ = COLLAGE_ITEMS.filter(function(q){return q.type==='sq';});  // transparent square case studies
     var vIdx=0, sIdx=0;
+    // Even grid: uniform column x (no jitter) + uniform row pitch (no parallax),
+    // so cells line up in rows AND columns. Even row/column counts keep the
+    // square/vertical checkerboard staggered seamlessly across the wrap.
+    if(totalCols % 2){ totalCols++; tileW = totalCols * pitch; }
+    var cardW = Math.round(colW*0.86);
+    var verticalH = Math.round(cardW*1.28);
+    var rowGap = Math.round(colW*0.22);
+    var rowH = verticalH + 40 + rowGap;           // pitch fits the tallest cell (vertical + its tag)
+    var rowsPerCol = Math.ceil(fillTo / rowH) + 2;
+    if(rowsPerCol % 2) rowsPerCol++;
+    var period = rowsPerCol * rowH;
     var frag = document.createDocumentFragment();
     for(var c=0;c<totalCols;c++){
-      var colX = c*pitch;
-      var depth = 1 + (rng()-0.5)*0.28*pAmt; // per-column vertical parallax (~0.86..1.14)
-      var y = 0, r = 0;
-      while(y < fillTo){
+      var colX = c*pitch + Math.round((colW - cardW)/2);   // centered in the column
+      for(var r=0;r<rowsPerCol;r++){
         var wantSq = (((c + r) % 2) === 0) && SQ.length;
         var d = wantSq ? SQ[sIdx++ % SQ.length] : (VE.length ? VE[vIdx++ % VE.length] : SQ[sIdx++ % SQ.length]);
-        r++;
         var it = makeNode(d);
-        var w, aspect;
-        if(d.type==='card'){ var range = SIZE[d.size] || SIZE.md; w = Math.round(colW*(range[0] + rng()*(range[1]-range[0]))); aspect = 1; }
-        else { w = Math.round(colW*0.86); aspect = (d.type==='sq') ? 1 : 1.28; }   // sq = transparent square case-study, image = vertical gradient mockup
-        var jx = colX + (colW - w)*rng();
-        var mh = Math.round(w*aspect);
-        it.node.style.width = w+'px';
-        if(d.type==='card'){
-          var lines=(d.glyph||'').split('\n'), maxLen=1;
-          for(var li=0;li<lines.length;li++){ if(lines[li].length>maxLen) maxLen=lines[li].length; }
-          it.media.style.fontSize = Math.round(w*(maxLen<=2?0.42:(maxLen<=4?0.26:0.2)))+'px';
-        } else {
-          it.media.style.height = mh+'px';
-        }
-        it.baseX=jx; it.baseY=y; it.col=c;
-        var blockH = mh + (d.caption ? (d.type==='image'?38:22) : 0);
-        y += blockH + H*(0.05 + rng()*0.09);
+        var mh = Math.round(cardW * ((d.type==='sq') ? 1 : 1.28));
+        it.node.style.width = cardW+'px';
+        it.media.style.height = mh+'px';
+        it.baseX = colX; it.baseY = r*rowH; it.col = c;
         frag.appendChild(it.node);
         items.push(it);
       }
-      cols.push({ depth:depth, period:y, phase:rng()*y });
+      cols.push({ depth:1, period:period, phase:0 });      // lockstep columns → rows stay aligned
     }
     el.appendChild(frag);
     renderFrame();
