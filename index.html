@@ -678,29 +678,34 @@ nav{
   position:relative;overflow:hidden;
   margin:clamp(14px,1.6vw,22px);margin-left:0;
   border-radius:var(--radius-md);
-  min-height:320px;
+  min-height:clamp(340px,30vw,400px);
   background-size:cover;background-position:center;background-color:#ece9f2;
 }
 .ts-layer{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  padding:11% 9%;opacity:0;transition:opacity .7s var(--ease);will-change:opacity;
+  padding:5% 4% 64px;
+  opacity:0;transform:translateY(14px);
+  transition:opacity .6s var(--ease),transform .6s var(--ease);
+  will-change:opacity,transform;pointer-events:none;
 }
-.ts-layer.is-on{opacity:1}
-.ts-layer img{max-width:100%;max-height:100%;object-fit:contain;
+.ts-layer.is-on{opacity:1;transform:translateY(0)}
+.ts-layer.is-exit{opacity:0;transform:translateY(-14px)}
+.ts-layer img{width:100%;height:auto;max-height:100%;object-fit:contain;
   filter:drop-shadow(0 22px 46px rgba(0,0,0,.32))}
 .tv-pill{
-  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
   background:rgba(255,255,255,.94);border:1px solid rgba(16,16,16,.55);
   border-radius:100px;padding:9px 22px;
   font-family:var(--mono);
   font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);
-  white-space:nowrap;z-index:3;transition:opacity .3s var(--ease);
+  white-space:nowrap;z-index:3;
 }
 .tv-oneplus{background:linear-gradient(160deg,#F15A43 0%,#FF9E73 100%)}
 .tv-kaltura{background:linear-gradient(160deg,#3F63F0 0%,#79C6F0 100%)}
 @media(max-width:880px){
   .testi-slide{grid-template-columns:1fr}
-  .testi-visual{margin:0 clamp(14px,4vw,22px) clamp(14px,4vw,22px);min-height:300px}
+  .testi-visual{margin:0 clamp(14px,4vw,22px) clamp(14px,4vw,22px);min-height:clamp(330px,66vw,440px)}
+  .ts-layer{padding:6% 5% 62px}
 }
 
 /* ============ PRICING ============ */
@@ -1115,8 +1120,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   <div class="nav-inner">
     <div class="bubble">
       <a href="#" class="logo"><img src="logo.svg" alt="DesignSpace" /></a>
-      <a href="#work" class="bnav-link">Projects</a>
       <a href="#why" class="bnav-link">Why Us</a>
+      <a href="#case-studies" class="bnav-link">Case Studies</a>
       <a href="#process" class="bnav-link">Process</a>
     </div>
     <div class="bubble">
@@ -1502,14 +1507,11 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 </section>
 
 <!-- ============ TESTIMONIALS ============ -->
-<section style="padding-top:0">
+<section id="case-studies" style="padding-top:0">
   <div class="wrap">
-    <div class="section-head head-split reveal">
-      <div>
-        <div class="eyebrow">Glowing Reviews</div>
-        <h2 class="h-xl">The go-to creative partner<br /><span class="serif">for cybersecurity teams.</span></h2>
-      </div>
-      <p class="lede">Why marketers say DesignSpace is their favorite creative partner.</p>
+    <div class="section-head reveal" style="text-align:center;display:flex;flex-direction:column;align-items:center">
+      <div class="eyebrow">Case Studies</div>
+      <h2 class="h-xl">In their words.<br /><span class="serif">From teams just like yours.</span></h2>
     </div>
   </div>
   <div class="ds-carousel" data-speed="32" data-center>
@@ -1746,9 +1748,9 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       </div>
       <div class="foot-col">
         <h4>Company</h4>
-        <a href="#work">Projects</a>
-        <a href="#process">Process</a>
         <a href="#why">Why Us</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#process">Process</a>
         <a href="#pricing">Pricing</a>
       </div>
       <div class="foot-col">
@@ -2560,9 +2562,14 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     ]
   };
   var INTERVAL = 2000;
-  // Build slideshow layers once per card. Idempotent and clone-safe:
-  // a card cloned by the carousel either arrives empty (built here) or
-  // pre-populated (skipped); the global ticker drives whichever exists.
+  // Each card holds two stacked layers (image + tag pill) that cross-fade
+  // with a gentle upward drift. Build is idempotent and clone-safe: a card
+  // cloned by the carousel either arrives empty (built here) or already
+  // populated (skipped); the ticker drives whichever exists.
+  function fill(layer, item) {
+    layer.querySelector('img').src = item.src;
+    layer.querySelector('.tv-pill').textContent = item.tag;
+  }
   function ensureBuilt(v) {
     var c = v.getAttribute('data-client');
     if (GRAD[c]) v.style.backgroundImage = 'url(' + GRAD[c] + ')';
@@ -2573,39 +2580,55 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       var l = document.createElement('div'); l.className = 'ts-layer';
       var im = document.createElement('img');
       im.alt = c + ' design work'; im.decoding = 'async';
-      l.appendChild(im); v.appendChild(l);
+      var pill = document.createElement('span'); pill.className = 'tv-pill';
+      l.appendChild(im); l.appendChild(pill); v.appendChild(l);
     }
-    var pill = document.createElement('span'); pill.className = 'tv-pill';
-    v.appendChild(pill);
     var layers = v.querySelectorAll('.ts-layer');
-    layers[0].querySelector('img').src = imgs[0].src;
+    fill(layers[0], imgs[0]); fill(layers[1], imgs[0]);
     layers[0].classList.add('is-on');
-    pill.textContent = imgs[0].tag;
     v.dataset.tsI = '0'; v.dataset.tsCur = '0';
   }
   function step(v) {
     var imgs = SHOWS[v.getAttribute('data-client')];
     var layers = v.querySelectorAll('.ts-layer');
-    var pill = v.querySelector('.tv-pill');
-    if (!imgs || layers.length < 2 || !pill) return;
+    if (!imgs || imgs.length < 2 || layers.length < 2) return;
     var i = (parseInt(v.dataset.tsI || '0', 10) + 1) % imgs.length;
-    var cur = parseInt(v.dataset.tsCur || '0', 10), nxt = 1 - cur, item = imgs[i];
-    layers[nxt].querySelector('img').src = item.src;
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        layers[nxt].classList.add('is-on');
-        layers[cur].classList.remove('is-on');
-        pill.style.opacity = '0';
-        setTimeout(function () { pill.textContent = item.tag; pill.style.opacity = '1'; }, 300);
-      });
-    });
+    var cur = parseInt(v.dataset.tsCur || '0', 10), nxt = 1 - cur;
+    var nl = layers[nxt], cl = layers[cur];
+    fill(nl, imgs[i]);
+    // reset incoming to the "below" start state without animating
+    nl.classList.remove('is-exit');
+    nl.style.transition = 'none';
+    nl.classList.remove('is-on');
+    void nl.offsetWidth;                 // commit reset
+    nl.style.transition = '';
+    nl.classList.add('is-on');           // fade up + in
+    cl.classList.remove('is-on');
+    cl.classList.add('is-exit');         // fade up + out
     v.dataset.tsI = '' + i; v.dataset.tsCur = '' + nxt;
+  }
+  // The "active" card is the one centered in the testimonials carousel.
+  // Only it advances; every other card pauses on its current image.
+  function activeVisual() {
+    var car = document.querySelector('.ds-carousel[data-speed="32"]');
+    if (!car) return null;
+    var rail = car.querySelector('.ds-rail'); if (!rail) return null;
+    var rr = rail.getBoundingClientRect(), cx = rr.left + rr.width / 2;
+    var best = null, bd = 1e9;
+    car.querySelectorAll('.testi-visual[data-client]').forEach(function (v) {
+      var slide = v.closest('.testi-slide') || v;
+      var r = slide.getBoundingClientRect();
+      if (r.right < rr.left - 40 || r.left > rr.right + 40) return;
+      var d = Math.abs((r.left + r.width / 2) - cx);
+      if (d < bd) { bd = d; best = v; }
+    });
+    return best;
   }
   document.querySelectorAll('.testi-visual[data-client]').forEach(ensureBuilt);
   setInterval(function () {
-    document.querySelectorAll('.testi-visual[data-client]').forEach(function (v) {
-      ensureBuilt(v); step(v);
-    });
+    document.querySelectorAll('.testi-visual[data-client]').forEach(ensureBuilt);
+    var v = activeVisual();
+    if (v) step(v);
   }, INTERVAL);
 })();
 </script>
