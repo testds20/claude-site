@@ -1346,7 +1346,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">For B2B Tech &amp; Cybersecurity Teams</div>
-      <h2 class="h-xl wch-head">One creative partner.&nbsp;&nbsp;<br /><span class="serif">All design assets covered.</span></h2>
+      <h2 class="h-xl">One creative partner.<br /><span class="serif">All design assets covered.</span></h2>
     </div>
     <div class="wcx reveal" data-autoloop data-interval="6500">
       <div class="wcx-list">
@@ -1406,7 +1406,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     <div class="hhead head-split">
       <div>
         <div class="eyebrow">Why Choose DesignSpace</div>
-        <h2 class="h-xl wch-head">Your dedicated design team.&nbsp;&nbsp;<br /><span class="serif">Built around your priorities.</span></h2>
+        <h2 class="h-xl wch-head">Your dedicated design team.&nbsp;<br /><span class="serif">Built around your priorities.</span></h2>
       </div>
       <p class="lede">Branded creatives whenever you need them — from a team that already knows your industry and keeps your output moving.</p>
     </div>
@@ -2361,20 +2361,28 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 <script>
 (function () {
   var COLLAGE_ITEMS = [
-    { type:'image', src:'https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=480', caption:'Product Mockups', size:'lg' },
-    { type:'sq',    src:'seemplicity-event-banners.png', caption:'Event Banners' },
-    { type:'image', src:'https://framerusercontent.com/images/n0YP32ZIZM8bBOcyoaarS35Ws.png?width=480', caption:'Reports + Docs', size:'md' },
-    { type:'sq',    src:'intrusion-ebooks.png', caption:'eBooks' },
-    { type:'image', src:'https://framerusercontent.com/images/w2PBu9y5PW7w0pJMBg20EXzq0VE.png?width=480', caption:'Ad Campaigns', size:'md' },
-    { type:'image', src:'https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=480', caption:'Dashboards', size:'lg' },
-    { type:'sq',    src:'oneplus-landing-pages.png', caption:'Landing Pages' },
-    { type:'image', src:'https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=480', caption:'Diagrams', size:'md' },
-    { type:'sq',    src:'cybersixgill-social-banners.png', caption:'Social Banners' },
-    { type:'image', src:'oneplus-card.jpg', caption:'Spec Sheets', size:'md' },
-    { type:'image', src:'cybersixgill-card.jpg', caption:'Digital Content', size:'lg' },
-    { type:'sq',    src:'kasada-guides.png', caption:'Guides' },
-    { type:'image', src:'https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=480', caption:'Reports', size:'md' },
-    { type:'sq',    src:'britive-carousel-posts.png', caption:'Carousel Posts' }
+    // Vertical gradient mockups (work-strip style)
+    { type:'image', src:'https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=480', caption:'Product Mockups' },
+    { type:'image', src:'https://framerusercontent.com/images/n0YP32ZIZM8bBOcyoaarS35Ws.png?width=480', caption:'Reports + Docs' },
+    { type:'image', src:'https://framerusercontent.com/images/w2PBu9y5PW7w0pJMBg20EXzq0VE.png?width=480', caption:'Ad Campaigns' },
+    { type:'image', src:'https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=480', caption:'Dashboards' },
+    { type:'image', src:'https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=480', caption:'Diagrams' },
+    { type:'image', src:'https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=480', caption:'Reports' },
+    { type:'image', src:'oneplus-card.jpg', caption:'Spec Sheets' },
+    { type:'image', src:'cybersixgill-card.jpg', caption:'Digital Content' },
+    // Transparent square case studies (varied clients + types)
+    { type:'sq', src:'seemplicity-event-banners.png', caption:'Event Banners' },
+    { type:'sq', src:'intrusion-ebooks.png', caption:'eBooks' },
+    { type:'sq', src:'oneplus-landing-pages.png', caption:'Landing Pages' },
+    { type:'sq', src:'cybersixgill-social-banners.png', caption:'Social Banners' },
+    { type:'sq', src:'kasada-guides.png', caption:'Guides' },
+    { type:'sq', src:'britive-carousel-posts.png', caption:'Carousel Posts' },
+    { type:'sq', src:'britive-flows.png', caption:'Flows' },
+    { type:'sq', src:'oneplus-brand-guidelines.png', caption:'Brand Guidelines' },
+    { type:'sq', src:'cybersixgill-brand-styles.png', caption:'Brand Styles' },
+    { type:'sq', src:'kasada-social-campaigns.png', caption:'Social Campaigns' },
+    { type:'sq', src:'kasada-2-pagers.png', caption:'2-Pagers' },
+    { type:'sq', src:'britive-speaker-banners.png', caption:'Speaker Banners' }
   ];
   var COLLAGE_CONFIG = { columns:4, speed:42, parallax:0.18, seed:14, pauseOnHover:false, respectReducedMotion:true };
 
@@ -2430,6 +2438,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     // from the one above it and from the one beside it.
     var VE = COLLAGE_ITEMS.filter(function(q){return q.type!=='sq';});  // vertical gradient mockups
     var SQ = COLLAGE_ITEMS.filter(function(q){return q.type==='sq';});  // transparent square case studies
+    // Shuffle each pool (seeded) and consume sequentially → no image repeats
+    // until a full pool is used, so nothing duplicates within the visible grid.
+    var shuf=function(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(rng()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; };
+    VE=shuf(VE); SQ=shuf(SQ);
     var vIdx=0, sIdx=0;
     // Even grid: uniform column x (no jitter) + uniform row pitch (no parallax),
     // so cells line up in rows AND columns. Even row/column counts keep the
