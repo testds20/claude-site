@@ -936,11 +936,12 @@ nav{
 /* ============ FOOTER ============ */
 footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 .foot-top{
-  display:grid;grid-template-columns:2.3fr 1fr 1fr 1fr;
+  display:grid;grid-template-columns:2.3fr 1fr 1fr;
   gap:clamp(28px,3vw,48px);align-items:start;
   padding-bottom:clamp(36px,4vw,56px);
 }
-.foot-head{font-size:clamp(1.4rem,2.2vw,var(--fs-h4));font-weight:400;letter-spacing:-.025em;line-height:1.14;max-width:none}
+.foot-colstack{display:flex;flex-direction:column;gap:clamp(30px,3.2vw,44px)}
+.foot-head{font-size:clamp(1.95rem,4.2vw,var(--fs-h2));font-weight:400;letter-spacing:-.03em;line-height:1.1;max-width:none}
 .foot-head .serif{color:var(--ink-soft)}
 .foot-copy{margin-top:clamp(18px,2vw,26px);font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
 .foot-col h4{
@@ -949,18 +950,18 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   color:var(--ink-soft);margin-bottom:18px;
 }
 .foot-col a{
-  display:block;font-size:15px;color:var(--ink);
-  margin-bottom:12px;transition:color .25s;
+  display:block;font-size:17px;font-weight:600;color:var(--ink);
+  margin-bottom:13px;transition:color .25s;
 }
 .foot-col a:hover{color:var(--ink-soft)}
 .foot-word{max-width:var(--max);margin:clamp(32px,5vw,64px) auto 0;padding:0 var(--pad)}
 .foot-word img{width:100%;height:auto;display:block}
 @media(max-width:820px){
-  .foot-top{grid-template-columns:1fr 1fr 1fr;gap:36px 24px}
+  .foot-top{grid-template-columns:1fr 1fr;gap:36px 24px}
   .foot-brand{grid-column:1/-1}
 }
 @media(max-width:440px){
-  .foot-top{grid-template-columns:1fr 1fr;gap:30px 22px}
+  .foot-top{grid-template-columns:1fr;gap:30px 22px}
 }
 
 /* ============ TOOLS & ASSET TYPES (integrations style) ============ */
@@ -1673,7 +1674,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     </div>
     <div class="reveal" data-autoloop data-interval="6500">
       <div class="proc-figure">
-        <img class="proc-fig active" data-fig="0" src="proc-1-kickoff.png" alt="Kickoff with DesignSpace" loading="lazy" />
+        <img class="proc-fig active" data-fig="0" src="proc-1-kickoff.png?v=2" alt="Kickoff with DesignSpace" loading="lazy" />
         <img class="proc-fig" data-fig="1" src="proc-2-deliver.png" alt="Submit tasks. We deliver." loading="lazy" />
         <img class="proc-fig" data-fig="2" src="proc-3-scale.png" alt="Scale on your terms." loading="lazy" />
       </div>
@@ -1771,15 +1772,17 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         <a href="#process">Our Process</a>
         <a href="#pricing">Pricing</a>
       </div>
-      <div class="foot-col">
-        <h4>Connect</h4>
-        <a href="https://www.linkedin.com/company/designspace-agency/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener">Book a Discovery Call</a>
-      </div>
-      <div class="foot-col">
-        <h4>Legal</h4>
-        <a href="terms.html">Terms &amp; Conditions</a>
-        <a href="privacy.html">Privacy Policy</a>
+      <div class="foot-colstack">
+        <div class="foot-col">
+          <h4>Connect</h4>
+          <a href="https://www.linkedin.com/company/designspace-agency/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener">Book a Discovery Call</a>
+        </div>
+        <div class="foot-col">
+          <h4>Legal</h4>
+          <a href="terms.html">Terms &amp; Conditions</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
       </div>
     </div>
   </div>
