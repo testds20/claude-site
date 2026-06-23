@@ -2442,7 +2442,6 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     // until a full pool is used, so nothing duplicates within the visible grid.
     var shuf=function(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(rng()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; };
     VE=shuf(VE); SQ=shuf(SQ);
-    var vIdx=0, sIdx=0;
     // Even grid: uniform column x (no jitter) + uniform row pitch (no parallax),
     // so cells line up in rows AND columns. Even row/column counts keep the
     // square/vertical checkerboard staggered seamlessly across the wrap.
@@ -2459,7 +2458,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       var colX = c*pitch + Math.round((colW - cardW)/2);   // centered in the column
       for(var r=0;r<rowsPerCol;r++){
         var wantSq = (((c + r) % 2) === 0) && SQ.length;
-        var d = wantSq ? SQ[sIdx++ % SQ.length] : (VE.length ? VE[vIdx++ % VE.length] : SQ[sIdx++ % SQ.length]);
+        // 2D index: within a row the picks are consecutive (all distinct), and
+        // the row stride (5, coprime with pool sizes) avoids same-column repeats.
+        var ci = Math.floor(c/2);
+        var d = wantSq ? SQ[(r*5 + ci) % SQ.length] : (VE.length ? VE[(r*5 + ci) % VE.length] : SQ[(r*5 + ci) % SQ.length]);
         var it = makeNode(d);
         var mh = Math.round(cardW * ((d.type==='sq') ? 1 : 1.28));
         it.node.style.width = cardW+'px';
