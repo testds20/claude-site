@@ -239,6 +239,7 @@ nav{
   display:flex;flex-direction:column;gap:7px;
   pointer-events:auto;user-select:none;-webkit-user-select:none;
 }
+.hero-collage .col-item.vert{gap:20px}
 .hero-collage .col-media{
   width:100%;border-radius:3px;overflow:hidden;display:block;
   background:var(--bg-card);-webkit-user-drag:none;user-select:none;pointer-events:none;
@@ -2361,7 +2362,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 (function () {
   var COLLAGE_ITEMS = [
     { type:'image', src:'https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=480', caption:'Product Mockups', size:'lg' },
-    { type:'sq',    src:'seemplicity-illustrations.png', caption:'Illustrations' },
+    { type:'sq',    src:'seemplicity-event-banners.png', caption:'Event Banners' },
     { type:'image', src:'https://framerusercontent.com/images/n0YP32ZIZM8bBOcyoaarS35Ws.png?width=480', caption:'Reports + Docs', size:'md' },
     { type:'sq',    src:'intrusion-ebooks.png', caption:'eBooks' },
     { type:'image', src:'https://framerusercontent.com/images/w2PBu9y5PW7w0pJMBg20EXzq0VE.png?width=480', caption:'Ad Campaigns', size:'md' },
@@ -2390,7 +2391,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   function clearItems(){ for(var i=0;i<items.length;i++){ var n=items[i].node; if(n&&n.parentNode) n.parentNode.removeChild(n); } items=[]; cols=[]; }
 
   function makeNode(d){
-    var wrap=document.createElement('div'); wrap.className='col-item';
+    var wrap=document.createElement('div'); wrap.className='col-item'+(d.type==='image'?' vert':'');
     var media;
     if(d.type==='card'){
       media=document.createElement('div'); media.className='col-card col-media';
@@ -2424,14 +2425,21 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     var fillTo = Math.max(H + topBuf + 80, H*1.7);
     var pAmt = (COLLAGE_CONFIG.parallax/0.18) || 1;
     clearItems();
-    var src = COLLAGE_ITEMS, n = src.length, idx=0;
+    // Split into two pools so the grid alternates square / vertical like a
+    // checkerboard: type chosen by (column + row) parity, so each cell differs
+    // from the one above it and from the one beside it.
+    var VE = COLLAGE_ITEMS.filter(function(q){return q.type!=='sq';});  // vertical gradient mockups
+    var SQ = COLLAGE_ITEMS.filter(function(q){return q.type==='sq';});  // transparent square case studies
+    var vIdx=0, sIdx=0;
     var frag = document.createDocumentFragment();
     for(var c=0;c<totalCols;c++){
       var colX = c*pitch;
       var depth = 1 + (rng()-0.5)*0.28*pAmt; // per-column vertical parallax (~0.86..1.14)
-      var y = 0;
+      var y = 0, r = 0;
       while(y < fillTo){
-        var d = src[idx % n]; idx++;
+        var wantSq = (((c + r) % 2) === 0) && SQ.length;
+        var d = wantSq ? SQ[sIdx++ % SQ.length] : (VE.length ? VE[vIdx++ % VE.length] : SQ[sIdx++ % SQ.length]);
+        r++;
         var it = makeNode(d);
         var w, aspect;
         if(d.type==='card'){ var range = SIZE[d.size] || SIZE.md; w = Math.round(colW*(range[0] + rng()*(range[1]-range[0]))); aspect = 1; }
@@ -2447,7 +2455,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
           it.media.style.height = mh+'px';
         }
         it.baseX=jx; it.baseY=y; it.col=c;
-        var blockH = mh + (d.caption?22:0);
+        var blockH = mh + (d.caption ? (d.type==='image'?38:22) : 0);
         y += blockH + H*(0.05 + rng()*0.09);
         frag.appendChild(it.node);
         items.push(it);
