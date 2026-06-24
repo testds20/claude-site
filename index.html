@@ -1117,7 +1117,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 /* ---- Assets variant B: cursor image trail ---- */
 #trail-wrap{
   cursor:crosshair;
-  width:min(var(--max), calc(100% - 2*var(--pad)));margin:0 auto;
+  margin:0 var(--pad);            /* full-bleed minus page gutters — matches the Let's-chat card width */
   border-radius:var(--radius-lg);
   background-color:var(--bg-soft);
   background-image:radial-gradient(rgba(16,16,16,.08) 1px, transparent 1px);
