@@ -361,6 +361,11 @@ nav{
 
 /* ============ WORK SHOWCASE (below hero) ============ */
 .work-strip-section{overflow:hidden}
+/* mobile: tighten the gap between the hero and the work-strip heading by ~50% */
+@media(max-width:860px){
+  .hero{padding-bottom:18px}
+  .work-strip-section{padding-top:36px}
+}
 .work-strip-section .wrap{text-align:center;margin-bottom:clamp(40px,5vw,64px)}
 .work-strip-section h1{max-width:26ch;margin:0 auto;color:var(--ink)}
 .work-strip{width:100%}
@@ -1398,32 +1403,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   </div>
 </section>
 
-<!-- ============ ASSETS COLLAGE — VARIANT A (floating images) ============ -->
-<section class="ab-variant ab-a" style="padding-top:0;padding-bottom:0">
-  <div class="assets-wrap" id="assets-wrap">
-    <img class="float-img" src="kasada-reports.png" alt="Case study work" loading="lazy" style="width:16%;min-width:140px;top:4%;left:30%" />
-    <img class="float-img" src="britive-carousel-posts.png" alt="Case study work" loading="lazy" style="width:13%;min-width:118px;top:7%;left:53%" />
-    <img class="float-img" src="seemplicity-diagrams.png" alt="Case study work" loading="lazy" style="width:15%;min-width:132px;top:19%;left:11%" />
-    <img class="float-img" src="kasada-social-campaigns.png" alt="Case study work" loading="lazy" style="width:15%;min-width:132px;top:21%;right:8%" />
-    <img class="float-img" src="britive-event-banners.png" alt="Case study work" loading="lazy" style="width:18%;min-width:155px;bottom:12%;left:9%" />
-    <img class="float-img" src="seemplicity-guides.png" alt="Case study work" loading="lazy" style="width:17%;min-width:148px;bottom:9%;right:10%" />
-    <img class="float-img m-hide" src="kasada-ad-campaigns.png" alt="Case study work" loading="lazy" style="width:12%;min-width:108px;bottom:5%;left:40%" />
-    <img class="float-img m-hide" src="britive-diagrams.png" alt="Case study work" loading="lazy" style="width:12%;min-width:108px;top:39%;left:1%" />
-    <img class="float-img m-hide" src="seemplicity-illustrations.png" alt="Case study work" loading="lazy" style="width:12%;min-width:108px;top:41%;right:1%" />
-    <div class="assets-center reveal">
-      <span class="assets-label">All design assets covered</span>
-      <div class="word-wheel" aria-hidden="true">
-        <div class="word-track">
-          <span>Ad Campaigns</span><span>Reports</span><span>Decks</span><span>Social Content</span><span>Banners</span><span>Carousels</span><span>Landing Pages</span><span>Cover Images</span><span>Guides</span><span>Event Booths</span><span>Dashboards</span><span>Illustrations</span><span>Product Mockups</span><span>Icons</span><span>eBooks</span><span>Diagrams</span><span>Case Studies</span>
-          <span>Ad Campaigns</span><span>Reports</span><span>Decks</span><span>Social Content</span><span>Banners</span><span>Carousels</span><span>Landing Pages</span><span>Cover Images</span><span>Guides</span><span>Event Booths</span><span>Dashboards</span><span>Illustrations</span><span>Product Mockups</span><span>Icons</span><span>eBooks</span><span>Diagrams</span><span>Case Studies</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ASSETS — VARIANT B (cursor image trail) ============ -->
-<section class="ab-variant ab-b" style="padding-top:0;padding-bottom:0" hidden>
+<!-- ============ ASSETS — "All design assets covered" (cursor image trail) ============ -->
+<section style="padding-top:0;padding-bottom:0">
   <div class="assets-wrap" id="trail-wrap">
     <div class="trail-layer" id="trail-layer" aria-hidden="true"></div>
     <div class="assets-center reveal">
@@ -1519,7 +1500,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       </div>
       <button class="int-more" type="button" data-int-more>See more <span class="int-more-ico">+</span></button>
     </div>
-    <div class="int-panel reveal">
+    <div class="int-panel reveal" data-reveal-delay="0.22">
       <div class="int-label">
         <h3>Everything your cyber marketing team needs — designed for you</h3>
       </div>
@@ -2769,29 +2750,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 })();
 </script>
 <script>
-/* ===== A/B switch for the "All design assets covered" section =====
-   Variant A = floating images, Variant B = cursor image-trail.
-   Random 50/50 per visitor (persisted); ?ab=a or ?ab=b forces a variant. */
-(function () {
-  var as = [].slice.call(document.querySelectorAll('.ab-a'));
-  var bs = [].slice.call(document.querySelectorAll('.ab-b'));
-  if (!as.length || !bs.length) return;
-  var forced = new URLSearchParams(location.search).get('ab');
-  var v = forced;
-  try { if (v !== 'a' && v !== 'b') v = localStorage.getItem('ds_ab'); } catch (e) {}
-  if (v !== 'a' && v !== 'b') v = Math.random() < 0.5 ? 'a' : 'b';
-  try { if (!forced) localStorage.setItem('ds_ab', v); } catch (e) {}
-  as.forEach(function (e) { e.hidden = v !== 'a'; });
-  bs.forEach(function (e) { e.hidden = v !== 'b'; });
-})();
-</script>
-<script>
-/* ===== Cursor image-trail (assets variant B) ===== */
+/* ===== Cursor image-trail ("All design assets covered" section) ===== */
 (function () {
   var wrap = document.getElementById('trail-wrap');
   if (!wrap) return;
-  var sec = wrap.closest('.ab-b');
-  if (sec && sec.hidden) return;                 // only run when variant B is live
   var layer = document.getElementById('trail-layer');
   var IMGS = ('airmdr-ad-campaigns,airmdr-guides,airmdr-reports,airmdr-social-banners,airmdr-stat-banners,' +
     'britive-ad-campaigns,britive-carousel-posts,britive-diagrams,britive-event-banners,britive-flows,britive-speaker-banners,' +
@@ -2831,22 +2793,37 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     var dx = x - lastX, dy = y - lastY;
     if (dx * dx + dy * dy >= GAP * GAP) { spawn(x, y); lastX = x; lastY = y; }
   }
+  // Desktop only: cursor trail (mouse). No touch-drag trail on mobile.
   wrap.addEventListener('pointermove', function (e) { if (e.pointerType === 'touch') return; at(e.clientX, e.clientY); });
   wrap.addEventListener('pointerleave', function () { lastX = lastY = null; });
-  wrap.addEventListener('touchmove', function (e) { var t = e.touches[0]; at(t.clientX, t.clientY); }, { passive: true });
-  // Touch devices: images appear on their own — auto-spawn at a random spot every second (no tap needed)
+
+  // Touch devices: no drag-trail. Images appear on their own at a random spot every second,
+  // kept to the white space ABOVE/BELOW the copy (never over the text).
   var coarse = window.matchMedia && matchMedia('(pointer: coarse)').matches;
   if (coarse && !reduce) {
+    var center = wrap.querySelector('.assets-center');
     setInterval(function () {
       var r = wrap.getBoundingClientRect();
-      if (r.bottom < 40 || r.top > (window.innerHeight - 40)) return;   // only while the section is on screen
-      spawn(r.width * (0.1 + Math.random() * 0.8), r.height * (0.14 + Math.random() * 0.72));
+      if (r.bottom < 40 || r.top > (window.innerHeight - 40)) return;     // only while the section is on screen
+      var cr = center.getBoundingClientRect();
+      var pad = 28;
+      var topBand = (cr.top - r.top) - pad;          // bottom edge of the upper white band
+      var botBand = (cr.bottom - r.top) + pad;       // top edge of the lower white band
+      var topH = topBand - r.height * 0.04;
+      var botH = (r.height * 0.96) - botBand;
+      var y;
+      if (topH < 26 && botH < 26) { y = r.height * 0.06; }
+      else {
+        var useTop = topH >= 26 && (botH < 26 || Math.random() < topH / (topH + botH));
+        y = useTop ? (r.height * 0.04 + Math.random() * topH) : (botBand + Math.random() * botH);
+      }
+      spawn(r.width * (0.08 + Math.random() * 0.84), y);
     }, 1000);
   }
 
   // One-time auto-demo when the section scrolls into view, so it isn't empty
   // and the interaction is discoverable.
-  if (!reduce && 'IntersectionObserver' in window) {
+  if (!reduce && !coarse && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (en) {
         if (!en.isIntersecting) return;
