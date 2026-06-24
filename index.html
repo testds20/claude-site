@@ -1114,6 +1114,21 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   .float-img.m-hide{display:none}
   .float-img{opacity:.92;width:22%!important;min-width:0!important}
 }
+/* ---- Assets variant B: cursor image trail ---- */
+#trail-wrap{cursor:crosshair}
+#trail-wrap .assets-center{position:relative;z-index:3}
+.trail-layer{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
+.trail-img{
+  position:absolute;top:0;left:0;width:clamp(120px,13vw,210px);height:auto;
+  border-radius:6px;pointer-events:none;
+  filter:drop-shadow(0 16px 34px rgba(0,0,0,.22));
+  opacity:0;transform:translate(-50%,-50%) scale(.5) rotate(var(--r,0deg));
+  transition:opacity .45s var(--ease),transform .65s var(--ease);
+  will-change:transform,opacity;
+}
+.trail-img.show{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(var(--r,0deg))}
+.trail-img.hide{opacity:0;transform:translate(-50%,-50%) scale(1.08) rotate(var(--r,0deg))}
+@media(max-width:880px){ #trail-wrap{cursor:default} .trail-img{width:clamp(108px,34vw,182px)} }
 
 /* ============ REVEAL ============ */
 .reveal{opacity:0;transform:translateY(34px)}
@@ -1376,8 +1391,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   </div>
 </section>
 
-<!-- ============ ASSETS COLLAGE ============ -->
-<section style="padding-top:0;padding-bottom:0">
+<!-- ============ ASSETS COLLAGE — VARIANT A (floating images) ============ -->
+<section class="ab-variant ab-a" style="padding-top:0;padding-bottom:0">
   <div class="assets-wrap" id="assets-wrap">
     <img class="float-img" src="kasada-reports.png" alt="Case study work" loading="lazy" style="width:16%;min-width:140px;top:4%;left:30%" />
     <img class="float-img" src="britive-carousel-posts.png" alt="Case study work" loading="lazy" style="width:13%;min-width:118px;top:7%;left:53%" />
@@ -1388,6 +1403,22 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     <img class="float-img m-hide" src="kasada-ad-campaigns.png" alt="Case study work" loading="lazy" style="width:12%;min-width:108px;bottom:5%;left:40%" />
     <img class="float-img m-hide" src="britive-diagrams.png" alt="Case study work" loading="lazy" style="width:12%;min-width:108px;top:39%;left:1%" />
     <img class="float-img m-hide" src="seemplicity-illustrations.png" alt="Case study work" loading="lazy" style="width:12%;min-width:108px;top:41%;right:1%" />
+    <div class="assets-center reveal">
+      <span class="assets-label">All design assets covered</span>
+      <div class="word-wheel" aria-hidden="true">
+        <div class="word-track">
+          <span>Ad Campaigns</span><span>Reports</span><span>Decks</span><span>Social Content</span><span>Banners</span><span>Carousels</span><span>Landing Pages</span><span>Cover Images</span><span>Guides</span><span>Event Booths</span><span>Dashboards</span><span>Illustrations</span><span>Product Mockups</span><span>Icons</span><span>eBooks</span><span>Diagrams</span><span>Case Studies</span>
+          <span>Ad Campaigns</span><span>Reports</span><span>Decks</span><span>Social Content</span><span>Banners</span><span>Carousels</span><span>Landing Pages</span><span>Cover Images</span><span>Guides</span><span>Event Booths</span><span>Dashboards</span><span>Illustrations</span><span>Product Mockups</span><span>Icons</span><span>eBooks</span><span>Diagrams</span><span>Case Studies</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ASSETS — VARIANT B (cursor image trail) ============ -->
+<section class="ab-variant ab-b" style="padding-top:0;padding-bottom:0" hidden>
+  <div class="assets-wrap" id="trail-wrap">
+    <div class="trail-layer" id="trail-layer" aria-hidden="true"></div>
     <div class="assets-center reveal">
       <span class="assets-label">All design assets covered</span>
       <div class="word-wheel" aria-hidden="true">
@@ -2728,6 +2759,94 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     var v = activeVisual();
     if (v) step(v);
   }, INTERVAL);
+})();
+</script>
+<script>
+/* ===== A/B switch for the "All design assets covered" section =====
+   Variant A = floating images, Variant B = cursor image-trail.
+   Random 50/50 per visitor (persisted); ?ab=a or ?ab=b forces a variant. */
+(function () {
+  var as = [].slice.call(document.querySelectorAll('.ab-a'));
+  var bs = [].slice.call(document.querySelectorAll('.ab-b'));
+  if (!as.length || !bs.length) return;
+  var forced = new URLSearchParams(location.search).get('ab');
+  var v = forced;
+  try { if (v !== 'a' && v !== 'b') v = localStorage.getItem('ds_ab'); } catch (e) {}
+  if (v !== 'a' && v !== 'b') v = Math.random() < 0.5 ? 'a' : 'b';
+  try { if (!forced) localStorage.setItem('ds_ab', v); } catch (e) {}
+  as.forEach(function (e) { e.hidden = v !== 'a'; });
+  bs.forEach(function (e) { e.hidden = v !== 'b'; });
+})();
+</script>
+<script>
+/* ===== Cursor image-trail (assets variant B) ===== */
+(function () {
+  var wrap = document.getElementById('trail-wrap');
+  if (!wrap) return;
+  var sec = wrap.closest('.ab-b');
+  if (sec && sec.hidden) return;                 // only run when variant B is live
+  var layer = document.getElementById('trail-layer');
+  var IMGS = ('airmdr-ad-campaigns,airmdr-guides,airmdr-reports,airmdr-social-banners,airmdr-stat-banners,' +
+    'britive-ad-campaigns,britive-carousel-posts,britive-diagrams,britive-event-banners,britive-flows,britive-speaker-banners,' +
+    'cybermarketingcon-ad-campaigns,cybermarketingcon-event-banners,cybermarketingcon-postcards,cybermarketingcon-social-campaigns,cybermarketingcon-social-templates,' +
+    'cybersixgill-ad-campaigns,cybersixgill-brand-styles,cybersixgill-guides,cybersixgill-social-banners,' +
+    'hyperproof-2-pagers,hyperproof-carousel-posts,hyperproof-guides,hyperproof-social-banners,' +
+    'intrusion-ad-campaigns,intrusion-guides,intrusion-reports,intrusion-ebooks,' +
+    'kasada-2-pagers,kasada-ad-campaigns,kasada-diagrams,kasada-guides,kasada-reports,kasada-social-campaigns,kasada-ebooks,' +
+    'oneplus-ad-campaigns,oneplus-brand-guidelines,oneplus-landing-pages,oneplus-product-launchs,oneplus-reports,oneplus-spec-sheets,' +
+    'seemplicity-2-pagers,seemplicity-diagrams,seemplicity-event-banners,seemplicity-guides,seemplicity-illustrations'
+  ).split(',').map(function (s) { return s + '.png'; });
+  // shuffle so the order differs each visit
+  for (var i = IMGS.length - 1; i > 0; i--) { var j = (Math.random() * (i + 1)) | 0; var t = IMGS[i]; IMGS[i] = IMGS[j]; IMGS[j] = t; }
+  IMGS.forEach(function (s) { var im = new Image(); im.src = s; });
+
+  var idx = 0, lastX = null, lastY = null, GAP = 62, MAX = 16, live = [];
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function spawn(x, y) {
+    var el = document.createElement('img');
+    el.className = 'trail-img'; el.alt = ''; el.decoding = 'async';
+    el.src = IMGS[idx++ % IMGS.length];
+    el.style.left = x + 'px'; el.style.top = y + 'px';
+    el.style.setProperty('--r', (Math.random() * 14 - 7).toFixed(1) + 'deg');
+    layer.appendChild(el); live.push(el);
+    requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add('show'); }); });
+    var life = reduce ? 450 : 680;
+    setTimeout(function () { el.classList.remove('show'); el.classList.add('hide'); }, life);
+    setTimeout(function () { if (el.parentNode) el.remove(); var k = live.indexOf(el); if (k >= 0) live.splice(k, 1); }, life + 720);
+    while (live.length > MAX) { var o = live.shift(); if (o && o.parentNode) o.remove(); }
+  }
+  function at(cx, cy) {
+    var r = wrap.getBoundingClientRect();
+    var x = cx - r.left, y = cy - r.top;
+    if (x < 0 || y < 0 || x > r.width || y > r.height) { lastX = lastY = null; return; }
+    if (lastX === null) { lastX = x; lastY = y; spawn(x, y); return; }
+    var dx = x - lastX, dy = y - lastY;
+    if (dx * dx + dy * dy >= GAP * GAP) { spawn(x, y); lastX = x; lastY = y; }
+  }
+  wrap.addEventListener('pointermove', function (e) { if (e.pointerType === 'touch') return; at(e.clientX, e.clientY); });
+  wrap.addEventListener('pointerleave', function () { lastX = lastY = null; });
+  wrap.addEventListener('touchstart', function (e) { lastX = lastY = null; var t = e.touches[0]; at(t.clientX, t.clientY); }, { passive: true });
+  wrap.addEventListener('touchmove', function (e) { var t = e.touches[0]; at(t.clientX, t.clientY); }, { passive: true });
+
+  // One-time auto-demo when the section scrolls into view, so it isn't empty
+  // and the interaction is discoverable.
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        io.disconnect();
+        var r = wrap.getBoundingClientRect(), n = 7, c = 0;
+        var tmr = setInterval(function () {
+          if (c >= n) { clearInterval(tmr); lastX = lastY = null; return; }
+          var px = r.width * (0.2 + 0.6 * (c / (n - 1)));
+          var py = r.height * (0.5 + 0.24 * Math.sin(c / (n - 1) * Math.PI * 2));
+          spawn(px, py); c++;
+        }, 240);
+      });
+    }, { threshold: 0.35 });
+    io.observe(wrap);
+  }
 })();
 </script>
 </body>
