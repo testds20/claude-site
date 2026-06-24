@@ -471,8 +471,10 @@ nav{
 
 /* ============ CAPABILITY CAROUSEL (Sana-style) ============ */
 .caps{overflow:hidden}
-.caps-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);gap:clamp(36px,5vw,72px);align-items:center}
+.caps-grid{display:grid;grid-template-columns:minmax(0,0.95fr) minmax(0,1.1fr);gap:clamp(36px,5vw,72px);align-items:center}
 .caps-grid #hero-app{margin-top:0;max-width:none;width:100%}
+br.capsbr{display:none}
+@media(min-width:881px){br.capsbr{display:inline}}
 @media(max-width:880px){.caps-grid{grid-template-columns:1fr;gap:clamp(28px,5vw,40px)}}
 
 /* ============ INFINITE CAROUSEL SYSTEM ============ */
@@ -480,7 +482,7 @@ nav{
 .hero-grid .ds-carousel{width:100%}
 .caps .wrap{text-align:left}
 .caps .section-head{display:flex;flex-direction:column;align-items:flex-start}
-.caps .lede{margin-left:0;margin-right:0}
+.caps .lede{margin-left:0;margin-right:0;max-width:60ch}
 .ds-rail{overflow:hidden;width:100%;cursor:grab;touch-action:pan-y}
 .ds-carousel.dragging .ds-rail{cursor:grabbing}
 .ds-track{
@@ -1267,7 +1269,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       <div class="section-head reveal">
         <div class="eyebrow">Full-Suite Marketing Design</div>
         <h2 class="h-xl">Creative fulfillment<br /><span class="serif">for your entire team.</span></h2>
-        <p class="lede" style="margin-top:20px">One subscription that keeps your creative output moving — no bottlenecks, no handoff delays, no waiting on design.</p>
+        <p class="lede" style="margin-top:20px">One subscription that keeps your creative output moving <br class="capsbr" />— no bottlenecks, no handoff delays, no waiting on design.</p>
       </div>
       <div class="hero-app reveal" id="hero-app">
         <div class="app-stage">
@@ -1357,15 +1359,15 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         <div class="app-tabs">
           <button class="app-tab" data-tab="0" aria-label="Your Entire Team">
             <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
-            <span class="tab-full">Your Entire Team</span><span class="tab-short">Team</span>
+            <span class="tab-full">Your Team</span><span class="tab-short">Team</span>
           </button>
           <button class="app-tab active" data-tab="1" aria-label="Active Design Projects">
             <svg viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
-            <span class="tab-full">Active Design Projects</span><span class="tab-short">Projects</span>
+            <span class="tab-full">Design Projects</span><span class="tab-short">Projects</span>
           </button>
           <button class="app-tab" data-tab="2" aria-label="Ongoing Fulfillment">
             <svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-            <span class="tab-full">Ongoing Fulfillment</span><span class="tab-short">Fulfillment</span>
+            <span class="tab-full">Fulfillment</span><span class="tab-short">Fulfillment</span>
           </button>
         </div>
       </div>
