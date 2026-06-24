@@ -1115,20 +1115,27 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   .float-img{opacity:.92;width:22%!important;min-width:0!important}
 }
 /* ---- Assets variant B: cursor image trail ---- */
-#trail-wrap{cursor:crosshair}
-#trail-wrap .assets-center{position:relative;z-index:3}
-.trail-layer{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
+#trail-wrap{
+  cursor:crosshair;
+  width:min(var(--max), calc(100% - 2*var(--pad)));margin:0 auto;
+  border-radius:var(--radius-lg);
+  background-color:var(--bg-soft);
+  background-image:radial-gradient(rgba(16,16,16,.08) 1px, transparent 1px);
+  background-size:18px 18px;
+}
+/* trail images sit ABOVE all section text */
+.trail-layer{position:absolute;inset:0;z-index:4;overflow:hidden;pointer-events:none}
 .trail-img{
-  position:absolute;top:0;left:0;width:clamp(120px,13vw,210px);height:auto;
+  position:absolute;top:0;left:0;width:clamp(180px,19.5vw,315px);height:auto;
   border-radius:6px;pointer-events:none;
-  filter:drop-shadow(0 16px 34px rgba(0,0,0,.22));
+  filter:drop-shadow(0 18px 40px rgba(0,0,0,.24));
   opacity:0;transform:translate(-50%,-50%) scale(.5) rotate(var(--r,0deg));
   transition:opacity .45s var(--ease),transform .65s var(--ease);
   will-change:transform,opacity;
 }
 .trail-img.show{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(var(--r,0deg))}
 .trail-img.hide{opacity:0;transform:translate(-50%,-50%) scale(1.08) rotate(var(--r,0deg))}
-@media(max-width:880px){ #trail-wrap{cursor:default} .trail-img{width:clamp(108px,34vw,182px)} }
+@media(max-width:880px){ #trail-wrap{cursor:default} .trail-img{width:clamp(162px,51vw,273px)} }
 
 /* ============ REVEAL ============ */
 .reveal{opacity:0;transform:translateY(34px)}
@@ -2826,8 +2833,16 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   }
   wrap.addEventListener('pointermove', function (e) { if (e.pointerType === 'touch') return; at(e.clientX, e.clientY); });
   wrap.addEventListener('pointerleave', function () { lastX = lastY = null; });
-  wrap.addEventListener('touchstart', function (e) { lastX = lastY = null; var t = e.touches[0]; at(t.clientX, t.clientY); }, { passive: true });
   wrap.addEventListener('touchmove', function (e) { var t = e.touches[0]; at(t.clientX, t.clientY); }, { passive: true });
+  // Touch devices: images appear on their own — auto-spawn at a random spot every second (no tap needed)
+  var coarse = window.matchMedia && matchMedia('(pointer: coarse)').matches;
+  if (coarse && !reduce) {
+    setInterval(function () {
+      var r = wrap.getBoundingClientRect();
+      if (r.bottom < 40 || r.top > (window.innerHeight - 40)) return;   // only while the section is on screen
+      spawn(r.width * (0.1 + Math.random() * 0.8), r.height * (0.14 + Math.random() * 0.72));
+    }, 1000);
+  }
 
   // One-time auto-demo when the section scrolls into view, so it isn't empty
   // and the interaction is discoverable.
