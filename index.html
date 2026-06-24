@@ -470,14 +470,17 @@ nav{
 .marquee-track{align-items:center}
 
 /* ============ CAPABILITY CAROUSEL (Sana-style) ============ */
-.caps{background:#FFFFFF;border:1px solid var(--line);border-radius:var(--radius-lg);margin:0 var(--pad);padding:clamp(56px,7vw,104px) 0;overflow:hidden}
+.caps{overflow:hidden}
+.caps-grid{display:grid;grid-template-columns:0.92fr 1.08fr;gap:clamp(36px,5vw,72px);align-items:center}
+.caps-grid #hero-app{margin-top:0;max-width:none;width:100%}
+@media(max-width:880px){.caps-grid{grid-template-columns:1fr;gap:clamp(28px,5vw,40px)}}
 
 /* ============ INFINITE CAROUSEL SYSTEM ============ */
 .ds-carousel{position:relative}
 .hero-grid .ds-carousel{width:100%}
-.caps .wrap{text-align:center}
-.caps .section-head{display:flex;flex-direction:column;align-items:center}
-.caps .lede{margin-left:auto;margin-right:auto}
+.caps .wrap{text-align:left}
+.caps .section-head{display:flex;flex-direction:column;align-items:flex-start}
+.caps .lede{margin-left:0;margin-right:0}
 .ds-rail{overflow:hidden;width:100%;cursor:grab;touch-action:pan-y}
 .ds-carousel.dragging .ds-rail{cursor:grabbing}
 .ds-track{
@@ -1204,7 +1207,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 <!-- ============ WORK SHOWCASE (below hero) ============ -->
 <section class="work-strip-section" id="work">
   <div class="wrap">
-    <h1 class="h-xl reveal">Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams, of all sizes.</h1>
+    <h1 class="h-xl reveal">Ongoing marketing design support for B2B tech and cybersecurity teams.</h1>
   </div>
   <div class="ds-carousel work-strip reveal" data-reveal-delay="0.18" data-speed="34" data-center>
     <div class="ds-rail"><div class="ds-track">
@@ -1260,12 +1263,13 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 <section>
   <div class="caps">
     <div class="wrap">
+      <div class="caps-grid">
       <div class="section-head reveal">
         <div class="eyebrow">Full-Suite Marketing Design</div>
         <h2 class="h-xl">Creative fulfillment<br /><span class="serif">for your entire team.</span></h2>
         <p class="lede" style="margin-top:20px">One subscription that keeps your creative output moving — no bottlenecks, no handoff delays, no waiting on design.</p>
       </div>
-      <div class="hero-app reveal" id="hero-app" style="margin-top:clamp(40px,5vw,72px)">
+      <div class="hero-app reveal" id="hero-app">
         <div class="app-stage">
   
           <!-- Panel 0: Your Entire Team -->
@@ -1365,39 +1369,6 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
           </button>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ WHY CHOOSE (image + feature list + stat) ============ -->
-<section style="padding-top:0">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">For B2B Tech &amp; Cybersecurity Teams</div>
-      <h2 class="h-xl">One creative partner.<br /><span class="serif">All design assets covered.</span></h2>
-    </div>
-    <div class="wcx reveal" data-autoloop data-interval="6500">
-      <div class="wcx-list">
-        <button class="wcx-item active" data-step="0">
-          <span class="wcx-bar"><i></i></span>
-          <h3>Every asset, handled.</h3>
-          <div class="wcx-desc"><p>From product mockups to pitch decks, ad campaigns to diagrams — one team covers every format you need.</p></div>
-        </button>
-        <button class="wcx-item" data-step="1">
-          <span class="wcx-bar"><i></i></span>
-          <h3>Your whole team, covered.</h3>
-          <div class="wcx-desc"><p>Add your whole team — marketing, design, sales, events — with a dedicated PM keeping every request on track.</p></div>
-        </button>
-        <button class="wcx-item" data-step="2">
-          <span class="wcx-bar"><i></i></span>
-          <h3>Specialists, not generalists.</h3>
-          <div class="wcx-desc"><p>Built for B2B tech and cybersecurity marketing — we know the landscape, the language, and what your buyers respond to.</p></div>
-        </button>
-      </div>
-      <div class="wcx-figure">
-        <img class="wcx-fig active" data-fig="0" src="wcx-everything.png" alt="Every asset, handled — full-suite design" loading="lazy" />
-        <img class="wcx-fig" data-fig="1" src="wcx-team.png" alt="Your whole team, covered" loading="lazy" />
-        <img class="wcx-fig" data-fig="2" src="wcx-specialists.png" alt="Specialists, not generalists — B2B tech and cybersecurity" loading="lazy" />
       </div>
     </div>
   </div>
@@ -1425,17 +1396,17 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 
     <div class="hhead head-split">
       <div>
-        <div class="eyebrow">Why Choose DesignSpace</div>
-        <h2 class="h-xl wch-head">Your dedicated design team.&nbsp;<br /><span class="serif">Built around your priorities.</span></h2>
+        <div class="eyebrow">Why DesignSpace</div>
+        <h2 class="h-xl wch-head">One creative partner.&nbsp;<br /><span class="serif">Built around your priorities.</span></h2>
       </div>
-      <p class="lede">Branded creatives whenever you need them — from a team that already knows your industry and keeps your output moving.</p>
+      <p class="lede">Unlimited design assets in your brand, on your team's schedule — created by an expert team of creatives with decades of tech &amp; startup experience.</p>
     </div>
 
     <div class="htrack">
       <article class="hcard">
         <div class="hcard-media"><img src="b2b-1-teams.png" alt="Built for tech & cyber marketers" loading="lazy" /></div>
         <h3 class="nowrap-d">Built for tech &amp; cyber marketers</h3>
-        <p>We're deeply rooted in your industry — the landscape, the language, and exactly what your buyers respond to.</p>
+        <p>B2B tech and cyber design specialists, since 2018 — we know your industry, terminology, and buyers.</p>
       </article>
 
       <article class="hcard">
@@ -1632,7 +1603,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Pricing</div>
-      <h2 class="h-xl">Dedicated design.<br /><span class="serif">Built around your priorities.</span></h2>
+      <h2 class="h-xl">Simple plans.<br /><span class="serif">Seriously creative output.</span></h2>
       <p class="lede" style="margin-top:20px">A flexible design subscription built for agile marketing teams.</p>
     </div>
 
@@ -1689,7 +1660,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         <div class="eyebrow">Our Process</div>
         <h2 class="h-xl">Your creative extension,<br /><span class="serif">at every step of the way.</span></h2>
       </div>
-      <p class="lede">From kickoff to delivery, one flexible subscription that flexes with your roadmap — no forms, no bottlenecks, no waiting on design.</p>
+      <p class="lede">From kickoff to ongoing asset delivery, one subscription that adapts to your roadmap — no forms, no bottlenecks, no waiting on design.</p>
     </div>
     <div class="reveal" data-autoloop data-interval="6500">
       <div class="proc-figure">
