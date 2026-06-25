@@ -5,10 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>DesignSpace — Tech Marketing, Designed Better</title>
 <meta name="description" content="Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams. One subscription, all design assets covered." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
-<link rel="icon" type="image/png" href="https://framerusercontent.com/images/jPhwNH3UTuBDYSHmKOBd1KZxkUk.png?width=64&height=64" />
+<link rel="canonical" href="https://designspaceagency.com/" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="theme-color" content="#fafafa" />
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="DesignSpace" />
+<meta property="og:title" content="DesignSpace — Tech Marketing, Designed Better" />
+<meta property="og:description" content="Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams. One subscription, all design assets covered." />
+<meta property="og:url" content="https://designspaceagency.com/" />
+<meta property="og:image" content="https://designspaceagency.com/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="DesignSpace — design subscription for B2B tech and cybersecurity marketing teams" />
+<meta property="og:locale" content="en_US" />
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="DesignSpace — Tech Marketing, Designed Better" />
+<meta name="twitter:description" content="One subscription, all design assets covered — for B2B tech and cybersecurity marketing teams." />
+<meta name="twitter:image" content="https://designspaceagency.com/og-image.png" />
+<link rel="preload" href="assets/fonts/Inter-400.woff" as="font" type="font/woff" crossorigin />
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:300;font-display:swap;src:url('assets/fonts/Inter-300.woff') format('woff')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/Inter-400.woff') format('woff')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/Inter-500.woff') format('woff')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/Inter-600.woff') format('woff')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/Inter-700.woff') format('woff')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:800;font-display:swap;src:url('assets/fonts/Inter-800.woff') format('woff')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/JetBrainsMono-500.woff') format('woff')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/JetBrainsMono-700.woff') format('woff')}
+</style>
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
 <style>
 /* ============ DESIGN TOKENS ============ */
 :root{
@@ -97,7 +128,7 @@ h1,h2,h3,h4,h5,h6{font-weight:500;letter-spacing:-.01em}
 }
 .eyebrow::before{
   content:"";width:13px;height:13px;flex:none;
-  background:url('https://framerusercontent.com/images/jPhwNH3UTuBDYSHmKOBd1KZxkUk.png?width=64&height=64') center/contain no-repeat;
+  background:url('mark.png') center/contain no-repeat;
 }
 
 /* ============ LAYOUT ============ */
@@ -293,57 +324,6 @@ nav{
 .hero-ctas .btn-ghost{background:var(--bg-soft);border-color:transparent}
 .hero-ctas .btn-ghost:hover{background:var(--ink);color:var(--bg)}
 
-/* tilted gradient panel with overlaid design mockups */
-.hero-visual{
-  position:relative;align-self:center;
-  display:flex;justify-content:flex-end;
-  min-height:clamp(320px,38vw,520px);
-}
-/* ---- 3D floating-card conveyor ---- */
-.hc-stage{
-  position:relative;width:100%;
-  height:clamp(360px,40vw,520px);
-  border:1px solid var(--line);
-  background:var(--bg-soft);
-  background-image:radial-gradient(rgba(16,16,16,.07) 1px,transparent 1px);
-  background-size:18px 18px;
-  border-radius:clamp(20px,2.4vw,30px);
-  overflow:hidden;
-  perspective:1200px;perspective-origin:50% 45%;
-  transform-style:preserve-3d;
-}
-.hc-card{
-  position:absolute;top:50%;left:50%;
-  width:clamp(190px,23vw,300px);aspect-ratio:4/5;
-  border-radius:var(--hc-radius,22px);overflow:hidden;
-  background:var(--bg-soft);
-  box-shadow:0 30px 60px -20px rgba(0,0,0,.25);
-  will-change:transform,opacity;transform-style:preserve-3d;backface-visibility:hidden;
-}
-.hc-card img,.hc-card video{width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none}
-.hc-stage:hover .hc-card{transition:transform .45s var(--ease)}
-.hc-cap{
-  position:absolute;left:0;right:0;bottom:16px;text-align:center;
-  color:#fff;font-weight:600;font-size:clamp(20px,2vw,28px);letter-spacing:-.01em;
-  text-shadow:0 2px 14px rgba(0,0,0,.45);pointer-events:none;
-}
-.hero-gradient{
-  position:relative;width:min(100%,460px);margin-left:auto;
-  aspect-ratio:4/5;border-radius:30px;overflow:hidden;
-  box-shadow:0 60px 110px -55px rgba(0,0,0,.4);
-  transform:rotate(2.4deg);
-  transition:transform .7s var(--ease);
-}
-.hero-card:hover .hero-gradient{transform:rotate(1.3deg) translateY(-4px)}
-.hero-art{
-  position:absolute;border-radius:12px;
-  box-shadow:0 24px 50px -18px rgba(0,0,0,.35);
-  transition:transform .8s var(--ease);
-}
-.hero-art-a{width:60%;left:9%;top:13%;transform:rotate(-6deg);z-index:2}
-.hero-art-b{width:50%;right:7%;bottom:12%;transform:rotate(6deg);z-index:1}
-.hero-card:hover .hero-art-a{transform:rotate(-7.5deg) translateY(-5px)}
-.hero-card:hover .hero-art-b{transform:rotate(7.5deg) translateY(-3px)}
 
 @media(max-width:860px){
   /* simplified mobile hero: no collage, centered copy, compact card lifted up */
@@ -367,7 +347,7 @@ nav{
   .work-strip-section{padding-top:36px}
 }
 .work-strip-section .wrap{text-align:center;margin-bottom:clamp(40px,5vw,64px)}
-.work-strip-section h1{max-width:26ch;margin:0 auto;color:var(--ink)}
+.work-strip-section h2{max-width:26ch;margin:0 auto;color:var(--ink)}
 .work-strip{width:100%}
 .work-strip .cap-card{width:min(360px,78vw)}
 
@@ -474,8 +454,8 @@ nav{
 .caps-grid{display:grid;grid-template-columns:minmax(0,0.95fr) minmax(0,1.1fr);gap:clamp(36px,5vw,72px);align-items:center}
 .caps-grid #hero-app{margin-top:0;max-width:none;width:100%}
 br.capsbr{display:none}
-@media(min-width:881px){br.capsbr{display:inline}}
-@media(max-width:880px){.caps-grid{grid-template-columns:1fr;gap:clamp(28px,5vw,40px)}}
+@media(min-width:600px){br.capsbr{display:inline}}
+@media(max-width:1280px){.caps{overflow:visible}.caps-grid{grid-template-columns:1fr;gap:clamp(28px,5vw,40px)}.caps-grid #hero-app{max-width:840px;margin-left:auto;margin-right:auto}}
 
 /* ============ INFINITE CAROUSEL SYSTEM ============ */
 .ds-carousel{position:relative}
@@ -483,6 +463,7 @@ br.capsbr{display:none}
 .caps .wrap{text-align:left}
 .caps .section-head{display:flex;flex-direction:column;align-items:flex-start}
 .caps .lede{margin-left:0;margin-right:0;max-width:60ch}
+@media(max-width:1280px){.caps .wrap{text-align:center}.caps .section-head{align-items:center}.caps .lede{margin-left:auto;margin-right:auto}}
 .ds-rail{overflow:hidden;width:100%;cursor:grab;touch-action:pan-y}
 .ds-carousel.dragging .ds-rail{cursor:grabbing}
 .ds-track{
@@ -624,8 +605,7 @@ br.capsbr{display:none}
   .hcard:hover .hcard-media img,
   .cap-card:hover,
   .cap-card:hover .cap-img{transform:none}
-  .proc-figure:hover .proc-fig.active,
-  .wcx-figure:hover .wcx-fig.active{transform:translate(-50%,-50%)}
+  .proc-figure:hover .proc-fig.active{transform:translate(-50%,-50%)}
 }
 @media(max-width:880px){
   .hwrap{padding:clamp(72px,11vw,110px) 0}
@@ -1005,14 +985,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   font-size:12.5px;font-weight:600;
 }
 .int-ico img{width:18px;height:18px;object-fit:contain}
-/* brand favicons (Lovable, Jitter): monochrome to match the B&W icon set */
-.int-ico-fav img{width:20px;height:20px;object-fit:contain;border-radius:5px;filter:grayscale(1) contrast(1.05)}
-.int-ico.ps img,.int-ico.ai img,.int-ico.id img,.int-ico.ae img{width:24px;height:24px;border-radius:5px}
 .int-ico svg{width:18px;height:18px;stroke:var(--ink);stroke-width:1.6;fill:none}
-.int-ico.ps{background:#001E36;color:#31A8FF;border:none}
-.int-ico.ai{background:#330000;color:#FF9A00;border:none}
-.int-ico.id{background:#49021F;color:#FF3366;border:none}
-.int-ico.ae{background:#00005B;color:#9999FF;border:none}
 @media(max-width:980px){.int-panel{grid-template-columns:1fr}.int-grid{grid-template-columns:repeat(2,1fr)}}
 .int-more{
   display:none;align-items:center;justify-content:space-between;width:100%;
@@ -1037,52 +1010,6 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 }
 .marquee img{-webkit-user-drag:none;user-select:none}
 
-/* ============ WHY CHOOSE (auto-loop list + image) ============ */
-.wcx{
-  display:grid;grid-template-columns:1fr 1.05fr;
-  gap:clamp(28px,4.5vw,72px);align-items:stretch;
-  margin-top:clamp(36px,4vw,56px);
-}
-.wcx-list{display:flex;flex-direction:column;justify-content:flex-start}
-/* desktop/tablet: spread the 3 points to fill the image height */
-@media(min-width:881px){.wcx-list{justify-content:space-between}}
-.wcx-item{
-  display:block;text-align:left;cursor:pointer;background:none;width:100%;
-  position:relative;padding:clamp(18px,2.2vw,26px) 0;
-  border-top:1px solid var(--line);
-}
-/* progress bar identical to Our Process: grey track on top, fills ink when active */
-.wcx-bar{position:absolute;top:-1px;left:0;right:0;height:2px;background:var(--line);overflow:hidden}
-.wcx-bar i{display:block;height:100%;width:0;background:var(--ink)}
-.wcx-item.active .wcx-bar i{width:100%;transition:width var(--aloop-dur,6500ms) linear}
-.wcx-item h3{font-size:clamp(1.25rem,2vw,var(--fs-h5));letter-spacing:-.02em;line-height:1.2;transition:color .45s var(--ease)}
-.wcx-item:not(.active) h3{color:var(--ink-faint)}
-/* descriptions stay visible whether or not the item is active (like Our Process) */
-.wcx-desc{margin-top:12px}
-.wcx-desc > p{color:var(--ink-soft);font-size:14.5px;line-height:1.55;max-width:48ch}
-.wcx-figure{
-  position:relative;border:1px solid var(--line);
-  border-radius:var(--radius-lg);overflow:hidden;
-  background:var(--bg-soft);
-  background-image:radial-gradient(rgba(16,16,16,.07) 1px,transparent 1px);
-  background-size:18px 18px;
-  min-height:clamp(360px,42vw,540px);
-}
-.wcx-fig{
-  position:absolute;top:50%;left:50%;
-  max-width:82%;max-height:82%;width:auto;height:auto;
-  border-radius:12px;
-  box-shadow:0 30px 60px -28px rgba(0,0,0,.28);
-  transform:translate(-50%,-50%);
-  opacity:0;transition:opacity .7s var(--ease),transform .6s var(--ease);
-}
-.wcx-fig.active{opacity:1}
-.wcx-figure:hover .wcx-fig.active{transform:translate(-50%,-50%) translateY(-6px) scale(1.02)}
-@media(max-width:880px){
-  .wcx{grid-template-columns:1fr;gap:24px}
-  .wcx-figure{order:-1;min-height:300px}
-  .wcx-item{padding:clamp(16px,3vw,22px) 0}
-}
 
 /* ============ ASSETS COLLAGE (word wheel) ============ */
 .assets-wrap{
@@ -1114,15 +1041,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   white-space:nowrap;
 }
 @keyframes wheel{to{transform:translateY(calc(-50% - 7px))}}
-.float-img{
-  position:absolute;object-fit:contain;
-  filter:drop-shadow(0 16px 30px rgba(0,0,0,.20));
-  z-index:2;will-change:transform;
-}
 @media(max-width:880px){
   .assets-center{flex-direction:column;gap:6px;text-align:center}
-  .float-img.m-hide{display:none}
-  .float-img{opacity:.92;width:22%!important;min-width:0!important}
 }
 /* ---- Assets variant B: cursor image trail ---- */
 #trail-wrap{
@@ -1192,14 +1112,14 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       <p class="clients-label">Trusted by leading tech<br />and cybersecurity teams</p>
       <div class="marquee">
         <div class="marquee-track" id="marquee-track">
-          <img class="client-logo" src="https://framerusercontent.com/images/LRoJk6Nmk71OZIJsfRIUJIFCrY4.png?width=2111&height=519" alt="OnePlus" loading="lazy" />
-          <img class="client-logo" src="https://framerusercontent.com/images/Y0G7v3UxyD48fS3GY331AhQCJ8.png?width=4096&height=660" alt="Seemplicity" loading="lazy" />
-          <img class="client-logo" src="https://framerusercontent.com/images/5DGhMkZ7Wsh7VHCuNTxbQPaWa7g.png?width=2377&height=446" alt="Hyperproof" loading="lazy" />
-          <img class="client-logo" src="https://framerusercontent.com/images/m2SE8EN7IeuuhusPlMMexsDGi9s.png?width=1115&height=241" alt="MazeBolt" loading="lazy" />
-          <img class="client-logo" src="https://framerusercontent.com/images/vigE96GowV0s18sNBdKTBseaHJ4.png?width=900&height=202" alt="Kasada" loading="lazy" />
-          <img class="client-logo" src="https://framerusercontent.com/images/qLqgs8ptSp8F6VY2envbKZ0Cg.png?width=1920&height=423" alt="Client logo" loading="lazy" />
-          <img class="client-logo" src="https://framerusercontent.com/images/O5RSL9vzuR67jB3g9ESCiwkbok.svg?width=225&height=41" alt="Client logo" loading="lazy" />
-          <img class="client-logo" src="https://framerusercontent.com/images/KPQv29zchiWzL9RdKzNAjllRZlE.png?width=600&height=148" alt="Client logo" loading="lazy" />
+          <img class="client-logo" src="assets/img/LRoJk6Nmk71OZIJsfRIUJIFCrY4-da40c16c.webp" alt="OnePlus" loading="lazy" />
+          <img class="client-logo" src="assets/img/Y0G7v3UxyD48fS3GY331AhQCJ8-ecaeb613.webp" alt="Seemplicity" loading="lazy" />
+          <img class="client-logo" src="assets/img/5DGhMkZ7Wsh7VHCuNTxbQPaWa7g-81564dfe.webp" alt="Hyperproof" loading="lazy" />
+          <img class="client-logo" src="assets/img/m2SE8EN7IeuuhusPlMMexsDGi9s-472ecb06.webp" alt="MazeBolt" loading="lazy" />
+          <img class="client-logo" src="assets/img/vigE96GowV0s18sNBdKTBseaHJ4-f8cc22ab.webp" alt="Kasada" loading="lazy" />
+          <img class="client-logo" src="assets/img/qLqgs8ptSp8F6VY2envbKZ0Cg-2c831bec.webp" alt="Client logo" loading="lazy" />
+          <img class="client-logo" src="assets/img/O5RSL9vzuR67jB3g9ESCiwkbok-f3728933.svg" alt="Client logo" loading="lazy" />
+          <img class="client-logo" src="assets/img/KPQv29zchiWzL9RdKzNAjllRZlE-82abc148.webp" alt="Client logo" loading="lazy" />
         </div>
       </div>
     </div>
@@ -1209,49 +1129,49 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 <!-- ============ WORK SHOWCASE (below hero) ============ -->
 <section class="work-strip-section" id="work">
   <div class="wrap">
-    <h1 class="h-xl reveal">Ongoing marketing design support for B2B tech and cybersecurity teams.</h1>
+    <h2 class="h-xl reveal">Ongoing marketing design support for B2B tech and cybersecurity teams.</h2>
   </div>
   <div class="ds-carousel work-strip reveal" data-reveal-delay="0.18" data-speed="34" data-center>
     <div class="ds-rail"><div class="ds-track">
       <div class="cap-card reveal">
-        <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=660&height=900" alt="Product mockups client work" loading="lazy" /></div>
+        <div class="cap-imgwrap"><img class="cap-img" src="assets/img/WBexTo7BNNhjQUCR9Ppjm5lTRT4-ee7db6e4.webp" alt="Product mockup designs for a B2B tech marketing team" loading="lazy" /></div>
         <span class="cap-pill">Product Mockups</span>
-        <div class="cap-client"><img src="https://framerusercontent.com/images/Gtuq5tWbrXabiSQIig8vrihPbYY.png?width=2377&height=446" alt="Hyperproof" loading="lazy" /></div>
+        <div class="cap-client"><img src="assets/img/Gtuq5tWbrXabiSQIig8vrihPbYY-ab125d74.webp" alt="Hyperproof" loading="lazy" /></div>
       </div>
       <div class="cap-card reveal">
-        <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/n0YP32ZIZM8bBOcyoaarS35Ws.png?width=660&height=900" alt="Reports and docs client work" loading="lazy" /></div>
+        <div class="cap-imgwrap"><img class="cap-img" src="assets/img/n0YP32ZIZM8bBOcyoaarS35Ws-d8f5c502.webp" alt="Report and document design for a cybersecurity marketing team" loading="lazy" /></div>
         <span class="cap-pill">Reports + Docs</span>
-        <div class="cap-client"><img src="https://framerusercontent.com/images/S7eiYkINZ5Q4uBo75a3rRpHObdU.svg?width=175&height=40" alt="Client logo" loading="lazy" /></div>
+        <div class="cap-client"><img src="assets/img/S7eiYkINZ5Q4uBo75a3rRpHObdU-1fa9ad79.svg" alt="Client logo" loading="lazy" /></div>
       </div>
       <div class="cap-card reveal">
-        <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/w2PBu9y5PW7w0pJMBg20EXzq0VE.png?width=660&height=900" alt="Ad campaigns client work" loading="lazy" /></div>
+        <div class="cap-imgwrap"><img class="cap-img" src="assets/img/w2PBu9y5PW7w0pJMBg20EXzq0VE-6dab2025.webp" alt="Ad campaign creative for a B2B tech marketing team" loading="lazy" /></div>
         <span class="cap-pill">Ad Campaigns</span>
-        <div class="cap-client"><img src="https://framerusercontent.com/images/vUL4UKtSxzNpY4BTablrxP3TD5Y.png?width=1886&height=407" alt="Client logo" loading="lazy" /></div>
+        <div class="cap-client"><img src="assets/img/vUL4UKtSxzNpY4BTablrxP3TD5Y-bab2594f.webp" alt="Client logo" loading="lazy" /></div>
       </div>
       <div class="cap-card reveal">
-        <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=660&height=900" alt="Diagrams client work" loading="lazy" /></div>
+        <div class="cap-imgwrap"><img class="cap-img" src="assets/img/loFtog2CtM8F5a28fWzmscA8Fo4-72707188.webp" alt="Technical diagram design for a cybersecurity brand" loading="lazy" /></div>
         <span class="cap-pill">Diagrams</span>
-        <div class="cap-client"><img src="https://framerusercontent.com/images/ybMs8JWdsWa1LjoYzj3wZKTWQ.jpg?width=800&height=129" alt="Client logo" loading="lazy" /></div>
+        <div class="cap-client"><img src="assets/img/ybMs8JWdsWa1LjoYzj3wZKTWQ-73183214.webp" alt="Client logo" loading="lazy" /></div>
       </div>
       <div class="cap-card reveal">
-        <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=660&height=900" alt="Social content client work" loading="lazy" /></div>
+        <div class="cap-imgwrap"><img class="cap-img" src="assets/img/ECMooFSDEqvz15IlouMY6pnsZPA-38fe58c8.webp" alt="Social media content design for a B2B tech brand" loading="lazy" /></div>
         <span class="cap-pill">Social Content</span>
-        <div class="cap-client"><img src="https://framerusercontent.com/images/GImBoI5JvavtbCMVJpSJ7qXfd3A.svg?width=420&height=76" alt="Client logo" loading="lazy" /></div>
+        <div class="cap-client"><img src="assets/img/GImBoI5JvavtbCMVJpSJ7qXfd3A-42b2421d.svg" alt="Client logo" loading="lazy" /></div>
       </div>
       <div class="cap-card reveal">
-        <div class="cap-imgwrap"><img class="cap-img" src="https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=660&height=900" alt="Reports and docs client work" loading="lazy" /></div>
+        <div class="cap-imgwrap"><img class="cap-img" src="assets/img/aYZkjqtd31W6wvchkfz6CTB5I-02e9471e.webp" alt="Report and document design for a cybersecurity marketing team" loading="lazy" /></div>
         <span class="cap-pill">Reports + Docs</span>
-        <div class="cap-client"><img src="https://framerusercontent.com/images/TDLRhJgtdEMI1bJm76cVSEljj1E.png?width=900&height=202" alt="Kasada" loading="lazy" /></div>
+        <div class="cap-client"><img src="assets/img/TDLRhJgtdEMI1bJm76cVSEljj1E-dfc8c4d4.webp" alt="Kasada" loading="lazy" /></div>
       </div>
       <div class="cap-card reveal">
-        <div class="cap-imgwrap"><img class="cap-img" src="oneplus-card.jpg" alt="OnePlus spec sheets client work" loading="lazy" /></div>
+        <div class="cap-imgwrap"><img class="cap-img" src="oneplus-card.webp" alt="OnePlus spec sheets client work" loading="lazy" /></div>
         <span class="cap-pill">Spec Sheets</span>
-        <div class="cap-client"><img src="oneplus-logo.png?v=3" alt="OnePlus" loading="lazy" /></div>
+        <div class="cap-client"><img src="oneplus-logo.webp?v=3" alt="OnePlus" loading="lazy" /></div>
       </div>
       <div class="cap-card reveal">
-        <div class="cap-imgwrap"><img class="cap-img" src="cybersixgill-card.jpg" alt="Cybersixgill digital content client work" loading="lazy" /></div>
+        <div class="cap-imgwrap"><img class="cap-img" src="cybersixgill-card.webp" alt="Cybersixgill digital content client work" loading="lazy" /></div>
         <span class="cap-pill">Digital Content</span>
-        <div class="cap-client"><img src="cybersixgill-logo.png?v=3" alt="Cybersixgill" loading="lazy" /></div>
+        <div class="cap-client"><img src="cybersixgill-logo.webp?v=3" alt="Cybersixgill" loading="lazy" /></div>
       </div>
     </div></div>
     <div class="ds-controls">
@@ -1278,19 +1198,19 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
           <div class="app-panel" data-panel="0">
             <div class="app-row">
               <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
-              <img class="app-avatar" src="https://framerusercontent.com/images/LvgYJ9klzRyqxco2w5piarzLq8.webp?width=300&height=300" alt="Pablo Picasso" loading="lazy" />
+              <img class="app-avatar" src="assets/img/LvgYJ9klzRyqxco2w5piarzLq8-7706785a.webp" alt="Pablo Picasso" loading="lazy" />
               <div><div class="row-title">Pablo Picasso</div><div class="row-sub">CMO</div></div>
               <div class="row-end"><span class="app-date app-team-count">2 Active Projects</span></div>
             </div>
             <div class="app-row">
               <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
-              <img class="app-avatar" src="https://framerusercontent.com/images/QMJQby2GSM1LxBOUQSRvXkPky04.png?width=300&height=300" alt="Leonardo da Vinci" loading="lazy" style="filter:grayscale(100%)" />
+              <img class="app-avatar" src="assets/img/QMJQby2GSM1LxBOUQSRvXkPky04-8f88edc6.webp" alt="Leonardo da Vinci" loading="lazy" style="filter:grayscale(100%)" />
               <div><div class="row-title">Leonardo da Vinci</div><div class="row-sub">VP Marketing</div></div>
               <div class="row-end"><span class="app-date app-team-count">5 Active Projects</span></div>
             </div>
             <div class="app-row">
               <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
-              <img class="app-avatar" src="https://framerusercontent.com/images/kjtCn1FFkVpSiCoaISG00zLqJJY.jpg?width=300&height=300" alt="Andy Warhol" loading="lazy" />
+              <img class="app-avatar" src="assets/img/kjtCn1FFkVpSiCoaISG00zLqJJY-13393f85.webp" alt="Andy Warhol" loading="lazy" />
               <div><div class="row-title">Andy Warhol</div><div class="row-sub">Content Marketer</div></div>
               <div class="row-end"><span class="app-date app-team-count">9 Active Projects</span></div>
             </div>
@@ -1406,37 +1326,37 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 
     <div class="htrack">
       <article class="hcard">
-        <div class="hcard-media"><img src="b2b-1-teams.png" alt="Built for tech & cyber marketers" loading="lazy" /></div>
+        <div class="hcard-media"><img src="b2b-1-teams.webp" alt="Built for tech & cyber marketers" loading="lazy" /></div>
         <h3 class="nowrap-d">Built for tech &amp; cyber marketers</h3>
         <p>B2B tech and cyber design specialists, since 2018 — we know your industry, terminology, and buyers.</p>
       </article>
 
       <article class="hcard">
-        <div class="hcard-media"><img src="b2b-2-quality.png" alt="Founder-led quality control" loading="lazy" /></div>
+        <div class="hcard-media"><img src="b2b-2-quality.webp" alt="Founder-led quality control" loading="lazy" /></div>
         <h3>Founder-led quality control</h3>
         <p>Every deliverable is reviewed and refined by our creative director — the person who set the standard in the first place.</p>
       </article>
 
       <article class="hcard">
-        <div class="hcard-media"><img src="b2b-3-contact.png" alt="One point of contact. Always." loading="lazy" /></div>
+        <div class="hcard-media"><img src="b2b-3-contact.webp" alt="One point of contact. Always." loading="lazy" /></div>
         <h3>One point of contact. Always.</h3>
         <p>No black box. Every account has a dedicated project manager who knows your priorities and keeps things moving.</p>
       </article>
 
       <article class="hcard">
-        <div class="hcard-media"><img src="b2b-4-visibility.png" alt="Full visibility at every stage" loading="lazy" /></div>
+        <div class="hcard-media"><img src="b2b-4-visibility.webp" alt="Full visibility at every stage" loading="lazy" /></div>
         <h3>Full visibility at every stage</h3>
         <p>Your Asana board shows exactly where every task sits — in progress, awaiting assets, or ready for review. No chasing updates.</p>
       </article>
 
       <article class="hcard">
-        <div class="hcard-media"><img src="b2b-5-subscription.png" alt="A subscription, not a contract" loading="lazy" /></div>
+        <div class="hcard-media"><img src="b2b-5-subscription.webp" alt="A subscription, not a contract" loading="lazy" /></div>
         <h3>A subscription, not a contract</h3>
         <p>One flat monthly rate, full flexibility. Upgrade, downgrade, or pause as your roadmap changes — 30 days notice, anytime.</p>
       </article>
 
       <article class="hcard">
-        <div class="hcard-media"><img src="b2b-6-assets.png" alt="All design assets covered" loading="lazy" /></div>
+        <div class="hcard-media"><img src="b2b-6-assets.webp" alt="All design assets covered" loading="lazy" /></div>
         <h3>All design assets covered</h3>
         <p>Decks, reports, ads, carousels, eBooks, diagrams — whatever your marketing needs, one team handles every format.</p>
       </article>
@@ -1528,10 +1448,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     <div class="ds-rail"><div class="ds-track">
         <div class="testi-slide">
           <div class="testi-left">
-            <img class="testi-logo" src="https://framerusercontent.com/images/8zhl4ZEYIhRST3NVtAfUiaylmQ.jpg?width=384&height=100" alt="Client logo" loading="lazy" />
+            <img class="testi-logo" src="assets/img/8zhl4ZEYIhRST3NVtAfUiaylmQ-c6c3c50c.webp" alt="Client logo" loading="lazy" />
             <p class="testi-quote">&quot;I have a design background, so my expectations of design deliverables are really high. DesignSpace is not only a fantastic design agency, they are also super organized and highly communicative. They exceeded my expectations and I will be recommending them to anyone that needs high quality creatives.&quot;</p>
             <div class="testi-person">
-              <img class="testi-avatar" src="https://framerusercontent.com/images/ZDYG4ezbbJbAmxQLpJIY0rSeg.jpeg?width=200&height=200" alt="Ashley Garner" loading="lazy" />
+              <img class="testi-avatar" src="assets/img/ZDYG4ezbbJbAmxQLpJIY0rSeg-56b5a463.webp" alt="Ashley Garner" loading="lazy" />
               <div><div class="name">Ashley Garner</div><div class="role">Head of Marketing</div></div>
             </div>
           </div>
@@ -1539,10 +1459,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         </div>
         <div class="testi-slide">
           <div class="testi-left">
-            <img class="testi-logo" src="https://framerusercontent.com/images/ooRXSSEbBY36so0rOziZnvhXgpY.jpg?width=384&height=62" alt="Client logo" loading="lazy" />
+            <img class="testi-logo" src="assets/img/ooRXSSEbBY36so0rOziZnvhXgpY-e86d4499.webp" alt="Client logo" loading="lazy" />
             <p class="testi-quote">&quot;Working with DesignSpace is an absolute dream. Their ability to take our rudimentary ideas and turn them into well-executed designs is impeccable. More than that, their cooperation, responsiveness and positive attitude is something I've never encountered with a design team before. They go above and beyond to make sure we get exactly what we want out of every project and always meet deadlines.&quot;</p>
             <div class="testi-person">
-              <img class="testi-avatar" src="https://framerusercontent.com/images/03V563TMCab5KM5bGDq5C75Hpk.jpeg?width=200&height=200" alt="Jessica Amado" loading="lazy" />
+              <img class="testi-avatar" src="assets/img/03V563TMCab5KM5bGDq5C75Hpk-4e30623b.webp" alt="Jessica Amado" loading="lazy" />
               <div><div class="name">Jessica Amado</div><div class="role">Content Marketing Manager</div></div>
             </div>
           </div>
@@ -1550,10 +1470,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         </div>
         <div class="testi-slide">
           <div class="testi-left">
-            <img class="testi-logo" src="https://framerusercontent.com/images/Xo4vyu2NdnvklJXioPtxv95HBg.svg?width=346&height=78" alt="Client logo" loading="lazy" />
+            <img class="testi-logo" src="assets/img/Xo4vyu2NdnvklJXioPtxv95HBg-b122f3b8.svg" alt="Client logo" loading="lazy" />
             <p class="testi-quote">&quot;10/10 recommend DesignSpace for cybersecurity marketing teams. They are genuinely a pleasure to work with and consistently deliver high-quality, polished design with a clean, modern look that fits the cybersecurity space. If you want dependable and consistent top-tier creative that makes your marketing look sharp, work with DesignSpace.&quot;</p>
             <div class="testi-person">
-              <img class="testi-avatar" src="https://framerusercontent.com/images/87IicYhjORN31aBABFqtJXvKGCI.jpeg?width=200&height=200" alt="Alexa Bleecker" loading="lazy" />
+              <img class="testi-avatar" src="assets/img/87IicYhjORN31aBABFqtJXvKGCI-6d624e30.webp" alt="Alexa Bleecker" loading="lazy" />
               <div><div class="name">Alexa Bleecker</div><div class="role">VP Marketing</div></div>
             </div>
           </div>
@@ -1561,10 +1481,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         </div>
         <div class="testi-slide">
           <div class="testi-left">
-            <img class="testi-logo" src="https://framerusercontent.com/images/fIEJ878nmyUdkya0EdDHcl8JuXQ.png?width=384&height=111" alt="Client logo" loading="lazy" />
+            <img class="testi-logo" src="assets/img/fIEJ878nmyUdkya0EdDHcl8JuXQ-59cca459.webp" alt="Client logo" loading="lazy" />
             <p class="testi-quote">&quot;Working with DesignSpace has been an absolute pleasure. Having a design partner that truly understands the unique challenges of cybersecurity marketing makes it easy to strike the balance between compelling visual appeal and the stringent expectations of a highly technical audience. The team has especially appreciated the flexibility, thoughtful input, and multiple iterations, templates, and ideas that have supported our brand identity.&quot;</p>
             <div class="testi-person">
-              <img class="testi-avatar" src="https://framerusercontent.com/images/hGaaJpcSTsbo5JXVNxtPNsBbZCE.jpeg?width=200&height=200" alt="Celyn Matienzo" loading="lazy" />
+              <img class="testi-avatar" src="assets/img/hGaaJpcSTsbo5JXVNxtPNsBbZCE-82f89e25.webp" alt="Celyn Matienzo" loading="lazy" />
               <div><div class="name">Celyn Matienzo</div><div class="role">Content Strategist</div></div>
             </div>
           </div>
@@ -1572,10 +1492,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         </div>
         <div class="testi-slide">
           <div class="testi-left">
-            <img class="testi-logo" src="oneplus-logo.png?v=3" alt="OnePlus" loading="lazy" />
+            <img class="testi-logo" src="oneplus-logo.webp?v=3" alt="OnePlus" loading="lazy" />
             <p class="testi-quote">&quot;When our internal design team reached its maximum capacity, DesignSpace stepped in to assist us with some of our more extensive creative requirements. Their reliability and creativity proved to be an invaluable asset during our new product launches and campaigns.&quot;</p>
             <div class="testi-person">
-              <img class="testi-avatar" src="https://framerusercontent.com/images/y6UvO971xfbVqxuxOedSFupTrzo.jpeg?width=200&height=200" alt="Carlos Zúñiga" loading="lazy" />
+              <img class="testi-avatar" src="assets/img/y6UvO971xfbVqxuxOedSFupTrzo-579fd5c3.webp" alt="Carlos Zúñiga" loading="lazy" />
               <div><div class="name">Carlos Zúñiga</div><div class="role">Creative Director</div></div>
             </div>
           </div>
@@ -1583,10 +1503,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
         </div>
         <div class="testi-slide">
           <div class="testi-left">
-            <img class="testi-logo" src="cybersixgill-logo.png?v=3" alt="Cybersixgill" loading="lazy" />
+            <img class="testi-logo" src="cybersixgill-logo.webp?v=3" alt="Cybersixgill" loading="lazy" />
             <p class="testi-quote">&quot;DesignSpace's creativity shines through every design, turning simple ideas into captivating visual narratives, without compromising on outstanding deliverables. I feel like they're an extension of my team rather than just an outsourced agency and genuinely invested in the success of my projects.&quot;</p>
             <div class="testi-person">
-              <img class="testi-avatar" src="https://framerusercontent.com/images/6yQkO1N9fDokUhPaUIoa332nHb8.jpeg?width=200&height=200" alt="Tirtza Bensoussan" loading="lazy" />
+              <img class="testi-avatar" src="assets/img/6yQkO1N9fDokUhPaUIoa332nHb8-232c5286.webp" alt="Tirtza Bensoussan" loading="lazy" />
               <div><div class="name">Tirtza Bensoussan</div><div class="role">Director of Demand Generation</div></div>
             </div>
           </div>
@@ -1612,25 +1532,25 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     <div class="palt reveal" data-palt>
       <div class="palt-toggle" role="tablist" aria-label="Pricing tiers">
         <span class="palt-ind" data-ind></span>
-        <button class="palt-seg" data-tier="0">Pro</button>
-        <button class="palt-seg active" data-tier="1">Extra</button>
+        <button class="palt-seg active" data-tier="0">Pro</button>
+        <button class="palt-seg" data-tier="1">Extra</button>
         <button class="palt-seg" data-tier="2">Mega</button>
       </div>
 
       <div class="palt-grid">
         <!-- LEFT: the changing plan -->
-        <div class="palt-card palt-plan popular" data-plan>
+        <div class="palt-card palt-plan" data-plan>
           <div class="palt-name-row">
-            <span class="palt-name" data-name>Extra</span>
-            <span class="palt-badge" data-badge>Most popular</span>
+            <span class="palt-name" data-name>Pro</span>
+            <span class="palt-badge" data-badge style="display:none">Most popular</span>
           </div>
-          <p class="palt-desc" data-desc>More bandwidth for teams producing content at higher volume.</p>
-          <div class="palt-price" data-price>$8,999 <span>/ month</span></div>
+          <p class="palt-desc" data-desc>Steady creative support for teams with consistent output needs.</p>
+          <div class="palt-price" data-price>$4,999 <span>/ month</span></div>
           <p class="palt-flex">Upgrade, downgrade, pause, or cancel anytime</p>
           <ul class="palt-specs">
-            <li class="palt-spec"><span>Hours / month</span><b data-hours>80 hours</b></li>
-            <li class="palt-spec"><span>Projects / month</span><b data-projects>6–12 projects</b></li>
-            <li class="palt-spec"><span>Rollover / month</span><b data-rollover>Up to 15 hours</b></li>
+            <li class="palt-spec"><span>Hours / month</span><b data-hours>40 hours</b></li>
+            <li class="palt-spec"><span>Projects / month</span><b data-projects>4–8 projects</b></li>
+            <li class="palt-spec"><span>Rollover / month</span><b data-rollover>Up to 10 hours</b></li>
           </ul>
           <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
         </div>
@@ -1666,9 +1586,9 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     </div>
     <div class="reveal" data-autoloop data-interval="6500">
       <div class="proc-figure">
-        <img class="proc-fig active" data-fig="0" src="proc-1-kickoff.png?v=2" alt="Kickoff with DesignSpace" loading="lazy" />
-        <img class="proc-fig" data-fig="1" src="proc-2-deliver.png" alt="Submit tasks. We deliver." loading="lazy" />
-        <img class="proc-fig" data-fig="2" src="proc-3-scale.png" alt="Scale on your terms." loading="lazy" />
+        <img class="proc-fig active" data-fig="0" src="proc-1-kickoff.webp?v=2" alt="Kickoff with DesignSpace" loading="lazy" />
+        <img class="proc-fig" data-fig="1" src="proc-2-deliver.webp" alt="Submit tasks. We deliver." loading="lazy" />
+        <img class="proc-fig" data-fig="2" src="proc-3-scale.webp" alt="Scale on your terms." loading="lazy" />
       </div>
       <div class="proc-steps">
         <button class="proc-step active" data-step="0">
@@ -1784,8 +1704,11 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 </footer>
 
 <!-- ============ SCRIPTS ============ -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<!-- GSAP (CDN). To pin with Subresource Integrity, add integrity="sha384-..." generated by:
+     curl -s https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js | openssl dgst -sha384 -binary | openssl base64 -A
+     curl -s https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js | openssl dgst -sha384 -binary | openssl base64 -A -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
 <script>
 /* ================================================================
    HERO APP WIDGET — auto-cycling tabbed panels
@@ -2187,20 +2110,6 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   document.querySelectorAll('.ds-carousel').forEach(makeCarousel);
 })();
 
-/* ================================================================
-   Floating collage images — gentle bob
-================================================================ */
-(function () {
-  if (!window.gsap) return;
-  document.querySelectorAll('.float-img').forEach(function (el, i) {
-    gsap.to(el, {
-      y: (i % 2 ? -1 : 1) * (10 + (i % 3) * 5),
-      duration: 2.8 + (i % 4) * 0.7,
-      ease: 'sine.inOut',
-      yoyo: true, repeat: -1, delay: i * 0.3
-    });
-  });
-})();
 
 /* ================================================================
    Auto-loop tabs — cycles [data-step] items on an interval, fills the
@@ -2296,7 +2205,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     moveInd(segs[i]);
   }
   segs.forEach(function (s, i) { s.addEventListener('click', function () { select(i); }); });
-  select(1); // default to Extra (popular)
+  select(0); // default to Pro
   function reflow() { var a = root.querySelector('.palt-seg.active'); if (a) moveInd(a); }
   window.addEventListener('resize', reflow);
   window.addEventListener('load', reflow);
@@ -2357,61 +2266,61 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 (function () {
   var COLLAGE_ITEMS = [
     // Vertical gradient mockups (work-strip style)
-    { type:'image', src:'https://framerusercontent.com/images/WBexTo7BNNhjQUCR9Ppjm5lTRT4.png?width=480', caption:'Product Mockups' },
-    { type:'image', src:'https://framerusercontent.com/images/n0YP32ZIZM8bBOcyoaarS35Ws.png?width=480', caption:'Reports + Docs' },
-    { type:'image', src:'https://framerusercontent.com/images/w2PBu9y5PW7w0pJMBg20EXzq0VE.png?width=480', caption:'Ad Campaigns' },
-    { type:'image', src:'https://framerusercontent.com/images/ECMooFSDEqvz15IlouMY6pnsZPA.png?width=480', caption:'Dashboards' },
-    { type:'image', src:'https://framerusercontent.com/images/loFtog2CtM8F5a28fWzmscA8Fo4.png?width=480', caption:'Diagrams' },
-    { type:'image', src:'https://framerusercontent.com/images/aYZkjqtd31W6wvchkfz6CTB5I.png?width=480', caption:'Reports' },
-    { type:'image', src:'oneplus-card.jpg', caption:'Spec Sheets' },
-    { type:'image', src:'cybersixgill-card.jpg', caption:'Digital Content' },
+    { type:'image', src:'assets/img/WBexTo7BNNhjQUCR9Ppjm5lTRT4-d9b92891.webp', caption:'Product Mockups' },
+    { type:'image', src:'assets/img/n0YP32ZIZM8bBOcyoaarS35Ws-6c48e1ee.webp', caption:'Reports + Docs' },
+    { type:'image', src:'assets/img/w2PBu9y5PW7w0pJMBg20EXzq0VE-3314b050.webp', caption:'Ad Campaigns' },
+    { type:'image', src:'assets/img/ECMooFSDEqvz15IlouMY6pnsZPA-c4c983ac.webp', caption:'Dashboards' },
+    { type:'image', src:'assets/img/loFtog2CtM8F5a28fWzmscA8Fo4-c8b2c248.webp', caption:'Diagrams' },
+    { type:'image', src:'assets/img/aYZkjqtd31W6wvchkfz6CTB5I-b29a90ab.webp', caption:'Reports' },
+    { type:'image', src:'oneplus-card.webp', caption:'Spec Sheets' },
+    { type:'image', src:'cybersixgill-card.webp', caption:'Digital Content' },
     // Transparent square case studies — every asset across all 9 clients
-    { type:'sq', src:'airmdr-ad-campaigns.png', caption:'Ad Campaigns' },
-    { type:'sq', src:'airmdr-guides.png', caption:'Guides' },
-    { type:'sq', src:'airmdr-reports.png', caption:'Reports' },
-    { type:'sq', src:'airmdr-social-banners.png', caption:'Social Banners' },
-    { type:'sq', src:'airmdr-stat-banners.png', caption:'Stat Banners' },
-    { type:'sq', src:'britive-ad-campaigns.png', caption:'Ad Campaigns' },
-    { type:'sq', src:'britive-carousel-posts.png', caption:'Carousel Posts' },
-    { type:'sq', src:'britive-diagrams.png', caption:'Diagrams' },
-    { type:'sq', src:'britive-event-banners.png', caption:'Event Banners' },
-    { type:'sq', src:'britive-flows.png', caption:'Flows' },
-    { type:'sq', src:'britive-speaker-banners.png', caption:'Speaker Banners' },
-    { type:'sq', src:'cybermarketingcon-ad-campaigns.png', caption:'Ad Campaigns' },
-    { type:'sq', src:'cybermarketingcon-event-banners.png', caption:'Event Banners' },
-    { type:'sq', src:'cybermarketingcon-postcards.png', caption:'Postcards' },
-    { type:'sq', src:'cybermarketingcon-social-campaigns.png', caption:'Social Campaigns' },
-    { type:'sq', src:'cybermarketingcon-social-templates.png', caption:'Social Templates' },
-    { type:'sq', src:'cybersixgill-ad-campaigns.png', caption:'Ad Campaigns' },
-    { type:'sq', src:'cybersixgill-brand-styles.png', caption:'Brand Styles' },
-    { type:'sq', src:'cybersixgill-guides.png', caption:'Guides' },
-    { type:'sq', src:'cybersixgill-social-banners.png', caption:'Social Banners' },
-    { type:'sq', src:'hyperproof-2-pagers.png', caption:'2-Pagers' },
-    { type:'sq', src:'hyperproof-carousel-posts.png', caption:'Carousel Posts' },
-    { type:'sq', src:'hyperproof-guides.png', caption:'Guides' },
-    { type:'sq', src:'hyperproof-social-banners.png', caption:'Social Banners' },
-    { type:'sq', src:'intrusion-ad-campaigns.png', caption:'Ad Campaigns' },
-    { type:'sq', src:'intrusion-guides.png', caption:'Guides' },
-    { type:'sq', src:'intrusion-reports.png', caption:'Reports' },
-    { type:'sq', src:'intrusion-ebooks.png', caption:'eBooks' },
-    { type:'sq', src:'kasada-2-pagers.png', caption:'2-Pagers' },
-    { type:'sq', src:'kasada-ad-campaigns.png', caption:'Ad Campaigns' },
-    { type:'sq', src:'kasada-diagrams.png', caption:'Diagrams' },
-    { type:'sq', src:'kasada-guides.png', caption:'Guides' },
-    { type:'sq', src:'kasada-reports.png', caption:'Reports' },
-    { type:'sq', src:'kasada-social-campaigns.png', caption:'Social Campaigns' },
-    { type:'sq', src:'kasada-ebooks.png', caption:'eBooks' },
-    { type:'sq', src:'oneplus-ad-campaigns.png', caption:'Ad Campaigns' },
-    { type:'sq', src:'oneplus-brand-guidelines.png', caption:'Brand Guidelines' },
-    { type:'sq', src:'oneplus-landing-pages.png', caption:'Landing Pages' },
-    { type:'sq', src:'oneplus-product-launchs.png', caption:'Product Launchs' },
-    { type:'sq', src:'oneplus-reports.png', caption:'Reports' },
-    { type:'sq', src:'oneplus-spec-sheets.png', caption:'Spec Sheets' },
-    { type:'sq', src:'seemplicity-2-pagers.png', caption:'2-Pagers' },
-    { type:'sq', src:'seemplicity-diagrams.png', caption:'Diagrams' },
-    { type:'sq', src:'seemplicity-event-banners.png', caption:'Event Banners' },
-    { type:'sq', src:'seemplicity-guides.png', caption:'Guides' },
-    { type:'sq', src:'seemplicity-illustrations.png', caption:'Illustrations' }
+    { type:'sq', src:'airmdr-ad-campaigns.webp', caption:'Ad Campaigns' },
+    { type:'sq', src:'airmdr-guides.webp', caption:'Guides' },
+    { type:'sq', src:'airmdr-reports.webp', caption:'Reports' },
+    { type:'sq', src:'airmdr-social-banners.webp', caption:'Social Banners' },
+    { type:'sq', src:'airmdr-stat-banners.webp', caption:'Stat Banners' },
+    { type:'sq', src:'britive-ad-campaigns.webp', caption:'Ad Campaigns' },
+    { type:'sq', src:'britive-carousel-posts.webp', caption:'Carousel Posts' },
+    { type:'sq', src:'britive-diagrams.webp', caption:'Diagrams' },
+    { type:'sq', src:'britive-event-banners.webp', caption:'Event Banners' },
+    { type:'sq', src:'britive-flows.webp', caption:'Flows' },
+    { type:'sq', src:'britive-speaker-banners.webp', caption:'Speaker Banners' },
+    { type:'sq', src:'cybermarketingcon-ad-campaigns.webp', caption:'Ad Campaigns' },
+    { type:'sq', src:'cybermarketingcon-event-banners.webp', caption:'Event Banners' },
+    { type:'sq', src:'cybermarketingcon-postcards.webp', caption:'Postcards' },
+    { type:'sq', src:'cybermarketingcon-social-campaigns.webp', caption:'Social Campaigns' },
+    { type:'sq', src:'cybermarketingcon-social-templates.webp', caption:'Social Templates' },
+    { type:'sq', src:'cybersixgill-ad-campaigns.webp', caption:'Ad Campaigns' },
+    { type:'sq', src:'cybersixgill-brand-styles.webp', caption:'Brand Styles' },
+    { type:'sq', src:'cybersixgill-guides.webp', caption:'Guides' },
+    { type:'sq', src:'cybersixgill-social-banners.webp', caption:'Social Banners' },
+    { type:'sq', src:'hyperproof-2-pagers.webp', caption:'2-Pagers' },
+    { type:'sq', src:'hyperproof-carousel-posts.webp', caption:'Carousel Posts' },
+    { type:'sq', src:'hyperproof-guides.webp', caption:'Guides' },
+    { type:'sq', src:'hyperproof-social-banners.webp', caption:'Social Banners' },
+    { type:'sq', src:'intrusion-ad-campaigns.webp', caption:'Ad Campaigns' },
+    { type:'sq', src:'intrusion-guides.webp', caption:'Guides' },
+    { type:'sq', src:'intrusion-reports.webp', caption:'Reports' },
+    { type:'sq', src:'intrusion-ebooks.webp', caption:'eBooks' },
+    { type:'sq', src:'kasada-2-pagers.webp', caption:'2-Pagers' },
+    { type:'sq', src:'kasada-ad-campaigns.webp', caption:'Ad Campaigns' },
+    { type:'sq', src:'kasada-diagrams.webp', caption:'Diagrams' },
+    { type:'sq', src:'kasada-guides.webp', caption:'Guides' },
+    { type:'sq', src:'kasada-reports.webp', caption:'Reports' },
+    { type:'sq', src:'kasada-social-campaigns.webp', caption:'Social Campaigns' },
+    { type:'sq', src:'kasada-ebooks.webp', caption:'eBooks' },
+    { type:'sq', src:'oneplus-ad-campaigns.webp', caption:'Ad Campaigns' },
+    { type:'sq', src:'oneplus-brand-guidelines.webp', caption:'Brand Guidelines' },
+    { type:'sq', src:'oneplus-landing-pages.webp', caption:'Landing Pages' },
+    { type:'sq', src:'oneplus-product-launchs.webp', caption:'Product Launchs' },
+    { type:'sq', src:'oneplus-reports.webp', caption:'Reports' },
+    { type:'sq', src:'oneplus-spec-sheets.webp', caption:'Spec Sheets' },
+    { type:'sq', src:'seemplicity-2-pagers.webp', caption:'2-Pagers' },
+    { type:'sq', src:'seemplicity-diagrams.webp', caption:'Diagrams' },
+    { type:'sq', src:'seemplicity-event-banners.webp', caption:'Event Banners' },
+    { type:'sq', src:'seemplicity-guides.webp', caption:'Guides' },
+    { type:'sq', src:'seemplicity-illustrations.webp', caption:'Illustrations' }
   ];
   var COLLAGE_CONFIG = { columns:4, speed:42, parallax:0.18, seed:14, pauseOnHover:false, respectReducedMotion:true };
 
@@ -2598,57 +2507,57 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 /* ===== Testimonial gradient + case-study slideshow ===== */
 (function () {
   var GRAD = {
-    Intrusion: 'grad-intrusion.jpg',
-    Seemplicity: 'grad-seemplicity.jpg',
-    Kasada: 'grad-kasada.jpg',
-    Britive: 'grad-britive.jpg',
-    OnePlus: 'grad-oneplus.jpg',
-    Cybersixgill: 'grad-cybersixgill.jpg'
+    Intrusion: 'grad-intrusion.webp',
+    Seemplicity: 'grad-seemplicity.webp',
+    Kasada: 'grad-kasada.webp',
+    Britive: 'grad-britive.webp',
+    OnePlus: 'grad-oneplus.webp',
+    Cybersixgill: 'grad-cybersixgill.webp'
   };
   var SHOWS = {
     Intrusion: [
-      { src: 'intrusion-ad-campaigns.png', tag: 'Ad Campaigns' },
-      { src: 'intrusion-guides.png', tag: 'Guides' },
-      { src: 'intrusion-reports.png', tag: 'Reports' },
-      { src: 'intrusion-ebooks.png', tag: 'eBooks' }
+      { src: 'intrusion-ad-campaigns.webp', tag: 'Ad Campaigns' },
+      { src: 'intrusion-guides.webp', tag: 'Guides' },
+      { src: 'intrusion-reports.webp', tag: 'Reports' },
+      { src: 'intrusion-ebooks.webp', tag: 'eBooks' }
     ],
     OnePlus: [
-      { src: 'oneplus-ad-campaigns.png', tag: 'Ad Campaigns' },
-      { src: 'oneplus-brand-guidelines.png', tag: 'Brand Guidelines' },
-      { src: 'oneplus-landing-pages.png', tag: 'Landing Pages' },
-      { src: 'oneplus-product-launchs.png', tag: 'Product Launchs' },
-      { src: 'oneplus-reports.png', tag: 'Reports' },
-      { src: 'oneplus-spec-sheets.png', tag: 'Spec Sheets' }
+      { src: 'oneplus-ad-campaigns.webp', tag: 'Ad Campaigns' },
+      { src: 'oneplus-brand-guidelines.webp', tag: 'Brand Guidelines' },
+      { src: 'oneplus-landing-pages.webp', tag: 'Landing Pages' },
+      { src: 'oneplus-product-launchs.webp', tag: 'Product Launchs' },
+      { src: 'oneplus-reports.webp', tag: 'Reports' },
+      { src: 'oneplus-spec-sheets.webp', tag: 'Spec Sheets' }
     ],
     Cybersixgill: [
-      { src: 'cybersixgill-ad-campaigns.png', tag: 'Ad Campaigns' },
-      { src: 'cybersixgill-brand-styles.png', tag: 'Brand Styles' },
-      { src: 'cybersixgill-guides.png', tag: 'Guides' },
-      { src: 'cybersixgill-social-banners.png', tag: 'Social Banners' }
+      { src: 'cybersixgill-ad-campaigns.webp', tag: 'Ad Campaigns' },
+      { src: 'cybersixgill-brand-styles.webp', tag: 'Brand Styles' },
+      { src: 'cybersixgill-guides.webp', tag: 'Guides' },
+      { src: 'cybersixgill-social-banners.webp', tag: 'Social Banners' }
     ],
     Seemplicity: [
-      { src: 'seemplicity-2-pagers.png', tag: '2-Pagers' },
-      { src: 'seemplicity-diagrams.png', tag: 'Diagrams' },
-      { src: 'seemplicity-event-banners.png', tag: 'Event Banners' },
-      { src: 'seemplicity-guides.png', tag: 'Guides' },
-      { src: 'seemplicity-illustrations.png', tag: 'Illustrations' }
+      { src: 'seemplicity-2-pagers.webp', tag: '2-Pagers' },
+      { src: 'seemplicity-diagrams.webp', tag: 'Diagrams' },
+      { src: 'seemplicity-event-banners.webp', tag: 'Event Banners' },
+      { src: 'seemplicity-guides.webp', tag: 'Guides' },
+      { src: 'seemplicity-illustrations.webp', tag: 'Illustrations' }
     ],
     Kasada: [
-      { src: 'kasada-2-pagers.png', tag: '2-Pagers' },
-      { src: 'kasada-ad-campaigns.png', tag: 'Ad Campaigns' },
-      { src: 'kasada-diagrams.png', tag: 'Diagrams' },
-      { src: 'kasada-guides.png', tag: 'Guides' },
-      { src: 'kasada-reports.png', tag: 'Reports' },
-      { src: 'kasada-social-campaigns.png', tag: 'Social Campaigns' },
-      { src: 'kasada-ebooks.png', tag: 'eBooks' }
+      { src: 'kasada-2-pagers.webp', tag: '2-Pagers' },
+      { src: 'kasada-ad-campaigns.webp', tag: 'Ad Campaigns' },
+      { src: 'kasada-diagrams.webp', tag: 'Diagrams' },
+      { src: 'kasada-guides.webp', tag: 'Guides' },
+      { src: 'kasada-reports.webp', tag: 'Reports' },
+      { src: 'kasada-social-campaigns.webp', tag: 'Social Campaigns' },
+      { src: 'kasada-ebooks.webp', tag: 'eBooks' }
     ],
     Britive: [
-      { src: 'britive-ad-campaigns.png', tag: 'Ad Campaigns' },
-      { src: 'britive-carousel-posts.png', tag: 'Carousel Posts' },
-      { src: 'britive-diagrams.png', tag: 'Diagrams' },
-      { src: 'britive-event-banners.png', tag: 'Event Banners' },
-      { src: 'britive-flows.png', tag: 'Flows' },
-      { src: 'britive-speaker-banners.png', tag: 'Speaker Banners' }
+      { src: 'britive-ad-campaigns.webp', tag: 'Ad Campaigns' },
+      { src: 'britive-carousel-posts.webp', tag: 'Carousel Posts' },
+      { src: 'britive-diagrams.webp', tag: 'Diagrams' },
+      { src: 'britive-event-banners.webp', tag: 'Event Banners' },
+      { src: 'britive-flows.webp', tag: 'Flows' },
+      { src: 'britive-speaker-banners.webp', tag: 'Speaker Banners' }
     ]
   };
   var INTERVAL = 2000;
@@ -2737,7 +2646,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     'kasada-2-pagers,kasada-ad-campaigns,kasada-diagrams,kasada-guides,kasada-reports,kasada-social-campaigns,kasada-ebooks,' +
     'oneplus-ad-campaigns,oneplus-brand-guidelines,oneplus-landing-pages,oneplus-product-launchs,oneplus-reports,oneplus-spec-sheets,' +
     'seemplicity-2-pagers,seemplicity-diagrams,seemplicity-event-banners,seemplicity-guides,seemplicity-illustrations'
-  ).split(',').map(function (s) { return s + '.png'; });
+  ).split(',').map(function (s) { return s + '.webp'; });
   // shuffle so the order differs each visit
   for (var i = IMGS.length - 1; i > 0; i--) { var j = (Math.random() * (i + 1)) | 0; var t = IMGS[i]; IMGS[i] = IMGS[j]; IMGS[j] = t; }
   IMGS.forEach(function (s) { var im = new Image(); im.src = s; });
@@ -2813,6 +2722,13 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     io.observe(wrap);
   }
 })();
+</script>
+<!-- Structured data: Organization + FAQ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"DesignSpace","description":"Design subscription providing ongoing marketing design for B2B tech and cybersecurity teams. One subscription, all design assets covered.","url":"https://designspaceagency.com/","logo":"https://designspaceagency.com/logo.svg","image":"https://designspaceagency.com/og-image.png","email":"hello@designspaceagency.com","foundingDate":"2018","sameAs":["https://www.linkedin.com/company/designspace-agency/"],"areaServed":"Worldwide","serviceType":["Marketing design","Graphic design subscription","B2B tech design","Cybersecurity marketing design"],"slogan":"Tech Marketing, Designed Better"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is this different from hiring an in-house designer?","acceptedAnswer":{"@type":"Answer","text":"One subscription gets you a full team — specialists across decks, reports, ads, diagrams, and social — plus a dedicated project manager and founder-led quality control. No recruiting, onboarding, or overhead, and you can scale up or down monthly."}},{"@type":"Question","name":"How fast will I receive my designs?","acceptedAnswer":{"@type":"Answer","text":"Most tasks are delivered within 2–3 business days. Larger projects like reports or eBooks are broken into milestones so you see progress continuously, with timelines visible on your Asana board."}},{"@type":"Question","name":"What types of design work are covered?","acceptedAnswer":{"@type":"Answer","text":"Everything a B2B marketing team needs: sales decks, whitepapers, reports, eBooks, ad campaigns, LinkedIn carousels, product mockups, technical diagrams, event booths, swag, and more. If it is marketing design, it is covered."}},{"@type":"Question","name":"How do I submit and track requests?","acceptedAnswer":{"@type":"Answer","text":"Just send a task on Asana — no submission forms. Your board shows exactly where every task sits: priorities, in progress, awaiting assets, or ready for review. Files are delivered in Figma, Canva, or Google Drive."}},{"@type":"Question","name":"What happens to unused hours?","acceptedAnswer":{"@type":"Answer","text":"A portion of unused hours rolls over each month — up to 10, 15, or 20 hours depending on your plan — so quiet months are not wasted ones."}},{"@type":"Question","name":"Can I pause or cancel anytime?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is a subscription, not a contract. Upgrade, downgrade, or pause anytime — and if you ever need to step away, just give us 30 days notice."}}]}
 </script>
 </body>
 </html>
