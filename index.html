@@ -914,13 +914,14 @@ br.capsbr{display:none}
   padding:clamp(32px,4vw,56px) clamp(16px,2.5vw,32px) clamp(20px,3vw,40px);
 }
 .cal-card .cta-head{margin-bottom:clamp(26px,3.2vw,44px)}
+.cal-embed{background-color:var(--bg-soft);background-image:radial-gradient(rgba(16,16,16,.08) 1px,transparent 1px);background-size:18px 18px;border-radius:var(--radius-md);padding:clamp(12px,2vw,22px)}
 .cal-card iframe{
-  width:100%;min-height:720px;border:0;display:block;
-  border-radius:var(--radius-md);background:var(--bg-card);
+  width:100%;min-height:620px;border:0;display:block;
+  border-radius:var(--radius-md);background:transparent;
 }
 @media(max-width:560px){
   .cal-card{padding:clamp(24px,6vw,32px) 14px 18px}
-  .cal-card iframe{min-height:1040px}
+  .cal-card iframe,#cal-inline{min-height:1040px}
 }
 
 /* ============ FOOTER ============ */
@@ -1069,6 +1070,29 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 
 /* ============ REVEAL ============ */
 .reveal{opacity:0;transform:translateY(34px)}
+/* ============ HERO PARTNER LINE ============ */
+.hero-partner{display:inline-flex;align-items:center;gap:11px;margin-top:clamp(32px,3.6vw,44px);color:var(--ink-soft);font-size:13.5px;font-weight:600;letter-spacing:-.01em;transition:color .25s;pointer-events:auto}
+.hero-partner:hover{color:var(--ink)}
+.hero-partner img{height:30px;width:auto;flex:none;border-radius:6px}
+@media(max-width:860px){.hero-partner{justify-content:center;font-size:12.5px}}
+
+/* ============ CMS PARTNERSHIP ============ */
+.cms-card{border-radius:var(--radius-lg);background:var(--bg-card);border:1px solid var(--line);padding:clamp(32px,5vw,72px);overflow:hidden}
+.cms-grid{display:grid;grid-template-columns:minmax(0,0.92fr) minmax(0,1.08fr);gap:clamp(36px,5vw,72px);align-items:center}
+.cms-copy{display:flex;flex-direction:column;align-items:flex-start}
+.cms-logo{width:clamp(84px,9vw,112px);height:auto;margin-bottom:clamp(20px,2.4vw,28px)}
+.cms-copy .lede{margin-top:20px;max-width:40ch}
+.cms-logo-link{display:inline-block}
+.cms-copy .lede a{color:var(--ink);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px;transition:color .2s}
+.cms-copy .lede a:hover{color:var(--ink-soft)}
+br.cmsbr{display:none}
+@media(min-width:1100px){br.cmsbr{display:inline}.cms-copy .lede{max-width:none}}
+.cms-figure{position:relative;border-radius:var(--radius-md);overflow:hidden;height:clamp(340px,30vw,400px);background-color:#ece9f2;background-image:url('cms-gradient.webp');background-size:cover;background-position:center}
+.cms-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:9% 8% 72px;opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease);will-change:opacity,transform}
+.cms-slide.is-on{opacity:1;transform:translateY(0)}
+.cms-slide img{width:100%;height:auto;max-height:100%;object-fit:contain;filter:drop-shadow(0 22px 46px rgba(0,0,0,.32))}
+.cms-pill{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.94);border:1px solid rgba(16,16,16,.55);border-radius:100px;padding:9px 22px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);white-space:nowrap;z-index:3}
+@media(max-width:1000px){.cms-grid{grid-template-columns:1fr;gap:clamp(28px,5vw,40px);text-align:center}.cms-copy{align-items:center}.cms-copy .lede{margin-left:auto;margin-right:auto}.cms-figure{aspect-ratio:5/4;height:auto;max-width:520px;margin-left:auto;margin-right:auto;width:100%}.cms-slide{padding:6% 5% 58px}}
 
 </style>
 </head>
@@ -1104,6 +1128,10 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
           <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
           <a href="#work" class="btn btn-ghost">Explore Designs</a>
         </div>
+        <a href="#partner" class="hero-partner">
+          <img src="cms-logo.webp" alt="" loading="lazy" />
+          <span>Proud Partner of the Cybersecurity Marketing Society</span>
+        </a>
       </div>
     </div>
 
@@ -1328,19 +1356,19 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
       <article class="hcard">
         <div class="hcard-media"><img src="b2b-1-teams.webp" alt="Built for tech & cyber marketers" loading="lazy" /></div>
         <h3 class="nowrap-d">Built for tech &amp; cyber marketers</h3>
-        <p>B2B tech and cyber design specialists, since 2018 — we know your industry, terminology, and buyers.</p>
+        <p>B2B tech and cyber design specialists, since 2018 — we know your industry timeline, technical jargon, pain points, and buyers.</p>
       </article>
 
       <article class="hcard">
-        <div class="hcard-media"><img src="b2b-2-quality.webp" alt="Founder-led quality control" loading="lazy" /></div>
-        <h3>Founder-led quality control</h3>
-        <p>Every deliverable is reviewed and refined by our creative director — the person who set the standard in the first place.</p>
+        <div class="hcard-media"><img src="b2b-2-quality.webp" alt="Consistency you can count on" loading="lazy" /></div>
+        <h3>Consistency you can count on</h3>
+        <p>Every project gets hands-on review from our creative director, so quality and brand stay sharp from concept to completion.</p>
       </article>
 
       <article class="hcard">
         <div class="hcard-media"><img src="b2b-3-contact.webp" alt="One point of contact. Always." loading="lazy" /></div>
         <h3>One point of contact. Always.</h3>
-        <p>No black box. Every account has a dedicated project manager who knows your priorities and keeps things moving.</p>
+        <p>Every team has a single dedicated project manager who is your source of truth — keeping your priorities and projects moving in the right direction.</p>
       </article>
 
       <article class="hcard">
@@ -1395,7 +1423,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
     </div>
     <div class="int-panel reveal" data-reveal-delay="0.22">
       <div class="int-label">
-        <h3>Everything your cyber marketing team needs — designed for you</h3>
+        <h3>Everything your marketing team needs — designed for you</h3>
       </div>
       <div class="int-grid">
         <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24"><path d="M3 11l18-7-7 18-2.5-7.5z"/></svg></span>Ad Campaigns</div>
@@ -1620,6 +1648,43 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
   </div>
 </section>
 
+<!-- ============ CMS PARTNERSHIP ============ -->
+<section id="partner">
+  <div class="wrap">
+  <div class="cms-card">
+    <div class="cms-grid">
+      <div class="cms-copy reveal">
+        <a href="https://www.cybersecuritymarketingsociety.com/" target="_blank" rel="noopener" class="cms-logo-link"><img class="cms-logo" src="cms-logo.webp" alt="Cybersecurity Marketing Society" loading="lazy" /></a>
+        <h2 class="h-xl">A proud partner.<br /><span class="serif">A trusted creative.</span></h2>
+        <p class="lede">DesignSpace has partnered with the <br class="cmsbr" /><a href="https://www.cybersecuritymarketingsociety.com/" target="_blank" rel="noopener">Cybersecurity Marketing Society</a> since 2023 <br class="cmsbr" />— shaping brand and design resources <br class="cmsbr" />that support their growing community.</p>
+      </div>
+      <div class="cms-figure reveal" id="cms-show" data-reveal-delay="0.15">
+        <div class="cms-slide is-on">
+          <img src="cybermarketingcon-social-campaigns.webp" alt="Cybersecurity Marketing Society design work by DesignSpace" />
+          <span class="cms-pill">Social Campaigns</span>
+        </div>
+        <div class="cms-slide">
+          <img src="cybermarketingcon-event-banners.webp" alt="" loading="lazy" />
+          <span class="cms-pill">Event Banners</span>
+        </div>
+        <div class="cms-slide">
+          <img src="cybermarketingcon-postcards.webp" alt="" loading="lazy" />
+          <span class="cms-pill">Postcards</span>
+        </div>
+        <div class="cms-slide">
+          <img src="cybermarketingcon-social-templates.webp" alt="" loading="lazy" />
+          <span class="cms-pill">Social Templates</span>
+        </div>
+        <div class="cms-slide">
+          <img src="cybermarketingcon-ad-campaigns.webp" alt="" loading="lazy" />
+          <span class="cms-pill">Ad Campaigns</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
 <!-- ============ FAQ ============ -->
 <section style="padding-top:0">
   <div class="wrap">
@@ -1657,15 +1722,16 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 </section>
 
 <!-- ============ CTA — booking ============ -->
-<section id="contact" style="padding-top:0">
+<section id="contact" style="padding-top:0;padding-bottom:0">
   <div class="cal-card reveal">
     <div class="section-head cta-head">
       <div class="eyebrow">Let's chat</div>
       <h2 class="h-xl">Ready to go?</h2>
       <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:clamp(20px,2.4vw,30px)">Book a Discovery Call <span class="arr">→</span></a>
     </div>
-    <iframe src="https://cal.com/ian-barin/discovery?embed=true&layout=month_view&theme=light"
-      title="Book a Discovery Call" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <div class="cal-embed">
+      <div id="cal-inline" style="width:100%;min-height:620px"></div>
+    </div>
   </div>
 </section>
 
@@ -2729,6 +2795,29 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is this different from hiring an in-house designer?","acceptedAnswer":{"@type":"Answer","text":"One subscription gets you a full team — specialists across decks, reports, ads, diagrams, and social — plus a dedicated project manager and founder-led quality control. No recruiting, onboarding, or overhead, and you can scale up or down monthly."}},{"@type":"Question","name":"How fast will I receive my designs?","acceptedAnswer":{"@type":"Answer","text":"Most tasks are delivered within 2–3 business days. Larger projects like reports or eBooks are broken into milestones so you see progress continuously, with timelines visible on your Asana board."}},{"@type":"Question","name":"What types of design work are covered?","acceptedAnswer":{"@type":"Answer","text":"Everything a B2B marketing team needs: sales decks, whitepapers, reports, eBooks, ad campaigns, LinkedIn carousels, product mockups, technical diagrams, event booths, swag, and more. If it is marketing design, it is covered."}},{"@type":"Question","name":"How do I submit and track requests?","acceptedAnswer":{"@type":"Answer","text":"Just send a task on Asana — no submission forms. Your board shows exactly where every task sits: priorities, in progress, awaiting assets, or ready for review. Files are delivered in Figma, Canva, or Google Drive."}},{"@type":"Question","name":"What happens to unused hours?","acceptedAnswer":{"@type":"Answer","text":"A portion of unused hours rolls over each month — up to 10, 15, or 20 hours depending on your plan — so quiet months are not wasted ones."}},{"@type":"Question","name":"Can I pause or cancel anytime?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is a subscription, not a contract. Upgrade, downgrade, or pause anytime — and if you ever need to step away, just give us 30 days notice."}}]}
+</script>
+<script>
+/* CMS partnership slideshow — cross-fade the CyberMarketingCon work (like the case studies) */
+(function () {
+  var fig = document.getElementById('cms-show');
+  if (!fig) return;
+  var slides = fig.querySelectorAll('.cms-slide');
+  if (slides.length < 2) return;
+  slides.forEach(function (sld) { var g = sld.querySelector('img'); if (g) { var im = new Image(); im.src = g.getAttribute('src'); } });
+  var i = 0;
+  setInterval(function () {
+    slides[i].classList.remove('is-on');
+    i = (i + 1) % slides.length;
+    slides[i].classList.add('is-on');
+  }, 2600);
+})();
+</script>
+<script>
+/* Cal.com inline embed (transparent, sits on the dotted panel) */
+(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+Cal("init", "discovery", { origin: "https://cal.com" });
+Cal.ns.discovery("inline", { elementOrSelector: "#cal-inline", config: { layout: "month_view", theme: "light" }, calLink: "ian-barin/discovery" });
+Cal.ns.discovery("ui", { hideEventTypeDetails: false, layout: "month_view" });
 </script>
 </body>
 </html>
