@@ -447,6 +447,7 @@ nav{
   align-self:center;
 }
 .client-logo:hover{opacity:1}
+.client-logo[src*="O5RSL9"]{height:20px}
 .marquee-track{align-items:center}
 
 /* ============ CAPABILITY CAROUSEL (Sana-style) ============ */
@@ -1074,7 +1075,8 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 .hero-partner{display:inline-flex;align-items:center;gap:11px;margin-top:clamp(35px,4vw,48px);color:var(--ink-soft);font-size:13.5px;font-weight:600;letter-spacing:-.01em;transition:color .25s;pointer-events:auto}
 .hero-partner:hover{color:var(--ink)}
 .hero-partner img{height:30px;width:auto;flex:none;border-radius:6px}
-@media(max-width:860px){.hero-partner{justify-content:center;font-size:12.5px}}
+br.hp-br{display:none}
+@media(max-width:860px){.hero-partner{justify-content:center;font-size:12.5px}br.hp-br{display:inline}.hero-partner span{text-align:left}}
 
 /* ============ CMS PARTNERSHIP ============ */
 .cms-card{border-radius:var(--radius-lg);background:var(--bg-card);border:1px solid var(--line);padding:clamp(32px,5vw,72px);overflow:hidden}
@@ -1130,7 +1132,7 @@ br.cmsbr{display:none}
         </div>
         <a href="#partner" class="hero-partner">
           <img src="cms-logo.webp" alt="" loading="lazy" />
-          <span>Official design partner of the <u>Cybersecurity Marketing Society</u></span>
+          <span>Official design partner of the <br class="hp-br" /><u>Cybersecurity Marketing Society</u></span>
         </a>
       </div>
     </div>
@@ -1145,9 +1147,9 @@ br.cmsbr{display:none}
           <img class="client-logo" src="assets/img/5DGhMkZ7Wsh7VHCuNTxbQPaWa7g-81564dfe.webp" alt="Hyperproof" loading="lazy" />
           <img class="client-logo" src="assets/img/m2SE8EN7IeuuhusPlMMexsDGi9s-472ecb06.webp" alt="MazeBolt" loading="lazy" />
           <img class="client-logo" src="assets/img/vigE96GowV0s18sNBdKTBseaHJ4-f8cc22ab.webp" alt="Kasada" loading="lazy" />
-          <img class="client-logo" src="assets/img/qLqgs8ptSp8F6VY2envbKZ0Cg-2c831bec.webp" alt="Client logo" loading="lazy" />
-          <img class="client-logo" src="assets/img/O5RSL9vzuR67jB3g9ESCiwkbok-f3728933.svg" alt="Client logo" loading="lazy" />
-          <img class="client-logo" src="assets/img/KPQv29zchiWzL9RdKzNAjllRZlE-82abc148.webp" alt="Client logo" loading="lazy" />
+          <img class="client-logo" src="assets/img/qLqgs8ptSp8F6VY2envbKZ0Cg-2c831bec.webp" alt="Intrusion" loading="lazy" />
+          <img class="client-logo" src="assets/img/O5RSL9vzuR67jB3g9ESCiwkbok-f3728933.svg" alt="AirMDR" loading="lazy" />
+          <img class="client-logo" src="assets/img/KPQv29zchiWzL9RdKzNAjllRZlE-82abc148.webp" alt="Votiro" loading="lazy" />
         </div>
       </div>
     </div>
