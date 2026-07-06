@@ -863,12 +863,12 @@ br.capsbr{display:none}
   .proc-head{grid-template-columns:1fr;gap:14px}
   .proc-figure{aspect-ratio:16/10}
   .proc-steps{grid-template-columns:1fr;gap:0}
-  /* like the stats: Step label left, content right, top-aligned */
+  /* Step label left, content right — with the timeline bar spanning the top */
   .proc-step{
     display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,5vw,28px);align-items:start;
-    padding:22px 0;border-top:1px solid var(--line);
+    padding:24px 0;
   }
-  .proc-step .proc-bar{display:none}
+  .proc-step .proc-bar{display:block;grid-column:1 / -1;margin:0 0 18px}
   .proc-step-num{margin-bottom:0;padding-top:2px}
 }
 
@@ -1359,7 +1359,7 @@ br.cmsbr{display:none}
       </article>
 
       <article class="hcard">
-        <div class="hcard-media"><img src="b2b-2-quality.webp?v=3" alt="Consistency you can count on" loading="lazy" /></div>
+        <div class="hcard-media"><img src="b2b-2-quality.webp?v=4" alt="Consistency you can count on" loading="lazy" /></div>
         <h3>Consistency you can count on</h3>
         <p>Every project gets hands-on review from our creative director, so quality and brand stay sharp from concept to completion.</p>
       </article>
@@ -2199,13 +2199,18 @@ br.cmsbr{display:none}
     function start() { stop(); timer = setInterval(function () { if (!paused) activate(cur + 1); }, dur); }
     function stop() { if (timer) { clearInterval(timer); timer = null; } }
 
+    var canHover = window.matchMedia('(hover:hover)').matches;
     steps.forEach(function (s, si) {
       s.addEventListener('click', function () { activate(si); start(); });
-      s.addEventListener('mouseenter', function () { paused = true; });
-      s.addEventListener('mouseleave', function () { paused = false; });
+      if (canHover) {
+        s.addEventListener('mouseenter', function () { paused = true; });
+        s.addEventListener('mouseleave', function () { paused = false; });
+      }
     });
-    root.addEventListener('mouseenter', function () { paused = true; });
-    root.addEventListener('mouseleave', function () { paused = false; });
+    if (canHover) {
+      root.addEventListener('mouseenter', function () { paused = true; });
+      root.addEventListener('mouseleave', function () { paused = false; });
+    }
 
     // Show the first item, but only begin the timer + progress fill once the
     // section scrolls into view — so the viewer always starts on point 1.
@@ -2221,7 +2226,7 @@ br.cmsbr{display:none}
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) { if (e.isIntersecting) { begin(); io.disconnect(); } });
-      }, { threshold: 0.35 });
+      }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
       io.observe(root);
     } else { begin(); }
   });
