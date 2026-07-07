@@ -861,14 +861,13 @@ br.capsbr{display:none}
 .proc-step:not(.active) h3{color:var(--ink-faint)}
 @media(max-width:760px){
   .proc-head{grid-template-columns:1fr;gap:14px}
-  .proc-figure{aspect-ratio:16/10}
   .proc-steps{grid-template-columns:1fr;gap:0}
   /* Step label left, content right — with the timeline bar spanning the top */
   .proc-step{
     display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,5vw,28px);align-items:start;
     padding:24px 0;
   }
-  .proc-step .proc-bar{display:block;grid-column:1 / -1;margin:0 0 18px}
+  .proc-step .proc-bar{display:block;grid-column:1 / -1;margin:0 0 11px}
   .proc-step-num{margin-bottom:0;padding-top:2px}
 }
 
