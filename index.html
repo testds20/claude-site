@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- redeploy 2026-07-02 -->
+<!-- redeploy 2026-09-16: AI brand system relaunch -->
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,8 +12,8 @@
   gtag('js', new Date());
   gtag('config', 'G-RRZW8MJ77R');
 </script>
-<title>DesignSpace — Tech Marketing, Designed Better</title>
-<meta name="description" content="Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams. One subscription, all design assets covered." />
+<title>DesignSpace — Design + AI Systems for Tech Marketing Teams</title>
+<meta name="description" content="Design subscription and AI brand systems for B2B tech and cyber marketing teams. On-brand work in Claude, ChatGPT, Figma & Canva. Free brand audit." />
 <link rel="canonical" href="https://designspaceagency.com/" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="theme-color" content="#fafafa" />
@@ -21,17 +21,17 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="DesignSpace" />
 <meta property="og:title" content="DesignSpace — Tech Marketing, Designed Better" />
-<meta property="og:description" content="Ongoing marketing design support for fast-moving B2B tech and cybersecurity teams. One subscription, all design assets covered." />
+<meta property="og:description" content="Your whole team designs now. We keep it on brand. Design and AI systems for B2B tech and cybersecurity marketing teams." />
 <meta property="og:url" content="https://designspaceagency.com/" />
 <meta property="og:image" content="https://designspaceagency.com/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="DesignSpace — design subscription for B2B tech and cybersecurity marketing teams" />
+<meta property="og:image:alt" content="DesignSpace — design and AI systems for B2B tech and cybersecurity marketing teams" />
 <meta property="og:locale" content="en_US" />
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="DesignSpace — Tech Marketing, Designed Better" />
-<meta name="twitter:description" content="One subscription, all design assets covered — for B2B tech and cybersecurity marketing teams." />
+<meta name="twitter:description" content="Your whole team designs now. We keep it on brand. Design and AI systems for B2B tech and cybersecurity marketing teams." />
 <meta name="twitter:image" content="https://designspaceagency.com/og-image.png" />
 <link rel="preload" href="assets/fonts/Inter-400.woff" as="font" type="font/woff" crossorigin />
 <style>
@@ -122,7 +122,7 @@ h1,h2,h3,h4,h5,h6{font-weight:500;letter-spacing:-.01em}
 }
 /* Why Choose heading: drop the forced break on mobile so it wraps smoothly */
 @media(max-width:860px){.wch-head br{display:none}}
-.lede{
+.lede{text-wrap:balance;
   font-size:clamp(1rem,1.2vw,1.125rem);        /* 16→18px */
   color:var(--ink-soft);
   line-height:1.6;
@@ -243,6 +243,14 @@ nav{
   transition:transform .3s var(--ease),box-shadow .3s;
 }
 .bnav-cta:hover{transform:translateY(-1px);box-shadow:0 12px 26px -12px rgba(0,0,0,.5)}
+.cta-short{display:none}
+@media(max-width:430px){
+  .cta-full{display:none}
+  .cta-short{display:inline}
+  .bnav-cta{padding:10px 15px;font-size:13.5px;gap:6px}
+  .bubble .logo{padding:5px 8px 5px 6px}
+  .bubble .logo img{height:17px}
+}
 .bnav-cta .arr{transition:transform .35s var(--ease)}
 .bnav-cta:hover .arr{transform:translateX(4px)}
 @media(max-width:880px){
@@ -318,7 +326,7 @@ nav{
 .hero-h1{
   font-size:min(clamp(2.25rem,6.6vw,4.768rem),8.5svh);  /* 36(mobile)→76.3px(desktop) */
   line-height:1.02;letter-spacing:-.038em;font-weight:400;
-  margin-bottom:clamp(32px,3.6vw,48px);
+  margin-bottom:clamp(10px,1.2vw,14px);
   text-wrap:balance;
 }
 .hero-h1 .serif{display:block;color:var(--ink-soft)}
@@ -410,7 +418,7 @@ nav{
   width:110px;height:5px;border-radius:99px;background:rgba(255,255,255,.12);
   overflow:hidden;
 }
-.app-bar i{display:block;height:100%;border-radius:99px;background:#fff;width:0;transition:width 1s var(--ease) .25s}
+.app-bar i{display:block;height:100%;border-radius:99px;background:#fff;width:0;min-width:5px;transition:width 1s var(--ease) .25s}
 .app-tabs{
   display:flex;align-items:center;justify-content:space-between;gap:6px;
   border-top:1px solid rgba(255,255,255,.1);
@@ -434,8 +442,11 @@ nav{
   .app-tab .tab-full{display:none}
   .app-tab .tab-short{display:inline}
   .app-tab{padding:11px 14px}
+  .hero-text .eyebrow{font-size:10px;letter-spacing:.04em;gap:6px;white-space:nowrap}
   /* hide all secondary dates incl. the "N Active Projects" team counts */
   .app-date{display:none}
+  .app-panel[data-panel="2"] .app-date{display:inline;font-size:13px}
+  .app-panel[data-panel="2"] .app-bar{display:none}
 }
 
 /* ============ LOGO MARQUEE ============ */
@@ -502,6 +513,7 @@ br.lede-3{display:none}
 }
 .scrub-dot:hover{background:rgba(16,16,16,.38)}
 .scrub-dot.on{width:104px}
+.scrub-dot.on .scrub-fill{min-width:7px}
 .scrub-dot.on:hover{background:rgba(16,16,16,.18)}
 .scrub-fill{
   position:absolute;inset:0;width:0%;
@@ -608,7 +620,8 @@ br.lede-3{display:none}
   transition:transform .6s var(--ease);
 }
 .hcard:hover .hcard-media img{transform:scale(1.05)}
-.hcard h3{font-size:clamp(1.25rem,2vw,var(--fs-h5));letter-spacing:-.02em;margin-top:clamp(20px,2vw,28px);line-height:1.22;padding-right:9%}
+.hcard h3{font-size:clamp(1.25rem,2vw,var(--fs-h5));letter-spacing:-.02em;margin-top:clamp(20px,2vw,28px);line-height:1.22;padding-right:9%;text-wrap:balance}
+.hcard p{text-wrap:balance;padding-right:6%}
 .hcard p{color:var(--ink-soft);font-size:15px;line-height:1.55;margin-top:12px;padding-right:9%;max-width:none}
 @media(min-width:861px){.hcard h3.nowrap-d{white-space:nowrap}}
 /* remove hover lift on touch devices (mobile) for all image cards */
@@ -820,6 +833,325 @@ br.lede-3{display:none}
   .palt-grid{grid-template-columns:1fr}
 }
 
+/* ============ HERO SUBHEAD (alt draft) ============ */
+.hero-sub{
+  margin-top:0;margin-bottom:clamp(34px,4vw,50px);max-width:none;
+  font-size:clamp(1rem,1.5vw,1.2rem);line-height:1.4;
+  color:var(--ink-soft);font-weight:500;letter-spacing:-.01em;text-wrap:balance;
+}
+@media(min-width:1100px){.hero-sub{white-space:nowrap}}
+@media(max-width:860px){.hero-sub{max-width:none;font-size:1.05rem}.hero-sub span{display:block}}
+
+/* ============ PRICING LADDER (alt draft v2 — redesign) ============ */
+.tier-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:clamp(26px,3.4vw,40px)}
+.tier-chip{display:flex;flex-direction:column;gap:5px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--bg-card);transition:border-color .25s,transform .25s var(--ease)}
+.tier-chip:hover{border-color:var(--ink);transform:translateY(-3px)}
+.tier-chip .tc-step{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+.tier-chip .tc-name{font-size:15.5px;font-weight:600;letter-spacing:-.015em}
+.tier-chip .tc-price{font-size:13px;color:var(--ink-soft);font-weight:600}
+.tier-chip.is-featured{border-color:var(--ink);background:var(--bg-soft)}
+@media(max-width:760px){.tier-strip{grid-template-columns:1fr 1fr}}
+
+.ladder{display:flex;flex-direction:column;gap:20px}
+.rung{position:relative;background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr)}
+.rung.featured{border-color:var(--ink);box-shadow:0 34px 70px -46px rgba(0,0,0,.35)}
+.rung-num{position:absolute;top:16px;right:18px;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);color:var(--ink-faint);font-family:var(--mono);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;background:var(--bg-card)}
+.rung.featured .rung-num{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.rung-lead{background:var(--bg-soft);padding:clamp(24px,2.6vw,34px);display:flex;flex-direction:column;align-items:flex-start;border-right:1px solid var(--line)}
+.rung.featured .rung-lead{background:var(--ink);color:var(--bg)}
+.rung-step{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+.rung.featured .rung-step{color:rgba(255,255,255,.6)}
+.rung-name{font-size:clamp(1.4rem,2.2vw,var(--fs-h4));font-weight:600;letter-spacing:-.025em;line-height:1.05;margin-bottom:14px}
+.rung-price{font-size:clamp(1.35rem,1.9vw,1.7rem);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-bottom:5px}
+.rung-price span{font-size:14px;font-weight:500;color:var(--ink-faint);letter-spacing:0}
+.rung.featured .rung-price span{color:rgba(255,255,255,.65)}
+.rung-cadence{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:16px}
+.rung.featured .rung-cadence{color:rgba(255,255,255,.55)}
+.rung-best{font-size:13px;color:var(--ink-soft);line-height:1.5;margin-bottom:22px}
+.rung.featured .rung-best{color:rgba(255,255,255,.75)}
+.ops-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);color:var(--bg);border-radius:100px;padding:7px 12px;font-size:12px;font-weight:600;margin-bottom:18px}
+.ops-badge svg{width:13px;height:13px;flex:none}
+.rung-lead .btn{margin-top:auto;justify-content:center;width:100%}
+.rung.featured .rung-lead .btn{background:var(--bg);color:var(--ink)}
+.rung-body{padding:clamp(24px,2.8vw,36px)}
+.rung-what{font-size:14.5px;color:var(--ink-soft);line-height:1.6;margin-bottom:18px}
+.rung-feats{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.rung-feats li{font-size:13.5px;color:var(--ink-soft);display:flex;gap:10px;align-items:flex-start;line-height:1.45}
+.rung-feats li::before{content:"";flex:none;width:16px;height:16px;margin-top:2px;border-radius:50%;background:var(--bg-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23101010' stroke-width='3'%3E%3Cpath d='M5 13l4 4 10-10'/%3E%3C/svg%3E") center/9px no-repeat}
+.rung-diff{font-size:13px;color:var(--ink);border-left:2px solid var(--ink);padding-left:14px;line-height:1.5}
+.ops-callout{display:flex;gap:12px;align-items:flex-start;background:var(--bg-warm);border-radius:12px;padding:15px 16px;margin-bottom:20px}
+.ops-callout .oc-ic{flex:none;width:22px;height:22px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center}
+.ops-callout .oc-ic svg{width:12px;height:12px}
+.ops-callout p{font-size:13px;color:var(--ink);line-height:1.45}
+.studio-sub{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+.studio-plan{position:relative;background:var(--bg-soft);border:1px solid var(--line);border-radius:14px;padding:18px 16px}
+.studio-plan.pop{border-color:var(--ink)}
+.sp-pop{position:absolute;top:-9px;left:16px;background:var(--ink);color:var(--bg);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:100px}
+.studio-plan h4{font-size:15px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+.sp-price{font-size:19px;font-weight:600;letter-spacing:-.02em;line-height:1}
+.sp-price span{font-size:12px;color:var(--ink-faint);font-weight:500}
+.sp-vol{font-size:12px;color:var(--ink-soft);margin-top:8px;line-height:1.4}
+.studio-note{font-size:12px;color:var(--ink-faint);line-height:1.5;margin-bottom:18px}
+.studio-note b{color:var(--ink-soft);font-weight:600}
+.ladder-connect{margin-top:28px;text-align:center}
+.ladder-connect p{font-size:15px;color:var(--ink-soft);max-width:66ch;margin:0 auto;line-height:1.6}
+@media(max-width:880px){
+  .rung{grid-template-columns:1fr}
+  .rung-lead{border-right:none;border-bottom:1px solid var(--line)}
+  .rung.featured .rung-lead{border-bottom-color:rgba(255,255,255,.2)}
+  .studio-sub{grid-template-columns:1fr}
+}
+
+/* ---- accessibility + touch targets ---- */
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--ink);border-radius:8px}
+.btn:focus-visible,.bnav-cta:focus-visible{border-radius:100px}
+@media(max-width:860px){
+  .bnav-link,.foot-col a,.foot-links a,.hero-partner{min-height:44px;display:inline-flex;align-items:center}
+  .switch{position:relative}
+  .switch::before{content:"";position:absolute;inset:-12px -8px;border-radius:100px}
+  .pc-addon-row{padding-top:18px;padding-bottom:18px}
+}
+
+/* ---- pricing cards ported from the layout explorations (Option 5) ---- */
+:root{--line-2:rgba(0,0,0,.14);--config-h:196px;--banner-h:44px;--focus:0 0 0 2px var(--bg),0 0 0 4px var(--ink)}
+.chk{list-style:none;display:flex;flex-direction:column;gap:10px}
+.chk li{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-soft);line-height:1.45}
+.chk li svg{flex:none;width:16px;height:16px;margin-top:1px;stroke:var(--ink)}
+.pc-cta .btn{width:100%;justify-content:center}
+.pf-h .btn{width:100%;justify-content:center}
+.pricing-foot{margin-top:20px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
+.pricing-table-head{margin:clamp(56px,7vw,96px) 0 0}
+.pricing-table-head .h-xl{margin:0}
+
+.pricing-table-head p{margin-top:10px;color:var(--ink-soft);font-size:15px;max-width:54ch;text-wrap:balance}
+/* =====================================================================
+   OPTIONS 5 & 6 — shadcn-style pricing cards (pc-*)
+   Card anatomy (subgrid, so every section lines up across cards):
+   row 1 banner · 2 header · 3 price · 4 configure · 5 CTA · 6 features
+   ===================================================================== */
+:root{--config-h:196px;--banner-h:44px;--focus:0 0 0 2px var(--bg),0 0 0 4px var(--ink)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.btn:focus-visible,.pc-tier:focus-visible,.pf-seg button:focus-visible{outline:none;box-shadow:var(--focus)}
+.btn .arr{transition:transform .35s var(--ease)}
+.btn:hover .arr{transform:translateX(3px)}
+.btn-sm{height:36px;padding:0 14px;font-size:13px;gap:6px}
+
+.pc-head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(26px,3vw,36px)}
+.pc-head-row .sec-h{margin-top:10px}
+.pc-head-row .sec-lede{margin-top:10px}
+
+/* badges (shadcn Badge variants) */
+.badge{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 10px;border-radius:100px;font-size:11.5px;font-weight:600;line-height:1;white-space:nowrap;border:1px solid transparent}
+.badge--outline{border-color:var(--line-2);background:var(--bg-card);color:var(--ink)}
+.badge--secondary{background:var(--bg-soft);color:var(--ink)}
+.badge--solid{background:var(--ink);color:#fff}
+.badge--pos{background:var(--ink);color:#fff;height:20px;padding:0 8px;font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+
+/* grid + subgrid */
+.pc-grid{display:grid;column-gap:16px;row-gap:0;grid-template-rows:var(--banner-h) repeat(3,auto) 1fr auto;position:relative}
+.pc-grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pc-grid--2{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px}
+.pc-grid--2 > .pc-card{grid-column:1}
+.pc-grid--2 > .pc-feature{grid-column:2}
+.pc-card{grid-row:2 / span 5;display:grid;grid-template-rows:subgrid;background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:clamp(26px,2.8vw,36px);box-shadow:0 1px 2px rgba(0,0,0,.04);transition:box-shadow .45s var(--ease)}
+@media(hover:hover){.pc-card:hover{box-shadow:0 30px 60px -36px rgba(0,0,0,.22)}}
+#o6 .pc-card{padding:clamp(26px,3vw,38px)}
+
+/* Nord-style featured frame: attached banner + 2px ink border */
+.pc-feature{grid-row:1 / span 6;display:grid;grid-template-rows:subgrid;background:var(--ink);border-radius:calc(var(--radius-lg) + 2px);padding:0 2px 2px}
+.pc-feature > .pc-card{border-color:transparent;box-shadow:none}
+.pc-banner{grid-row:1;display:flex;align-items:center;justify-content:flex-start;padding-left:calc(clamp(26px,2.8vw,36px) + 2px);gap:8px;color:#fff;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.pc-banner svg{width:12px;height:12px;fill:#fff}
+.pc-banner span{color:rgba(255,255,255,.55)}
+
+/* card sections */
+.pc-head{display:flex;flex-direction:column;gap:7px;padding:8px 0 22px}
+.pc-title{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.pc-title .badge{margin-top:1px}
+.pc-name{font-size:20px;font-weight:600;letter-spacing:-.02em;line-height:1.2;text-wrap:balance;max-width:15ch}
+.pc-desc{font-size:14px;color:var(--ink-soft);line-height:1.5;text-wrap:balance;max-width:34ch}
+.pc-price{padding-bottom:20px}
+.pc-amount{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px;font-variant-numeric:tabular-nums}
+.pc-amount .num{font-size:clamp(2rem,3vw,2.5rem);font-weight:600;letter-spacing:-.04em;line-height:1}
+.pc-amount .unit{font-size:14px;font-weight:500;color:var(--ink-faint)}
+.pc-meta{margin-top:10px;font-size:12.5px;color:var(--ink-faint)}
+.pc-config{padding-bottom:20px;display:flex;flex-direction:column}
+.pc-config > *{flex:1}
+.pc-cta{border-top:1px solid var(--line);padding-top:24px}
+.pc-cta .btn{height:46px;padding:0 22px}
+.pc-feats{padding-bottom:24px}
+.pc-feats h4{font-size:13px;font-weight:600;letter-spacing:-.005em;margin-bottom:14px}
+.pc-incl{display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:var(--ink);background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 13px;margin-bottom:14px}
+.pc-incl svg{flex:none;width:15px;height:15px;stroke:var(--ink)}
+.pc-card--dark .pc-incl{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:#fff}
+.pc-card--dark .pc-incl svg{stroke:#fff}
+.pc-feats .chk{gap:11px}
+.pc-feats .chk li,.pc-addon .chk li{font-size:13px;letter-spacing:-.005em}
+
+/* audit "how it works" note — DesignSpace dotted panel */
+.pc-note{border-radius:var(--radius-md);padding:16px 18px;background:var(--bg-soft) radial-gradient(rgba(16,16,16,.07) 1px,transparent 1px) 0 0/18px 18px;font-size:13px;color:var(--ink-soft);line-height:1.5}
+.pc-steps{display:flex;flex-direction:column;padding:0;background:var(--bg-soft);border:1px solid transparent;color:var(--ink-soft)}
+.pc-steps-head{padding:16px 18px}
+.pc-note .pc-steps-head b{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:normal;text-transform:none;color:var(--ink);margin:0}
+.pc-steps-head small{display:block;font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+.pc-steps-head small em{font-style:normal;font-weight:600;color:var(--ink)}
+.pc-steps ol{list-style:none;display:flex;flex-direction:column;justify-content:center;flex:1;gap:10px;margin:0 18px 16px;padding-top:13px;border-top:1px solid var(--line-2)}
+.pc-steps li{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;line-height:1.45;text-wrap:pretty}
+.pc-steps li span{flex:none;width:18px;height:18px;border-radius:50%;background:var(--ink);color:#fff;font-family:var(--mono);font-size:10px;font-weight:700;display:grid;place-items:center}
+.pc-note b{display:block;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px}
+
+/* add-on (shadcn Switch inside a bordered option card) */
+.pc-addon{border:1px solid var(--line-2);border-radius:var(--radius-md);background:var(--bg-card);transition:border-color .2s,background .2s}
+.pc-addon.on{border-color:var(--ink);background:#fcfcfb}
+.pc-addon-row{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer}
+.pc-addon-txt{flex:1;min-width:0}
+.pc-addon-txt b{display:block;font-size:14px;font-weight:600}
+.pc-addon-txt small{display:block;font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+.pc-addon-txt small em{font-style:normal;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.pc-addon-price{font-size:14px;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pc-addon-price small{font-size:12px;font-weight:500;color:var(--ink-faint)}
+.pc-addon,.pc-tiers,.pc-steps{display:flex;flex-direction:column;min-height:var(--config-h)}
+.pc-addon-panel{flex:1;display:flex;align-items:stretch}
+.pc-addon-panel > div{display:flex;flex:1}
+.pc-tiers .pc-tier{flex:1}
+.pc-addon-panel .chk{width:100%;justify-content:center;margin:0 18px 16px;padding-top:13px;border-top:1px solid var(--line);gap:10px}
+.pc-addon-panel .chk li{font-size:12.5px}
+.switch{appearance:none;-webkit-appearance:none;flex:none;width:40px;height:22px;border-radius:100px;background:#d6d5d1;position:relative;cursor:pointer;transition:background .2s}
+.switch::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .25s var(--ease)}
+.switch:checked{background:var(--ink)}
+.switch:checked::after{transform:translateX(18px)}
+.switch:focus-visible{outline:none;box-shadow:var(--focus)}
+
+/* plan selector (shadcn RadioGroup as stacked option rows) */
+.pc-tiers{border:1px solid var(--line-2);border-radius:var(--radius-md);background:var(--bg-card);overflow:hidden}
+.pc-tier{display:flex;align-items:center;gap:13px;width:100%;text-align:left;padding:15px 18px;transition:background .15s}
+.pc-tier + .pc-tier{border-top:1px solid var(--line)}
+.pc-tier:hover{background:rgba(0,0,0,.025)}
+.pc-tier[aria-checked="true"]{background:var(--bg-soft)}
+.pc-tier:focus-visible{box-shadow:inset 0 0 0 2px var(--ink)}
+.pc-radio{flex:none;width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(0,0,0,.28);display:grid;place-items:center;transition:border-color .2s}
+.pc-radio::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink);transform:scale(0);transition:transform .25s var(--ease)}
+.pc-tier[aria-checked="true"] .pc-radio{border-color:var(--ink)}
+.pc-tier[aria-checked="true"] .pc-radio::after{transform:scale(1)}
+.pc-tier-txt{flex:1;min-width:0}
+.pc-tier-txt b{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;line-height:1.45}
+.pc-tier-txt small{display:block;font-size:12px;color:var(--ink-faint);margin-top:5px}
+.pc-tier-amt{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* dark card variant (Option 6 Studio) */
+.pc-card--dark{background:radial-gradient(130% 120% at 85% -10%,#262626 0%,#0b0b0b 55%);color:#fff}
+.pc-card--dark .pc-desc,.pc-card--dark .chk li{color:rgba(255,255,255,.7)}
+.pc-card--dark .pc-amount .unit,.pc-card--dark .pc-meta,.pc-card--dark .pc-tier-txt small{color:rgba(255,255,255,.5)}
+.pc-card--dark .chk li svg{stroke:#fff}
+.pc-card--dark .pc-cta{border-top-color:rgba(255,255,255,.14)}
+.pc-card--dark .badge--outline{background:transparent;border-color:rgba(255,255,255,.25);color:#fff}
+.pc-card--dark .pc-tiers{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.14)}
+.pc-card--dark .pc-tier{color:#fff}
+.pc-card--dark .pc-tier + .pc-tier{border-top-color:rgba(255,255,255,.08)}
+.pc-card--dark .pc-tier:hover{background:rgba(255,255,255,.05)}
+.pc-card--dark .pc-tier[aria-checked="true"]{background:rgba(255,255,255,.09)}
+.pc-card--dark .pc-radio{border-color:rgba(255,255,255,.35)}
+.pc-card--dark .pc-radio::after{background:#fff}
+.pc-card--dark .pc-tier[aria-checked="true"] .pc-radio{border-color:#fff}
+.pc-card--dark .pc-tier:focus-visible{box-shadow:inset 0 0 0 2px #fff}
+.pc-card--dark .badge--pos{background:#fff;color:var(--ink)}
+.pc-card--dark .btn{background:#fff;color:var(--ink)}
+.pc-card--dark .btn:hover{transform:translateY(-2px)}
+.pc-card--dark .btn:focus-visible{box-shadow:0 0 0 2px #0b0b0b,0 0 0 4px #fff}
+
+/* "or" connector (Option 6) — Studio already includes Build + Maintenance */
+.pc-or{grid-column:1 / -1;grid-row:2 / span 5;align-self:center;justify-self:center;z-index:3;width:42px;height:42px;border-radius:50%;background:var(--bg-card);border:1px solid var(--line-2);display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);box-shadow:0 0 0 6px var(--bg)}
+
+.pc-foot{margin-top:18px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
+.pc-foot a{color:var(--ink);font-weight:600;border-bottom:1px solid var(--line-2)}
+
+/* Option 6 — free audit strip */
+.pc-audit{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,52px);align-items:center;margin-top:24px;background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:clamp(22px,2.6vw,32px)}
+.pc-audit .pc-name{display:flex;align-items:center;gap:10px}
+.pc-audit .pc-desc{margin-top:6px}
+.pc-audit .chk{margin:18px 0 22px}
+.pc-audit .btn{width:auto;height:44px;padding:0 22px}
+.pc-audit-viz{border-radius:var(--radius-md);background:var(--bg-soft) radial-gradient(rgba(16,16,16,.07) 1px,transparent 1px) 0 0/18px 18px;padding:clamp(16px,2.4vw,28px)}
+.pc-audit-viz svg{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 30px rgba(0,0,0,.08))}
+
+
+/* Build price when maintenance is on */
+.pc-amount .add{flex-basis:100%;color:var(--ink);font-weight:600;font-size:15px;margin-top:4px}
+.pc-amount .add[hidden]{display:none}
+
+@media(max-width:960px){
+  .pc-grid{grid-template-columns:1fr;grid-template-rows:none;row-gap:16px;max-width:none;margin:0}
+  .pc-card,.pc-feature,.pc-grid--2 > .pc-card,.pc-grid--2 > .pc-feature{grid-column:auto;grid-row:auto;grid-template-rows:none;display:flex;flex-direction:column}
+  .pc-feature > .pc-card{flex:1}
+  .pc-banner{padding:11px 0 11px calc(clamp(26px,2.8vw,36px) + 2px)}
+  .pc-or{display:none}
+  .pc-feats{margin-top:auto}
+  .pc-cta{margin-top:0}
+}
+@media(max-width:600px){.pc-audit-viz{display:none}}
+@media(prefers-reduced-motion:reduce){.pc-card,.pc-addon-panel,.switch::after,.pc-radio::after,.btn,.btn .arr{transition:none}}
+
+/* =====================================================================
+   PLAN FEATURES comparison (shadcn Table)
+   ===================================================================== */
+.pf{padding:clamp(46px,7vw,86px) 0;border-top:1px dashed var(--line-2)}
+.pf-card{margin-top:clamp(48px,5.2vw,78px)}
+.pf-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;font-size:14px}
+.pf-table col.c-feat{width:34%}
+.pf-table th,.pf-table td{padding:15px 20px;text-align:left;vertical-align:middle;border-bottom:1px solid var(--line)}
+.pf-table thead th{background:var(--bg);vertical-align:bottom;padding:10px 20px 22px;border-bottom:1px solid var(--line)}
+@media(min-width:901px){
+  .pf-table thead th{position:sticky;top:112px;z-index:4}
+  .pf-card.is-stuck .pf-table thead th{box-shadow:0 -112px 0 var(--bg)}
+  .pf-card.is-stuck .pf-table thead th.is-feat{box-shadow:0 -112px 0 var(--bg)}
+}
+.pf-table thead th.is-feat,.pf-table td.is-feat{background:var(--bg-soft)}
+.pf-table thead th.is-feat{border-top-left-radius:var(--radius-md,16px);border-top-right-radius:var(--radius-md,16px);padding-top:18px}
+.pf-table tbody tr:last-child td.is-feat{border-bottom-left-radius:var(--radius-md,16px);border-bottom-right-radius:var(--radius-md,16px)}
+.pf-table tbody tr:last-child > *{border-bottom:none}
+.pf-lead{display:flex;flex-direction:column;gap:7px;max-width:30ch}
+.pf-lead-t{font-size:16px;font-weight:600;letter-spacing:-.015em;color:var(--ink);line-height:1.25}
+.pf-lead-s{font-size:13px;font-weight:400;color:var(--ink-soft);line-height:1.5;text-wrap:pretty}
+.pf-h{display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+.pf-kind{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px}
+.pf-name{font-size:16px;font-weight:600;letter-spacing:-.015em;color:var(--ink)}
+.pf-pr{font-size:13.5px;font-weight:400;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.pf-h .btn{margin-top:16px}
+.pf-table .grp th{font-family:var(--font-sans);font-size:15px;font-weight:600;letter-spacing:-.015em;text-transform:none;color:var(--ink);padding:34px 20px 12px}
+.pf-table .grp td{padding:34px 20px 12px}
+.pf-table tbody th{text-align:left;font-weight:400;color:var(--ink);font-size:14px}
+.pf-table tbody th small{display:block;font-size:12.5px;color:var(--ink-faint);margin-top:3px;line-height:1.4}
+.pf-table tbody td{color:var(--ink-soft);font-size:13.5px;font-variant-numeric:tabular-nums}
+.ic-yes{display:inline-block;width:17px;height:17px;vertical-align:middle;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23101010' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E") center/17px no-repeat}
+.ic-no{display:inline-block;width:10px;height:1px;background:rgba(0,0,0,.2);vertical-align:middle}
+.pf-val{color:var(--ink);font-weight:400}
+.pf-vol{display:flex;gap:10px;align-items:baseline;color:var(--ink)}
+.pf-vol + .pf-vol{margin-top:6px}
+.pf-vol b{min-width:40px;font-weight:600;font-size:12.5px}
+.pf-swipe{display:none;margin-top:6px;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.pf-card{position:relative}
+@media(max-width:900px){
+  .pf-card::after{content:"";position:absolute;top:0;right:0;width:44px;height:100%;pointer-events:none;z-index:3;background:linear-gradient(to right,rgba(250,250,250,0),rgba(250,250,250,.92));border-radius:0 16px 16px 0}
+  .pf-swipe{display:block}
+}
+@media(max-width:900px){
+  .pf-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+  .pf-table{min-width:700px;font-size:13px}
+  .pf-table col.c-feat{width:180px}
+  .pf-table th,.pf-table td{padding:12px 14px}
+  .pf-table thead th{padding:18px 14px 14px}
+  .pf-table tbody td{position:relative;z-index:0}
+  .pf-table tbody th,.pf-table .grp th{position:sticky;left:0;z-index:2;background:var(--bg);box-shadow:1px 0 0 var(--line)}
+  .pf-table thead th:first-child{position:sticky;left:0;z-index:5;background:var(--bg);box-shadow:1px 0 0 var(--line)}
+  .pf-table thead th{position:relative;z-index:1}
+  .pf-table tbody th{font-size:13px}
+  .pf-table tbody th small{font-size:11.5px}
+  .pf-table tbody td{font-size:12.5px}
+  .pf-h .btn{width:auto;min-width:0}
+}
+
+
+
 /* ============ PROCESS (auto-loop steps + figure) ============ */
 /* Split header: heading left, supporting copy right, bottom-aligned */
 .head-split{
@@ -858,8 +1190,9 @@ br.lede-3{display:none}
   display:block;text-align:left;cursor:pointer;background:none;width:100%;
   position:relative;
 }
-.proc-bar{display:block;height:2px;background:var(--line);overflow:hidden;border-radius:2px;margin-bottom:clamp(18px,2vw,24px)}
-.proc-bar i{display:block;height:100%;width:0;background:var(--ink);border-radius:2px}
+.proc-bar{display:block;height:3px;background:var(--line);overflow:hidden;border-radius:99px;margin-bottom:clamp(18px,2vw,24px)}
+.proc-bar i{display:block;height:100%;width:0;min-width:3px;background:var(--ink);border-radius:99px;opacity:0}
+.proc-step.active .proc-bar i{opacity:1}
 .proc-step.active .proc-bar i{width:100%;transition:width var(--aloop-dur,6500ms) linear}
 .proc-step-num{
   display:block;font-family:var(--mono);font-weight:700;
@@ -883,6 +1216,7 @@ br.lede-3{display:none}
 
 /* ============ FAQ ============ */
 .faq-list{max-width:780px}
+@media(min-width:1000px){.faq-list{max-width:none;display:grid;grid-template-columns:1fr 1fr;align-items:start;column-gap:clamp(40px,5vw,80px)}.faq-q{padding:22px 0;gap:18px}}
 .faq-item{border-bottom:1px solid var(--line)}
 .faq-q{
   width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;
@@ -929,6 +1263,7 @@ br.lede-3{display:none}
 @media(max-width:560px){
   .cal-card{padding:clamp(24px,6vw,32px) 14px 18px}
   .cal-card iframe,#cal-inline{min-height:1040px}
+  .cal-card > .cal-embed{background:none;border:1px solid var(--line);padding:0;overflow:hidden}
 }
 
 /* ============ FOOTER ============ */
@@ -1033,7 +1368,7 @@ footer{padding:clamp(56px,6vw,90px) 0 0;overflow:hidden}
 .assets-label{
   position:relative;z-index:3;
   font-weight:400;
-  font-size:clamp(1.95rem,3.3vw,var(--fs-h2));color:var(--ink);
+  font-size:clamp(1.25rem,7.4vw,var(--fs-h2));color:var(--ink);
   white-space:nowrap;letter-spacing:-.03em;
 }
 .word-wheel{
@@ -1116,7 +1451,7 @@ br.cmsbr{display:none}
     </div>
     <div class="bubble">
       <a href="#pricing" class="bnav-link">Pricing</a>
-      <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="bnav-cta">Book a Discovery Call <span class="arr">→</span></a>
+      <a href="https://cal.com/ian-barin/discovery-call" target="_blank" rel="noopener" class="bnav-cta"><span class="cta-full">Book a Discovery Call</span><span class="cta-short">Book a Call</span> <span class="arr">→</span></a>
     </div>
   </div>
 </nav>
@@ -1130,10 +1465,11 @@ br.cmsbr{display:none}
     <!-- copy overlay -->
     <div class="hero-stage">
       <div class="hero-text">
-        <div class="eyebrow">Flexible B2B Design Subscription</div>
+        <div class="eyebrow">Design + AI Systems for Marketing Teams</div>
         <h1 class="hero-h1">Tech Marketing,<br /><span class="serif">Designed Better</span></h1>
+        <p class="hero-sub"><span>Your whole team designs now.</span> <span>We keep it on brand.</span></p>
         <div class="hero-ctas">
-          <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
+          <a href="https://cal.com/ian-barin/discovery-call" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
           <a href="#work" class="btn btn-ghost">Explore Designs</a>
         </div>
         <a href="#partner" class="hero-partner">
@@ -1165,7 +1501,7 @@ br.cmsbr{display:none}
 <!-- ============ WORK SHOWCASE (below hero) ============ -->
 <section class="work-strip-section" id="work">
   <div class="wrap">
-    <h2 class="h-xl reveal">Ongoing marketing design support for B2B tech and cybersecurity teams.</h2>
+    <h2 class="h-xl reveal">Design and AI systems for B2B tech and cybersecurity teams.</h2>
   </div>
   <div class="ds-carousel work-strip reveal" data-reveal-delay="0.18" data-speed="34" data-center>
     <div class="ds-rail"><div class="ds-track">
@@ -1224,8 +1560,8 @@ br.cmsbr{display:none}
       <div class="caps-grid">
       <div class="section-head reveal">
         <div class="eyebrow">Full-Suite Marketing Design</div>
-        <h2 class="h-xl">Creative fulfillment<br /><span class="serif">for your entire team.</span></h2>
-        <p class="lede" style="margin-top:20px">One subscription that keeps your <br class="lede-3" />creative output moving — no bottlenecks, <br class="lede-3" />no handoff delays, no waiting on design.</p>
+        <h2 class="h-xl">Creative fulfillment and brand guardrails<br /><span class="serif">for your entire team.</span></h2>
+        <p class="lede" style="margin-top:20px">One subscription that keeps your creative output moving <em>and on-brand</em>. No&nbsp;bottlenecks, no drift, no waiting on design.</p>
       </div>
       <div class="hero-app reveal" id="hero-app">
         <div class="app-stage">
@@ -1252,7 +1588,7 @@ br.cmsbr{display:none}
             </div>
             <div class="app-row">
               <svg class="row-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M19 8v6M16 11h6"/></svg>
-              <img class="app-avatar" src="frida.jpg" alt="Frida Kahlo" loading="lazy" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Frida_Kahlo,_by_Guillermo_Kahlo.jpg?width=200'}else{var d=document.createElement('div');d.className='app-avatar initials';d.textContent='FK';this.replaceWith(d)}" />
+              <div class="app-avatar initials" aria-hidden="true">FK</div>
               <div><div class="row-title">Frida Kahlo</div><div class="row-sub">Demand Gen Lead</div></div>
               <div class="row-end"><span class="app-date app-team-count">4 Active Projects</span></div>
             </div>
@@ -1287,27 +1623,27 @@ br.cmsbr{display:none}
             </div>
           </div>
   
-          <!-- Panel 2: Ongoing Fulfillment -->
+          <!-- Panel 2: Brand Health -->
           <div class="app-panel" data-panel="2">
             <div class="app-row">
-              <svg class="row-icon" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-              <div><div class="row-title">January 2027</div><div class="row-sub">Pro Plan</div></div>
-              <span class="row-end"><span class="app-bar"><i data-fill="92.5%"></i></span><span class="app-date">37/40 Hours Used</span></span>
+              <svg class="row-icon" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+              <div><div class="row-title">Brand Health Score</div><div class="row-sub">Rolling 30 days</div></div>
+              <span class="row-end"><span class="app-bar"><i data-fill="94%"></i></span><span class="app-date">94% on-brand</span></span>
             </div>
             <div class="app-row">
-              <svg class="row-icon" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-              <div><div class="row-title">February 2027</div><div class="row-sub">Extra Plan</div></div>
-              <span class="row-end"><span class="app-bar"><i data-fill="98.75%"></i></span><span class="app-date">79/80 Hours Used</span></span>
+              <svg class="row-icon" viewBox="0 0 24 24"><path d="M5 21V4h11l-2 4 2 4H5"/></svg>
+              <div><div class="row-title">Drift Flags</div><div class="row-sub">This month</div></div>
+              <span class="row-end"><span class="app-date">3 flagged · 3 fixed</span></span>
             </div>
             <div class="app-row">
-              <svg class="row-icon" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-              <div><div class="row-title">March 2027</div><div class="row-sub">Pro Plan</div></div>
-              <span class="row-end"><span class="app-bar"><i data-fill="100%"></i></span><span class="app-date">40/40 Hours Used</span></span>
+              <svg class="row-icon" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              <div><div class="row-title">Assets Reviewed</div><div class="row-sub">This month</div></div>
+              <span class="row-end"><span class="app-date">128 reviewed</span></span>
             </div>
             <div class="app-row">
-              <svg class="row-icon" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-              <div><div class="row-title">April 2027</div><div class="row-sub">Current: Mega Plan</div></div>
-              <span class="row-end"><span class="app-bar"><i data-fill="51.6%"></i></span><span class="app-date">62/120 Hours Used</span></span>
+              <svg class="row-icon" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-2.6-6.3M21 4v4h-4"/></svg>
+              <div><div class="row-title">System Updates Shipped</div><div class="row-sub">This quarter</div></div>
+              <span class="row-end"><span class="app-date">6 updates</span></span>
             </div>
           </div>
   
@@ -1321,9 +1657,9 @@ br.cmsbr{display:none}
             <svg viewBox="0 0 24 24"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg>
             <span class="tab-full">Design Projects</span><span class="tab-short">Projects</span>
           </button>
-          <button class="app-tab" data-tab="2" aria-label="Ongoing Fulfillment">
-            <svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-            <span class="tab-full">Fulfillment</span><span class="tab-short">Fulfillment</span>
+          <button class="app-tab" data-tab="2" aria-label="Brand Health">
+            <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+            <span class="tab-full">Brand Health</span><span class="tab-short">Brand</span>
           </button>
         </div>
       </div>
@@ -1357,14 +1693,20 @@ br.cmsbr{display:none}
         <div class="eyebrow">Why DesignSpace</div>
         <h2 class="h-xl wch-head">One creative partner.&nbsp;<br /><span class="serif">Built around your priorities.</span></h2>
       </div>
-      <p class="lede">Unlimited design assets in your brand, on your team's schedule — created by an expert team of creatives with decades of tech &amp; startup experience.</p>
+      <p class="lede">Unlimited design assets and projects in your brand, on your team's schedule, created by an expert team of creatives with decades of tech &amp; startup experience.</p>
     </div>
 
     <div class="htrack">
       <article class="hcard">
+        <div class="hcard-media"><img src="ai-brand-guardrails.svg" alt="Claude and ChatGPT output staying on brand" loading="lazy" /></div>
+        <h3>We own your brand in the AI era</h3>
+        <p>As your team uses Claude, ChatGPT, Figma, and Canva to move faster, we&nbsp;make sure what ships stays on-brand. We build the system, review the output, and patch the drift.</p>
+      </article>
+
+      <article class="hcard">
         <div class="hcard-media"><img src="b2b-1-teams.webp?v=3" alt="Built for tech & cyber marketers" loading="lazy" /></div>
         <h3 class="nowrap-d">Built for tech &amp; cyber marketers</h3>
-        <p>B2B tech and cyber design specialists, since 2020 — we know your industry timeline, technical jargon, pain points, and buyers.</p>
+        <p>B2B tech and cyber design specialists since 2020. We know your industry timeline, technical jargon, pain points, and buyers.</p>
       </article>
 
       <article class="hcard">
@@ -1376,25 +1718,25 @@ br.cmsbr{display:none}
       <article class="hcard">
         <div class="hcard-media"><img src="b2b-3-contact.webp?v=3" alt="One point of contact. Always." loading="lazy" /></div>
         <h3>One point of contact. Always.</h3>
-        <p>Every team has a single dedicated project manager who is your source of truth — keeping your priorities and projects moving in the right direction.</p>
+        <p>Every team has a single dedicated project manager who is your source of truth, keeping your priorities and projects moving in the right direction.</p>
       </article>
 
       <article class="hcard">
         <div class="hcard-media"><img src="b2b-4-visibility.webp?v=3" alt="Full visibility at every stage" loading="lazy" /></div>
         <h3>Full visibility at every stage</h3>
-        <p>Your Asana board shows exactly where every task sits — in progress, awaiting assets, or ready for review. No chasing updates.</p>
+        <p>Your Asana board shows exactly where every task sits: in progress, awaiting assets, or ready for review. No chasing updates.</p>
       </article>
 
       <article class="hcard">
         <div class="hcard-media"><img src="b2b-5-subscription.webp?v=3" alt="A subscription, not a contract" loading="lazy" /></div>
         <h3>A subscription, not a contract</h3>
-        <p>One flat monthly rate, full flexibility. Upgrade, downgrade, or pause as your roadmap changes — 30 days notice, anytime.</p>
+        <p>One flat monthly rate, full flexibility. Switch between Pro, Extra, and Mega anytime, then pause or cancel with 30 days notice after 3 months.</p>
       </article>
 
       <article class="hcard">
         <div class="hcard-media"><img src="b2b-6-assets.webp?v=3" alt="All design assets covered" loading="lazy" /></div>
         <h3>All design assets covered</h3>
-        <p>Decks, reports, ads, carousels, eBooks, diagrams — whatever your marketing needs, one team handles every format.</p>
+        <p>Decks, reports, ads, carousels, eBooks, diagrams. Whatever your marketing needs, one team handles every format.</p>
       </article>
     </div>
 
@@ -1414,14 +1756,14 @@ br.cmsbr{display:none}
     </div>
     <div class="int-panel reveal">
       <div class="int-label">
-        <h3>Plays nicely with the tools your team already uses</h3>
+        <h3>We build your brand into the tools your team already uses</h3>
       </div>
       <div class="int-grid">
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/claude.svg" alt="" loading="lazy" onerror="this.replaceWith('Cl')" /></span>Claude</div>
+        <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/openai.svg" alt="" loading="lazy" onerror="this.replaceWith('AI')" /></span>ChatGPT</div>
         <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/figma.svg" alt="" loading="lazy" onerror="this.replaceWith('Fi')" /></span>Figma</div>
         <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/canva.svg" alt="" loading="lazy" onerror="this.replaceWith('Cv')" /></span>Canva</div>
         <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/adobe.svg" alt="" loading="lazy" onerror="this.replaceWith('Ad')" /></span>Adobe Suite</div>
-        <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/openai.svg" alt="" loading="lazy" onerror="this.replaceWith('AI')" /></span>ChatGPT</div>
-        <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/claude.svg" alt="" loading="lazy" onerror="this.replaceWith('Cl')" /></span>Claude</div>
         <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/framer.svg" alt="" loading="lazy" onerror="this.replaceWith('Fr')" /></span>Framer</div>
         <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/asana.svg" alt="" loading="lazy" onerror="this.replaceWith('As')" /></span>Asana</div>
         <div class="int-item"><span class="int-ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/googledrive.svg" alt="" loading="lazy" onerror="this.replaceWith('GD')" /></span>Google Drive</div>
@@ -1431,9 +1773,10 @@ br.cmsbr{display:none}
     </div>
     <div class="int-panel reveal" data-reveal-delay="0.22">
       <div class="int-label">
-        <h3>Everything your marketing team needs — designed for you</h3>
+        <h3>Everything your marketing team needs, designed for you</h3>
       </div>
       <div class="int-grid">
+        <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 1.6v2.4M15 1.6v2.4M9 20v2.4M15 20v2.4M1.6 9H4M1.6 15H4M20 9h2.4M20 15h2.4"/><path d="M12 8.1l1.15 2.75L15.9 12l-2.75 1.15L12 15.9l-1.15-2.75L8.1 12l2.75-1.15z"/></svg></span>AI Systems</div>
         <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24"><path d="M3 11l18-7-7 18-2.5-7.5z"/></svg></span>Ad Campaigns</div>
         <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>Reports</div>
         <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="12" rx="2"/><path d="M12 15v4M8 21l4-2 4 2"/></svg></span>Decks</div>
@@ -1446,6 +1789,8 @@ br.cmsbr{display:none}
         <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><circle cx="17.5" cy="6.5" r="3.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="3.5"/></svg></span>Icons</div>
         <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 012-2h13v16H6a2 2 0 000 4h13"/></svg></span>eBooks</div>
         <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24"><path d="M14 3v5h5M6 3h9l4 4v14H6z"/><path d="M9 12h6M9 16h4"/></svg></span>Case Studies</div>
+        <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg></span>Video Templates</div>
+        <div class="int-item"><span class="int-ico"><svg viewBox="0 0 24 24"><path d="M4 3l7 17 2.6-6.4L20 11z"/></svg></span>Interactive Tools</div>
       </div>
       <button class="int-more" type="button" data-int-more>See more <span class="int-more-ico">+</span></button>
     </div>
@@ -1556,56 +1901,153 @@ br.cmsbr{display:none}
   </div>
 </section>
 
-<!-- ============ PRICING (tier slider) ============ -->
+<!-- ============ PRICING (cards + comparison) ============ -->
 <section id="pricing">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Pricing</div>
+      <div class="eyebrow">How We Work Together</div>
       <h2 class="h-xl">Simple plans.<br /><span class="serif">Seriously creative output.</span></h2>
-      <p class="lede" style="margin-top:20px">A flexible design subscription built for agile marketing teams.</p>
+      <p class="lede" style="margin-top:20px">From a free audit to your full creative team, a flexible design subscription built for agile marketing teams.</p>
     </div>
 
-    <div class="palt reveal" data-palt>
-      <div class="palt-toggle" role="tablist" aria-label="Pricing tiers">
-        <span class="palt-ind" data-ind></span>
-        <button class="palt-seg active" data-tier="0">Pro</button>
-        <button class="palt-seg" data-tier="1">Extra</button>
-        <button class="palt-seg" data-tier="2">Mega</button>
-      </div>
-
-      <div class="palt-grid">
-        <!-- LEFT: the changing plan -->
-        <div class="palt-card palt-plan" data-plan>
-          <div class="palt-name-row">
-            <span class="palt-name" data-name>Pro</span>
-            <span class="palt-badge" data-badge style="display:none">Most popular</span>
+    <div class="reveal">
+    <div class="pc-grid pc-grid--3">
+      <article class="pc-card">
+        <header class="pc-head">
+          <div class="pc-title"><h3 class="pc-name">Brand Drift Audit</h3><span class="badge badge--secondary">Free</span></div>
+          <p class="pc-desc">See where your brand's design is drifting across your recent work.</p>
+        </header>
+        <div class="pc-price">
+          <div class="pc-amount"><span class="num">$0</span></div>
+          <div class="pc-meta">Free, no commitment</div>
+        </div>
+        <div class="pc-config">
+          <div class="pc-note pc-steps">
+            <div class="pc-steps-head"><b>How it works</b><small><em>3 steps</em> to a sharper brand</small></div>
+            <ol>
+              <li><span>1</span>We pull your last 30 days of design work</li>
+              <li><span>2</span>We score it against your brand</li>
+              <li><span>3</span>You get the fixes, ranked by impact</li>
+            </ol>
           </div>
-          <p class="palt-desc" data-desc>Steady creative support for teams with consistent output needs.</p>
-          <div class="palt-price" data-price>$4,999 <span>/ month</span></div>
-          <p class="palt-flex">Upgrade, downgrade, pause, or cancel anytime</p>
-          <ul class="palt-specs">
-            <li class="palt-spec"><span>Hours / month</span><b data-hours>40 hours</b></li>
-            <li class="palt-spec"><span>Projects / month</span><b data-projects>4–8 projects</b></li>
-            <li class="palt-spec"><span>Rollover / month</span><b data-rollover>Up to 10 hours</b></li>
-          </ul>
-          <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call <span class="arr">→</span></a>
         </div>
+        <div class="pc-feats">
+          <h4>What you get</h4>
+          <ul class="chk">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>Brand Health score, last 30 days</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>5 before/after redesigns of your assets</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>A written breakdown of the drift</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>A prioritized list of what to fix</li>
+          </ul>
+        </div>
+        <div class="pc-cta"><a class="btn btn-ghost" href="https://cal.com/ian-barin/audit" target="_blank" rel="noopener">Book a free audit <span class="arr">→</span></a></div>
+      </article>
 
-        <!-- RIGHT: constant, every plan includes -->
-        <div class="palt-card palt-inc">
-          <h3>Every plan includes…</h3>
-          <ul>
-            <li>Expert B2B tech designers &amp; dedicated project manager</li>
-            <li>Unlimited active projects, asset types &amp; design revisions</li>
-            <li>Add your entire team — marketing, design, sales, events</li>
-            <li>Stress-free tools: Asana, Figma, Canva &amp; Google Drive</li>
-            <li>No submission forms — just send a task on Asana</li>
-            <li>Flexible monthly plans — start small, scale when ready</li>
-            <li>Portion of unused hours roll over every month</li>
-            <li>Upgrade, downgrade, pause, or cancel anytime</li>
+      <article class="pc-card" data-build>
+        <header class="pc-head">
+          <div class="pc-title"><h3 class="pc-name">AI Brand Design Ops</h3><span class="badge badge--outline" data-build-badge>One-time</span></div>
+          <p class="pc-desc">Sync your brand's design into Claude, ChatGPT, Figma &amp; Canva.</p>
+        </header>
+        <div class="pc-price">
+          <div class="pc-amount"><span class="num">$7,499</span><span class="unit" data-build-unit>one-time</span></div>
+          <div class="pc-meta" data-build-meta>Billed once, yours to keep</div>
+        </div>
+        <div class="pc-config">
+          <div class="pc-addon" data-addon>
+            <label class="pc-addon-row">
+              <span class="pc-addon-txt"><b>Add ongoing maintenance</b><small><em>+$2,499/mo</em>, keeps it on-brand</small></span>
+              <input type="checkbox" role="switch" class="switch" aria-controls="hp-maint" />
+            </label>
+            <div class="pc-addon-panel" id="hp-maint"><div>
+              <ul class="chk">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>Fast-track reviews for AI design assets</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>Monthly Brand Health report</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>Updates for new tools &amp; hires</li>
+          </ul>
+            </div></div>
+          </div>
+        </div>
+        <div class="pc-feats">
+          <h4>What you get</h4>
+          <ul class="chk">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>Delivered in 3–6 weeks</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>Installed in Claude &amp; ChatGPT</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>AI templates for your top-10 assets</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>Red-team pass + team training</li>
           </ul>
         </div>
+        <div class="pc-cta"><a class="btn btn-primary" href="https://cal.com/ian-barin/design-ops" target="_blank" rel="noopener">Book a Design Ops call <span class="arr">→</span></a></div>
+      </article>
+
+      <div class="pc-feature">
+        <div class="pc-banner"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.8 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z"/></svg>Recommended</div>
+        <article class="pc-card" data-make>
+          <header class="pc-head">
+            <div class="pc-title"><h3 class="pc-name">Studio Plan</h3><span class="badge badge--outline">Monthly</span></div>
+            <p class="pc-desc">Your full creative team, with unlimited design assets and projects.</p>
+          </header>
+          <div class="pc-price">
+            <div class="pc-amount"><span class="num">$<span data-mk-amt>8,999</span></span><span class="unit">/mo</span></div>
+            <div class="pc-meta">Billed monthly, 3-month minimum</div>
+          </div>
+          <div class="pc-config">
+            <div class="pc-tiers" role="radiogroup" aria-label="Studio plan volume">
+              <button type="button" class="pc-tier" role="radio" aria-checked="false" data-tier="Pro"><span class="pc-radio"></span><span class="pc-tier-txt"><b>Pro</b><small>4–8 projects/mo, ~40 hrs</small></span><span class="pc-tier-amt">$4,999</span></button>
+              <button type="button" class="pc-tier" role="radio" aria-checked="true" data-tier="Extra"><span class="pc-radio"></span><span class="pc-tier-txt"><b>Extra <span class="badge badge--pos">Most popular</span></b><small>6–12 projects/mo, ~80 hrs</small></span><span class="pc-tier-amt">$8,999</span></button>
+              <button type="button" class="pc-tier" role="radio" aria-checked="false" data-tier="Mega"><span class="pc-radio"></span><span class="pc-tier-txt"><b>Mega</b><small>8–16 projects/mo, ~120 hrs</small></span><span class="pc-tier-amt">$12,999</span></button>
+            </div>
+          </div>
+          <div class="pc-feats">
+            <h4>What you get</h4>
+            <div class="pc-incl"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>Everything in Design Ops + Maintenance</div>
+            <ul class="chk">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>Flagship work in every format</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>AI + traditional creative tools</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13l4 4 10-10"/></svg>Founder-led review + dedicated PM</li>
+          </ul>
+          </div>
+          <div class="pc-cta"><a class="btn btn-primary" href="https://cal.com/ian-barin/studio-extra" target="_blank" rel="noopener"><span data-mk-cta>Book a Studio Extra call</span> <span class="arr">→</span></a></div>
+        </article>
       </div>
+    </div>
+    </div>
+    <p class="pricing-foot">All prices in USD. Every plan is built on the same brand system, and you own it either way.</p>
+
+    <div class="reveal">
+    <div class="pf-card">
+      <div class="pf-scroll">
+      <table class="pf-table">
+        <colgroup><col class="c-feat" /><col /><col /><col /></colgroup>
+        <thead>
+          <tr>
+            <th scope="col"><div class="pf-lead"><span class="pf-lead-t">Every feature, side by side</span><span class="pf-lead-s">What is included at each step, from the free audit through to ongoing creative output.</span><span class="pf-swipe">Swipe to compare →</span></div></th>
+            <th scope="col"><div class="pf-h"><span class="pf-kind">Free</span><span class="pf-name">Brand Drift Audit</span><span class="pf-pr">$0</span><a class="btn btn-ghost btn-sm" href="https://cal.com/ian-barin/audit">Book a free audit</a></div></th>
+            <th scope="col"><div class="pf-h"><span class="pf-kind">One-time</span><span class="pf-name">AI Brand Design Ops</span><span class="pf-pr">$7,499</span><a class="btn btn-ghost btn-sm" href="https://cal.com/ian-barin/design-ops">Book a call</a></div></th>
+            <th scope="col" class="is-feat"><div class="pf-h"><span class="pf-kind">Monthly</span><span class="pf-name">Studio Plan</span><span class="pf-pr">$4,999–$12,999/mo</span><a class="btn btn-primary btn-sm" href="https://cal.com/ian-barin/discovery-call">Book a call</a></div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="grp"><th scope="colgroup">Diagnosis</th><td></td><td></td><td class="is-feat"></td></tr>
+          <tr><th scope="row">Brand Health score<small>Scored on color, type, layout &amp; voice</small></th><td>30-day snapshot</td><td>Baseline</td><td class="is-feat">Monthly</td></tr>
+          <tr><th scope="row">Before/after redesigns of your assets<small>Built from work you actually published</small></th><td>5 fixes</td><td><span class="ic-yes"><span class="sr">Included</span></span></td><td class="is-feat"><span class="ic-yes"><span class="sr">Included</span></span></td></tr>
+          <tr class="grp"><th scope="colgroup">The brand system</th><td></td><td></td><td class="is-feat"></td></tr>
+          <tr><th scope="row">Installed in Claude, ChatGPT, Figma &amp; Canva<small>Your whole team creates on-brand by default</small></th><td><span class="ic-no"><span class="sr">Not included</span></span></td><td><span class="ic-yes"><span class="sr">Included</span></span></td><td class="is-feat"><span class="ic-yes"><span class="sr">Included</span></span></td></tr>
+          <tr><th scope="row">Brand source file<small>Tokens, type, colour ratios, voice, banned patterns</small></th><td><span class="ic-no"><span class="sr">Not included</span></span></td><td><span class="ic-yes"><span class="sr">Included</span></span></td><td class="is-feat"><span class="ic-yes"><span class="sr">Included</span></span></td></tr>
+          <tr><th scope="row">AI templates for your top-10 assets<small>Reports, social, diagrams, events, video</small></th><td><span class="ic-no"><span class="sr">Not included</span></span></td><td><span class="ic-yes"><span class="sr">Included</span></span></td><td class="is-feat"><span class="ic-yes"><span class="sr">Included</span></span></td></tr>
+          <tr><th scope="row">Red-team pass + live team training<small>We stress-test outputs, then train your team</small></th><td><span class="ic-no"><span class="sr">Not included</span></span></td><td><span class="ic-yes"><span class="sr">Included</span></span></td><td class="is-feat"><span class="ic-yes"><span class="sr">Included</span></span></td></tr>
+          <tr class="grp"><th scope="colgroup">Keeping it on-brand</th><td></td><td></td><td class="is-feat"></td></tr>
+          <tr><th scope="row">Ongoing maintenance<small>+$2,499/mo, cancel anytime</small></th><td><span class="ic-no"><span class="sr">Not included</span></span></td><td>Optional add-on</td><td class="is-feat">Included</td></tr>
+          <tr><th scope="row">Fast-track AI asset reviews<br />+ monthly Brand Health report<small>Priority checks on AI-made work, scored monthly</small></th><td><span class="ic-no"><span class="sr">Not included</span></span></td><td>With maintenance</td><td class="is-feat"><span class="ic-yes"><span class="sr">Included</span></span></td></tr>
+          <tr><th scope="row">Updates for new tools, campaigns &amp; hires<small>Your system evolves as your team does</small></th><td><span class="ic-no"><span class="sr">Not included</span></span></td><td>With maintenance</td><td class="is-feat"><span class="ic-yes"><span class="sr">Included</span></span></td></tr>
+          <tr class="grp"><th scope="colgroup">Creative output</th><td></td><td></td><td class="is-feat"></td></tr>
+          <tr><th scope="row">Flagship work in every asset type &amp; format<small>Reports, eBooks, decks, campaigns &amp; more</small></th><td><span class="ic-no"><span class="sr">Not included</span></span></td><td><span class="ic-no"><span class="sr">Not included</span></span></td><td class="is-feat"><span class="ic-yes"><span class="sr">Included</span></span></td></tr>
+          <tr><th scope="row">Founder-led review + dedicated project manager<small>Senior eyes on every asset, one point of contact</small></th><td><span class="ic-no"><span class="sr">Not included</span></span></td><td><span class="ic-no"><span class="sr">Not included</span></span></td><td class="is-feat"><span class="ic-yes"><span class="sr">Included</span></span></td></tr>
+          <tr><th scope="row">Monthly volume<small>Change tiers as your roadmap shifts</small></th><td><span class="ic-no"><span class="sr">Not included</span></span></td><td><span class="ic-no"><span class="sr">Not included</span></span></td><td class="is-feat pf-val"><span class="pf-vol"><b>Pro</b>4–8 projects, ~40 hrs</span><span class="pf-vol"><b>Extra</b>6–12 projects, ~80 hrs</span><span class="pf-vol"><b>Mega</b>8–16 projects, ~120 hrs</span></td></tr>
+          <tr><th scope="row">Commitment<small>Minimum term for each plan</small></th><td>None</td><td>One-time, 3–6 weeks</td><td class="is-feat">Monthly, 3-month minimum</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
     </div>
   </div>
 </section>
@@ -1618,7 +2060,7 @@ br.cmsbr{display:none}
         <div class="eyebrow">Our Process</div>
         <h2 class="h-xl">Your creative extension,<br /><span class="serif">at every step of the way.</span></h2>
       </div>
-      <p class="lede">From kickoff to ongoing asset delivery, one subscription that adapts to your roadmap — no forms, no bottlenecks, no waiting on design.</p>
+      <p class="lede">From kickoff to ongoing asset delivery, one subscription that adapts to your roadmap. No forms, no bottlenecks, no waiting on design.</p>
     </div>
     <div class="reveal" data-autoloop data-interval="6500">
       <div class="proc-figure">
@@ -1632,15 +2074,15 @@ br.cmsbr{display:none}
           <span class="proc-step-num">Step 1</span>
           <div class="proc-step-body">
             <h3>Kickoff with DesignSpace.</h3>
-            <p>We align on your team, priorities, and workflows — then set up your Asana board, shared Figma file, and brand assets folder.</p>
+            <p>We align on your team, priorities, and workflows, then set up your Asana board, shared Figma file, and brand assets folder.</p>
           </div>
         </button>
         <button class="proc-step" data-step="1">
           <span class="proc-bar"><i></i></span>
           <span class="proc-step-num">Step 2</span>
           <div class="proc-step-body">
-            <h3>Submit tasks. We deliver.</h3>
-            <p>Drop tasks straight into Asana — no forms, no brief templates. Your team designs, your creative director reviews, you receive polished work.</p>
+            <h3>Submit tasks. We deliver on-brand.</h3>
+            <p>Drop tasks straight into Asana, no forms or briefs. Your team and AI tools design, we review, and it all ships on-brand.</p>
           </div>
         </button>
         <button class="proc-step" data-step="2">
@@ -1648,7 +2090,7 @@ br.cmsbr{display:none}
           <span class="proc-step-num">Step 3</span>
           <div class="proc-step-body">
             <h3>Scale on your terms.</h3>
-            <p>Upgrade for launches, downgrade in quiet months, pause when you need to. Your subscription flexes with your roadmap.</p>
+            <p>Upgrade for launches, downgrade in quiet months, pause after your first 3 months. Your subscription flexes with your roadmap.</p>
           </div>
         </button>
       </div>
@@ -1664,7 +2106,7 @@ br.cmsbr{display:none}
       <div class="cms-copy reveal">
         <a href="https://www.cybersecuritymarketingsociety.com/" target="_blank" rel="noopener" class="cms-logo-link"><img class="cms-logo" src="cms-logo.webp" alt="Cybersecurity Marketing Society" loading="lazy" /></a>
         <h2 class="h-xl">A proud partner.<br /><span class="serif">A trusted creative.</span></h2>
-        <p class="lede">DesignSpace has partnered with the <br class="cmsbr" /><a href="https://www.cybersecuritymarketingsociety.com/" target="_blank" rel="noopener">Cybersecurity Marketing Society</a> since 2023 <br class="cmsbr" />— shaping brand and design resources <br class="cmsbr" />that support their growing community.</p>
+        <p class="lede">DesignSpace has partnered with the <br class="cmsbr" /><a href="https://www.cybersecuritymarketingsociety.com/" target="_blank" rel="noopener">Cybersecurity Marketing Society</a> since 2023, <br class="cmsbr" />shaping brand and design resources <br class="cmsbr" />that support their growing community.</p>
       </div>
       <div class="cms-figure reveal" id="cms-show" data-reveal-delay="0.15">
         <div class="cms-slide is-on">
@@ -1701,9 +2143,10 @@ br.cmsbr{display:none}
       <h2 class="h-xl">Everything<br /><span class="serif">you're wondering.</span></h2>
     </div>
     <div class="faq-list reveal">
+      <div class="faq-col">
       <div class="faq-item">
         <button class="faq-q">How is this different from hiring an in-house designer?<span class="faq-icon"></span></button>
-        <div class="faq-a"><p>One subscription gets you a full team — specialists across decks, reports, ads, diagrams, and social — plus a dedicated project manager and founder-led quality control. No recruiting, onboarding, or overhead, and you can scale up or down monthly.</p></div>
+        <div class="faq-a"><p>One subscription gets you a full team: specialists across decks, reports, ads, diagrams, and social, plus a dedicated project manager and founder-led quality control. No recruiting, onboarding, or overhead, and you can scale up or down monthly.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">How fast will I receive my designs?<span class="faq-icon"></span></button>
@@ -1718,16 +2161,31 @@ br.cmsbr{display:none}
         <div class="faq-a"><p>Absolutely. Whether you're using AI-powered tools like Claude and ChatGPT or trusted platforms like Figma and Canva, we integrate seamlessly into your existing workflow. Every output goes through hands-on review from our creative director, so you never sacrifice quality or brand consistency.</p></div>
       </div>
       <div class="faq-item">
+        <button class="faq-q">Can't we just import our brand into Claude Design ourselves?<span class="faq-icon"></span></button>
+        <div class="faq-a"><p>You can, and Claude will faithfully enforce whatever you import. The hard part is deciding what goes in, writing rules for the edge cases a guidelines PDF never covers, and keeping it current as your team and tools change. It takes a designer's eye to tune it just right. That ongoing judgment is the actual job.</p></div>
+      </div>
+      </div>
+      <div class="faq-col">
+      <div class="faq-item">
+        <button class="faq-q">What happens after the brand system is built?<span class="faq-icon"></span></button>
+        <div class="faq-a"><p>That's ongoing maintenance: a monthly drift review, template updates as new campaigns launch, quarterly onboarding for new hires, and ongoing optimization as new roadblocks surface from your team's day-to-day use.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you handle full rebrands or new brand identities?<span class="faq-icon"></span></button>
+        <div class="faq-a"><p>No. This is built to maintain, improve, and evolve a brand that already exists. Building one from scratch (new name, new identity, new visual system) is a different kind of engagement than what we offer here.</p></div>
+      </div>
+      <div class="faq-item">
         <button class="faq-q">How do I submit and track requests?<span class="faq-icon"></span></button>
-        <div class="faq-a"><p>Just send a task on Asana — no submission forms. Your board shows exactly where every task sits: priorities, in progress, awaiting assets, or ready for review. Files are delivered in Figma, Canva, or Google Drive.</p></div>
+        <div class="faq-a"><p>Just send a task on Asana, no submission forms. Your board shows exactly where every task sits: priorities, in progress, awaiting assets, or ready for review. Files are delivered in Figma, Canva, or Google Drive.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">What happens to unused hours?<span class="faq-icon"></span></button>
-        <div class="faq-a"><p>A portion of unused hours rolls over each month — up to 10, 15, or 20 hours depending on your plan — so quiet months aren't wasted ones.</p></div>
+        <div class="faq-a"><p>A portion of unused hours rolls over each month, up to 10, 15, or 20 hours depending on your plan, so quiet months aren't wasted ones.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Can I pause or cancel anytime?<span class="faq-icon"></span></button>
-        <div class="faq-a"><p>Yes. It's a subscription, not a contract. Upgrade, downgrade, or pause anytime — and if you ever need to step away, just give us 30 days notice.</p></div>
+        <button class="faq-q">Can I change, pause, or cancel my plan?<span class="faq-icon"></span></button>
+        <div class="faq-a"><p>Yes. It's a subscription, not a contract. Studio plans have a 3-month minimum, and you can switch between Pro, Extra, and Mega anytime. After your first 3 months, pause or cancel with 30 days notice.</p></div>
+      </div>
       </div>
     </div>
   </div>
@@ -1739,7 +2197,7 @@ br.cmsbr{display:none}
     <div class="section-head cta-head">
       <div class="eyebrow">Let's chat</div>
       <h2 class="h-xl">Ready to go?</h2>
-      <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:clamp(20px,2.4vw,30px)">Book a Discovery Call <span class="arr">→</span></a>
+      <a href="https://cal.com/ian-barin/discovery-call" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:clamp(20px,2.4vw,30px)">Book a Discovery Call <span class="arr">→</span></a>
     </div>
     <div class="cal-embed">
       <div id="cal-inline" style="width:100%;min-height:620px"></div>
@@ -1766,7 +2224,7 @@ br.cmsbr{display:none}
         <div class="foot-col">
           <h4>Connect</h4>
           <a href="https://www.linkedin.com/company/designspace-agency/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://cal.com/ian-barin/discovery" target="_blank" rel="noopener">Book a Discovery Call</a>
+          <a href="https://cal.com/ian-barin/discovery-call" target="_blank" rel="noopener">Book a Discovery Call</a>
         </div>
         <div class="foot-col">
           <h4>Legal</h4>
@@ -1777,7 +2235,7 @@ br.cmsbr{display:none}
     </div>
   </div>
   <div class="foot-word">
-    <a href="/" style="display:block" aria-label="DesignSpace — home"><img src="logo.svg" alt="DesignSpace" /></a>
+    <a href="/" style="display:block" aria-label="DesignSpace home"><img src="logo.svg" alt="DesignSpace" /></a>
   </div>
 </footer>
 
@@ -2253,9 +2711,9 @@ br.cmsbr{display:none}
   var root = document.querySelector('[data-palt]');
   if (!root) return;
   var TIERS = [
-    { name: 'Pro',   popular: false, desc: 'Steady creative support for teams with consistent output needs.',  price: '$4,999',  hours: '40 hours',  projects: '4–8 projects',  rollover: 'Up to 10 hours' },
-    { name: 'Extra', popular: true,  desc: 'More bandwidth for teams producing content at higher volume.',      price: '$8,999',  hours: '80 hours',  projects: '6–12 projects', rollover: 'Up to 15 hours' },
-    { name: 'Mega',  popular: false, desc: 'Maximum output for teams running full-scale creative programs.',     price: '$12,999', hours: '120 hours', projects: '8–16 projects', rollover: 'Up to 20 hours' }
+    { name: 'Pro',   popular: false, desc: 'Steady creative support for teams with consistent monthly output.', price: '$4,999',  best: 'Steady monthly output',      covered: '4–8 projects / month',                hours: '40 hours' },
+    { name: 'Extra', popular: true,  desc: 'More bandwidth for scaling teams with active launch calendars.',    price: '$8,999',  best: 'Scaling teams / launches',   covered: 'Reports, microsites, event campaigns', hours: '80 hours' },
+    { name: 'Mega',  popular: false, desc: 'A full creative department replacement for flagship programs.',     price: '$12,999', best: 'Full department replacement', covered: 'Launches, refinements, major events',  hours: '120 hours' }
   ];
   var toggle = root.querySelector('.palt-toggle');
   var segs = Array.prototype.slice.call(root.querySelectorAll('.palt-seg'));
@@ -2264,8 +2722,8 @@ br.cmsbr{display:none}
   var q = function (s) { return root.querySelector(s); };
   var el = {
     name: q('[data-name]'), desc: q('[data-desc]'), price: q('[data-price]'),
-    hours: q('[data-hours]'), projects: q('[data-projects]'),
-    rollover: q('[data-rollover]'), badge: q('[data-badge]')
+    best: q('[data-best]'), covered: q('[data-covered]'), hours: q('[data-hours]'),
+    badge: q('[data-badge]')
   };
   function moveInd(seg) {
     var pr = toggle.getBoundingClientRect();
@@ -2280,9 +2738,9 @@ br.cmsbr{display:none}
     el.name.textContent = t.name;
     el.desc.textContent = t.desc;
     el.price.innerHTML = t.price + ' <span>/ month</span>';
-    el.hours.textContent = t.hours;
-    el.projects.textContent = t.projects;
-    el.rollover.textContent = t.rollover;
+    if (el.best) el.best.textContent = t.best;
+    if (el.covered) el.covered.textContent = t.covered;
+    if (el.hours) el.hours.textContent = t.hours;
     plan.classList.toggle('popular', t.popular);
     el.badge.style.display = t.popular ? 'inline-block' : 'none';
     moveInd(segs[i]);
@@ -2808,10 +3266,10 @@ br.cmsbr{display:none}
 </script>
 <!-- Structured data: Organization + FAQ -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"DesignSpace","description":"Design subscription providing ongoing marketing design for B2B tech and cybersecurity teams. One subscription, all design assets covered.","url":"https://designspaceagency.com/","logo":"https://designspaceagency.com/logo.svg","image":"https://designspaceagency.com/og-image.png","email":"hello@designspaceagency.com","foundingDate":"2018","sameAs":["https://www.linkedin.com/company/designspace-agency/"],"areaServed":"Worldwide","serviceType":["Marketing design","Graphic design subscription","B2B tech design","Cybersecurity marketing design"],"slogan":"Tech Marketing, Designed Better"}
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"DesignSpace","description":"Design subscription and AI brand systems for B2B tech and cybersecurity marketing teams, with on-brand creative in Claude, ChatGPT, Figma, and Canva.","url":"https://designspaceagency.com/","logo":"https://designspaceagency.com/logo.svg","image":"https://designspaceagency.com/og-image.png","email":"hello@designspaceagency.com","foundingDate":"2018","sameAs":["https://www.linkedin.com/company/designspace-agency/"],"areaServed":"Worldwide","serviceType":["Marketing design","Graphic design subscription","B2B tech design","Cybersecurity marketing design"],"slogan":"Tech Marketing, Designed Better"}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is this different from hiring an in-house designer?","acceptedAnswer":{"@type":"Answer","text":"One subscription gets you a full team — specialists across decks, reports, ads, diagrams, and social — plus a dedicated project manager and founder-led quality control. No recruiting, onboarding, or overhead, and you can scale up or down monthly."}},{"@type":"Question","name":"How fast will I receive my designs?","acceptedAnswer":{"@type":"Answer","text":"Most tasks are delivered within 2–3 business days. Larger projects like reports or eBooks are broken into milestones so you see progress continuously, with timelines visible on your Asana board."}},{"@type":"Question","name":"What types of design work are covered?","acceptedAnswer":{"@type":"Answer","text":"Everything a B2B marketing team needs: sales decks, whitepapers, reports, eBooks, ad campaigns, LinkedIn carousels, product mockups, technical diagrams, event booths, swag, and more. If it is marketing design, it is covered."}},{"@type":"Question","name":"Can I request AI-assisted design work?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. Whether you are using AI-powered tools like Claude and ChatGPT or trusted platforms like Figma and Canva, we integrate seamlessly into your existing workflow. Every output goes through hands-on review from our creative director, so you never sacrifice quality or brand consistency."}},{"@type":"Question","name":"How do I submit and track requests?","acceptedAnswer":{"@type":"Answer","text":"Just send a task on Asana — no submission forms. Your board shows exactly where every task sits: priorities, in progress, awaiting assets, or ready for review. Files are delivered in Figma, Canva, or Google Drive."}},{"@type":"Question","name":"What happens to unused hours?","acceptedAnswer":{"@type":"Answer","text":"A portion of unused hours rolls over each month — up to 10, 15, or 20 hours depending on your plan — so quiet months are not wasted ones."}},{"@type":"Question","name":"Can I pause or cancel anytime?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is a subscription, not a contract. Upgrade, downgrade, or pause anytime — and if you ever need to step away, just give us 30 days notice."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is this different from hiring an in-house designer?","acceptedAnswer":{"@type":"Answer","text":"One subscription gets you a full team: specialists across decks, reports, ads, diagrams, and social, plus a dedicated project manager and founder-led quality control. No recruiting, onboarding, or overhead, and you can scale up or down monthly."}},{"@type":"Question","name":"How fast will I receive my designs?","acceptedAnswer":{"@type":"Answer","text":"Most tasks are delivered within 2–3 business days. Larger projects like reports or eBooks are broken into milestones so you see progress continuously, with timelines visible on your Asana board."}},{"@type":"Question","name":"What types of design work are covered?","acceptedAnswer":{"@type":"Answer","text":"Everything a B2B marketing team needs: sales decks, whitepapers, reports, eBooks, ad campaigns, LinkedIn carousels, product mockups, technical diagrams, event booths, swag, and more. If it is marketing design, it is covered."}},{"@type":"Question","name":"Can I request AI-assisted design work?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. Whether you are using AI-powered tools like Claude and ChatGPT or trusted platforms like Figma and Canva, we integrate seamlessly into your existing workflow. Every output goes through hands-on review from our creative director, so you never sacrifice quality or brand consistency."}},{"@type":"Question","name":"How do I submit and track requests?","acceptedAnswer":{"@type":"Answer","text":"Just send a task on Asana, no submission forms. Your board shows exactly where every task sits: priorities, in progress, awaiting assets, or ready for review. Files are delivered in Figma, Canva, or Google Drive."}},{"@type":"Question","name":"What happens to unused hours?","acceptedAnswer":{"@type":"Answer","text":"A portion of unused hours rolls over each month, up to 10, 15, or 20 hours depending on your plan, so quiet months are not wasted ones."}},{"@type":"Question","name":"Can I change, pause, or cancel my plan?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is a subscription, not a contract. Studio plans have a 3-month minimum, and you can switch between Pro, Extra, and Mega anytime. After your first 3 months, pause or cancel with 30 days notice."}}]}
 </script>
 <script>
 /* CMS partnership slideshow — cross-fade the CyberMarketingCon work (like the case studies) */
@@ -2832,9 +3290,73 @@ br.cmsbr{display:none}
 <script>
 /* Cal.com inline embed (transparent, sits on the dotted panel) */
 (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-Cal("init", "discovery", { origin: "https://cal.com" });
-Cal.ns.discovery("inline", { elementOrSelector: "#cal-inline", config: { layout: "month_view", theme: "light" }, calLink: "ian-barin/discovery" });
-Cal.ns.discovery("ui", { hideEventTypeDetails: false, layout: "month_view" });
+Cal("init", "discoveryCall", { origin: "https://cal.com" });
+Cal.ns.discoveryCall("inline", { elementOrSelector: "#cal-inline", config: { layout: "month_view", theme: "light" }, calLink: "ian-barin/discovery-call" });
+Cal.ns.discoveryCall("ui", { hideEventTypeDetails: false, layout: "month_view" });
+
+/* ---- comparison table: mask rows passing above the pinned header ---- */
+(function(){
+  var card=document.querySelector('.pf-card'); if(!card) return;
+  var head=card.querySelector('thead');
+  function sync(){
+    if(window.innerWidth<901){ card.classList.remove('is-stuck'); return; }
+    var r=card.getBoundingClientRect(), h=head.getBoundingClientRect();
+    card.classList.toggle('is-stuck', r.top<112 && r.bottom>0);
+  }
+  window.addEventListener('scroll',sync,{passive:true});
+  window.addEventListener('resize',sync);
+  sync();
+})();
+
+/* ---- pricing cards (ported from the layout explorations) ---- */
+/* Options 5, 5B & 6 — maintenance add-on switch updates the main price + billing line */
+(function(){
+  document.querySelectorAll('[data-addon]').forEach(function(box){
+    var sw=box.querySelector('.switch');
+    var card=box.closest('.pc-card, .pl-row')||document;
+    var unit=card.querySelector('[data-build-unit]');
+    var meta=card.querySelector('[data-build-meta]');
+    function sync(){
+      var on=sw.checked;
+      box.classList.toggle('on',on);
+      sw.setAttribute('aria-expanded',on);
+      if(unit) unit.textContent=on?'+ $2,499/mo':'one-time';
+      if(meta) meta.textContent=on?'Billed once, then monthly':'Billed once, yours to keep';
+      var cta=card.querySelector('.pc-cta a');
+      if(cta) cta.href='https://cal.com/ian-barin/'+(on?'design-ops-maintenance':'design-ops');
+    }
+    sw.addEventListener('change',sync); sync();
+  });
+})();
+
+/* Studio plan selector — radio groups in the cards + tabs in the table stay in sync */
+(function(){
+  var AMT={Pro:'4,999',Extra:'8,999',Mega:'12,999'};
+  var radios=document.querySelectorAll('.pc-tier');
+  var tabs=document.querySelectorAll('.pf-seg button');
+  function setTier(name){
+    radios.forEach(function(r){
+      var on=r.dataset.tier===name;
+      r.setAttribute('aria-checked',on); r.tabIndex=on?0:-1;
+    });
+    tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.tier===name);});
+    document.querySelectorAll('[data-mk-amt]').forEach(function(el){el.textContent=AMT[name];});
+    document.querySelectorAll('[data-mk-cta]').forEach(function(el){el.textContent='Book a Studio '+name+' call';var a=el.closest('a');if(a) a.href='https://cal.com/ian-barin/studio-'+name.toLowerCase();});
+    document.querySelectorAll('[data-tier-cell]').forEach(function(el){el.textContent=el.dataset[name.toLowerCase()];});
+  }
+  radios.forEach(function(r){
+    r.addEventListener('click',function(){setTier(r.dataset.tier);});
+    r.addEventListener('keydown',function(e){
+      var dir={ArrowDown:1,ArrowRight:1,ArrowUp:-1,ArrowLeft:-1}[e.key]; if(!dir) return;
+      e.preventDefault();
+      var group=[].slice.call(r.parentNode.querySelectorAll('.pc-tier'));
+      var next=group[(group.indexOf(r)+dir+group.length)%group.length];
+      setTier(next.dataset.tier); next.focus();
+    });
+  });
+  tabs.forEach(function(t){t.addEventListener('click',function(){setTier(t.dataset.tier);});});
+  setTier('Extra');
+})();
 </script>
 </body>
 </html>
